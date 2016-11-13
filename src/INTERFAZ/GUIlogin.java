@@ -154,7 +154,7 @@ public class GUIlogin extends javax.swing.JFrame {
         int cargo = 0;
 
         String driver = "org.postgresql.Driver";
-        String connectString = "jdbc:postgresql://localhost:5432/AutosABC";
+        String connectString = "jdbc:postgresql://localhost:5432/autosabc";
         String user = "postgres";
         String password = "123456789";
 
