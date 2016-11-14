@@ -6,6 +6,7 @@ DROP TABLE IF EXISTS venta CASCADE;
 DROP TABLE IF EXISTS cotizacion CASCADE;
 DROP TABLE IF EXISTS orden_de_trabajo CASCADE;
 DROP TABLE IF EXISTS repuestos_vehiculos CASCADE;
+DROP TABLE IF EXISTS recuperacionEncriptacion CASCADE;
 
 
 CREATE TABLE sedes (
@@ -32,8 +33,8 @@ CREATE TABLE usuarios (
 	salario INT,
 	telefono VARCHAR(20),
 	estado VARCHAR(20),
-	cuenta VARCHAR(20),
-	contrasena VARCHAR(20),
+	cuenta VARCHAR(120),
+	contrasena VARCHAR(120),
 	FOREIGN KEY (id_sede) REFERENCES sedes(id_sede)
 );
 
@@ -126,6 +127,14 @@ CREATE TABLE repuestos_vehiculos (
 
 );
 
+CREATE TABLE recuperacionEncriptacion (
+	cuenta VARCHAR(120),
+	contrasena VARCHAR(120),
+	pin VARCHAR(120),
+	cedula INT
+);
+
+INSERT INTO recuperacionEncriptacion VALUES ('Alevale', 'Alevale',552107685672,1120309485);
 
 INSERT INTO sedes  VALUES (01, 'yanaconas',     'cali',         'calle 3 # 45a-12',   '3323456', '343456');
 INSERT INTO sedes  VALUES (02, 'automotores',   'palmira',      'carrera 4 # 23-97',  '4455234', '345203');
@@ -138,13 +147,13 @@ INSERT INTO sedes  VALUES (08, 'ContinAutos',   'cali',         'calle 3 # 34-45
 INSERT INTO sedes  VALUES (09, 'GeneralMotors', 'bogota',       'carrera 3 # 34-56',  '2200989', '3400584');
 
 
-INSERT INTO usuarios  VALUES (1134495960, 01, 'Andres hurtado',     '1982-10-23', 'calle 4 # 34-45',   'M', 'hurtado.andres_ho@yahoo.co', 3, 800000,  '3344554',  'activo', 'Andrehur', 'Andrehur');
-INSERT INTO usuarios  VALUES (1122394859, 02, 'Angela Henao',       '1994-09-21', 'carrera 5 # 3-32',  'F', 'Henao.An1998@Mye-mail.com' , 3, 750000,  '2233454', 'activo', 'Anghen', 'Anghen');
-INSERT INTO usuarios  VALUES (1109498849, 03, 'Pedro Perez',        '1992-03-15', 'calle 4 # 32-67',   'M', 'pepedrorez@mysql.com'      , 2, 1000000, '4455968', 'activo', 'Pedper', 'Pedper');
-INSERT INTO usuarios  VALUES (230049958,  04, 'Patricia Soto',      '1976-01-09', 'Avenida 4 # 34-45', 'F', 'paty-soto@gmail.com'       , 3, 850000,  '3399485',   'activo', 'Patsot', 'Patsot');
-INSERT INTO usuarios  VALUES (1120309485, 05, 'Alejandro Valencia', '1991-05-07', 'calle 5 # 32-34',   'M', 'alevari@hotmail.com'       , 1, 2000000, '3344959', 'activo', 'Alevale', 'Alevale');
-INSERT INTO usuarios  VALUES (1109948394, 06, 'Juan varela ',       '1993-12-19', 'carrera 4 # 34-45', 'M', 'Varela.juan-123@gmail.com' , 3, 800000,  '4455948',  'activo', 'Juavar','Juavar');
-INSERT INTO usuarios  VALUES (34958478,   07, 'Jairo Diaz',         '1984-07-11', 'calle 45 # 3-23',   'M', 'dia-jairo@hotmail.com'     , 3, 800000,  '3344059', 'activo', 'Jaidia',  'Jaidia');
+INSERT INTO usuarios  VALUES (1134495960, 01, 'Andres hurtado',     '1982-10-23', 'calle 4 # 34-45',   'M', 'hurtado.andres_ho@yahoo.co', 3, 800000,  '3344554', 'activo', 'Andrehurr', 'Andrehurr');
+INSERT INTO usuarios  VALUES (1122394859, 02, 'Angela Henao',       '1994-09-21', 'carrera 5 # 3-32',  'F', 'Henao.An1998@Mye-mail.com' , 3, 750000,  '2233454', 'activo', 'Anghen',   'Anghen');
+INSERT INTO usuarios  VALUES (1109498849, 03, 'Pedro Perez',        '1992-03-15', 'calle 4 # 32-67',   'M', 'pepedrorez@mysql.com'      , 2, 1000000, '4455968', 'activo', 'Pedper',   'Pedper');
+INSERT INTO usuarios  VALUES (230049958,  04, 'Patricia Soto',      '1976-01-09', 'Avenida 4 # 34-45', 'F', 'paty-soto@gmail.com'       , 3, 850000,  '3399485', 'activo', 'Patsot',   'Patsot');
+INSERT INTO usuarios  VALUES (1120309485, 05, 'Alejandro Valencia', '1991-05-07', 'calle 5 # 32-34',   'M', 'alevari@hotmail.com'       , 1, 2000000, '3344959', 'activo', 'U5/+1GK+4{[6_E~R8vyo«',  'Zu}0P(jBw"GBpCWqU*3c<');
+INSERT INTO usuarios  VALUES (1109948394, 06, 'Juan varela ',       '1993-12-19', 'carrera 4 # 34-45', 'M', 'Varela.juan-123@gmail.com' , 3, 800000,  '4455948', 'activo', 'Juavar',   'Juavar');
+INSERT INTO usuarios  VALUES (34958478,   07, 'Jairo Diaz',         '1984-07-11', 'calle 45 # 3-23',   'M', 'dia-jairo@hotmail.com'     , 3, 800000,  '3344059', 'activo', 'Jaidia',   'Jaidia');
 
 
 --INSERT INTO vehiculos VALUES (id, id-sede,  color, marca, referencia, tipo, traccion, modelo, precio, iva);
