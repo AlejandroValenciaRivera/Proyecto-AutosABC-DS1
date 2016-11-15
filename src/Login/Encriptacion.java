@@ -297,8 +297,7 @@ public class Encriptacion {
         
         for (int i = 0; i < extraer.length; i++) {
             posicionesContrasena[i] = encontrarPosicion(extraer[i]);
-        }
-        
+        }        
         int x1 = ((extraer.length*2 + 1)*peso1);
         int x2 = ((extraer.length*2 + 1)*peso2);
         int x3 = ((extraer.length*2 + 1)*peso3);
