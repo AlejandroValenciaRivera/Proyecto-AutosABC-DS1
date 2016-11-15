@@ -349,7 +349,6 @@ public class Encriptacion {
         for (int i = 0; i < datoReconstruido.length; i++){
             datoReconstruido[i] = datos[posicionesContrasena[i]];
         }
-      
         datoEncriptado = String.valueOf(datoReconstruido);
         return datoEncriptado;
     }
