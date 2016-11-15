@@ -1,9 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ACCESO_DATOS.entidades_y_relaciones;
+
+import java.sql.*;
 
 /**
  *
@@ -11,4 +8,71 @@ package ACCESO_DATOS.entidades_y_relaciones;
  */
 public class Cotizacion {
     
+        int  id_cotizacion;
+	Vehiculo id_vehiculo ;
+	Usuario id_usuario ;
+	Sede id_sede ;
+	int precio ;
+	int iva ;
+	Date fecha;
+
+    public int getId_cotizacion() {
+        return id_cotizacion;
+    }
+
+    public Vehiculo getId_vehiculo() {
+        return id_vehiculo;
+    }
+
+    public Usuario getId_usuario() {
+        return id_usuario;
+    }
+
+    public Sede getId_sede() {
+        return id_sede;
+    }
+
+    public int getPrecio() {
+        return precio;
+    }
+
+    public int getIva() {
+        return iva;
+    }
+
+    public Date getFecha() {
+        return fecha;
+    }
+
+    public void setId_cotizacion(int id_cotizacion) {
+        this.id_cotizacion = id_cotizacion;
+    }
+
+    public void setId_vehiculo(Vehiculo id_vehiculo) {
+        this.id_vehiculo = id_vehiculo;
+    }
+
+    public void setId_usuario(Usuario id_usuario) {
+        this.id_usuario = id_usuario;
+    }
+
+    public void setId_sede(Sede id_sede) {
+        this.id_sede = id_sede;
+    }
+
+    public void setPrecio(int precio) {
+        this.precio = precio;
+    }
+
+    public void setIva(int iva) {
+        this.iva = iva;
+    }
+
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
+    }
+	
+
+    
 }
+
