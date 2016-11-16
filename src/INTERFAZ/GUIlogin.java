@@ -20,6 +20,7 @@ import java.util.Arrays;
 public class GUIlogin extends javax.swing.JFrame {
     
     GUIgerente gerente;
+    GUIvendedor vendedor;
     /**
      * Creates new form Login
      */
@@ -144,6 +145,8 @@ public class GUIlogin extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("AUTOS ABC");
+        setAlwaysOnTop(true);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -161,9 +164,10 @@ public class GUIlogin extends javax.swing.JFrame {
     public void reset(){
         usuariologin.setText("");
         contraseñalogin.setText("");
+        pin_login.setText("");
     }
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        JOptionPane.showMessageDialog(null, "Aqui va un texto de ayuda");
+        JOptionPane.showMessageDialog(rootPane, "Aqui va un texto de ayuda");
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void botonLogeoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonLogeoActionPerformed
@@ -223,12 +227,16 @@ public class GUIlogin extends javax.swing.JFrame {
 
                     if (Arrays.equals(contraseñalogin.getPassword(), explode(contraseña))) {
 
-                        if (cargo == 1) {
-                            gerente = new GUIgerente(this);
-                        }
-
-                        else {
-                            JOptionPane.showMessageDialog(rootPane, "La aplicación sólo soporta ingreso de gerente por el momento");
+                        switch (cargo) {
+                            case 1:
+                                gerente = new GUIgerente(this);
+                                break;
+                            case 3:
+                                vendedor = new GUIvendedor(this);
+                                break;
+                            default:
+                                JOptionPane.showMessageDialog(rootPane, "La aplicación sólo soporta ingreso de gerente y vendedor por el momento");
+                                break;
                         }
 
                         break;
@@ -291,12 +299,13 @@ public class GUIlogin extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+                
                 new GUIlogin().setVisible(true);
-                /*
+                
+                
                 Encriptacion encripto = new Encriptacion();
-                System.out.println(encripto.encriptar("Alevale"));
-                */
-               
+                System.out.println(encripto.encriptar("Pedper") + "::--->");
+                System.out.println(encripto.desencriptar(25, 55, 79, "6d]<btWRJ/^$<UJkN("));
                 
             }
         });

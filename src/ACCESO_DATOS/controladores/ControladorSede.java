@@ -8,6 +8,8 @@ package ACCESO_DATOS.controladores;
 import ACCESO_DATOS.DAO.*;
 import ACCESO_DATOS.entidades_y_relaciones.*;
 import java.sql.*;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
 /**
  *
  * @author aleja_000
@@ -32,4 +34,12 @@ public class ControladorSede {
         int result = daoSede.guardarSede(sede);
         return result;
     }
+    
+    public ArrayList<Sede> consultarSedes(){
+
+        ArrayList<Sede> sedes = daoSede.consultarSedes();
+
+        return sedes;
+    }
+            
 }

@@ -8,6 +8,8 @@ package ACCESO_DATOS.DAO;
 import ACCESO_DATOS.conexion.*;
 import ACCESO_DATOS.entidades_y_relaciones.*;
 import java.sql.*;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
 /**
  *
  * @author aleja_000
@@ -48,5 +50,40 @@ public class DAOSede {
     
     public Sede consultarSede(int id_sede) {
         return null;
+    }
+    
+    public ArrayList<Sede> consultarSedes() {
+        Sede unaSede;
+        ArrayList<Sede> sedes = new ArrayList<>();
+        
+        String sql_select;
+        sql_select="SELECT id_sede,nombre FROM  sedes";
+         try{
+            Connection conn = fachada.getConnetion();
+            Statement sentencia = conn.createStatement();
+            ResultSet tabla = sentencia.executeQuery(sql_select);
+
+            while(tabla.next()){
+               unaSede = new Sede();
+               
+               unaSede.setId(tabla.getInt(1));
+              
+               unaSede.setNombre(tabla.getString(2));
+               
+
+               sedes.add(unaSede);
+            }
+
+            fachada.closeConection();
+            return sedes;
+         }
+         catch(SQLException e){ 
+             JOptionPane.showMessageDialog(null, "Ha ocurrido un problema, \n consulta con la base de datos fallida");
+         }
+         catch(Exception e){ 
+             JOptionPane.showMessageDialog(null, " Conexion con la base de datos fallida. \n Contacte inmediatamente con soporte");
+         }
+         
+        return sedes;
     }
 }

@@ -10,6 +10,7 @@ import javax.swing.*;
 import java.sql.*;
 import ACCESO_DATOS.controladores.*;
 import ACCESO_DATOS.entidades_y_relaciones.*;
+import java.util.ArrayList;
 
 /**
  *
@@ -119,16 +120,16 @@ public class GUIgerente extends javax.swing.JFrame {
         
         jPanel17.add(panelModificarInventarioModificarRepuesto);
         jPanel17.add(panelModificarInventarioModificarRepuestoVacio);
-        
-        getContentPane().add(panelGerente);
-        
+
         getContentPane().setLayout(card);
+        getContentPane().add(panelGerente);
         panelGerente.setBounds(0,0,737,522);
         setBounds(panelGerente.getBounds());
         card.show(getContentPane(), "panelGerente");
         
         setVisible(true);
         
+
     }
 
     /**
@@ -230,7 +231,7 @@ public class GUIgerente extends javax.swing.JFrame {
         jLabel26 = new javax.swing.JLabel();
         jTextField15 = new javax.swing.JTextField();
         jLabel27 = new javax.swing.JLabel();
-        jComboBox3 = new javax.swing.JComboBox<>();
+        comboBoxSedeCrearUsuario = new javax.swing.JComboBox<>();
         botonAyudaCrearUsuario = new javax.swing.JButton();
         botonCrearUsuarioConfirmacion = new javax.swing.JButton();
         jLabel46 = new javax.swing.JLabel();
@@ -250,9 +251,10 @@ public class GUIgerente extends javax.swing.JFrame {
         panelCrearInventario = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
         jPanel15 = new javax.swing.JPanel();
-        jPanel5 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        botonPanelInventarioCrearVehiculo = new javax.swing.JButton();
+        botonPanelInventarioCrearRepuesto = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
         panelModificarInventario = new javax.swing.JPanel();
         jPanel16 = new javax.swing.JPanel();
         jPanel17 = new javax.swing.JPanel();
@@ -260,31 +262,36 @@ public class GUIgerente extends javax.swing.JFrame {
         jButton9 = new javax.swing.JButton();
         jButton16 = new javax.swing.JButton();
         panelCrearInventarioCrearVehiculo = new javax.swing.JPanel();
-        jLabel34 = new javax.swing.JLabel();
         jLabel35 = new javax.swing.JLabel();
         jLabel36 = new javax.swing.JLabel();
         jLabel37 = new javax.swing.JLabel();
         jLabel38 = new javax.swing.JLabel();
-        jLabel39 = new javax.swing.JLabel();
         jTextField18 = new javax.swing.JTextField();
         jTextField19 = new javax.swing.JTextField();
         jTextField20 = new javax.swing.JTextField();
         jTextField21 = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jTextField14 = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
         jTextField22 = new javax.swing.JTextField();
-        jButton5 = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        jComboBox4 = new javax.swing.JComboBox<>();
+        jLabel25 = new javax.swing.JLabel();
+        jComboBox9 = new javax.swing.JComboBox<>();
+        jLabel28 = new javax.swing.JLabel();
+        comboBoxSedeVehiculosInventario = new javax.swing.JComboBox<>();
         panelCrearInventarioCrearRepuesto = new javax.swing.JPanel();
         jLabel40 = new javax.swing.JLabel();
-        jLabel41 = new javax.swing.JLabel();
         jLabel42 = new javax.swing.JLabel();
         jLabel43 = new javax.swing.JLabel();
         jLabel44 = new javax.swing.JLabel();
         jLabel45 = new javax.swing.JLabel();
-        jTextField23 = new javax.swing.JTextField();
         jTextField24 = new javax.swing.JTextField();
         jTextField25 = new javax.swing.JTextField();
         jTextField26 = new javax.swing.JTextField();
         jTextField27 = new javax.swing.JTextField();
-        jButton7 = new javax.swing.JButton();
+        jLabel34 = new javax.swing.JLabel();
+        comboBoxSedeRepuestosInventario = new javax.swing.JComboBox<>();
         panelCrearInventarioCrearVehiculoVacio = new javax.swing.JPanel();
         panelCrearInventarioCrearRepuestoVacio = new javax.swing.JPanel();
         panelModificarInventarioModificarVehiculo = new javax.swing.JPanel();
@@ -345,6 +352,7 @@ public class GUIgerente extends javax.swing.JFrame {
         });
 
         jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/INTERFAZ/icono-logout.png"))); // NOI18N
+        jButton6.setToolTipText("Presione aqui para salir a la ventana de Login");
         jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton6ActionPerformed(evt);
@@ -894,33 +902,29 @@ public class GUIgerente extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(panelCrearSedeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelCrearSedeLayout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(id_sede))
-                    .addGroup(panelCrearSedeLayout.createSequentialGroup()
                         .addComponent(jButton14, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 410, Short.MAX_VALUE)
                         .addComponent(jButton13, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panelCrearSedeLayout.createSequentialGroup()
-                        .addComponent(jLabel6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(nombre_sede))
+                        .addGroup(panelCrearSedeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel9)
+                            .addComponent(jLabel10))
+                        .addGap(36, 36, 36)
+                        .addGroup(panelCrearSedeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(telefono_sede)
+                            .addComponent(fax_sede)))
                     .addGroup(panelCrearSedeLayout.createSequentialGroup()
-                        .addComponent(jLabel7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(ciudad_sede))
-                    .addGroup(panelCrearSedeLayout.createSequentialGroup()
-                        .addComponent(jLabel8)
+                        .addGroup(panelCrearSedeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel8))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(dir_sede))
-                    .addGroup(panelCrearSedeLayout.createSequentialGroup()
-                        .addComponent(jLabel9)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(telefono_sede))
-                    .addGroup(panelCrearSedeLayout.createSequentialGroup()
-                        .addComponent(jLabel10)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(fax_sede)))
+                        .addGroup(panelCrearSedeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(dir_sede)
+                            .addComponent(ciudad_sede)
+                            .addComponent(nombre_sede)
+                            .addComponent(id_sede))))
                 .addContainerGap())
         );
         panelCrearSedeLayout.setVerticalGroup(
@@ -950,7 +954,7 @@ public class GUIgerente extends javax.swing.JFrame {
                 .addGroup(panelCrearSedeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
                     .addComponent(fax_sede, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 99, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 97, Short.MAX_VALUE)
                 .addGroup(panelCrearSedeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton14, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton13, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -1042,7 +1046,7 @@ public class GUIgerente extends javax.swing.JFrame {
 
         jLabel27.setText("SEDE:");
 
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboBoxSedeCrearUsuario.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         botonAyudaCrearUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/INTERFAZ/icono ayuda.jpg"))); // NOI18N
         botonAyudaCrearUsuario.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -1123,7 +1127,7 @@ public class GUIgerente extends javax.swing.JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelCrearUsuarioLayout.createSequentialGroup()
                                 .addComponent(jLabel27)
                                 .addGap(18, 18, 18)
-                                .addComponent(jComboBox3, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(comboBoxSedeCrearUsuario, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelCrearUsuarioLayout.createSequentialGroup()
                                 .addComponent(jLabel20)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1183,7 +1187,7 @@ public class GUIgerente extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelCrearUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel27)
-                    .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(comboBoxSedeCrearUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel46)
                     .addComponent(jComboBox8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 105, Short.MAX_VALUE)
@@ -1316,7 +1320,7 @@ public class GUIgerente extends javax.swing.JFrame {
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 272, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         jPanel15.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -1330,69 +1334,61 @@ public class GUIgerente extends javax.swing.JFrame {
         );
         jPanel15Layout.setVerticalGroup(
             jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 311, Short.MAX_VALUE)
         );
 
-        jPanel5.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
-        jButton1.setText("VEHICULOS");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        botonPanelInventarioCrearVehiculo.setText("VEHICULOS");
+        botonPanelInventarioCrearVehiculo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                botonPanelInventarioCrearVehiculoActionPerformed(evt);
             }
         });
 
-        jButton4.setText("REPUESTOS");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        botonPanelInventarioCrearRepuesto.setText("REPUESTOS");
+        botonPanelInventarioCrearRepuesto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                botonPanelInventarioCrearRepuestoActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton4)
-                .addContainerGap())
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addContainerGap(12, Short.MAX_VALUE)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton4))
-                .addContainerGap())
-        );
+        jButton2.setText("AÑADIR");
+
+        jButton3.setText("AÑADIR");
 
         javax.swing.GroupLayout panelCrearInventarioLayout = new javax.swing.GroupLayout(panelCrearInventario);
         panelCrearInventario.setLayout(panelCrearInventarioLayout);
         panelCrearInventarioLayout.setHorizontalGroup(
             panelCrearInventarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelCrearInventarioLayout.createSequentialGroup()
+            .addGroup(panelCrearInventarioLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panelCrearInventarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(panelCrearInventarioLayout.createSequentialGroup()
-                        .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
-                        .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(botonPanelInventarioCrearVehiculo)
+                        .addGap(94, 94, 94)
+                        .addComponent(jButton2))
+                    .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+                .addGroup(panelCrearInventarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel15, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelCrearInventarioLayout.createSequentialGroup()
+                        .addComponent(jButton3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(botonPanelInventarioCrearRepuesto)))
                 .addContainerGap())
         );
         panelCrearInventarioLayout.setVerticalGroup(
             panelCrearInventarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelCrearInventarioLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGroup(panelCrearInventarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(botonPanelInventarioCrearVehiculo)
+                    .addComponent(botonPanelInventarioCrearRepuesto)
+                    .addComponent(jButton2)
+                    .addComponent(jButton3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelCrearInventarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel15, javax.swing.GroupLayout.DEFAULT_SIZE, 315, Short.MAX_VALUE)
+                    .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -1488,9 +1484,8 @@ public class GUIgerente extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        panelCrearInventarioCrearVehiculo.setPreferredSize(new java.awt.Dimension(258, 276));
-
-        jLabel34.setText("INFORMACION VEHICULO:");
+        panelCrearInventarioCrearVehiculo.setPreferredSize(new java.awt.Dimension(267, 315));
+        panelCrearInventarioCrearVehiculo.setRequestFocusEnabled(false);
 
         jLabel35.setText("MARCA:");
 
@@ -1500,9 +1495,21 @@ public class GUIgerente extends javax.swing.JFrame {
 
         jLabel38.setText("PRECIO:");
 
-        jLabel39.setText("ID:");
+        jLabel1.setText("COLOR: ");
 
-        jButton5.setText("AÑADIR");
+        jLabel2.setText("CANTIDAD:");
+
+        jLabel3.setText("TIPO:");
+
+        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione una", "Sedan", "Coupe" }));
+
+        jLabel25.setText("TRACCION:");
+
+        jComboBox9.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione una", "Delantera", "Trasera", "Doble" }));
+
+        jLabel28.setText("SEDE:");
+
+        comboBoxSedeVehiculosInventario.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout panelCrearInventarioCrearVehiculoLayout = new javax.swing.GroupLayout(panelCrearInventarioCrearVehiculo);
         panelCrearInventarioCrearVehiculo.setLayout(panelCrearInventarioCrearVehiculoLayout);
@@ -1512,40 +1519,37 @@ public class GUIgerente extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(panelCrearInventarioCrearVehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelCrearInventarioCrearVehiculoLayout.createSequentialGroup()
-                        .addComponent(jLabel35)
+                        .addGroup(panelCrearInventarioCrearVehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel36)
+                            .addComponent(jLabel35))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField18))
+                        .addGroup(panelCrearInventarioCrearVehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextField18)
+                            .addComponent(jTextField19)))
                     .addGroup(panelCrearInventarioCrearVehiculoLayout.createSequentialGroup()
-                        .addComponent(jLabel34)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(panelCrearInventarioCrearVehiculoLayout.createSequentialGroup()
-                        .addComponent(jLabel36)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField19))
-                    .addGroup(panelCrearInventarioCrearVehiculoLayout.createSequentialGroup()
-                        .addComponent(jLabel37)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField20))
-                    .addGroup(panelCrearInventarioCrearVehiculoLayout.createSequentialGroup()
-                        .addComponent(jLabel38)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField21))
-                    .addGroup(panelCrearInventarioCrearVehiculoLayout.createSequentialGroup()
-                        .addComponent(jLabel39)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField22)))
+                        .addGroup(panelCrearInventarioCrearVehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel38)
+                            .addComponent(jLabel37)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel25)
+                            .addComponent(jLabel28))
+                        .addGap(21, 21, 21)
+                        .addGroup(panelCrearInventarioCrearVehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jComboBox9, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jTextField22)
+                            .addComponent(jTextField20)
+                            .addComponent(jTextField21)
+                            .addComponent(jTextField14)
+                            .addComponent(jComboBox4, 0, 169, Short.MAX_VALUE)
+                            .addComponent(comboBoxSedeVehiculosInventario, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
-            .addGroup(panelCrearInventarioCrearVehiculoLayout.createSequentialGroup()
-                .addGap(87, 87, 87)
-                .addComponent(jButton5)
-                .addContainerGap(100, Short.MAX_VALUE))
         );
         panelCrearInventarioCrearVehiculoLayout.setVerticalGroup(
             panelCrearInventarioCrearVehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelCrearInventarioCrearVehiculoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel34)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelCrearInventarioCrearVehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel35)
                     .addComponent(jTextField18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -1563,18 +1567,33 @@ public class GUIgerente extends javax.swing.JFrame {
                     .addComponent(jTextField21, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelCrearInventarioCrearVehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel39)
+                    .addComponent(jLabel1)
+                    .addComponent(jTextField14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panelCrearInventarioCrearVehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
                     .addComponent(jTextField22, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jButton5)
-                .addContainerGap(80, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panelCrearInventarioCrearVehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panelCrearInventarioCrearVehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel25)
+                    .addComponent(jComboBox9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panelCrearInventarioCrearVehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel28)
+                    .addComponent(comboBoxSedeVehiculosInventario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(76, Short.MAX_VALUE))
         );
 
-        panelCrearInventarioCrearRepuesto.setPreferredSize(new java.awt.Dimension(258, 276));
+        panelCrearInventarioCrearVehiculo.getAccessibleContext().setAccessibleName("");
+
+        panelCrearInventarioCrearRepuesto.setName(""); // NOI18N
+        panelCrearInventarioCrearRepuesto.setPreferredSize(new java.awt.Dimension(267, 315));
 
         jLabel40.setText("INFORMACION REPUESTO:");
-
-        jLabel41.setText("ID:");
 
         jLabel42.setText("NOMBRE:");
 
@@ -1590,7 +1609,9 @@ public class GUIgerente extends javax.swing.JFrame {
             }
         });
 
-        jButton7.setText("AÑADIR");
+        jLabel34.setText("SEDE:");
+
+        comboBoxSedeRepuestosInventario.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout panelCrearInventarioCrearRepuestoLayout = new javax.swing.GroupLayout(panelCrearInventarioCrearRepuesto);
         panelCrearInventarioCrearRepuesto.setLayout(panelCrearInventarioCrearRepuestoLayout);
@@ -1599,33 +1620,27 @@ public class GUIgerente extends javax.swing.JFrame {
             .addGroup(panelCrearInventarioCrearRepuestoLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panelCrearInventarioCrearRepuestoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelCrearInventarioCrearRepuestoLayout.createSequentialGroup()
-                        .addComponent(jLabel41)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField23))
-                    .addGroup(panelCrearInventarioCrearRepuestoLayout.createSequentialGroup()
-                        .addComponent(jLabel42)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField24))
-                    .addGroup(panelCrearInventarioCrearRepuestoLayout.createSequentialGroup()
-                        .addComponent(jLabel43)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField25))
-                    .addGroup(panelCrearInventarioCrearRepuestoLayout.createSequentialGroup()
-                        .addComponent(jLabel44)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField26))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelCrearInventarioCrearRepuestoLayout.createSequentialGroup()
+                        .addGroup(panelCrearInventarioCrearRepuestoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel34)
+                            .addComponent(jLabel42))
+                        .addGap(49, 49, 49)
+                        .addGroup(panelCrearInventarioCrearRepuestoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextField24)
+                            .addComponent(comboBoxSedeRepuestosInventario, 0, 152, Short.MAX_VALUE)))
                     .addGroup(panelCrearInventarioCrearRepuestoLayout.createSequentialGroup()
                         .addComponent(jLabel40)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(panelCrearInventarioCrearRepuestoLayout.createSequentialGroup()
-                        .addComponent(jLabel45)
+                        .addGroup(panelCrearInventarioCrearRepuestoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel44)
+                            .addComponent(jLabel43)
+                            .addComponent(jLabel45))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(panelCrearInventarioCrearRepuestoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(panelCrearInventarioCrearRepuestoLayout.createSequentialGroup()
-                                .addComponent(jButton7)
-                                .addGap(0, 90, Short.MAX_VALUE))
-                            .addComponent(jTextField27))))
+                            .addComponent(jTextField27)
+                            .addComponent(jTextField25)
+                            .addComponent(jTextField26))))
                 .addContainerGap())
         );
         panelCrearInventarioCrearRepuestoLayout.setVerticalGroup(
@@ -1635,8 +1650,8 @@ public class GUIgerente extends javax.swing.JFrame {
                 .addComponent(jLabel40)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelCrearInventarioCrearRepuestoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel41)
-                    .addComponent(jTextField23, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel34)
+                    .addComponent(comboBoxSedeRepuestosInventario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelCrearInventarioCrearRepuestoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel42)
@@ -1653,25 +1668,25 @@ public class GUIgerente extends javax.swing.JFrame {
                 .addGroup(panelCrearInventarioCrearRepuestoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel45)
                     .addComponent(jTextField27, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jButton7)
-                .addContainerGap(80, Short.MAX_VALUE))
+                .addContainerGap(160, Short.MAX_VALUE))
         );
 
-        panelCrearInventarioCrearVehiculoVacio.setPreferredSize(new java.awt.Dimension(258, 276));
+        panelCrearInventarioCrearVehiculoVacio.setOpaque(false);
+        panelCrearInventarioCrearVehiculoVacio.setPreferredSize(new java.awt.Dimension(267, 315));
 
         javax.swing.GroupLayout panelCrearInventarioCrearVehiculoVacioLayout = new javax.swing.GroupLayout(panelCrearInventarioCrearVehiculoVacio);
         panelCrearInventarioCrearVehiculoVacio.setLayout(panelCrearInventarioCrearVehiculoVacioLayout);
         panelCrearInventarioCrearVehiculoVacioLayout.setHorizontalGroup(
             panelCrearInventarioCrearVehiculoVacioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 258, Short.MAX_VALUE)
+            .addGap(0, 267, Short.MAX_VALUE)
         );
         panelCrearInventarioCrearVehiculoVacioLayout.setVerticalGroup(
             panelCrearInventarioCrearVehiculoVacioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 276, Short.MAX_VALUE)
+            .addGap(0, 315, Short.MAX_VALUE)
         );
 
-        panelCrearInventarioCrearRepuestoVacio.setPreferredSize(new java.awt.Dimension(258, 276));
+        panelCrearInventarioCrearRepuestoVacio.setName(""); // NOI18N
+        panelCrearInventarioCrearRepuestoVacio.setPreferredSize(new java.awt.Dimension(267, 315));
 
         javax.swing.GroupLayout panelCrearInventarioCrearRepuestoVacioLayout = new javax.swing.GroupLayout(panelCrearInventarioCrearRepuestoVacio);
         panelCrearInventarioCrearRepuestoVacio.setLayout(panelCrearInventarioCrearRepuestoVacioLayout);
@@ -1839,7 +1854,8 @@ public class GUIgerente extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("AUTOS ABC");
+        setTitle("AUTOS ABC -- GERENTE");
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setResizable(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -1880,6 +1896,17 @@ public class GUIgerente extends javax.swing.JFrame {
 
     private void botonUsuariosGerenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonUsuariosGerenteActionPerformed
         card2.show(jPanel3, "USUARIOS");
+        
+        comboBoxSedeCrearUsuario.removeAllItems();
+        comboBoxSedeCrearUsuario.addItem("Seleccione una");
+
+        ControladorSede cSede = new ControladorSede();
+
+        ArrayList<Sede> sedes = cSede.consultarSedes();
+
+        for (int i = 0; i < sedes.size(); i++) {
+            comboBoxSedeCrearUsuario.addItem(sedes.get(i).getNombre());
+        }
     }//GEN-LAST:event_botonUsuariosGerenteActionPerformed
 
     private void botonReportesGerenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonReportesGerenteActionPerformed
@@ -1939,6 +1966,16 @@ public class GUIgerente extends javax.swing.JFrame {
 
     private void botonCrearUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCrearUsuarioActionPerformed
         ventanaUsuarios.show(jPanel11, "CREAR-USUARIO");
+        comboBoxSedeCrearUsuario.removeAllItems();
+        comboBoxSedeCrearUsuario.addItem("Seleccione una");
+
+        ControladorSede cSede = new ControladorSede();
+
+        ArrayList<Sede> sedes = cSede.consultarSedes();
+
+        for (int i = 0; i < sedes.size(); i++) {
+            comboBoxSedeCrearUsuario.addItem(sedes.get(i).getNombre());
+        }
     }//GEN-LAST:event_botonCrearUsuarioActionPerformed
 
     private void botonModificarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonModificarUsuarioActionPerformed
@@ -1977,10 +2014,45 @@ public class GUIgerente extends javax.swing.JFrame {
        card2.show(jPanel3, "INVENTARIO");
        ventanaInventarioCrearVehiculo.show(jPanel7, "CREAR-VEHICULO-MOSTRAR");
        ventanaInventarioCrearRepuesto.show(jPanel15, "CREAR-REPUESTO-OCULTAR");
+       
+       comboBoxSedeVehiculosInventario.removeAllItems();
+       comboBoxSedeRepuestosInventario.removeAllItems();
+       comboBoxSedeVehiculosInventario.addItem("Seleccione una");
+       comboBoxSedeRepuestosInventario.addItem("Seleccione una");
+       
+       ControladorSede cSede = new ControladorSede();
+       
+       ArrayList<Sede> sedes = cSede.consultarSedes();
+       
+       for (int i = 0; i < sedes.size(); i++) {
+           comboBoxSedeVehiculosInventario.addItem(sedes.get(i).getNombre());
+       }
+       
+       for (int i = 0; i < sedes.size(); i++) {
+           comboBoxSedeRepuestosInventario.addItem(sedes.get(i).getNombre());
+       }
+       
+       
     }//GEN-LAST:event_botonInventarioGerenteActionPerformed
 
     private void botonCrearInventarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCrearInventarioActionPerformed
         ventanaInventario.show(jPanel13, "CREAR-INVENTARIO");
+        comboBoxSedeVehiculosInventario.removeAllItems();
+        comboBoxSedeRepuestosInventario.removeAllItems();
+        comboBoxSedeVehiculosInventario.addItem("Seleccione una");
+        comboBoxSedeRepuestosInventario.addItem("Seleccione una");
+       
+        ControladorSede cSede = new ControladorSede();
+       
+        ArrayList<Sede> sedes = cSede.consultarSedes();
+       
+        for (int i = 0; i < sedes.size(); i++) {
+           comboBoxSedeVehiculosInventario.addItem(sedes.get(i).getNombre());
+        }
+       
+        for (int i = 0; i < sedes.size(); i++) {
+           comboBoxSedeRepuestosInventario.addItem(sedes.get(i).getNombre());
+        }
     }//GEN-LAST:event_botonCrearInventarioActionPerformed
 
     private void botonModificarInventarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonModificarInventarioActionPerformed
@@ -1993,16 +2065,48 @@ public class GUIgerente extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField24ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void botonPanelInventarioCrearVehiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonPanelInventarioCrearVehiculoActionPerformed
         ventanaInventarioCrearRepuesto.show(jPanel15, "CREAR-REPUESTO-OCULTAR");
         ventanaInventarioCrearVehiculo.show(jPanel7, "CREAR-VEHICULO-MOSTRAR");
-        
-    }//GEN-LAST:event_jButton1ActionPerformed
+        comboBoxSedeVehiculosInventario.removeAllItems();
+        comboBoxSedeRepuestosInventario.removeAllItems();
+        comboBoxSedeVehiculosInventario.addItem("Seleccione una");
+        comboBoxSedeRepuestosInventario.addItem("Seleccione una");
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        ControladorSede cSede = new ControladorSede();
+
+        ArrayList<Sede> sedes = cSede.consultarSedes();
+
+        for (int i = 0; i < sedes.size(); i++) {
+            comboBoxSedeVehiculosInventario.addItem(sedes.get(i).getNombre());
+        }
+
+        for (int i = 0; i < sedes.size(); i++) {
+            comboBoxSedeRepuestosInventario.addItem(sedes.get(i).getNombre());
+        }
+        
+    }//GEN-LAST:event_botonPanelInventarioCrearVehiculoActionPerformed
+
+    private void botonPanelInventarioCrearRepuestoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonPanelInventarioCrearRepuestoActionPerformed
        ventanaInventarioCrearVehiculo.show(jPanel7, "CREAR-VEHICULO-OCULTAR");
        ventanaInventarioCrearRepuesto.show(jPanel15, "CREAR-REPUESTO-MOSTRAR");
-    }//GEN-LAST:event_jButton4ActionPerformed
+       comboBoxSedeVehiculosInventario.removeAllItems();
+       comboBoxSedeRepuestosInventario.removeAllItems();
+       comboBoxSedeVehiculosInventario.addItem("Seleccione una");
+       comboBoxSedeRepuestosInventario.addItem("Seleccione una");
+       
+       ControladorSede cSede = new ControladorSede();
+       
+       ArrayList<Sede> sedes = cSede.consultarSedes();
+       
+       for (int i = 0; i < sedes.size(); i++) {
+           comboBoxSedeVehiculosInventario.addItem(sedes.get(i).getNombre());
+       }
+       
+       for (int i = 0; i < sedes.size(); i++) {
+           comboBoxSedeRepuestosInventario.addItem(sedes.get(i).getNombre());
+       }
+    }//GEN-LAST:event_botonPanelInventarioCrearRepuestoActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
        ventanaInventarioModificarVehiculo.show(jPanel16, "MODIFICAR-VEHICULO-MOSTRAR");
@@ -2042,12 +2146,6 @@ public class GUIgerente extends javax.swing.JFrame {
         
     }//GEN-LAST:event_botonCrearUsuarioConfirmacionActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    
-   
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonAyudaCrearUsuario;
     private javax.swing.JButton botonAyudaCrearUsuario1;
@@ -2057,14 +2155,18 @@ public class GUIgerente extends javax.swing.JFrame {
     private javax.swing.JButton botonInventarioGerente;
     private javax.swing.JButton botonModificarInventario;
     private javax.swing.JButton botonModificarUsuario;
+    private javax.swing.JButton botonPanelInventarioCrearRepuesto;
+    private javax.swing.JButton botonPanelInventarioCrearVehiculo;
     private javax.swing.JButton botonReportesGerente;
     private javax.swing.JButton botonSedesGerente;
     private javax.swing.JButton botonUsuariosGerente;
     private javax.swing.JTextField ciudad_sede;
+    private javax.swing.JComboBox<String> comboBoxSedeCrearUsuario;
+    private javax.swing.JComboBox<String> comboBoxSedeRepuestosInventario;
+    private javax.swing.JComboBox<String> comboBoxSedeVehiculosInventario;
     private javax.swing.JTextField dir_sede;
     private javax.swing.JTextField fax_sede;
     private javax.swing.JTextField id_sede;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton12;
@@ -2074,19 +2176,20 @@ public class GUIgerente extends javax.swing.JFrame {
     private javax.swing.JButton jButton16;
     private javax.swing.JButton jButton18;
     private javax.swing.JButton jButton19;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JComboBox<String> jComboBox3;
+    private javax.swing.JComboBox<String> jComboBox4;
     private javax.swing.JComboBox<String> jComboBox5;
     private javax.swing.JComboBox<String> jComboBox6;
     private javax.swing.JComboBox<String> jComboBox7;
     private javax.swing.JComboBox<String> jComboBox8;
+    private javax.swing.JComboBox<String> jComboBox9;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -2097,14 +2200,18 @@ public class GUIgerente extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
@@ -2114,10 +2221,8 @@ public class GUIgerente extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel36;
     private javax.swing.JLabel jLabel37;
     private javax.swing.JLabel jLabel38;
-    private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel40;
-    private javax.swing.JLabel jLabel41;
     private javax.swing.JLabel jLabel42;
     private javax.swing.JLabel jLabel43;
     private javax.swing.JLabel jLabel44;
@@ -2148,7 +2253,6 @@ public class GUIgerente extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
@@ -2165,6 +2269,7 @@ public class GUIgerente extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField11;
     private javax.swing.JTextField jTextField12;
     private javax.swing.JTextField jTextField13;
+    private javax.swing.JTextField jTextField14;
     private javax.swing.JTextField jTextField15;
     private javax.swing.JTextField jTextField16;
     private javax.swing.JTextField jTextField17;
@@ -2174,7 +2279,6 @@ public class GUIgerente extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField20;
     private javax.swing.JTextField jTextField21;
     private javax.swing.JTextField jTextField22;
-    private javax.swing.JTextField jTextField23;
     private javax.swing.JTextField jTextField24;
     private javax.swing.JTextField jTextField25;
     private javax.swing.JTextField jTextField26;

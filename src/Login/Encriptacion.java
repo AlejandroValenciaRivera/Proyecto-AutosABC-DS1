@@ -15,7 +15,7 @@ public class Encriptacion {
     char[] datos;
     
     public Encriptacion(){
-        datos = new char[100];
+        datos = new char[94];
         datos[0] = 'A';
         datos[1] = 'B';
         datos[2] = 'C';
@@ -88,34 +88,28 @@ public class Encriptacion {
         datos[69] = '}';
         datos[70] = '~';
         datos[71] = '!';
-        datos[72] = '"';
-        datos[73] = '#';
-        datos[74] = '$';
-        datos[75] = '%';
-        datos[76] = '&';
-        datos[77] = '+';
-        datos[78] = '(';
-        datos[79] = ')';
-        datos[80] = '*';
-        datos[81] = '+';
-        datos[82] = ',';
-        datos[83] = '-';
-        datos[84] = '.';
-        datos[85] = '/';
-        datos[86] = ':';
-        datos[87] = ';';
-        datos[88] = '<';
-        datos[89] = '=';
-        datos[90] = '>';
-        datos[91] = '?';
-        datos[92] = '@';
-        datos[93] = '`';
-        datos[94] = '¿';
-        datos[95] = '®';
-        datos[96] = '¶';
-        datos[97] = '«';
-        datos[98] = '»';
-        datos[99] = '¡';
+        datos[72] = '#';
+        datos[73] = '$';
+        datos[74] = '%';
+        datos[75] = '&';
+        datos[76] = '+';
+        datos[77] = '(';
+        datos[78] = ')';
+        datos[79] = '*';
+        datos[80] = '+';
+        datos[81] = ',';
+        datos[82] = '-';
+        datos[83] = '.';
+        datos[84] = '/';
+        datos[85] = ':';
+        datos[86] = ';';
+        datos[87] = '<';
+        datos[88] = '=';
+        datos[89] = '>';
+        datos[90] = '?';
+        datos[91] = '@';
+        datos[92] = '`';
+        datos[93] = '¿';
     }
     
     public String encriptar(String dato){
@@ -123,9 +117,9 @@ public class Encriptacion {
         String datoEncriptado = "";
         char[] datoParticionado = explode(dato);
         Random indice = new Random();
-        int peso1 = (int) (indice.nextDouble() * 100 );
-        int peso2 = (int) (indice.nextDouble() * 100 );
-        int peso3 = (int) (indice.nextDouble() * 100 );
+        int peso1 = (int) (indice.nextDouble() * 94 );
+        int peso2 = (int) (indice.nextDouble() * 94 );
+        int peso3 = (int) (indice.nextDouble() * 94 );
         
         System.out.println(peso1);
         System.out.println(peso2);
@@ -143,7 +137,7 @@ public class Encriptacion {
             switch (iteracion) {
                 case 1:
                     while (posicion < peso1 ){
-                        if (posicionesContrasena[i] > 98){
+                        if (posicionesContrasena[i] > 92){
                             posicionesContrasena[i] = 0;
                         }
                         else {
@@ -155,7 +149,7 @@ public class Encriptacion {
                     break;
                 case 2:
                     while (posicion < peso2 ){
-                        if (posicionesContrasena[i] > 98){
+                        if (posicionesContrasena[i] > 92){
                             posicionesContrasena[i] = 0;
                         }
                         else {
@@ -168,7 +162,7 @@ public class Encriptacion {
                 default:
                     iteracion = 1;
                     while (posicion < peso3 ){
-                        if (posicionesContrasena[i] > 98){
+                        if (posicionesContrasena[i] > 92){
                             posicionesContrasena[i] = 0;
                         }
                         else {
@@ -186,7 +180,7 @@ public class Encriptacion {
             datoReconstruido[i] = datos[posicionesContrasena[i]];
         }
         for (int i = tamañoCadena; i < tamañoCadena*2; i++){
-            datoReconstruido[i] = datos[(int) (indice.nextDouble() * 100)];
+            datoReconstruido[i] = datos[(int) (indice.nextDouble() * 94)];
         }
         
         tamañoCadena = datoReconstruido.length;
@@ -203,7 +197,7 @@ public class Encriptacion {
             switch (iteracion) {
                 case 1:
                     while (posicion < (tamañoCadena*peso1) ){
-                        if (posicionesContrasena[i] > 98){
+                        if (posicionesContrasena[i] > 92){
                             posicionesContrasena[i] = 0;
                         }
                         else {
@@ -215,7 +209,7 @@ public class Encriptacion {
                     break;
                 case 2:
                     while (posicion < (tamañoCadena*peso2) ){
-                        if (posicionesContrasena[i] > 98){
+                        if (posicionesContrasena[i] > 92){
                             posicionesContrasena[i] = 0;
                         }
                         else {
@@ -228,7 +222,7 @@ public class Encriptacion {
                 default:
                     iteracion = 1;
                     while (posicion < (tamañoCadena*peso3) ){
-                        if (posicionesContrasena[i] > 98){
+                        if (posicionesContrasena[i] > 92){
                             posicionesContrasena[i] = 0;
                         }
                         else {
@@ -253,7 +247,7 @@ public class Encriptacion {
             contador = contador +1;
         }
         for (int i = 2; i < datoReconstruido.length; i = i + 3) {
-            datoReconstruido[i] = datos[(int) (indice.nextDouble() * 100)];
+            datoReconstruido[i] = datos[(int) (indice.nextDouble() * 94)];
         }
         
         datoEncriptado = String.valueOf(datoReconstruido);
@@ -308,7 +302,7 @@ public class Encriptacion {
                 case 1:
                     while (posicion < x1){
                         if (posicionesContrasena[i] < 1){
-                            posicionesContrasena[i] = 99;
+                            posicionesContrasena[i] = 93;
                         }
                         else {
                             posicionesContrasena[i] = posicionesContrasena[i] - 1;
@@ -320,7 +314,7 @@ public class Encriptacion {
                 case 2:
                     while (posicion < x2){
                         if (posicionesContrasena[i] < 1){
-                            posicionesContrasena[i] = 99;
+                            posicionesContrasena[i] = 93;
                         }
                         else {
                             posicionesContrasena[i] = posicionesContrasena[i] - 1;
@@ -333,7 +327,7 @@ public class Encriptacion {
                     iteracion = 1;
                     while (posicion < x3){
                         if (posicionesContrasena[i] < 1){
-                            posicionesContrasena[i] = 99;
+                            posicionesContrasena[i] = 93;
                         }
                         else {
                             posicionesContrasena[i] = posicionesContrasena[i] - 1;
