@@ -140,7 +140,9 @@ CREATE TABLE recuperacionEncriptacion (
 	cedula INT
 );
 
-INSERT INTO recuperacionEncriptacion VALUES ('Alevale', 'Alevale',552107685672,1120309485);
+INSERT INTO recuperacionEncriptacion VALUES ('Alevale', 'Alevale', 037712056156,1120309485);
+INSERT INTO recuperacionEncriptacion VALUES ('Juavar', 'Juavar',   084901842479,1120309485);
+INSERT INTO recuperacionEncriptacion VALUES ('Pedper', 'Pedper',   364225255579,1120309485);
 
 INSERT INTO sedes  VALUES (01, 'yanaconas',     'cali',         'calle 3 # 45a-12',   '3323456', '343456');
 INSERT INTO sedes  VALUES (02, 'automotores',   'palmira',      'carrera 4 # 23-97',  '4455234', '345203');
