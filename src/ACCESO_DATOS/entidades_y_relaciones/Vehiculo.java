@@ -6,7 +6,7 @@ package ACCESO_DATOS.entidades_y_relaciones;
  */
 public class Vehiculo {
         int vehiculo ;
-	Sede id_sede ;
+        int id_sede ;
 	String color ;
 	String marca;
 	String referencia ;
@@ -20,7 +20,7 @@ public class Vehiculo {
         return vehiculo;
     }
 
-    public Sede getId_sede() {
+    public int getId_sede() {
         return id_sede;
     }
 
@@ -60,7 +60,7 @@ public class Vehiculo {
         this.vehiculo = vehiculo;
     }
 
-    public void setId_sede(Sede id_sede) {
+    public void setId_sede(int id_sede) {
         this.id_sede = id_sede;
     }
 

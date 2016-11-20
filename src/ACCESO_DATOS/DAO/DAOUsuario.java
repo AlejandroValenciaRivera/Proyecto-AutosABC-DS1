@@ -38,21 +38,21 @@ public class DAOUsuario {
                 usu.getEstado() + "' , '" +
                 usu.getCuenta() + "', '" +
                 usu.getContrasena() + "')";
+        int numFilas = -1;
         try{
             Connection conn= fachada.getConnetion();
             Statement sentencia = conn.createStatement();
-            int numFilas = sentencia.executeUpdate(sql_guardar);
+            numFilas = sentencia.executeUpdate(sql_guardar);
             conn.close();
             fachada.closeConection();
-            return numFilas;
         }
         catch(SQLException e){ 
-            System.out.println(e); 
+            return -2; 
         }
         catch(Exception e){ 
-            System.out.println(e); 
+            return -3; 
         }
-        return -1;
+        return numFilas;
     }
     
     public Usuario ConsultarUsuario(int cedula){
