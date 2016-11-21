@@ -60,7 +60,9 @@ public class DAOVehiculo {
     /**
      * 
      * @param idVehiculo
-     * @return 
+     * @return Vehiculo
+     * @author Erik L+opez P.
+     * @proposito buscar un vehiculo en la base de datos y lo retorna
      */
     public Vehiculo consultarVehiculo(int idVehiculo) {
         Vehiculo unVehiculo = new Vehiculo();
@@ -73,12 +75,13 @@ public class DAOVehiculo {
                 + "traccion, "
                 + "modelo, "
                 + "precio, "
-                + "iva FROM vehiculos WHERE id_vehiculo = " + idVehiculo +" ";
+                + "iva FROM vehiculos WHERE id_vehiculo = " + idVehiculo;
         
         try {
             Connection conn = fachada.getConnetion();
             Statement sentencia = conn.createStatement();
             ResultSet tabla = sentencia.executeQuery(sql_select);
+            
             unVehiculo.setVehiculo(tabla.getInt(1));
             unVehiculo.setId_sede(tabla.getInt(2));
             unVehiculo.setColor(tabla.getString(3));

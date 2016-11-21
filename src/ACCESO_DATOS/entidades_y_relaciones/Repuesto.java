@@ -8,7 +8,7 @@ package ACCESO_DATOS.entidades_y_relaciones;
 public class Repuesto {
     
         int id_repuesto;
-	Sede id_sede ;
+	int id_sede ;
 	String nombre ;
 	int cantidad;
 	int precio_unidad ;
@@ -19,7 +19,7 @@ public class Repuesto {
         return id_repuesto;
     }
 
-    public Sede getId_sede() {
+    public int getId_sede() {
         return id_sede;
     }
 
@@ -47,7 +47,7 @@ public class Repuesto {
         this.id_repuesto = id_repuesto;
     }
 
-    public void setId_sede(Sede id_sede) {
+    public void setId_sede(int id_sede) {
         this.id_sede = id_sede;
     }
 

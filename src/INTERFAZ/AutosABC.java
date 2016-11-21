@@ -18,7 +18,6 @@ public class AutosABC {
      */
     public static void main(String[] args) {
             GUIlogin.main(args);
-            
     }
     
 }
