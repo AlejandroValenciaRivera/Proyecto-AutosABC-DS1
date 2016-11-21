@@ -20,7 +20,7 @@ public class DAOVenta {
     }
      /**
      * 
-     * @param repuesto
+     * @param venta
      * @return int
      * @author Juan José Varela V
      * @proposito recive un objeto Venta y lo guarda en la base de datos
