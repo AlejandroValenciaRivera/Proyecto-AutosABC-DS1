@@ -105,8 +105,7 @@ public class DAOVehiculo {
     }
 
     /**
-     * +++++++++++++++++++++++++++++++++PARTE DE UPDATE PARA
-     * VEHICULOS++++++++++++++++++++++++++++++++++++++++++++++++++
+     * +++++++++++++++++++++++++++++++++PARTE DE UPDATE PARA VEHICULOS++++++++++++++++++++++++++++++++++++++++++++++++++
      *
      * @param vehiculo
      * @return int
