@@ -172,13 +172,13 @@ public class GUIlogin extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void botonLogeoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonLogeoActionPerformed
-
+        setVisible(false);  
         String usuario = "";
         String contraseña = "";
         int cargo = 0;
         ControladorUsuario cUsuario = new ControladorUsuario();
-        
         ArrayList<Usuario> users = cUsuario.consultarLogin();
+        setVisible(true); 
         if (usuariologin.getText().equals(usuario) | Arrays.equals(contraseñalogin.getPassword(), explode(contraseña))){
             JOptionPane.showMessageDialog(rootPane, "Debe introducir datos en ambos campos");
         }
@@ -262,6 +262,8 @@ public class GUIlogin extends javax.swing.JFrame {
                 }
             }
         }
+        
+        
 
     }//GEN-LAST:event_botonLogeoActionPerformed
     
