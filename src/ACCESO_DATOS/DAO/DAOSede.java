@@ -75,11 +75,10 @@ public class DAOSede {
             }
 
             fachada.closeConection();
-            return sedes;
+            //return sedes;
          }
          catch(SQLException e){ 
-             JOptionPane.showMessageDialog(null, "Ha ocurrido un problema, \n consulta con la base de datos fallida");
-         }
+             JOptionPane.showMessageDialog(null, "         Ha ocurrido un problema, \n consulta con la base de datos fallida", "AutosABC", JOptionPane.ERROR_MESSAGE);         }
          catch(Exception e){ 
              JOptionPane.showMessageDialog(null, " Conexion con la base de datos fallida. \n Contacte inmediatamente con soporte");
          }
