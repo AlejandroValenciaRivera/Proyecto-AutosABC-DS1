@@ -74,7 +74,7 @@ public class DAOVenta {
                 + "cedula_cliente, "
                 + "nombre_cliente, "
                 + "telefono_cliente "
-                + "FROM repuestos WHERE id_repuesto = " + idVenta;
+                + "FROM venta WHERE id_venta = " + idVenta;
         try{
             Connection conn = fachada.getConnetion();
             Statement sentencia = conn.createStatement();
