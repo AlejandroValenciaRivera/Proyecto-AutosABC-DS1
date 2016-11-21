@@ -9,9 +9,9 @@ import java.sql.*;
 public class Cotizacion {
     
         int  id_cotizacion;
-	Vehiculo id_vehiculo ;
-	Usuario id_usuario ;
-	Sede id_sede ;
+	int id_vehiculo ;
+	int id_usuario ;
+	int id_sede ;
 	int precio ;
 	int iva ;
 	Date fecha;
@@ -20,15 +20,15 @@ public class Cotizacion {
         return id_cotizacion;
     }
 
-    public Vehiculo getId_vehiculo() {
+    public int getId_vehiculo() {
         return id_vehiculo;
     }
 
-    public Usuario getId_usuario() {
+    public int getId_usuario() {
         return id_usuario;
     }
 
-    public Sede getId_sede() {
+    public int getId_sede() {
         return id_sede;
     }
 
@@ -48,15 +48,15 @@ public class Cotizacion {
         this.id_cotizacion = id_cotizacion;
     }
 
-    public void setId_vehiculo(Vehiculo id_vehiculo) {
+    public void setId_vehiculo(int id_vehiculo) {
         this.id_vehiculo = id_vehiculo;
     }
 
-    public void setId_usuario(Usuario id_usuario) {
+    public void setId_usuario(int id_usuario) {
         this.id_usuario = id_usuario;
     }
 
-    public void setId_sede(Sede id_sede) {
+    public void setId_sede(int id_sede) {
         this.id_sede = id_sede;
     }
 
