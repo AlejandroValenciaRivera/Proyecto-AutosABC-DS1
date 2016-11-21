@@ -21,6 +21,7 @@ public class GUIlogin extends javax.swing.JFrame {
     
     GUIgerente gerente;
     GUIvendedor vendedor;
+    GUIJefeTaller jefeDeTaller;
     /**
      * Creates new form Login
      */
@@ -231,11 +232,14 @@ public class GUIlogin extends javax.swing.JFrame {
                             case 1:
                                 gerente = new GUIgerente(this);
                                 break;
+                            case 2:
+                                jefeDeTaller = new GUIJefeTaller(this);
+                                break;
                             case 3:
                                 vendedor = new GUIvendedor(this);
                                 break;
                             default:
-                                JOptionPane.showMessageDialog(rootPane, "La aplicación sólo soporta ingreso de gerente y vendedor por el momento");
+                                JOptionPane.showMessageDialog(rootPane, "Ha ocurrido un error critico,\n no se reconocio el cargo de la cuenta ingresada");
                                 break;
                         }
 
@@ -302,10 +306,11 @@ public class GUIlogin extends javax.swing.JFrame {
                 
                 new GUIlogin().setVisible(true);
                 
-                
+                /*
                 Encriptacion encripto = new Encriptacion();
                 System.out.println(encripto.encriptar("Pedper") + "::--->");
                 System.out.println(encripto.desencriptar(25, 55, 79, "6d]<btWRJ/^$<UJkN("));
+                */
                 
             }
         });
