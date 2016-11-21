@@ -24,7 +24,7 @@ public class DAOVenta {
      * @param venta
      * @return int
      * @author Juan José Varela V
-     * @proposito recive un objeto Venta y lo guarda en la base de datos
+     * @proposito recibe un objeto Venta y lo guarda en la base de datos
      */
     public int guardarVenta(Venta venta) {
        
@@ -58,9 +58,9 @@ public class DAOVenta {
      /**
      * 
      * @param idVenta
-     * @return int
+     * @return venta
      * @author Juan José Varela V
-     * @proposito recive un objeto Venta y lo guarda en la base de datos
+     * @proposito recibe un id Venta, realiza la consulta en la base de datos y devuelve un objeto venta
      */   
     public Venta consultarVenta(int idVenta) {
 
@@ -99,4 +99,34 @@ public class DAOVenta {
         }
         return ven;
     }
+     /**
+     * 
+     * @param Venta
+     * @return int
+     * @author Juan José Varela V
+     * @proposito metodo que modifica registros en la base de datos
+     *              a partir de un objeto venta que se recibe
+     */   
+    public int update(Venta venta){
+        String update_statement = "UPDATE venta SET id_vehiculo = " + venta.getId_vehiculo()
+                + ", id_usuario = " + venta.getId_usuario()
+                + ", id_sede = " + venta.getId_sede()
+                + ", formaDePago = " + venta.getForma_pago()
+                + ", fecha = " + venta.getFecha()
+                + " WHERE id_venta = " + venta.getId_venta();
+        int numFilas = -1;
+        try {
+            Connection conn = fachada.getConnetion();
+            Statement sentencia = conn.createStatement();
+            numFilas = sentencia.executeUpdate(update_statement);
+            conn.close();
+            fachada.closeConection();
+        } catch (SQLException ex) {
+            return -2;
+        } catch (Exception ex) {
+            return -3;
+        }
+        return numFilas;
+    }
+    
 }
