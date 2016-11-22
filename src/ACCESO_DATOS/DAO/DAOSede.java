@@ -85,4 +85,116 @@ public class DAOSede {
          
         return sedes;
     }
+    
+    //-----------------------Actualización de atributos--------------------------------------------
+    
+    /**
+     *
+     * @param Sede
+     * @return int
+     */
+    public int updateNombre(Sede sede) {
+        String update_statement = "UPDATE sedes SET nombre = '" + sede.getNombre() + "' WHERE id_sede = " + sede.getId();
+        int numFilas = -1;
+        try {
+            Connection conn = fachada.getConnetion();
+            Statement sentencia = conn.createStatement();
+            numFilas = sentencia.executeUpdate(update_statement);
+            conn.close();
+            fachada.closeConection();
+        } catch (SQLException ex) {
+            return -2;
+        } catch (Exception ex) {
+            return -3;
+        }
+        return numFilas;
+    }
+    
+    /**
+     *
+     * @param Sede
+     * @return int
+     */
+    public int updateCiudad(Sede sede) {
+        String update_statement = "UPDATE sedes SET ciudad = '" + sede.getCiudad() + "' WHERE id_sede = " + sede.getId();
+        int numFilas = -1;
+        try {
+            Connection conn = fachada.getConnetion();
+            Statement sentencia = conn.createStatement();
+            numFilas = sentencia.executeUpdate(update_statement);
+            conn.close();
+            fachada.closeConection();
+        } catch (SQLException ex) {
+            return -2;
+        } catch (Exception ex) {
+            return -3;
+        }
+        return numFilas;
+    }
+    
+    /**
+     *
+     * @param Sede
+     * @return int
+     */
+    public int updateDireccion(Sede sede) {
+        String update_statement = "UPDATE sedes SET direccion = '" + sede.getDireccion() + "' WHERE id_sede = " + sede.getId();
+        int numFilas = -1;
+        try {
+            Connection conn = fachada.getConnetion();
+            Statement sentencia = conn.createStatement();
+            numFilas = sentencia.executeUpdate(update_statement);
+            conn.close();
+            fachada.closeConection();
+        } catch (SQLException ex) {
+            return -2;
+        } catch (Exception ex) {
+            return -3;
+        }
+        return numFilas;
+    }
+    
+    /**
+     *
+     * @param Sede
+     * @return int
+     */
+    public int updateTelefono(Sede sede) {
+        String update_statement = "UPDATE sedes SET telefono = '" + sede.getTelefono() + "' WHERE id_sede = " + sede.getId();
+        int numFilas = -1;
+        try {
+            Connection conn = fachada.getConnetion();
+            Statement sentencia = conn.createStatement();
+            numFilas = sentencia.executeUpdate(update_statement);
+            conn.close();
+            fachada.closeConection();
+        } catch (SQLException ex) {
+            return -2;
+        } catch (Exception ex) {
+            return -3;
+        }
+        return numFilas;
+    }
+    
+    /**
+     *
+     * @param Sede
+     * @return int
+     */
+    public int updateFax(Sede sede) {
+        String update_statement = "UPDATE sedes SET fax = '" + sede.getFax() + "' WHERE id_sede = " + sede.getId();
+        int numFilas = -1;
+        try {
+            Connection conn = fachada.getConnetion();
+            Statement sentencia = conn.createStatement();
+            numFilas = sentencia.executeUpdate(update_statement);
+            conn.close();
+            fachada.closeConection();
+        } catch (SQLException ex) {
+            return -2;
+        } catch (Exception ex) {
+            return -3;
+        }
+        return numFilas;
+    }
 }
