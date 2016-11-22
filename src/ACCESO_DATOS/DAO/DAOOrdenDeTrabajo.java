@@ -86,15 +86,15 @@ public class DAOOrdenDeTrabajo {
             while(tabla.next()){
                orden = new OrdenDeTrabajo();
                
-               orden.setId_orden(Integer.parseInt(tabla.getString(1)));
+               orden.setId_orden(tabla.getInt(1));
                                              
-               orden.setId_usuario(Integer.parseInt(tabla.getString(2)));
+               orden.setId_usuario(tabla.getInt(2));
                
-               orden.setId_repuesto(Integer.parseInt(tabla.getString(3)));
+               orden.setId_repuesto(tabla.getInt(3));
                
-               orden.setId_vehiculo(Integer.parseInt(tabla.getString(4)));
+               orden.setId_vehiculo(tabla.getInt(4));
                
-               orden.setId_sede(Integer.parseInt(tabla.getString(5)));
+               orden.setId_sede(tabla.getInt(5));
                
                orden.setDescripcion(tabla.getString(6));
                
