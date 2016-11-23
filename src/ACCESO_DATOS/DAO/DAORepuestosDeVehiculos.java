@@ -38,13 +38,14 @@ public class DAORepuestosDeVehiculos {
             numFilas = sentencia.executeUpdate(statement_save);
             conn.close();
             fachada.closeConection();
+            return numFilas;
         }
         catch (SQLException ex) {
             return -2;
         } catch (Exception ex) {
             return -3;
         }
-        return numFilas;
+        
     }
     
     /**
@@ -107,4 +108,6 @@ public class DAORepuestosDeVehiculos {
          }
         return listaVinculacion;
     }
+    
+     
 }

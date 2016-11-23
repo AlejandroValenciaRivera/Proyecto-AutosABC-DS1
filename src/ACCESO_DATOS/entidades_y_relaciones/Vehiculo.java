@@ -15,6 +15,7 @@ public class Vehiculo {
 	String modelo ;
 	int precio ;
 	int iva ;
+        String estado;
 
     public int getVehiculo() {
         return vehiculo;
@@ -54,6 +55,10 @@ public class Vehiculo {
 
     public int getIva() {
         return iva;
+    }
+    
+    public String getEstado(){
+        return estado;
     }
 
     public void setVehiculo(int vehiculo) {
@@ -95,10 +100,9 @@ public class Vehiculo {
     public void setIva(int iva) {
         this.iva = iva;
     }
-
-
     
-    
-    
+    public void setEstado(String estado){
+        this.estado = estado;
+    }
     
 }

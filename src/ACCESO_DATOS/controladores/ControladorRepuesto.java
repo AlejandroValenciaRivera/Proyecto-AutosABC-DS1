@@ -32,4 +32,19 @@ public class ControladorRepuesto {
         
         return result;
     }
+    
+    public Repuesto consultarRepuesto(int sede, String nombre, int cantidad, int precio, int iva, String descripcion){
+        Repuesto repuesto = new Repuesto();
+        
+        repuesto.setId_sede(sede);
+        repuesto.setNombre(nombre);
+        repuesto.setCantidad(cantidad);
+        repuesto.setPrecio_unidad(precio);
+        repuesto.setIva(iva);
+        repuesto.setDescripcion(descripcion);
+        
+        Repuesto repuesto2 = daoRepuesto.consultarRepuesto2(repuesto);
+        
+        return repuesto2;
+    }
 }

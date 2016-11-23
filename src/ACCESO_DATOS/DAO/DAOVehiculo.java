@@ -8,6 +8,7 @@ package ACCESO_DATOS.DAO;
 import ACCESO_DATOS.conexion.*;
 import ACCESO_DATOS.entidades_y_relaciones.*;
 import java.sql.*;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /**
@@ -40,7 +41,8 @@ public class DAOVehiculo {
                 + vehiculo.getTraccion() + "', '"
                 + vehiculo.getModelo() + "', "
                 + vehiculo.getPrecio() + ", "
-                + vehiculo.getIva() + " )";
+                + vehiculo.getIva() + ", '" 
+                + vehiculo.getEstado() + "' )";
         int numFilas = -1;
         try {
             Connection conn = fachada.getConnetion();
@@ -74,7 +76,7 @@ public class DAOVehiculo {
                 + "traccion, "
                 + "modelo, "
                 + "precio, "
-                + "iva FROM vehiculos WHERE id_vehiculo = " + idVehiculo;
+                + "iva, estado FROM vehiculos WHERE id_vehiculo = " + idVehiculo;
 
         try {
             Connection conn = fachada.getConnetion();
@@ -91,6 +93,7 @@ public class DAOVehiculo {
             unVehiculo.setModelo(tabla.getString(8));
             unVehiculo.setPrecio(tabla.getInt(9));
             unVehiculo.setIva(tabla.getInt(10));
+            unVehiculo.setEstado(tabla.getString(11));
 
             fachada.closeConection();
 
@@ -101,7 +104,57 @@ public class DAOVehiculo {
         }
         return unVehiculo;
     }
+    
+    
+    public ArrayList<Vehiculo> consultarVehiculos() {
+        Vehiculo unVehiculo = new Vehiculo();
+        String sql_select = "SELECT id_vehiculo, "
+                + "id_sede,  "
+                + "color, "
+                + "marca, "
+                + "referencia, "
+                + "tipo, "
+                + "traccion, "
+                + "modelo, "
+                + "precio, "
+                + "iva, estado FROM vehiculos";
+        
+        ArrayList<Vehiculo> vehiculos = new ArrayList<>();
+        
+        try {
+            Connection conn = fachada.getConnetion();
+            Statement sentencia = conn.createStatement();
+            ResultSet tabla = sentencia.executeQuery(sql_select);
+            
+            while(tabla.next()){
+                unVehiculo = new Vehiculo();
+                unVehiculo.setVehiculo(tabla.getInt(1));
+                unVehiculo.setId_sede(tabla.getInt(2));
+                unVehiculo.setColor(tabla.getString(3));
+                unVehiculo.setMarca(tabla.getString(4));
+                unVehiculo.setReferencia(tabla.getString(5));
+                unVehiculo.setTipo(tabla.getString(6));
+                unVehiculo.setTraccion(tabla.getString(7));
+                unVehiculo.setModelo(tabla.getString(8));
+                unVehiculo.setPrecio(tabla.getInt(9));
+                unVehiculo.setIva(tabla.getInt(10));
+                unVehiculo.setEstado(tabla.getString(11));
+                
+                vehiculos.add(unVehiculo);
+            
+            }
+            
 
+            fachada.closeConection();
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "         Ha ocurrido un problema, \n consulta con la base de datos fallida", "AutosABC", JOptionPane.ERROR_MESSAGE);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Ha ocurrido un problema!!", "AutosABC", JOptionPane.ERROR_MESSAGE);
+        }
+        return vehiculos;
+    }
+    
     /**
      * +++++++++++++++++++++++++++++++++PARTE DE UPDATE PARA VEHICULOS++++++++++++++++++++++++++++++++++++++++++++++++++
      *
@@ -290,6 +343,23 @@ public class DAOVehiculo {
      */
     public int updateIva(Vehiculo vehiculo) {
         String update_statement = "UPDATE vehiculos SET iva = " + vehiculo.getIva() + " WHERE id_vehiculo = " + vehiculo.getVehiculo();
+        int numFilas = -1;
+        try {
+            Connection conn = fachada.getConnetion();
+            Statement sentencia = conn.createStatement();
+            numFilas = sentencia.executeUpdate(update_statement);
+            conn.close();
+            fachada.closeConection();
+        } catch (SQLException ex) {
+            return -2;
+        } catch (Exception ex) {
+            return -3;
+        }
+        return numFilas;
+    }
+    
+    public int updateEstado(Vehiculo vehiculo) {
+        String update_statement = "UPDATE vehiculos SET estado = '" + vehiculo.getEstado() + "' WHERE id_vehiculo = " + vehiculo.getVehiculo();
         int numFilas = -1;
         try {
             Connection conn = fachada.getConnetion();

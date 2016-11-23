@@ -19,7 +19,14 @@ public class ControladorRepuestosDeVehiculo {
         daoVinculo = new DAORepuestosDeVehiculos();
     }
     
-    public int insertarVinculo(){
-        return 1;
+    public int insertarVinculo(int repuesto, int vehiculo){
+        
+        RepuestosDeVehiculos vinculacion = new RepuestosDeVehiculos();
+        
+        vinculacion.setId_repuesto(repuesto);
+        vinculacion.setId_vehiculo(vehiculo);
+        
+        int result = daoVinculo.guardarVinculacion(vinculacion);
+        return result;
     }
 }

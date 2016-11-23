@@ -29,6 +29,8 @@ public class GUIgerente extends javax.swing.JFrame {
     CardLayout ventanaInventarioCrearRepuesto;
     CardLayout ventanaInventarioModificarVehiculo;
     CardLayout ventanaInventarioModificarRepuesto;
+    ArrayList<Vehiculo> vehiculos;
+    ArrayList<Vehiculo> vehiculosAenviar; 
     /**
      * Creates new form AutosABC
      * @param login2
@@ -130,7 +132,9 @@ public class GUIgerente extends javax.swing.JFrame {
         
         setVisible(true);
         
-
+        ControladorVehiculo cVehiculo = new ControladorVehiculo();
+        vehiculos = cVehiculo.consultarVehiculos();
+        vehiculosAenviar = new ArrayList<>();
     }
 
     /**
@@ -294,7 +298,7 @@ public class GUIgerente extends javax.swing.JFrame {
         jLabel39 = new javax.swing.JLabel();
         comboBoxRepuestoVehiculo = new javax.swing.JComboBox<>();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTextArea3 = new javax.swing.JTextArea();
+        areaVehiculosAñadidos = new javax.swing.JTextArea();
         botonAñadirRepuestoVehiculo = new javax.swing.JButton();
         panelCrearInventarioCrearVehiculoVacio = new javax.swing.JPanel();
         panelCrearInventarioCrearRepuestoVacio = new javax.swing.JPanel();
@@ -1611,10 +1615,10 @@ public class GUIgerente extends javax.swing.JFrame {
 
         comboBoxRepuestoVehiculo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        jTextArea3.setEditable(false);
-        jTextArea3.setColumns(20);
-        jTextArea3.setRows(5);
-        jScrollPane3.setViewportView(jTextArea3);
+        areaVehiculosAñadidos.setEditable(false);
+        areaVehiculosAñadidos.setColumns(20);
+        areaVehiculosAñadidos.setRows(5);
+        jScrollPane3.setViewportView(areaVehiculosAñadidos);
 
         botonAñadirRepuestoVehiculo.setText("AÑADIR VEHICULO");
         botonAñadirRepuestoVehiculo.addActionListener(new java.awt.event.ActionListener() {
@@ -2159,6 +2163,14 @@ public class GUIgerente extends javax.swing.JFrame {
        
        botonAñadirRepuesto.setEnabled(true);
        botonAñadirVehiculo.setEnabled(false);
+             
+       comboBoxRepuestoVehiculo.removeAllItems();
+       comboBoxRepuestoVehiculo.addItem("Seleccione una");
+       
+       for (int i = 0; i < vehiculos.size(); i++) {
+           comboBoxRepuestoVehiculo.addItem(Integer.toString(vehiculos.get(i).getVehiculo()));
+       }
+       
     }//GEN-LAST:event_botonPanelInventarioCrearRepuestoActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
@@ -2298,7 +2310,7 @@ public class GUIgerente extends javax.swing.JFrame {
                 
                 for (int i = 1; i <= cantidad; i++) {
                     cVehiculo = new ControladorVehiculo();
-                    int result = cVehiculo.insertarVehiculo(id_sede_vehiculo, color, marca, referencia, modelo, traccion, tipo, precio, iva);
+                    int result = cVehiculo.insertarVehiculo(id_sede_vehiculo, color, marca, referencia, modelo, traccion, tipo, precio, iva, "Disponible");
                 
                     if ((result == -2) | (result == -3)) {
                         JOptionPane.showMessageDialog(rootPane, "NO SE PUDO REGISTRAR EL VEHICULO", "AutosABC", JOptionPane.ERROR_MESSAGE);
@@ -2317,7 +2329,33 @@ public class GUIgerente extends javax.swing.JFrame {
     }//GEN-LAST:event_botonAñadirVehiculoActionPerformed
 
     private void botonAñadirRepuestoVehiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAñadirRepuestoVehiculoActionPerformed
-        // TODO add your handling code here:
+        try{
+            
+            int id_vehiculo = comboBoxRepuestoVehiculo.getSelectedIndex();
+            Vehiculo unVehiculo = new Vehiculo();
+            
+            if (id_vehiculo == 0){
+            
+            }
+            
+            else {
+                unVehiculo = vehiculos.get(id_vehiculo - 1);
+                vehiculos.remove(id_vehiculo - 1);
+                vehiculosAenviar.add(unVehiculo);
+                comboBoxRepuestoVehiculo.removeAllItems();
+                comboBoxRepuestoVehiculo.addItem("Seleccione una");
+
+                for (int i = 0; i < vehiculos.size(); i++) {
+                    comboBoxRepuestoVehiculo.addItem(Integer.toString(vehiculos.get(i).getVehiculo()));
+                }
+                areaVehiculosAñadidos.append(unVehiculo.getVehiculo() + " | " + unVehiculo.getMarca() +" | " +unVehiculo.getReferencia() +  " | " + unVehiculo.getModelo() + " | " + unVehiculo.getColor() + "\n");
+            }
+            
+        }
+        
+        catch(NumberFormatException e){
+        
+        }
     }//GEN-LAST:event_botonAñadirRepuestoVehiculoActionPerformed
 
     private void botonAñadirRepuestoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAñadirRepuestoActionPerformed
@@ -2341,11 +2379,11 @@ public class GUIgerente extends javax.swing.JFrame {
        
                 ArrayList<Sede> sedes = cSede.consultarSedes();
            
-                int id_sede_vehiculo = sedes.get(sede - 1).getId();
+                int id_sede_repuesto = sedes.get(sede - 1).getId();
                 
                 ControladorRepuesto cRepuesto = new ControladorRepuesto();
                 
-                int result = cRepuesto.insertarRepuesto(sede, nombre, cantidad, precio, iva, descripcion);
+                int result = cRepuesto.insertarRepuesto(id_sede_repuesto, nombre, cantidad, precio, iva, descripcion);
                 
                 if ((result == -2) | (result == -3)) {
                     JOptionPane.showMessageDialog(rootPane, "NO SE PUDO REGISTRAR EL REPUESTO", "AutosABC", JOptionPane.ERROR_MESSAGE);
@@ -2354,6 +2392,27 @@ public class GUIgerente extends javax.swing.JFrame {
 
                 else{
                     JOptionPane.showMessageDialog(rootPane, "REPUESTO REGISTRADO CON EXITO", "AutosABC", JOptionPane.INFORMATION_MESSAGE);
+                }
+                
+                ControladorRepuestosDeVehiculo cRV = new ControladorRepuestosDeVehiculo();
+                cRepuesto = new ControladorRepuesto();
+                System.out.println("error 1");
+                Repuesto repuesto = cRepuesto.consultarRepuesto(id_sede_repuesto, nombre, cantidad, precio, iva, descripcion);
+                System.out.println("error 2");
+                System.out.println(repuesto.getId_repuesto());
+                for (int i = 0; i < vehiculosAenviar.size(); i++){
+                    cRV = new ControladorRepuestosDeVehiculo();
+                    result = cRV.insertarVinculo(repuesto.getId_repuesto(), vehiculosAenviar.get(i).getVehiculo());
+                    if((result == -2)|(result == -3)) {
+                        JOptionPane.showMessageDialog(rootPane, "NO SE PUDO REGISTRAR LA VINCULACION DEL REPUESTO CON LOS VEHICULOS", "AutosABC", JOptionPane.ERROR_MESSAGE);
+                        break;
+                    }
+                    
+                    else{
+                        if((i + 1) == vehiculosAenviar.size()){
+                            JOptionPane.showMessageDialog(rootPane, "VINCULACIONES VEHICULO-REPUESTO EXITOSA", "AutosABC", JOptionPane.INFORMATION_MESSAGE);
+                        }
+                    }
                 }
            }
        }       
@@ -2367,6 +2426,7 @@ public class GUIgerente extends javax.swing.JFrame {
     }//GEN-LAST:event_radioBotonGeneroFActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextArea areaVehiculosAñadidos;
     private javax.swing.JButton botonAyudaCrearUsuario;
     private javax.swing.JButton botonAyudaCrearUsuario1;
     private javax.swing.JButton botonAñadirRepuesto;
@@ -2493,7 +2553,6 @@ public class GUIgerente extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextArea jTextArea2;
-    private javax.swing.JTextArea jTextArea3;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField16;
     private javax.swing.JTextField jTextField17;

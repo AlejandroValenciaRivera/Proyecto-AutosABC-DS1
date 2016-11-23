@@ -8,6 +8,7 @@ package ACCESO_DATOS.DAO;
 import ACCESO_DATOS.conexion.*;
 import ACCESO_DATOS.entidades_y_relaciones.*;
 import java.sql.*;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 /**
  *
@@ -229,5 +230,36 @@ public class DAORepuesto {
     
     /**
      * +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++FIN PARTE UPDATES PARA REPUESTOS++++++++++++++++++++++++++++++++++++++++
+     * @param repuesto
+     * @return 
      */
+    
+    public Repuesto consultarRepuesto2(Repuesto repuesto){
+        String sql_select = "SELECT id_repuesto FROM repuestos WHERE id_sede = " + repuesto.getId_sede() 
+                + " AND nombre = '" + repuesto.getNombre() + "'" +  " AND cantidad = " + repuesto.getCantidad()
+                + " AND precio_unidad = " + repuesto.getPrecio_unidad() + " AND iva = " + repuesto.getIva()
+                + " AND descripcion = '" + repuesto.getDescripcion() + "' ";
+        
+                System.out.println(sql_select);
+        
+        Repuesto repVehi = new Repuesto();
+        try{
+            Connection conn = fachada.getConnetion();
+            Statement sentencia = conn.createStatement();
+            ResultSet tabla = sentencia.executeQuery(sql_select);
+            
+            while(tabla.next()){
+                repVehi.setId_repuesto(tabla.getInt(1));
+                System.out.println(repVehi.getId_repuesto());
+            }
+
+        }
+        catch(SQLException e){
+             System.out.println(e);
+             JOptionPane.showMessageDialog(null, "         Ha ocurrido un problema, \n consulta con la base de datos fallida", "AutosABC", JOptionPane.ERROR_MESSAGE);         }
+         catch(Exception e){ 
+             JOptionPane.showMessageDialog(null, " Conexion con la base de datos fallida. \n Contacte inmediatamente con soporte");
+         }
+        return repVehi;
+    }
 }
