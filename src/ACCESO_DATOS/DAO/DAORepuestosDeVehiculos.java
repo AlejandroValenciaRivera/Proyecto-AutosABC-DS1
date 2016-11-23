@@ -78,6 +78,11 @@ public class DAORepuestosDeVehiculos {
         return listaVinculacion;
     }
     
+    /**
+     * igual que el anterior
+     * @param id_repuesto
+     * @return 
+     */
     public ArrayList<RepuestosDeVehiculos> consultarVinculacionRepuesto(int id_repuesto){
         ArrayList<RepuestosDeVehiculos> listaVinculacion = new ArrayList<>();
         String sql_select = "SELECT * FROM repuestos_vehiculos WHERE id_repuesto = " + id_repuesto;
