@@ -10,7 +10,7 @@ import ACCESO_DATOS.entidades_y_relaciones.*;
 import java.sql.*;
 /**
  *
- * @author aleja_000
+ * @author Erik Lopez Pacheco
  */
 public class DAORepuestosDeVehiculos {
     FachadaBD fachada;
