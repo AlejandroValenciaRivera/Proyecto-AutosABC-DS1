@@ -20,7 +20,23 @@ public class DAORepuestosDeVehiculos {
     }
     
     public int guardarVinculacion(RepuestosDeVehiculos vinculacion){
-        return 1;
+        String statement_save = "INSERT INTO repuestos_vehiculos VALUES ("
+                +vinculacion.getId_repuesto() +", "
+                + vinculacion.getId_vehiculo()+" )";
+        int numFilas = -1;
+        try{
+            Connection conn = fachada.getConnetion();
+            Statement sentencia = conn.createStatement();
+            numFilas = sentencia.executeUpdate(statement_save);
+            conn.close();
+            fachada.closeConection();
+        }
+        catch (SQLException ex) {
+            return -2;
+        } catch (Exception ex) {
+            return -3;
+        }
+        return numFilas;
     }
     
     public RepuestosDeVehiculos consultarVinculacion(){
