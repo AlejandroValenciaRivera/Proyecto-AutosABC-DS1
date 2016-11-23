@@ -5,8 +5,6 @@
  */
 package INTERFAZ;
 
-import javax.swing.JOptionPane;
-
 /**
  *
  * @author aleja_000

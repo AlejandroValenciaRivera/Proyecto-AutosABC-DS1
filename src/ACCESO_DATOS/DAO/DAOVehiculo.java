@@ -8,8 +8,6 @@ package ACCESO_DATOS.DAO;
 import ACCESO_DATOS.conexion.*;
 import ACCESO_DATOS.entidades_y_relaciones.*;
 import java.sql.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -33,7 +31,7 @@ public class DAOVehiculo {
      */
     public int guardarVehiculo(Vehiculo vehiculo) {
         String statement_save = "INSERT INTO vehiculos VALUES ( "
-                + vehiculo.getVehiculo() + ", "
+                + "nextval('secuencia_id_vehiculo')" + ", "
                 + vehiculo.getId_sede() + ", '"
                 + vehiculo.getColor() + "', '"
                 + vehiculo.getMarca() + "', '"
@@ -50,12 +48,12 @@ public class DAOVehiculo {
             numFilas = sentencia.executeUpdate(statement_save);
             conn.close();
             fachada.closeConection();
+            return numFilas;
         } catch (SQLException ex) {
             return -2;
         } catch (Exception ex) {
             return -3;
         }
-        return numFilas;
     }
 
     /**

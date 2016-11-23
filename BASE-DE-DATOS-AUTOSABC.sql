@@ -60,7 +60,7 @@ CREATE TABLE vehiculos (
 	modelo VARCHAR(20),
 	precio INT,
 	iva INT,
-	cantidad INT,
+	estado VARCHAR(20),
 	FOREIGN KEY (id_sede) REFERENCES sedes(id_sede)
 );
 
@@ -86,7 +86,7 @@ CREATE TABLE orden_de_trabajo (
 	id_repuesto INT,
 	id_vehiculo INT,
 	id_sede INT,
-	descripcion INT,
+	descripcion VARCHAR(500),
 	FOREIGN KEY (id_vehiculo) REFERENCES vehiculos(id_vehiculo),
 	FOREIGN KEY (id_repuesto) REFERENCES repuestos(id_repuesto),
 	FOREIGN KEY (id_sede) REFERENCES sedes(id_sede),
@@ -166,16 +166,16 @@ INSERT INTO usuarios  VALUES (34958478,   07, 'Jairo Diaz',         '1984-07-11'
 
 
 --INSERT INTO vehiculos VALUES (id, id-sede,  color, marca, referencia, tipo, traccion, modelo, precio, iva);
-INSERT INTO vehiculos VALUES (nextval('secuencia_id_vehiculo'), 01, 'verde',    'Mazda',     '3',        'sedan', 'trasera',   '2013', 54989999,   20000,   1);
-INSERT INTO vehiculos VALUES (nextval('secuencia_id_vehiculo'), 01, 'negro',    'Chevrolet', 'spak',     'coupe', 'doble',     '2016', 89579999,   30000,   1);
-INSERT INTO vehiculos VALUES (nextval('secuencia_id_vehiculo'), 01, 'rojo',     'Honda',     'huang',    'sedan', 'delantera', '2014', 34560000,   20000,   1);
-INSERT INTO vehiculos VALUES (nextval('secuencia_id_vehiculo'), 01, 'azul',     'Audi',      'scorpion', 'sedan', 'trasera',   '2013', 54697000,   30000,   1);
-INSERT INTO vehiculos VALUES (nextval('secuencia_id_vehiculo'), 01, 'blanco',   'Kia',       'soul',     'sedan', 'doble',     '2015', 67986000,   40000,   1);
-INSERT INTO vehiculos VALUES (nextval('secuencia_id_vehiculo'), 01, 'verde',    'pagani',    'zonda',    'coupe', 'trasera',   '2016', 2050060000, 1000000, 1);
-INSERT INTO vehiculos VALUES (nextval('secuencia_id_vehiculo'), 01, 'negro',    'Chevrolet', 'camaro',   'coupe', 'trasera',   '2015', 120495598,  10000,   1);
-INSERT INTO	vehiculos VALUES (nextval('secuencia_id_vehiculo'), 01, 'amarillo', 'Ford',      'Mustang',  'coupe', 'trasera',   '2014', 100490509,  200000,  1);
-INSERT INTO vehiculos VALUES (nextval('secuencia_id_vehiculo'), 01, 'blando',   'Kia',       'Cerato',   'coupe', 'trasera',   '2015', 85698958,   50000,   1);
-INSERT INTO vehiculos VALUES (nextval('secuencia_id_vehiculo'), 01, 'rojo',     'Chevrolet', 'Spark-GT', 'sedan', 'delantera', '2015', 46596958,   20000,   1);
+INSERT INTO vehiculos VALUES (nextval('secuencia_id_vehiculo'), 01, 'verde',    'Mazda',     '3',        'sedan', 'trasera',   '2013', 54989999,   20000,   'Disponible');
+INSERT INTO vehiculos VALUES (nextval('secuencia_id_vehiculo'), 01, 'negro',    'Chevrolet', 'spak',     'coupe', 'doble',     '2016', 89579999,   30000,   'Disponible');
+INSERT INTO vehiculos VALUES (nextval('secuencia_id_vehiculo'), 01, 'rojo',     'Honda',     'huang',    'sedan', 'delantera', '2014', 34560000,   20000,   'Disponible');
+INSERT INTO vehiculos VALUES (nextval('secuencia_id_vehiculo'), 01, 'azul',     'Audi',      'scorpion', 'sedan', 'trasera',   '2013', 54697000,   30000,   'Disponible');
+INSERT INTO vehiculos VALUES (nextval('secuencia_id_vehiculo'), 01, 'blanco',   'Kia',       'soul',     'sedan', 'doble',     '2015', 67986000,   40000,   'Disponible');
+INSERT INTO vehiculos VALUES (nextval('secuencia_id_vehiculo'), 01, 'verde',    'pagani',    'zonda',    'coupe', 'trasera',   '2016', 2050060000, 1000000, 'Disponible');
+INSERT INTO vehiculos VALUES (nextval('secuencia_id_vehiculo'), 01, 'negro',    'Chevrolet', 'camaro',   'coupe', 'trasera',   '2015', 120495598,  10000,   'Disponible');
+INSERT INTO	vehiculos VALUES (nextval('secuencia_id_vehiculo'), 01, 'amarillo', 'Ford',      'Mustang',  'coupe', 'trasera',   '2014', 100490509,  200000,  'Disponible');
+INSERT INTO vehiculos VALUES (nextval('secuencia_id_vehiculo'), 01, 'blando',   'Kia',       'Cerato',   'coupe', 'trasera',   '2015', 85698958,   50000,   'Disponible');
+INSERT INTO vehiculos VALUES (nextval('secuencia_id_vehiculo'), 01, 'rojo',     'Chevrolet', 'Spark-GT', 'sedan', 'delantera', '2015', 46596958,   20000,   'Disponible');
 
 --INSERT INTO repuestos VALUES (id-respuesto, id-sede, nombre, cantidad, percion-un, iva, descripcion);
 INSERT INTO repuestos VALUES (nextval('secuencia_id_repuesto'), 01, 'Rin',                         20, 80000,   200,   'rin para llanta de auto');

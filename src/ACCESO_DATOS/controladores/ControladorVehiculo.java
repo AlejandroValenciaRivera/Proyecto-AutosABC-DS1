@@ -19,8 +19,21 @@ public class ControladorVehiculo {
         daoVehiculo = new DAOVehiculo();
     }
     
-    public int insertarVehiculo(){
-        return 1;
+    public int insertarVehiculo(int sede, String color, String marca, String referencia, String modelo, String traccion, String tipo, int precio, int iva){
+        Vehiculo vehiculo = new Vehiculo();
+        vehiculo.setId_sede(sede);
+        vehiculo.setColor(color);
+        vehiculo.setMarca(marca);
+        vehiculo.setReferencia(referencia);
+        vehiculo.setModelo(modelo);
+        vehiculo.setTraccion(traccion);
+        vehiculo.setTipo(tipo);
+        vehiculo.setPrecio(precio);
+        vehiculo.setIva(iva);
+        
+        int result = daoVehiculo.guardarVehiculo(vehiculo);
+        
+        return result;
     }
 }
 

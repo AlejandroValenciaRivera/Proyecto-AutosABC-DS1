@@ -19,7 +19,17 @@ public class ControladorRepuesto {
         daoRepuesto = new DAORepuesto();
     }
     
-    public int insertarRepuesto(){
-        return 1;
+    public int insertarRepuesto(int sede, String nombre, int cantidad, int precio, int iva, String descripcion){
+        Repuesto repuesto = new Repuesto();
+        repuesto.setId_sede(sede);
+        repuesto.setNombre(nombre);
+        repuesto.setCantidad(cantidad);
+        repuesto.setPrecio_unidad(precio);
+        repuesto.setIva(iva);
+        repuesto.setDescripcion(descripcion);
+        
+        int result = daoRepuesto.guardarRepuesto(repuesto);
+        
+        return result;
     }
 }

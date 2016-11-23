@@ -10,6 +10,7 @@ import javax.swing.*;
 import java.sql.*;
 import ACCESO_DATOS.controladores.*;
 import ACCESO_DATOS.entidades_y_relaciones.*;
+import Login.Encriptacion;
 import java.util.ArrayList;
 
 /**
@@ -194,7 +195,7 @@ public class GUIgerente extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        jButton13 = new javax.swing.JButton();
+        botonCrearSede = new javax.swing.JButton();
         jButton14 = new javax.swing.JButton();
         fax_sede = new javax.swing.JTextField();
         telefono_sede = new javax.swing.JTextField();
@@ -213,29 +214,27 @@ public class GUIgerente extends javax.swing.JFrame {
         jLabel18 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
-        jTextField7 = new javax.swing.JTextField();
+        nombre_usuario = new javax.swing.JTextField();
+        cedula_usuario = new javax.swing.JTextField();
         jLabel21 = new javax.swing.JLabel();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
-        jTextField8 = new javax.swing.JTextField();
-        jTextField9 = new javax.swing.JTextField();
-        jTextField11 = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        radioBotonGeneroM = new javax.swing.JRadioButton();
+        radioBotonGeneroF = new javax.swing.JRadioButton();
+        nacimiento_usuario = new javax.swing.JTextField();
+        email_usuario = new javax.swing.JTextField();
+        cuenta_usuario = new javax.swing.JTextField();
+        comboBoxCargoUsuario = new javax.swing.JComboBox<>();
         jLabel22 = new javax.swing.JLabel();
-        jTextField12 = new javax.swing.JTextField();
+        direccion_usuario = new javax.swing.JTextField();
         jLabel23 = new javax.swing.JLabel();
-        jTextField10 = new javax.swing.JTextField();
+        telefono_usuario = new javax.swing.JTextField();
         jLabel24 = new javax.swing.JLabel();
-        jTextField13 = new javax.swing.JTextField();
+        salario_usuario = new javax.swing.JTextField();
         jLabel26 = new javax.swing.JLabel();
-        jTextField15 = new javax.swing.JTextField();
+        contrasena_usuario = new javax.swing.JTextField();
         jLabel27 = new javax.swing.JLabel();
         comboBoxSedeCrearUsuario = new javax.swing.JComboBox<>();
         botonAyudaCrearUsuario = new javax.swing.JButton();
         botonCrearUsuarioConfirmacion = new javax.swing.JButton();
-        jLabel46 = new javax.swing.JLabel();
-        jComboBox8 = new javax.swing.JComboBox<>();
         panelModificarUsuario = new javax.swing.JPanel();
         jLabel29 = new javax.swing.JLabel();
         jTextField16 = new javax.swing.JTextField();
@@ -253,8 +252,8 @@ public class GUIgerente extends javax.swing.JFrame {
         jPanel15 = new javax.swing.JPanel();
         botonPanelInventarioCrearVehiculo = new javax.swing.JButton();
         botonPanelInventarioCrearRepuesto = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        botonAñadirVehiculo = new javax.swing.JButton();
+        botonAñadirRepuesto = new javax.swing.JButton();
         panelModificarInventario = new javax.swing.JPanel();
         jPanel16 = new javax.swing.JPanel();
         jPanel17 = new javax.swing.JPanel();
@@ -266,18 +265,18 @@ public class GUIgerente extends javax.swing.JFrame {
         jLabel36 = new javax.swing.JLabel();
         jLabel37 = new javax.swing.JLabel();
         jLabel38 = new javax.swing.JLabel();
-        jTextField18 = new javax.swing.JTextField();
-        jTextField19 = new javax.swing.JTextField();
-        jTextField20 = new javax.swing.JTextField();
-        jTextField21 = new javax.swing.JTextField();
+        marca_vehiculo = new javax.swing.JTextField();
+        referencia_vehiculo = new javax.swing.JTextField();
+        modelo_vehiculo = new javax.swing.JTextField();
+        precio_vehiculo = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        jTextField14 = new javax.swing.JTextField();
+        color_vehiculo = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jTextField22 = new javax.swing.JTextField();
+        cantidad_vehiculo = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jComboBox4 = new javax.swing.JComboBox<>();
+        comboBoxTipoVehiculo = new javax.swing.JComboBox<>();
         jLabel25 = new javax.swing.JLabel();
-        jComboBox9 = new javax.swing.JComboBox<>();
+        comboBoxTraccionVehiculo = new javax.swing.JComboBox<>();
         jLabel28 = new javax.swing.JLabel();
         comboBoxSedeVehiculosInventario = new javax.swing.JComboBox<>();
         panelCrearInventarioCrearRepuesto = new javax.swing.JPanel();
@@ -286,12 +285,17 @@ public class GUIgerente extends javax.swing.JFrame {
         jLabel43 = new javax.swing.JLabel();
         jLabel44 = new javax.swing.JLabel();
         jLabel45 = new javax.swing.JLabel();
-        jTextField24 = new javax.swing.JTextField();
-        jTextField25 = new javax.swing.JTextField();
-        jTextField26 = new javax.swing.JTextField();
-        jTextField27 = new javax.swing.JTextField();
+        nombre_repuesto = new javax.swing.JTextField();
+        cantidad_repuesto = new javax.swing.JTextField();
+        precio_repuesto = new javax.swing.JTextField();
+        descripcion_repuesto = new javax.swing.JTextField();
         jLabel34 = new javax.swing.JLabel();
         comboBoxSedeRepuestosInventario = new javax.swing.JComboBox<>();
+        jLabel39 = new javax.swing.JLabel();
+        comboBoxRepuestoVehiculo = new javax.swing.JComboBox<>();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTextArea3 = new javax.swing.JTextArea();
+        botonAñadirRepuestoVehiculo = new javax.swing.JButton();
         panelCrearInventarioCrearVehiculoVacio = new javax.swing.JPanel();
         panelCrearInventarioCrearRepuestoVacio = new javax.swing.JPanel();
         panelModificarInventarioModificarVehiculo = new javax.swing.JPanel();
@@ -864,10 +868,10 @@ public class GUIgerente extends javax.swing.JFrame {
         jLabel10.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel10.setText("FAX:");
 
-        jButton13.setText("CREAR");
-        jButton13.addActionListener(new java.awt.event.ActionListener() {
+        botonCrearSede.setText("CREAR");
+        botonCrearSede.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton13ActionPerformed(evt);
+                botonCrearSedeActionPerformed(evt);
             }
         });
 
@@ -904,7 +908,7 @@ public class GUIgerente extends javax.swing.JFrame {
                     .addGroup(panelCrearSedeLayout.createSequentialGroup()
                         .addComponent(jButton14, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 410, Short.MAX_VALUE)
-                        .addComponent(jButton13, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(botonCrearSede, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panelCrearSedeLayout.createSequentialGroup()
                         .addGroup(panelCrearSedeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel9)
@@ -957,7 +961,7 @@ public class GUIgerente extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 97, Short.MAX_VALUE)
                 .addGroup(panelCrearSedeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton14, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton13, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(botonCrearSede, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -1012,29 +1016,29 @@ public class GUIgerente extends javax.swing.JFrame {
 
         jLabel20.setText("USUARIO");
 
-        jTextField6.addActionListener(new java.awt.event.ActionListener() {
+        nombre_usuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField6ActionPerformed(evt);
+                nombre_usuarioActionPerformed(evt);
             }
         });
 
         jLabel21.setText("GENERO:");
 
-        jRadioButton1.setText("MASCULINO");
-        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
+        radioBotonGeneroM.setText("MASCULINO");
+        radioBotonGeneroM.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton1ActionPerformed(evt);
+                radioBotonGeneroMActionPerformed(evt);
             }
         });
 
-        jRadioButton2.setText("FEMENINO");
-        jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
+        radioBotonGeneroF.setText("FEMENINO");
+        radioBotonGeneroF.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton2ActionPerformed(evt);
+                radioBotonGeneroFActionPerformed(evt);
             }
         });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboBoxCargoUsuario.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione una", "Gerente", "Jefe de Taller", "Vendedor" }));
 
         jLabel22.setText("DIRECCION:");
 
@@ -1064,10 +1068,6 @@ public class GUIgerente extends javax.swing.JFrame {
             }
         });
 
-        jLabel46.setText("ESTADO:");
-
-        jComboBox8.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         javax.swing.GroupLayout panelCrearUsuarioLayout = new javax.swing.GroupLayout(panelCrearUsuario);
         panelCrearUsuario.setLayout(panelCrearUsuarioLayout);
         panelCrearUsuarioLayout.setHorizontalGroup(
@@ -1075,73 +1075,65 @@ public class GUIgerente extends javax.swing.JFrame {
             .addGroup(panelCrearUsuarioLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panelCrearUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelCrearUsuarioLayout.createSequentialGroup()
-                        .addComponent(jLabel15)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField6))
-                    .addGroup(panelCrearUsuarioLayout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelCrearUsuarioLayout.createSequentialGroup()
                         .addComponent(jLabel18)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField9))
+                        .addComponent(email_usuario))
                     .addGroup(panelCrearUsuarioLayout.createSequentialGroup()
                         .addComponent(jLabel17)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField8)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(nacimiento_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                         .addComponent(jLabel22)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField12, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(direccion_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panelCrearUsuarioLayout.createSequentialGroup()
+                        .addGroup(panelCrearUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel24)
+                            .addComponent(jLabel19))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(panelCrearUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelCrearUsuarioLayout.createSequentialGroup()
-                                .addComponent(jLabel24)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField13))
-                            .addGroup(panelCrearUsuarioLayout.createSequentialGroup()
-                                .addComponent(jLabel19)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(comboBoxCargoUsuario, 0, 183, Short.MAX_VALUE)
+                            .addComponent(salario_usuario))
                         .addGap(18, 18, 18)
                         .addGroup(panelCrearUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(panelCrearUsuarioLayout.createSequentialGroup()
                                 .addComponent(jLabel23)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField10))
+                                .addGap(23, 23, 23)
+                                .addComponent(telefono_usuario))
                             .addGroup(panelCrearUsuarioLayout.createSequentialGroup()
                                 .addComponent(jLabel21)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jRadioButton1)
+                                .addComponent(radioBotonGeneroM)
                                 .addGap(34, 34, 34)
-                                .addComponent(jRadioButton2)
+                                .addComponent(radioBotonGeneroF)
                                 .addGap(17, 17, 17))))
-                    .addGroup(panelCrearUsuarioLayout.createSequentialGroup()
-                        .addComponent(jLabel16)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField7))
                     .addGroup(panelCrearUsuarioLayout.createSequentialGroup()
                         .addComponent(botonAyudaCrearUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(348, 348, 348)
-                        .addComponent(botonCrearUsuarioConfirmacion, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE))
+                        .addComponent(botonCrearUsuarioConfirmacion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(panelCrearUsuarioLayout.createSequentialGroup()
-                        .addGroup(panelCrearUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelCrearUsuarioLayout.createSequentialGroup()
-                                .addComponent(jLabel27)
-                                .addGap(18, 18, 18)
-                                .addComponent(comboBoxSedeCrearUsuario, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelCrearUsuarioLayout.createSequentialGroup()
+                        .addGroup(panelCrearUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(panelCrearUsuarioLayout.createSequentialGroup()
                                 .addComponent(jLabel20)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField11, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(18, 18, 18)
-                        .addGroup(panelCrearUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(cuenta_usuario))
                             .addGroup(panelCrearUsuarioLayout.createSequentialGroup()
-                                .addComponent(jLabel26)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField15))
-                            .addGroup(panelCrearUsuarioLayout.createSequentialGroup()
-                                .addComponent(jLabel46)
+                                .addComponent(jLabel27)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jComboBox8, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                                .addComponent(comboBoxSedeCrearUsuario, 0, 196, Short.MAX_VALUE)))
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel26)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(contrasena_usuario))
+                    .addGroup(panelCrearUsuarioLayout.createSequentialGroup()
+                        .addGroup(panelCrearUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel15)
+                            .addComponent(jLabel16))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(panelCrearUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cedula_usuario)
+                            .addComponent(nombre_usuario))))
                 .addContainerGap())
         );
         panelCrearUsuarioLayout.setVerticalGroup(
@@ -1150,46 +1142,44 @@ public class GUIgerente extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(panelCrearUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel15)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(nombre_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelCrearUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel16)
-                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cedula_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelCrearUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel17)
-                    .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(nacimiento_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel22)
-                    .addComponent(jTextField12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(direccion_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelCrearUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel18)
-                    .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(email_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelCrearUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel19)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(comboBoxCargoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel23)
-                    .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(telefono_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelCrearUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel24)
-                    .addComponent(jTextField13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(salario_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel21)
-                    .addComponent(jRadioButton1)
-                    .addComponent(jRadioButton2))
+                    .addComponent(radioBotonGeneroM)
+                    .addComponent(radioBotonGeneroF))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelCrearUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel20)
-                    .addComponent(jTextField11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cuenta_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel26)
-                    .addComponent(jTextField15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(contrasena_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelCrearUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel27)
-                    .addComponent(comboBoxSedeCrearUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel46)
-                    .addComponent(jComboBox8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(comboBoxSedeCrearUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 105, Short.MAX_VALUE)
                 .addGroup(panelCrearUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(botonAyudaCrearUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1351,9 +1341,19 @@ public class GUIgerente extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("AÑADIR");
+        botonAñadirVehiculo.setText("AÑADIR");
+        botonAñadirVehiculo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonAñadirVehiculoActionPerformed(evt);
+            }
+        });
 
-        jButton3.setText("AÑADIR");
+        botonAñadirRepuesto.setText("AÑADIR");
+        botonAñadirRepuesto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonAñadirRepuestoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelCrearInventarioLayout = new javax.swing.GroupLayout(panelCrearInventario);
         panelCrearInventario.setLayout(panelCrearInventarioLayout);
@@ -1365,13 +1365,13 @@ public class GUIgerente extends javax.swing.JFrame {
                     .addGroup(panelCrearInventarioLayout.createSequentialGroup()
                         .addComponent(botonPanelInventarioCrearVehiculo)
                         .addGap(94, 94, 94)
-                        .addComponent(jButton2))
+                        .addComponent(botonAñadirVehiculo))
                     .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
                 .addGroup(panelCrearInventarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel15, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelCrearInventarioLayout.createSequentialGroup()
-                        .addComponent(jButton3)
+                        .addComponent(botonAñadirRepuesto)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(botonPanelInventarioCrearRepuesto)))
                 .addContainerGap())
@@ -1383,8 +1383,8 @@ public class GUIgerente extends javax.swing.JFrame {
                 .addGroup(panelCrearInventarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(botonPanelInventarioCrearVehiculo)
                     .addComponent(botonPanelInventarioCrearRepuesto)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3))
+                    .addComponent(botonAñadirVehiculo)
+                    .addComponent(botonAñadirRepuesto))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelCrearInventarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel15, javax.swing.GroupLayout.DEFAULT_SIZE, 315, Short.MAX_VALUE)
@@ -1501,11 +1501,11 @@ public class GUIgerente extends javax.swing.JFrame {
 
         jLabel3.setText("TIPO:");
 
-        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione una", "Sedan", "Coupe" }));
+        comboBoxTipoVehiculo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione una", "Sedan", "Coupe" }));
 
         jLabel25.setText("TRACCION:");
 
-        jComboBox9.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione una", "Delantera", "Trasera", "Doble" }));
+        comboBoxTraccionVehiculo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione una", "Delantera", "Trasera", "Doble" }));
 
         jLabel28.setText("SEDE:");
 
@@ -1524,8 +1524,8 @@ public class GUIgerente extends javax.swing.JFrame {
                             .addComponent(jLabel35))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(panelCrearInventarioCrearVehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField18)
-                            .addComponent(jTextField19)))
+                            .addComponent(marca_vehiculo)
+                            .addComponent(referencia_vehiculo)))
                     .addGroup(panelCrearInventarioCrearVehiculoLayout.createSequentialGroup()
                         .addGroup(panelCrearInventarioCrearVehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel38)
@@ -1537,12 +1537,12 @@ public class GUIgerente extends javax.swing.JFrame {
                             .addComponent(jLabel28))
                         .addGap(21, 21, 21)
                         .addGroup(panelCrearInventarioCrearVehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jComboBox9, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jTextField22)
-                            .addComponent(jTextField20)
-                            .addComponent(jTextField21)
-                            .addComponent(jTextField14)
-                            .addComponent(jComboBox4, 0, 169, Short.MAX_VALUE)
+                            .addComponent(comboBoxTraccionVehiculo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cantidad_vehiculo)
+                            .addComponent(modelo_vehiculo)
+                            .addComponent(precio_vehiculo)
+                            .addComponent(color_vehiculo)
+                            .addComponent(comboBoxTipoVehiculo, 0, 169, Short.MAX_VALUE)
                             .addComponent(comboBoxSedeVehiculosInventario, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
@@ -1552,35 +1552,35 @@ public class GUIgerente extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(panelCrearInventarioCrearVehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel35)
-                    .addComponent(jTextField18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(marca_vehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelCrearInventarioCrearVehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel36)
-                    .addComponent(jTextField19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(referencia_vehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelCrearInventarioCrearVehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel37)
-                    .addComponent(jTextField20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(modelo_vehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelCrearInventarioCrearVehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel38)
-                    .addComponent(jTextField21, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(precio_vehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelCrearInventarioCrearVehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(color_vehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelCrearInventarioCrearVehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField22, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cantidad_vehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelCrearInventarioCrearVehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(comboBoxTipoVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelCrearInventarioCrearVehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel25)
-                    .addComponent(jComboBox9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(comboBoxTraccionVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelCrearInventarioCrearVehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel28)
@@ -1603,15 +1603,25 @@ public class GUIgerente extends javax.swing.JFrame {
 
         jLabel45.setText("DESCRIPCION:");
 
-        jTextField24.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField24ActionPerformed(evt);
-            }
-        });
-
         jLabel34.setText("SEDE:");
 
         comboBoxSedeRepuestosInventario.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jLabel39.setText("INSERTE VEHICULO:");
+
+        comboBoxRepuestoVehiculo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jTextArea3.setEditable(false);
+        jTextArea3.setColumns(20);
+        jTextArea3.setRows(5);
+        jScrollPane3.setViewportView(jTextArea3);
+
+        botonAñadirRepuestoVehiculo.setText("AÑADIR VEHICULO");
+        botonAñadirRepuestoVehiculo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonAñadirRepuestoVehiculoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelCrearInventarioCrearRepuestoLayout = new javax.swing.GroupLayout(panelCrearInventarioCrearRepuesto);
         panelCrearInventarioCrearRepuesto.setLayout(panelCrearInventarioCrearRepuestoLayout);
@@ -1626,11 +1636,8 @@ public class GUIgerente extends javax.swing.JFrame {
                             .addComponent(jLabel42))
                         .addGap(49, 49, 49)
                         .addGroup(panelCrearInventarioCrearRepuestoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField24)
+                            .addComponent(nombre_repuesto)
                             .addComponent(comboBoxSedeRepuestosInventario, 0, 152, Short.MAX_VALUE)))
-                    .addGroup(panelCrearInventarioCrearRepuestoLayout.createSequentialGroup()
-                        .addComponent(jLabel40)
-                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(panelCrearInventarioCrearRepuestoLayout.createSequentialGroup()
                         .addGroup(panelCrearInventarioCrearRepuestoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel44)
@@ -1638,9 +1645,20 @@ public class GUIgerente extends javax.swing.JFrame {
                             .addComponent(jLabel45))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(panelCrearInventarioCrearRepuestoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField27)
-                            .addComponent(jTextField25)
-                            .addComponent(jTextField26))))
+                            .addComponent(descripcion_repuesto)
+                            .addComponent(cantidad_repuesto)
+                            .addComponent(precio_repuesto)))
+                    .addGroup(panelCrearInventarioCrearRepuestoLayout.createSequentialGroup()
+                        .addComponent(jLabel39)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(comboBoxRepuestoVehiculo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(panelCrearInventarioCrearRepuestoLayout.createSequentialGroup()
+                        .addComponent(jLabel40)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane3)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelCrearInventarioCrearRepuestoLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(botonAñadirRepuestoVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         panelCrearInventarioCrearRepuestoLayout.setVerticalGroup(
@@ -1655,20 +1673,28 @@ public class GUIgerente extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelCrearInventarioCrearRepuestoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel42)
-                    .addComponent(jTextField24, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(nombre_repuesto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelCrearInventarioCrearRepuestoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel43)
-                    .addComponent(jTextField25, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cantidad_repuesto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelCrearInventarioCrearRepuestoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel44)
-                    .addComponent(jTextField26, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(precio_repuesto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelCrearInventarioCrearRepuestoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel45)
-                    .addComponent(jTextField27, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(160, Short.MAX_VALUE))
+                    .addComponent(descripcion_repuesto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panelCrearInventarioCrearRepuestoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel39)
+                    .addComponent(comboBoxRepuestoVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(botonAñadirRepuestoVehiculo)
+                .addContainerGap())
         );
 
         panelCrearInventarioCrearVehiculoVacio.setOpaque(false);
@@ -1925,23 +1951,48 @@ public class GUIgerente extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(rootPane, "Aqui va un texto de ayuda");
     }//GEN-LAST:event_jButton14ActionPerformed
 
-    private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
-
-        ControladorSede cSede = new ControladorSede();
+    private void botonCrearSedeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCrearSedeActionPerformed
+        try {
+            
+            int sede_id = Integer.parseInt(id_sede.getText());
+            String nombre = nombre_sede.getText();
+            String ciudad = ciudad_sede.getText();
+            String direccion = dir_sede.getText();
+            String telefono = Integer.toString(Integer.parseInt(telefono_sede.getText()));
+            String fax = Integer.toString(Integer.parseInt(fax_sede.getText()));
+            
+            if(nombre.equals("") | ciudad.equals("") | direccion.equals("") | (sede_id <=0)){
+                JOptionPane.showMessageDialog(rootPane, "DEBE LLENAR TODOS LOS CAMPOS, LA IDENTIFICACION DE LA SEDE \n"
+                        + "NO PUEDE SER UN NUMERO NEGATIVO O CERO", "AutosABC", JOptionPane.ERROR_MESSAGE);
+            }
+            
+            else {
+                ControladorSede cSede = new ControladorSede();
         
-        int result = cSede.insertarSede(
-                Integer.parseInt(id_sede.getText()), 
-                nombre_sede.getText(), 
-                ciudad_sede.getText(), 
-                dir_sede.getText(), 
-                telefono_sede.getText(), 
-                fax_sede.getText());
+                int result = cSede.insertarSede(
+                        sede_id, 
+                        nombre, 
+                        ciudad, 
+                        direccion, 
+                        telefono, 
+                        fax
+                );
 
-        if ((result == -2) | (result == -3)){
-            JOptionPane.showMessageDialog(rootPane, "No se registro la sede, \n hubo un problema al hacer el registro");
+                if ((result == -2) | (result == -3)){
+                    JOptionPane.showMessageDialog(rootPane, "    NO SE REGISTRO LA SEDE, \n HUBO UN PROBLEMA EN EL REGISTRO", "AutosABC", JOptionPane.ERROR_MESSAGE);
+                }
+                else {
+                    JOptionPane.showMessageDialog(rootPane, "SEDE REGISTRADA CON EXITO", "AutosABC", JOptionPane.INFORMATION_MESSAGE);
+                }
+            }
         }
+        
+        catch(NumberFormatException e) {
+            JOptionPane.showMessageDialog(rootPane, "LA IDENTIFICACION, EL TELEFONO Y EL FAZ DEBEN SER NUMEROS", "AutosABC", JOptionPane.ERROR_MESSAGE);
+        }
+        
 
-    }//GEN-LAST:event_jButton13ActionPerformed
+    }//GEN-LAST:event_botonCrearSedeActionPerformed
 
     private void seleccionFiltroSedeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_seleccionFiltroSedeActionPerformed
         if (seleccionFiltroSede.getSelectedIndex() == 1) {
@@ -1982,18 +2033,14 @@ public class GUIgerente extends javax.swing.JFrame {
         ventanaUsuarios.show(jPanel11, "MODIFICAR-USUARIO");
     }//GEN-LAST:event_botonModificarUsuarioActionPerformed
 
-    private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField6ActionPerformed
+    private void nombre_usuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombre_usuarioActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField6ActionPerformed
+    }//GEN-LAST:event_nombre_usuarioActionPerformed
 
-    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton1ActionPerformed
-
-    private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton2ActionPerformed
-
+    private void radioBotonGeneroMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioBotonGeneroMActionPerformed
+        radioBotonGeneroF.setSelected(false);
+    }//GEN-LAST:event_radioBotonGeneroMActionPerformed
+        
     private void botonAyudaCrearUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAyudaCrearUsuarioActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_botonAyudaCrearUsuarioActionPerformed
@@ -2032,6 +2079,8 @@ public class GUIgerente extends javax.swing.JFrame {
            comboBoxSedeRepuestosInventario.addItem(sedes.get(i).getNombre());
        }
        
+       botonAñadirRepuesto.setEnabled(false);
+       botonAñadirVehiculo.setEnabled(true);
        
     }//GEN-LAST:event_botonInventarioGerenteActionPerformed
 
@@ -2053,6 +2102,9 @@ public class GUIgerente extends javax.swing.JFrame {
         for (int i = 0; i < sedes.size(); i++) {
            comboBoxSedeRepuestosInventario.addItem(sedes.get(i).getNombre());
         }
+        
+        botonAñadirRepuesto.setEnabled(false);
+        botonAñadirVehiculo.setEnabled(true);
     }//GEN-LAST:event_botonCrearInventarioActionPerformed
 
     private void botonModificarInventarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonModificarInventarioActionPerformed
@@ -2060,10 +2112,6 @@ public class GUIgerente extends javax.swing.JFrame {
         ventanaInventarioModificarVehiculo.show(jPanel16, "MODIFICAR-VEHICULO-MOSTRAR");
         ventanaInventarioModificarRepuesto.show(jPanel17, "MODIFICAR-REPUESTO-OCULTAR");
     }//GEN-LAST:event_botonModificarInventarioActionPerformed
-
-    private void jTextField24ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField24ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField24ActionPerformed
 
     private void botonPanelInventarioCrearVehiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonPanelInventarioCrearVehiculoActionPerformed
         ventanaInventarioCrearRepuesto.show(jPanel15, "CREAR-REPUESTO-OCULTAR");
@@ -2085,6 +2133,8 @@ public class GUIgerente extends javax.swing.JFrame {
             comboBoxSedeRepuestosInventario.addItem(sedes.get(i).getNombre());
         }
         
+        botonAñadirRepuesto.setEnabled(false);
+        botonAñadirVehiculo.setEnabled(true);
     }//GEN-LAST:event_botonPanelInventarioCrearVehiculoActionPerformed
 
     private void botonPanelInventarioCrearRepuestoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonPanelInventarioCrearRepuestoActionPerformed
@@ -2106,6 +2156,9 @@ public class GUIgerente extends javax.swing.JFrame {
        for (int i = 0; i < sedes.size(); i++) {
            comboBoxSedeRepuestosInventario.addItem(sedes.get(i).getNombre());
        }
+       
+       botonAñadirRepuesto.setEnabled(true);
+       botonAñadirVehiculo.setEnabled(false);
     }//GEN-LAST:event_botonPanelInventarioCrearRepuestoActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
@@ -2119,37 +2172,208 @@ public class GUIgerente extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton16ActionPerformed
 
     private void botonCrearUsuarioConfirmacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCrearUsuarioConfirmacionActionPerformed
-        Sede sede = new Sede();
-        char genero;
-        sede.setId(01);
-        if (jRadioButton1.isSelected()) {
-           genero = 'M';   
-        } else {
-           genero = 'F'; 
+        
+        try {
+            
+            boolean enviar = true;
+            int sede = comboBoxSedeCrearUsuario.getSelectedIndex();
+            char genero = ' ';
+            
+            if (radioBotonGeneroM.isSelected()) {
+                genero = 'M';
+            }
+            else if(radioBotonGeneroF.isSelected()){
+                genero = 'F';
+            }
+            
+            else {
+                JOptionPane.showMessageDialog(rootPane, "DEBE SELECCIONAR UN GENERO", "AutosABC", JOptionPane.ERROR_MESSAGE);
+                enviar = false;
+            }
+            
+            int cedula = Integer.parseInt(cedula_usuario.getText());
+            String nombre = nombre_usuario.getText();
+            String direccion = direccion_usuario.getText();
+            Date nacimiento = Date.valueOf(nacimiento_usuario.getText());
+            int cargo = comboBoxCargoUsuario.getSelectedIndex();
+            String telefono = Integer.toString(Integer.parseInt(telefono_usuario.getText()));
+            int salario = Integer.parseInt(salario_usuario.getText());
+            String usuario = cuenta_usuario.getText();
+            String contrasena = contrasena_usuario.getText();
+            String email = email_usuario.getText();
+            String estado = "activo";
+
+            if (enviar){
+                if ((cedula <= 0) | nombre.equals("") | usuario.equals("") | contrasena.equals("") | direccion.equals("") | 
+                        email.equals("") | (salario <= 0) | (sede == 0) | (cargo == 0)){
+                    JOptionPane.showMessageDialog(
+                            rootPane, 
+                            "DEBE DIGITAR TODOS LOS CAMPOS, LOS CAMPOS NUMERICOS NO PUEDEN SER CERO O NEGATIVOS,"
+                                    + "\n ADEMÁS RECUERDE SELECCIONAR UNA SEDE Y UN CARGO", 
+                            "AutosABC", 
+                            JOptionPane.ERROR_MESSAGE);
+                }
+                else {
+                    ControladorSede cSede = new ControladorSede();
+
+                    ArrayList<Sede> sedes = cSede.consultarSedes();
+
+                    int id_sede_usuario = sedes.get(sede - 1).getId();
+
+                    Sede sede_usuario = new Sede();
+
+                    sede_usuario.setId(id_sede_usuario);
+
+                    Encriptacion encripto = new Encriptacion();
+                    
+                    ArrayList<String> pesos_cuenta = encripto.encriptar(usuario);
+                    ArrayList<String> pesos_contrasena = encripto.encriptar(contrasena);
+                    
+                    String PIN =  pesos_contrasena.get(1) + pesos_cuenta.get(1);
+
+                    ControladorUsuario nuevoUsuario = new ControladorUsuario();
+                    int result = nuevoUsuario.insertarUsuario(
+                            cedula,
+                            sede_usuario, 
+                            nombre, 
+                            nacimiento, 
+                            direccion,
+                            genero,
+                            email,
+                            cargo,
+                            salario,
+                            telefono,
+                            estado,
+                            pesos_cuenta.get(0),
+                            pesos_contrasena.get(0)
+                            );
+                    
+                    if((result == -2 )|(result == -3)){
+                        JOptionPane.showMessageDialog(rootPane, "EL USUARIO NO SE HA REGISTRADO, HA OCURRIDO UN ERROR", "AutosABC", JOptionPane.ERROR_MESSAGE);
+                    }
+                    
+                    else {
+                        JOptionPane.showMessageDialog(rootPane, "       USUARIO CREADO CON EXITO: \n"
+                            + "EL PIN DEL USUARIO ES: " + PIN, "AutosABC", JOptionPane.INFORMATION_MESSAGE);
+                    }
+                }
+            }
         }
-        ControladorUsuario nuevoUsuario = new ControladorUsuario();
-        int result = nuevoUsuario.insertarUsuario(Integer.parseInt(
-                jTextField7.getText()),
-                sede, jTextField6.getText(), 
-                Date.valueOf(jTextField8.getText()), 
-                jTextField12.getText(),
-                genero,
-                jTextField9.getText(),
-                1,
-                Integer.parseInt(jTextField13.getText()),
-                jTextField10.getText(),
-                "Activo",
-                jTextField11.getText(),
-                jTextField15.getText()
-                );
-        System.out.println(result);
+        
+        catch(NumberFormatException e){
+             JOptionPane.showMessageDialog(rootPane, "LA CEDULA, EL SALARIO Y EL TELEFONO DEBEN SER NUMEROS", "AutosABC", JOptionPane.ERROR_MESSAGE);
+        }
+        catch(IllegalArgumentException e){
+             JOptionPane.showMessageDialog(rootPane, "LA FECHA DE NACIMIENTO DEBE TENER EL FORMATO 'AAAA-MM-DD'", "AutosABC", JOptionPane.ERROR_MESSAGE);
+        }
         
     }//GEN-LAST:event_botonCrearUsuarioConfirmacionActionPerformed
+
+    private void botonAñadirVehiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAñadirVehiculoActionPerformed
+       try {
+           int precio = Integer.parseInt(precio_vehiculo.getText());      
+           int cantidad = Integer.parseInt(cantidad_vehiculo.getText());
+           int iva =  precio*(16/100);
+           String color = color_vehiculo.getText();
+           String marca = marca_vehiculo.getText();
+           String referencia = referencia_vehiculo.getText();
+           String modelo = modelo_vehiculo.getText();
+           String tipo = comboBoxTipoVehiculo.getSelectedItem().toString();
+           String traccion = comboBoxTraccionVehiculo.getSelectedItem().toString();
+           int sede = comboBoxSedeVehiculosInventario.getSelectedIndex();          
+                      
+           if((color.equals("")) | (marca.equals("")) | (referencia.equals("")) | (modelo.equals("")) | (sede == 0) | (tipo.equalsIgnoreCase("seleccione una")) | (traccion.equalsIgnoreCase("seleccione una")) | (cantidad <= 0)){
+            JOptionPane.showMessageDialog(rootPane, "DEBE LLENAR TODOS LOS CAMPOS", "AutosABC", JOptionPane.ERROR_MESSAGE);
+           }
+           
+           else {
+               
+                ControladorSede cSede = new ControladorSede();
+       
+                ArrayList<Sede> sedes = cSede.consultarSedes();
+           
+                int id_sede_vehiculo = sedes.get(sede - 1).getId();
+                
+                ControladorVehiculo cVehiculo;
+                
+                for (int i = 1; i <= cantidad; i++) {
+                    cVehiculo = new ControladorVehiculo();
+                    int result = cVehiculo.insertarVehiculo(id_sede_vehiculo, color, marca, referencia, modelo, traccion, tipo, precio, iva);
+                
+                    if ((result == -2) | (result == -3)) {
+                        JOptionPane.showMessageDialog(rootPane, "NO SE PUDO REGISTRAR EL VEHICULO", "AutosABC", JOptionPane.ERROR_MESSAGE);
+                        break;
+                    }
+
+                    else if ((i + 1) > cantidad){
+                        JOptionPane.showMessageDialog(rootPane, "VEHICULO REGISTRADO CON EXITO", "AutosABC", JOptionPane.INFORMATION_MESSAGE);
+                    }
+                }  
+           }
+       }       
+       catch (NumberFormatException e) {
+           JOptionPane.showMessageDialog(rootPane, "EL PRECIO Y LA CANTIDAD DEBEN SER NUMEROS", "AutosABC", JOptionPane.ERROR_MESSAGE);
+       }
+    }//GEN-LAST:event_botonAñadirVehiculoActionPerformed
+
+    private void botonAñadirRepuestoVehiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAñadirRepuestoVehiculoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_botonAñadirRepuestoVehiculoActionPerformed
+
+    private void botonAñadirRepuestoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAñadirRepuestoActionPerformed
+         try {
+           int precio = Integer.parseInt(precio_repuesto.getText());      
+           int cantidad = Integer.parseInt(cantidad_repuesto.getText());
+           int iva =  precio*(16/100);
+           int sede = comboBoxSedeRepuestosInventario.getSelectedIndex();
+           String nombre = nombre_repuesto.getText();
+           String descripcion = descripcion_repuesto.getText();
+
+           
+                      
+           if( (sede == 0) | (cantidad <= 0) | (descripcion.equals("")) | (nombre.equals("")) | (precio <= 0)){
+            JOptionPane.showMessageDialog(rootPane, "DEBE LLENAR TODOS LOS CAMPOS", "AutosABC", JOptionPane.ERROR_MESSAGE);
+           }
+           
+           else {
+               
+                ControladorSede cSede = new ControladorSede();
+       
+                ArrayList<Sede> sedes = cSede.consultarSedes();
+           
+                int id_sede_vehiculo = sedes.get(sede - 1).getId();
+                
+                ControladorRepuesto cRepuesto = new ControladorRepuesto();
+                
+                int result = cRepuesto.insertarRepuesto(sede, nombre, cantidad, precio, iva, descripcion);
+                
+                if ((result == -2) | (result == -3)) {
+                    JOptionPane.showMessageDialog(rootPane, "NO SE PUDO REGISTRAR EL REPUESTO", "AutosABC", JOptionPane.ERROR_MESSAGE);
+
+                }
+
+                else{
+                    JOptionPane.showMessageDialog(rootPane, "REPUESTO REGISTRADO CON EXITO", "AutosABC", JOptionPane.INFORMATION_MESSAGE);
+                }
+           }
+       }       
+       catch (NumberFormatException e) {
+           JOptionPane.showMessageDialog(rootPane, "EL PRECIO Y LA CANTIDAD DEBEN SER NUMEROS", "AutosABC", JOptionPane.ERROR_MESSAGE);
+       }
+    }//GEN-LAST:event_botonAñadirRepuestoActionPerformed
+
+    private void radioBotonGeneroFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioBotonGeneroFActionPerformed
+       radioBotonGeneroM.setSelected(false);
+    }//GEN-LAST:event_radioBotonGeneroFActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonAyudaCrearUsuario;
     private javax.swing.JButton botonAyudaCrearUsuario1;
+    private javax.swing.JButton botonAñadirRepuesto;
+    private javax.swing.JButton botonAñadirRepuestoVehiculo;
+    private javax.swing.JButton botonAñadirVehiculo;
     private javax.swing.JButton botonCrearInventario;
+    private javax.swing.JButton botonCrearSede;
     private javax.swing.JButton botonCrearUsuario;
     private javax.swing.JButton botonCrearUsuarioConfirmacion;
     private javax.swing.JButton botonInventarioGerente;
@@ -2160,35 +2384,41 @@ public class GUIgerente extends javax.swing.JFrame {
     private javax.swing.JButton botonReportesGerente;
     private javax.swing.JButton botonSedesGerente;
     private javax.swing.JButton botonUsuariosGerente;
+    private javax.swing.JTextField cantidad_repuesto;
+    private javax.swing.JTextField cantidad_vehiculo;
+    private javax.swing.JTextField cedula_usuario;
     private javax.swing.JTextField ciudad_sede;
+    private javax.swing.JTextField color_vehiculo;
+    private javax.swing.JComboBox<String> comboBoxCargoUsuario;
+    private javax.swing.JComboBox<String> comboBoxRepuestoVehiculo;
     private javax.swing.JComboBox<String> comboBoxSedeCrearUsuario;
     private javax.swing.JComboBox<String> comboBoxSedeRepuestosInventario;
     private javax.swing.JComboBox<String> comboBoxSedeVehiculosInventario;
+    private javax.swing.JComboBox<String> comboBoxTipoVehiculo;
+    private javax.swing.JComboBox<String> comboBoxTraccionVehiculo;
+    private javax.swing.JTextField contrasena_usuario;
+    private javax.swing.JTextField cuenta_usuario;
+    private javax.swing.JTextField descripcion_repuesto;
     private javax.swing.JTextField dir_sede;
+    private javax.swing.JTextField direccion_usuario;
+    private javax.swing.JTextField email_usuario;
     private javax.swing.JTextField fax_sede;
     private javax.swing.JTextField id_sede;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton12;
-    private javax.swing.JButton jButton13;
     private javax.swing.JButton jButton14;
     private javax.swing.JButton jButton15;
     private javax.swing.JButton jButton16;
     private javax.swing.JButton jButton18;
     private javax.swing.JButton jButton19;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JComboBox<String> jComboBox4;
     private javax.swing.JComboBox<String> jComboBox5;
     private javax.swing.JComboBox<String> jComboBox6;
     private javax.swing.JComboBox<String> jComboBox7;
-    private javax.swing.JComboBox<String> jComboBox8;
-    private javax.swing.JComboBox<String> jComboBox9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -2221,13 +2451,13 @@ public class GUIgerente extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel36;
     private javax.swing.JLabel jLabel37;
     private javax.swing.JLabel jLabel38;
+    private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel40;
     private javax.swing.JLabel jLabel42;
     private javax.swing.JLabel jLabel43;
     private javax.swing.JLabel jLabel44;
     private javax.swing.JLabel jLabel45;
-    private javax.swing.JLabel jLabel46;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel52;
     private javax.swing.JLabel jLabel53;
@@ -2257,32 +2487,17 @@ public class GUIgerente extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextArea jTextArea2;
+    private javax.swing.JTextArea jTextArea3;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField10;
-    private javax.swing.JTextField jTextField11;
-    private javax.swing.JTextField jTextField12;
-    private javax.swing.JTextField jTextField13;
-    private javax.swing.JTextField jTextField14;
-    private javax.swing.JTextField jTextField15;
     private javax.swing.JTextField jTextField16;
     private javax.swing.JTextField jTextField17;
-    private javax.swing.JTextField jTextField18;
-    private javax.swing.JTextField jTextField19;
     private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField20;
-    private javax.swing.JTextField jTextField21;
-    private javax.swing.JTextField jTextField22;
-    private javax.swing.JTextField jTextField24;
-    private javax.swing.JTextField jTextField25;
-    private javax.swing.JTextField jTextField26;
-    private javax.swing.JTextField jTextField27;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField33;
     private javax.swing.JTextField jTextField38;
@@ -2290,11 +2505,12 @@ public class GUIgerente extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField40;
     private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField jTextField9;
+    private javax.swing.JTextField marca_vehiculo;
+    private javax.swing.JTextField modelo_vehiculo;
+    private javax.swing.JTextField nacimiento_usuario;
+    private javax.swing.JTextField nombre_repuesto;
     private javax.swing.JTextField nombre_sede;
+    private javax.swing.JTextField nombre_usuario;
     private javax.swing.JPanel panelConsultarSede;
     private javax.swing.JPanel panelCrearInventario;
     private javax.swing.JPanel panelCrearInventarioCrearRepuesto;
@@ -2317,8 +2533,15 @@ public class GUIgerente extends javax.swing.JFrame {
     private javax.swing.JPanel panelSedeConsultaFiltroON;
     private javax.swing.JPanel panelSedeGerente;
     private javax.swing.JPanel panelUsuariosGerente;
+    private javax.swing.JTextField precio_repuesto;
+    private javax.swing.JTextField precio_vehiculo;
+    private javax.swing.JRadioButton radioBotonGeneroF;
+    private javax.swing.JRadioButton radioBotonGeneroM;
+    private javax.swing.JTextField referencia_vehiculo;
+    private javax.swing.JTextField salario_usuario;
     private javax.swing.JComboBox<String> seleccionFiltroSede;
     private javax.swing.JComboBox<String> seleccionarSede;
     private javax.swing.JTextField telefono_sede;
+    private javax.swing.JTextField telefono_usuario;
     // End of variables declaration//GEN-END:variables
 }

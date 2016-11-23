@@ -5,7 +5,10 @@
  */
 package Login;
 
+
+import java.util.ArrayList;
 import java.util.Random;
+
 
 /**
  *
@@ -112,7 +115,7 @@ public class Encriptacion {
         datos[93] = '¿';
     }
     
-    public String encriptar(String dato){
+    public ArrayList<String> encriptar(String dato){
         
         String datoEncriptado = "";
         char[] datoParticionado = explode(dato);
@@ -121,9 +124,6 @@ public class Encriptacion {
         int peso2 = (int) (indice.nextDouble() * 94 );
         int peso3 = (int) (indice.nextDouble() * 94 );
         
-        System.out.println(peso1);
-        System.out.println(peso2);
-        System.out.println(peso3);
         int tamañoCadena = dato.length();
         int[] posicionesContrasena = new int[tamañoCadena];
         
@@ -251,7 +251,36 @@ public class Encriptacion {
         }
         
         datoEncriptado = String.valueOf(datoReconstruido);
-        return datoEncriptado;
+        
+        String peso1S = "";
+        String peso2S = "";
+        String peso3S = "";
+        
+        if (peso1 < 10) {
+            peso1S = "0" + peso1;
+        }
+        else {
+            peso1S = Integer.toString(peso1);
+        }
+        
+        if (peso2 < 10) {
+            peso2S = "0" + peso2;
+        }
+        else {
+            peso2S = Integer.toString(peso2);
+        }
+        
+        if (peso3 < 10) {
+            peso3S = "0" + peso3;
+        }
+        else {
+            peso3S = Integer.toString(peso3);
+        }
+        
+        ArrayList<String> retorno = new ArrayList<>();
+        retorno.add(datoEncriptado);
+        retorno.add(peso1S + peso2S + peso3S);
+        return retorno;
          
     }
     

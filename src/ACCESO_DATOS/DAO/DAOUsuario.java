@@ -45,6 +45,7 @@ public class DAOUsuario {
             numFilas = sentencia.executeUpdate(sql_guardar);
             conn.close();
             fachada.closeConection();
+            return numFilas;
         }
         catch(SQLException e){ 
             return -2; 
@@ -52,7 +53,7 @@ public class DAOUsuario {
         catch(Exception e){ 
             return -3; 
         }
-        return numFilas;
+        
     }
     
     public Usuario ConsultarUsuario(int cedula){

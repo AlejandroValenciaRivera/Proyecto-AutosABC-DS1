@@ -28,7 +28,7 @@ public class DAORepuesto {
      */
     public int guardarRepuesto(Repuesto repuesto){
         String sql_guardar = "INSERT INTO repuestos VALUES ("
-                + repuesto.getId_repuesto() + ", "
+                + "nextval('secuencia_id_repuesto')" + ", "
                 + repuesto.getId_sede() +", '"
                 + repuesto.getNombre() + "', "
                 + repuesto.getCantidad() + ", "
@@ -42,6 +42,7 @@ public class DAORepuesto {
             numFilas = sentencia.executeUpdate(sql_guardar);
             conn.close();
             fachada.closeConection();
+            return numFilas;
         }
         catch(SQLException e){ 
             return -2; 
@@ -49,7 +50,7 @@ public class DAORepuesto {
         catch(Exception e){ 
             return -3; 
         }
-        return numFilas;
+        
     }
     
     /**

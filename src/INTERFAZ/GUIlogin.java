@@ -179,71 +179,80 @@ public class GUIlogin extends javax.swing.JFrame {
         ControladorUsuario cUsuario = new ControladorUsuario();
         ArrayList<Usuario> users = cUsuario.consultarLogin();
         setVisible(true); 
-        if (usuariologin.getText().equals(usuario) | Arrays.equals(contraseñalogin.getPassword(), explode(contraseña))){
-            JOptionPane.showMessageDialog(rootPane, "Debe introducir datos en ambos campos");
+        if (usuariologin.getText().equals(usuario) | Arrays.equals(contraseñalogin.getPassword(), explode(contraseña)) | (pin_login.getPassword().length <= 11)){
+            JOptionPane.showMessageDialog(rootPane, "Debe introducir datos en ambos campos, recuerde que el PIN es un numero de 12 digitos");
         }
         else {
             
-            int peso1 = 0;
-            int peso2 = 0;
-            int peso3 = 0;
-            int peso4 = 0;
-            int peso5 = 0;
-            int peso6 = 0;
-                
-            char[] pin = pin_login.getPassword();
-            char [] valor = new char[2];
-                
-            valor[0] = pin[0];
-            valor[1] = pin[1];
-            peso1 = Integer.parseInt(String.valueOf(valor));
-                
-            valor[0] = pin[2];
-            valor[1] = pin[3];
-            peso2 = Integer.parseInt(String.valueOf(valor));
-                
-            valor[0] = pin[4];
-            valor[1] = pin[5];
-            peso3 = Integer.parseInt(String.valueOf(valor));
-            
-            valor[0] = pin[6];
-            valor[1] = pin[7];
-            peso4 = Integer.parseInt(String.valueOf(valor));
-                
-            valor[0] = pin[8];
-            valor[1] = pin[9];
-            peso5 = Integer.parseInt(String.valueOf(valor));
-                
-            valor[0] = pin[10];
-            valor[1] = pin[11];
-            peso6 = Integer.parseInt(String.valueOf(valor));
-            Encriptacion encripto = new Encriptacion();
-                
-            for (int i = 0; i < users.size(); i++) {
-                
-                usuario = encripto.desencriptar(peso4, peso5, peso6, users.get(i).getCuenta());
-                contraseña = encripto.desencriptar(peso1, peso2, peso3, users.get(i).getContrasena());
-                cargo = users.get(i).getCargo();
-                if (usuariologin.getText().equals(usuario)) {
+            try {
+                int peso1 = 0;
+                int peso2 = 0;
+                int peso3 = 0;
+                int peso4 = 0;
+                int peso5 = 0;
+                int peso6 = 0;
 
-                    if (Arrays.equals(contraseñalogin.getPassword(), explode(contraseña))) {
+                char[] pin = pin_login.getPassword();
+                char [] valor = new char[2];
 
-                        switch (cargo) {
-                            case 1:
-                                gerente = new GUIgerente(this);
-                                break;
-                            case 2:
-                                jefeDeTaller = new GUIJefeTaller(this);
-                                break;
-                            case 3:
-                                vendedor = new GUIvendedor(this);
-                                break;
-                            default:
-                                JOptionPane.showMessageDialog(rootPane, "Ha ocurrido un error critico,\n no se reconocio el cargo de la cuenta ingresada");
-                                break;
+                valor[0] = pin[0];
+                valor[1] = pin[1];
+                peso1 = Integer.parseInt(String.valueOf(valor));
+
+                valor[0] = pin[2];
+                valor[1] = pin[3];
+                peso2 = Integer.parseInt(String.valueOf(valor));
+
+                valor[0] = pin[4];
+                valor[1] = pin[5];
+                peso3 = Integer.parseInt(String.valueOf(valor));
+
+                valor[0] = pin[6];
+                valor[1] = pin[7];
+                peso4 = Integer.parseInt(String.valueOf(valor));
+
+                valor[0] = pin[8];
+                valor[1] = pin[9];
+                peso5 = Integer.parseInt(String.valueOf(valor));
+
+                valor[0] = pin[10];
+                valor[1] = pin[11];
+                peso6 = Integer.parseInt(String.valueOf(valor));
+                Encriptacion encripto = new Encriptacion();
+
+                for (int i = 0; i < users.size(); i++) {
+
+                    usuario = encripto.desencriptar(peso4, peso5, peso6, users.get(i).getCuenta());
+                    contraseña = encripto.desencriptar(peso1, peso2, peso3, users.get(i).getContrasena());
+                    cargo = users.get(i).getCargo();
+                    if (usuariologin.getText().equals(usuario)) {
+
+                        if (Arrays.equals(contraseñalogin.getPassword(), explode(contraseña))) {
+
+                            switch (cargo) {
+                                case 1:
+                                    gerente = new GUIgerente(this);
+                                    break;
+                                case 2:
+                                    jefeDeTaller = new GUIJefeTaller(this);
+                                    break;
+                                case 3:
+                                    vendedor = new GUIvendedor(this);
+                                    break;
+                                default:
+                                    JOptionPane.showMessageDialog(rootPane, "Ha ocurrido un error critico,\n no se reconocio el cargo de la cuenta ingresada");
+                                    break;
+                            }
+
+                            break;
+
                         }
 
-                        break;
+                        else {
+                            if((i + 1) == users.size()){
+                                JOptionPane.showMessageDialog(rootPane, "Usuario o contraseña incorrectos");
+                            }
+                        }
 
                     }
 
@@ -252,15 +261,13 @@ public class GUIlogin extends javax.swing.JFrame {
                             JOptionPane.showMessageDialog(rootPane, "Usuario o contraseña incorrectos");
                         }
                     }
-
-                }
-                
-                else {
-                    if((i + 1) == users.size()){
-                        JOptionPane.showMessageDialog(rootPane, "Usuario o contraseña incorrectos");
-                    }
                 }
             }
+            
+            catch(NumberFormatException e) {
+                JOptionPane.showMessageDialog(rootPane, "EL PIN DEBE SER UN NUMERO ENTERO DE 12 DIGITOS", "AutosABC", JOptionPane.ERROR_MESSAGE);
+            }
+            
         }
         
         
