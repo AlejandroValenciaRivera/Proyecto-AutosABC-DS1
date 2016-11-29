@@ -11,12 +11,9 @@ public class Venta {
 	int id_usuario ;
 	int id_sede ;
         String forma_pago;
-	int precio ;
-	int iva ;
-	int cedula_cliente;
+	String cedula_cliente;
         String nombre_cliente;
-        int telefono_cliente;
-	String placa_vehiculo;
+        String telefono_cliente;
 	Date fecha;
 
 
@@ -28,7 +25,7 @@ public class Venta {
         return nombre_cliente;
     }
 
-    public int getTelefono_cliente() {
+    public String getTelefono_cliente() {
         return telefono_cliente;
     }
 
@@ -48,20 +45,8 @@ public class Venta {
         return id_sede;
     }
 
-    public int getPrecio() {
-        return precio;
-    }
-
-    public int getIva() {
-        return iva;
-    }
-
-    public int getCedula_cliente() {
+    public String getCedula_cliente() {
         return cedula_cliente;
-    }
-
-    public String getPlaca_vehiculo() {
-        return placa_vehiculo;
     }
 
     public Date getFecha() {
@@ -84,27 +69,15 @@ public class Venta {
         this.id_sede = id_sede;
     }
 
-    public void setPrecio(int precio) {
-        this.precio = precio;
-    }
-
-    public void setIva(int iva) {
-        this.iva = iva;
-    }
-
-    public void setCedula_cliente(int cedula_cliente) {
+    public void setCedula_cliente(String cedula_cliente) {
         this.cedula_cliente = cedula_cliente;
-    }
-
-    public void setPlaca_vehiculo(String placa_vehiculo) {
-        this.placa_vehiculo = placa_vehiculo;
     }
 
     public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
     
-    public void setTelefono_cliente(int telefono_cliente) {
+    public void setTelefono_cliente(String telefono_cliente) {
         this.telefono_cliente = telefono_cliente;
     }
     

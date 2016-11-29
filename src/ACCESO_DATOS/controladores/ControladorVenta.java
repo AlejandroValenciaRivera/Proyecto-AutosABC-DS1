@@ -19,7 +19,23 @@ public class ControladorVenta {
         daoVenta = new DAOVenta();
     }
     
-    public int insertarVenta(){
-        return 1;
+    public int insertarVenta(int vehiculo, int usuario, int sede, String pago, String cedula, String nombre, String telefono){
+        Venta venta = new Venta();
+        
+        venta.setId_vehiculo(vehiculo);
+        venta.setId_usuario(usuario);
+        venta.setId_sede(sede);
+        venta.setForma_pago(pago);
+        venta.setCedula_cliente(cedula);
+        venta.setNombre_cliente(nombre);
+        venta.setTelefono_cliente(telefono);
+        
+        int result = daoVenta.guardarVenta(venta);
+        return result;
+    }
+    
+    public int consultarUltimaVenta(){
+        int result = daoVenta.consultarVentaReciente();
+        return result;
     }
 }

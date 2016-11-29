@@ -41,5 +41,60 @@ public class ControladorSede {
 
         return sedes;
     }
+    
+    public int cambiarNombre(int id_sede, String nombre) {
+        Sede sede = new Sede();
+        
+        sede.setId(id_sede);
+        sede.setNombre(nombre);
+        
+        int result = daoSede.updateNombre(sede);
+        
+        return result;
+    }
+    
+    public int cambiarCiudad(int id_sede, String ciudad) {
+        Sede sede = new Sede();
+        
+        sede.setId(id_sede);
+        sede.setCiudad(ciudad);
+        
+        int result = daoSede.updateCiudad(sede);
+        
+        return result;
+    }
+    
+    public int cambiarDireccion(int id_sede, String direccion) {
+        Sede sede = new Sede();
+        
+        sede.setId(id_sede);
+        sede.setDireccion(direccion);
+        
+        int result = daoSede.updateDireccion(sede);
+        
+        return result;
+    }
+    
+    public int cambiarTelefono(int id_sede, String telefono) {
+        Sede sede = new Sede();
+        
+        sede.setId(id_sede);
+        sede.setTelefono(telefono);
+        
+        int result = daoSede.updateTelefono(sede);
+        
+        return result;
+    }
+    public int cambiarFax(int id_sede, String fax) {
+        Sede sede = new Sede();
+        
+        sede.setId(id_sede);
+        sede.setFax(fax);
+        
+        int result = daoSede.updateFax(sede);
+        
+        return result;
+    }
+    
             
 }

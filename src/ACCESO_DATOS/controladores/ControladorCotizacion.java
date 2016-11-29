@@ -19,8 +19,20 @@ public class ControladorCotizacion {
         daoCotizacion = new DAOCotizacion();
     }
     
-    public int insertarCotizacion(){
-        return 1;
+    public int insertarCotizacion(int usuario, int vehiculo, int sede){
+        Cotizacion unaCotizacion= new Cotizacion();
+        
+        unaCotizacion.setId_usuario(usuario);
+        unaCotizacion.setId_vehiculo(vehiculo);
+        unaCotizacion.setId_sede(sede);
+        
+        int result = daoCotizacion.guardarCotizacion(unaCotizacion);
+        return result;
     }
+    public int consultarUltimaCotizacion(){
+        int result = daoCotizacion.consultarCotizacionReciente();
+        return result;
+    }
+    
  
 }

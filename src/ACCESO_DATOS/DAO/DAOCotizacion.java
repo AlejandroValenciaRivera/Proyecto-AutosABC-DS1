@@ -8,6 +8,7 @@ package ACCESO_DATOS.DAO;
 import ACCESO_DATOS.conexion.*;
 import ACCESO_DATOS.entidades_y_relaciones.*;
 import java.sql.*;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 /**
  *
@@ -28,11 +29,11 @@ public class DAOCotizacion {
      */
     public int guardarCotizacion(Cotizacion cotizacion){
         String sql_guardar = "INSERT INTO cotizacion VALUES ("
-                + cotizacion.getId_cotizacion()+ ", "
+                + "nextval('secuencia_id_cotizacion'), "
                 + cotizacion.getId_vehiculo()+", "
                 + cotizacion.getId_usuario() + ", "
                 + cotizacion.getId_sede()+ ", "
-                + cotizacion.getFecha() + ")";
+                + "now())";
         int numFilas = -1;
         try{
             Connection conn = fachada.getConnetion();
@@ -40,6 +41,7 @@ public class DAOCotizacion {
             numFilas = sentencia.executeUpdate(sql_guardar);
             conn.close();
             fachada.closeConection();
+            return numFilas;
         }
         catch(SQLException e){ 
             return -2; 
@@ -47,8 +49,6 @@ public class DAOCotizacion {
         catch(Exception e){ 
             return -3; 
         }
-        return numFilas;
-    
     }
     /**
      * 
@@ -64,7 +64,7 @@ public class DAOCotizacion {
                 + "id_vehiculo,"
                 + "id_usuario,"
                 + "id_sede, "
-                + "fecha, "
+                + "fecha "
                 + "FROM cotizacion WHERE id_cotizacion = " + idCotizacion;
         try{
             Connection conn = fachada.getConnetion();
@@ -86,33 +86,28 @@ public class DAOCotizacion {
         }
         return cot;
     }
-    /**
-     * 
-     * @param cotizacion
-     * @return int
-     * @author Juan José Varela V
-     * @proposito recibe un objeto cotizacion y guarda en la base de datos
-     *            las modificaciones que se realicen
-     */
-    public int update(Cotizacion cotizacion){
-        String update_statement = "UPDATE cotizacion SET id_vehiculo = " + cotizacion.getId_vehiculo()
-                + ", id_usuario = " + cotizacion.getId_usuario()
-                + ", id_sede = " + cotizacion.getId_sede()
-                + ", fecha = " + cotizacion.getFecha()
-                + " WHERE id_cotizacion = " + cotizacion.getId_cotizacion();
-        int numFilas = -1;
-        try {
+    
+    public int consultarCotizacionReciente(){
+        String unRep = "SELECT * FROM cotizacion";
+        try{
             Connection conn = fachada.getConnetion();
             Statement sentencia = conn.createStatement();
-            numFilas = sentencia.executeUpdate(update_statement);
+            ResultSet tabla = sentencia.executeQuery(unRep);
+            int numFilas = 0;
+            while(tabla.next()){
+                numFilas++;
+            }
             conn.close();
             fachada.closeConection();
-        } catch (SQLException ex) {
+            return numFilas;
+        }
+        catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "         Ha ocurrido un problema, \n consulta con la base de datos fallida", "AutosABC", JOptionPane.ERROR_MESSAGE); 
             return -2;
-        } catch (Exception ex) {
+        }
+        catch (Exception ex){
+            JOptionPane.showMessageDialog(null, "Ha ocurrido un problema!!", "AutosABC", JOptionPane.ERROR_MESSAGE);
             return -3;
         }
-        return numFilas;
     }
-
 }

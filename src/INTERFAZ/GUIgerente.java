@@ -31,6 +31,9 @@ public class GUIgerente extends javax.swing.JFrame {
     CardLayout ventanaInventarioModificarRepuesto;
     ArrayList<Vehiculo> vehiculos;
     ArrayList<Vehiculo> vehiculosAenviar; 
+    ArrayList<Sede> sedesCambioSede;
+    ArrayList<Sede> sedesCrearUsuario;
+    int bloqueoAction;
     /**
      * Creates new form AutosABC
      * @param login2
@@ -81,9 +84,7 @@ public class GUIgerente extends javax.swing.JFrame {
         
         ventanaInventarioModificarRepuesto.addLayoutComponent(panelModificarInventarioModificarRepuesto,"MODIFICAR-REPUESTO-MOSTRAR");
         ventanaInventarioModificarRepuesto.addLayoutComponent(panelModificarInventarioModificarRepuestoVacio,"MODIFICAR-REPUESTO-OCULTAR");
-        
-        
-        
+
         jPanel3.setLayout(card2);
         jPanel9.setLayout(card3);
         jPanel14.setLayout(card4);
@@ -135,6 +136,7 @@ public class GUIgerente extends javax.swing.JFrame {
         ControladorVehiculo cVehiculo = new ControladorVehiculo();
         vehiculos = cVehiculo.consultarVehiculos();
         vehiculosAenviar = new ArrayList<>();
+        bloqueoAction = 0;
     }
 
     /**
@@ -157,7 +159,7 @@ public class GUIgerente extends javax.swing.JFrame {
         panelSedeGerente = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
         jButton11 = new javax.swing.JButton();
-        jButton12 = new javax.swing.JButton();
+        botonModificarSede = new javax.swing.JButton();
         jButton15 = new javax.swing.JButton();
         jPanel9 = new javax.swing.JPanel();
         panelUsuariosGerente = new javax.swing.JPanel();
@@ -182,16 +184,19 @@ public class GUIgerente extends javax.swing.JFrame {
         jTextArea1 = new javax.swing.JTextArea();
         jPanel14 = new javax.swing.JPanel();
         panelModificarSede = new javax.swing.JPanel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea2 = new javax.swing.JTextArea();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
+        comboBoxSedeCambio = new javax.swing.JComboBox<>();
         jLabel13 = new javax.swing.JLabel();
+        comboBoxDatoACambiar = new javax.swing.JComboBox<>();
         jLabel14 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
+        valor_actual_sede = new javax.swing.JTextField();
+        jLabel41 = new javax.swing.JLabel();
+        valor_nuevo_sede = new javax.swing.JTextField();
+        botonAplicarCambioSede = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        areTextoModificacionSede = new javax.swing.JTextArea();
+        botonRefrescarSede = new javax.swing.JButton();
         panelCrearSede = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -241,15 +246,15 @@ public class GUIgerente extends javax.swing.JFrame {
         botonCrearUsuarioConfirmacion = new javax.swing.JButton();
         panelModificarUsuario = new javax.swing.JPanel();
         jLabel29 = new javax.swing.JLabel();
-        jTextField16 = new javax.swing.JTextField();
+        cedula_modificar_usuario = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel30 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        jTextField17 = new javax.swing.JTextField();
+        nuevo_valor_usuario = new javax.swing.JTextField();
         jLabel32 = new javax.swing.JLabel();
         jLabel31 = new javax.swing.JLabel();
-        jComboBox5 = new javax.swing.JComboBox<>();
-        jButton10 = new javax.swing.JButton();
+        comboBoxAtributoUsuario = new javax.swing.JComboBox<>();
+        botonModificarAtributoUsuario = new javax.swing.JButton();
         botonAyudaCrearUsuario1 = new javax.swing.JButton();
         panelCrearInventario = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
@@ -305,21 +310,21 @@ public class GUIgerente extends javax.swing.JFrame {
         panelModificarInventarioModificarVehiculo = new javax.swing.JPanel();
         jLabel60 = new javax.swing.JLabel();
         jLabel61 = new javax.swing.JLabel();
-        jTextField39 = new javax.swing.JTextField();
-        jButton19 = new javax.swing.JButton();
+        id_modificar_vehiculo = new javax.swing.JTextField();
+        botonModificarVehiculo = new javax.swing.JButton();
         jLabel62 = new javax.swing.JLabel();
-        jComboBox7 = new javax.swing.JComboBox<>();
+        comboBoxAtributoVehiculo = new javax.swing.JComboBox<>();
         jLabel63 = new javax.swing.JLabel();
-        jTextField40 = new javax.swing.JTextField();
+        nuevo_valor_vehiculo = new javax.swing.JTextField();
         panelModificarInventarioModificarRepuesto = new javax.swing.JPanel();
         jLabel52 = new javax.swing.JLabel();
         jLabel53 = new javax.swing.JLabel();
-        jTextField33 = new javax.swing.JTextField();
-        jButton18 = new javax.swing.JButton();
+        id_modificar_respuesto = new javax.swing.JTextField();
+        botonModificarRepuesto = new javax.swing.JButton();
         jLabel58 = new javax.swing.JLabel();
-        jComboBox6 = new javax.swing.JComboBox<>();
+        comboBoxAtributoRepuesto = new javax.swing.JComboBox<>();
         jLabel59 = new javax.swing.JLabel();
-        jTextField38 = new javax.swing.JTextField();
+        nuevo_valor_repuesto = new javax.swing.JTextField();
         panelModificarInventarioModificarVehiculoVacio = new javax.swing.JPanel();
         panelModificarInventarioModificarRepuestoVacio = new javax.swing.JPanel();
 
@@ -442,11 +447,11 @@ public class GUIgerente extends javax.swing.JFrame {
             }
         });
 
-        jButton12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/MODIFICAR-SEDE.png"))); // NOI18N
-        jButton12.setToolTipText("Al hacer click en este boton, se desplegará  el menu para modificar sedes");
-        jButton12.addActionListener(new java.awt.event.ActionListener() {
+        botonModificarSede.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/MODIFICAR-SEDE.png"))); // NOI18N
+        botonModificarSede.setToolTipText("Al hacer click en este boton, se desplegará  el menu para modificar sedes");
+        botonModificarSede.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton12ActionPerformed(evt);
+                botonModificarSedeActionPerformed(evt);
             }
         });
 
@@ -466,7 +471,7 @@ public class GUIgerente extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(botonModificarSede, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jButton15, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                     .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -477,7 +482,7 @@ public class GUIgerente extends javax.swing.JFrame {
                 .addGap(27, 27, 27)
                 .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(42, 42, 42)
-                .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(botonModificarSede, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(39, 39, 39)
                 .addComponent(jButton15, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -785,17 +790,50 @@ public class GUIgerente extends javax.swing.JFrame {
         panelModificarSede.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         panelModificarSede.setPreferredSize(new java.awt.Dimension(586, 366));
 
-        jTextArea2.setColumns(20);
-        jTextArea2.setRows(5);
-        jScrollPane2.setViewportView(jTextArea2);
+        jLabel11.setText("MODIFICAR SEDE");
 
-        jLabel11.setText("NOMBRE SEDE:");
+        jLabel12.setText("SELECCIONE LA SEDE:");
 
-        jLabel12.setText("NUEVO NOMBRE:");
+        comboBoxSedeCambio.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboBoxSedeCambio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboBoxSedeCambioActionPerformed(evt);
+            }
+        });
 
-        jLabel13.setText("NUEVO TELEFONO");
+        jLabel13.setText("DATO A CAMBIAR:");
 
-        jLabel14.setText("NUEVO FAX");
+        comboBoxDatoACambiar.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione Una", "Nombre", "Ciudad", "Direccion", "Telefono", "Fax" }));
+        comboBoxDatoACambiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboBoxDatoACambiarActionPerformed(evt);
+            }
+        });
+
+        jLabel14.setText("VALOR ACTUAL:");
+
+        valor_actual_sede.setEditable(false);
+
+        jLabel41.setText("NUEVO VALOR:");
+
+        botonAplicarCambioSede.setText("APLICAR CAMBIO");
+        botonAplicarCambioSede.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonAplicarCambioSedeActionPerformed(evt);
+            }
+        });
+
+        areTextoModificacionSede.setEditable(false);
+        areTextoModificacionSede.setColumns(20);
+        areTextoModificacionSede.setRows(5);
+        jScrollPane2.setViewportView(areTextoModificacionSede);
+
+        botonRefrescarSede.setText("REFRESCAR");
+        botonRefrescarSede.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonRefrescarSedeActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelModificarSedeLayout = new javax.swing.GroupLayout(panelModificarSede);
         panelModificarSede.setLayout(panelModificarSedeLayout);
@@ -804,46 +842,67 @@ public class GUIgerente extends javax.swing.JFrame {
             .addGroup(panelModificarSedeLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panelModificarSedeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 564, Short.MAX_VALUE)
                     .addGroup(panelModificarSedeLayout.createSequentialGroup()
-                        .addComponent(jLabel14)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField5))
+                        .addComponent(jScrollPane2)
+                        .addContainerGap())
                     .addGroup(panelModificarSedeLayout.createSequentialGroup()
-                        .addComponent(jLabel11)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField2))
-                    .addGroup(panelModificarSedeLayout.createSequentialGroup()
-                        .addComponent(jLabel12)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField3))
-                    .addGroup(panelModificarSedeLayout.createSequentialGroup()
-                        .addComponent(jLabel13)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField4)))
-                .addContainerGap())
+                        .addGroup(panelModificarSedeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel11)
+                            .addGroup(panelModificarSedeLayout.createSequentialGroup()
+                                .addGroup(panelModificarSedeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel12)
+                                    .addComponent(jLabel13))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(panelModificarSedeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(comboBoxSedeCambio, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(comboBoxDatoACambiar, 0, 205, Short.MAX_VALUE)))
+                            .addGroup(panelModificarSedeLayout.createSequentialGroup()
+                                .addComponent(jLabel14)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(valor_actual_sede))
+                            .addGroup(panelModificarSedeLayout.createSequentialGroup()
+                                .addComponent(jLabel41)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(valor_nuevo_sede)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
+                        .addGroup(panelModificarSedeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(botonAplicarCambioSede, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
+                            .addComponent(botonRefrescarSede, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(58, 58, 58))))
         );
         panelModificarSedeLayout.setVerticalGroup(
             panelModificarSedeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelModificarSedeLayout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addGroup(panelModificarSedeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel11)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(panelModificarSedeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel12)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(panelModificarSedeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel13)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(panelModificarSedeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel14)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE)
+            .addGroup(panelModificarSedeLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel11)
+                .addGroup(panelModificarSedeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelModificarSedeLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(panelModificarSedeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel12)
+                            .addComponent(comboBoxSedeCambio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(panelModificarSedeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel13)
+                            .addComponent(comboBoxDatoACambiar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(panelModificarSedeLayout.createSequentialGroup()
+                        .addGap(35, 35, 35)
+                        .addComponent(botonAplicarCambioSede)))
+                .addGroup(panelModificarSedeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelModificarSedeLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(panelModificarSedeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel14)
+                            .addComponent(valor_actual_sede, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(panelModificarSedeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel41)
+                            .addComponent(valor_nuevo_sede, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(panelModificarSedeLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(botonRefrescarSede)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -1203,17 +1262,17 @@ public class GUIgerente extends javax.swing.JFrame {
 
         jLabel31.setText("VALOR A MODIFICAR: ");
 
-        jComboBox5.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione un Atributo", "Nombre", "Direccion", "E-mail", "Telefono", "Celular", "Sede", "Situacion Sentimental", "Usuario", "Contraseña" }));
-        jComboBox5.addActionListener(new java.awt.event.ActionListener() {
+        comboBoxAtributoUsuario.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione un Atributo", "Nombre", "Direccion", "E-mail", "Telefono", "Sede", "Estado", "Salario", "Usuario y Contraseña" }));
+        comboBoxAtributoUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox5ActionPerformed(evt);
+                comboBoxAtributoUsuarioActionPerformed(evt);
             }
         });
 
-        jButton10.setText("MODIFICAR");
-        jButton10.addActionListener(new java.awt.event.ActionListener() {
+        botonModificarAtributoUsuario.setText("MODIFICAR");
+        botonModificarAtributoUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton10ActionPerformed(evt);
+                botonModificarAtributoUsuarioActionPerformed(evt);
             }
         });
 
@@ -1229,13 +1288,13 @@ public class GUIgerente extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jComboBox5, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(comboBoxAtributoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jTextField17))
+                    .addComponent(nuevo_valor_usuario))
                 .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(203, 203, 203)
-                .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(botonModificarAtributoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -1244,13 +1303,13 @@ public class GUIgerente extends javax.swing.JFrame {
                 .addGap(21, 21, 21)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel31)
-                    .addComponent(jComboBox5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(comboBoxAtributoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel32)
-                    .addComponent(jTextField17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(nuevo_valor_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(botonModificarAtributoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(22, Short.MAX_VALUE))
         );
 
@@ -1275,7 +1334,7 @@ public class GUIgerente extends javax.swing.JFrame {
                     .addGroup(panelModificarUsuarioLayout.createSequentialGroup()
                         .addComponent(jLabel29)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
-                        .addComponent(jTextField16, javax.swing.GroupLayout.PREFERRED_SIZE, 433, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cedula_modificar_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 433, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(8, 8, 8))
                     .addGroup(panelModificarUsuarioLayout.createSequentialGroup()
                         .addGroup(panelModificarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1290,7 +1349,7 @@ public class GUIgerente extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(panelModificarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel29)
-                    .addComponent(jTextField16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cedula_modificar_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1731,15 +1790,20 @@ public class GUIgerente extends javax.swing.JFrame {
 
         panelModificarInventarioModificarVehiculo.setPreferredSize(new java.awt.Dimension(258, 276));
 
-        jLabel60.setText("INFORMACION REPUESTO:");
+        jLabel60.setText("INFORMACION VEHICULO:");
 
         jLabel61.setText("ID:");
 
-        jButton19.setText("MODIFICAR");
+        botonModificarVehiculo.setText("MODIFICAR");
+        botonModificarVehiculo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonModificarVehiculoActionPerformed(evt);
+            }
+        });
 
         jLabel62.setText("ATRIBUTO");
 
-        jComboBox7.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboBoxAtributoVehiculo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione Una", "Sede", "Precio", "Iva", "Estado" }));
 
         jLabel63.setText("NUEVO VALOR:");
 
@@ -1753,22 +1817,22 @@ public class GUIgerente extends javax.swing.JFrame {
                     .addGroup(panelModificarInventarioModificarVehiculoLayout.createSequentialGroup()
                         .addComponent(jLabel61)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField39))
+                        .addComponent(id_modificar_vehiculo))
                     .addGroup(panelModificarInventarioModificarVehiculoLayout.createSequentialGroup()
                         .addComponent(jLabel62)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox7, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(comboBoxAtributoVehiculo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(panelModificarInventarioModificarVehiculoLayout.createSequentialGroup()
                         .addGroup(panelModificarInventarioModificarVehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(panelModificarInventarioModificarVehiculoLayout.createSequentialGroup()
                                 .addGap(77, 77, 77)
-                                .addComponent(jButton19))
+                                .addComponent(botonModificarVehiculo))
                             .addComponent(jLabel60))
                         .addGap(0, 70, Short.MAX_VALUE))
                     .addGroup(panelModificarInventarioModificarVehiculoLayout.createSequentialGroup()
                         .addComponent(jLabel63)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField40)))
+                        .addComponent(nuevo_valor_vehiculo)))
                 .addContainerGap())
         );
         panelModificarInventarioModificarVehiculoLayout.setVerticalGroup(
@@ -1779,17 +1843,17 @@ public class GUIgerente extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelModificarInventarioModificarVehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel61)
-                    .addComponent(jTextField39, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(id_modificar_vehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(panelModificarInventarioModificarVehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel62)
-                    .addComponent(jComboBox7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(comboBoxAtributoVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panelModificarInventarioModificarVehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel63)
-                    .addComponent(jTextField40, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(nuevo_valor_vehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(50, 50, 50)
-                .addComponent(jButton19)
+                .addComponent(botonModificarVehiculo)
                 .addContainerGap(83, Short.MAX_VALUE))
         );
 
@@ -1799,11 +1863,16 @@ public class GUIgerente extends javax.swing.JFrame {
 
         jLabel53.setText("ID:");
 
-        jButton18.setText("MODIFICAR");
+        botonModificarRepuesto.setText("MODIFICAR");
+        botonModificarRepuesto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonModificarRepuestoActionPerformed(evt);
+            }
+        });
 
         jLabel58.setText("ATIRBUTO");
 
-        jComboBox6.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboBoxAtributoRepuesto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione Una", "Sede", "Nombre", "Cantidad", "Precio", "Iva", "Asociar a Vehiculo" }));
 
         jLabel59.setText("NUEVO VALOR:");
 
@@ -1817,22 +1886,22 @@ public class GUIgerente extends javax.swing.JFrame {
                     .addGroup(panelModificarInventarioModificarRepuestoLayout.createSequentialGroup()
                         .addComponent(jLabel53)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField33))
+                        .addComponent(id_modificar_respuesto))
                     .addGroup(panelModificarInventarioModificarRepuestoLayout.createSequentialGroup()
                         .addComponent(jLabel58)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox6, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(comboBoxAtributoRepuesto, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(panelModificarInventarioModificarRepuestoLayout.createSequentialGroup()
                         .addGroup(panelModificarInventarioModificarRepuestoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(panelModificarInventarioModificarRepuestoLayout.createSequentialGroup()
                                 .addGap(77, 77, 77)
-                                .addComponent(jButton18))
+                                .addComponent(botonModificarRepuesto))
                             .addComponent(jLabel52))
                         .addGap(0, 70, Short.MAX_VALUE))
                     .addGroup(panelModificarInventarioModificarRepuestoLayout.createSequentialGroup()
                         .addComponent(jLabel59)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField38)))
+                        .addComponent(nuevo_valor_repuesto)))
                 .addContainerGap())
         );
         panelModificarInventarioModificarRepuestoLayout.setVerticalGroup(
@@ -1843,17 +1912,17 @@ public class GUIgerente extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelModificarInventarioModificarRepuestoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel53)
-                    .addComponent(jTextField33, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(id_modificar_respuesto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(panelModificarInventarioModificarRepuestoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel58)
-                    .addComponent(jComboBox6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(comboBoxAtributoRepuesto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panelModificarInventarioModificarRepuestoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel59)
-                    .addComponent(jTextField38, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(nuevo_valor_repuesto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(50, 50, 50)
-                .addComponent(jButton18)
+                .addComponent(botonModificarRepuesto)
                 .addContainerGap(83, Short.MAX_VALUE))
         );
 
@@ -1920,9 +1989,24 @@ public class GUIgerente extends javax.swing.JFrame {
       
     }//GEN-LAST:event_jButton15ActionPerformed
 
-    private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
+    private void botonModificarSedeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonModificarSedeActionPerformed
         card3.show(jPanel9, "MODIFICAR-SEDE");
-    }//GEN-LAST:event_jButton12ActionPerformed
+        
+        sedesCambioSede = new ArrayList<>();
+        
+        comboBoxSedeCambio.removeAllItems();
+        comboBoxSedeCambio.addItem("Seleccione una");
+
+        ControladorSede cSede = new ControladorSede();
+
+        sedesCambioSede = cSede.consultarSedes();
+
+        for (int i = 0; i < sedesCambioSede.size(); i++) {
+            comboBoxSedeCambio.addItem(sedesCambioSede.get(i).getNombre());
+        }
+        
+        botonRefrescarSede.setEnabled(false);
+    }//GEN-LAST:event_botonModificarSedeActionPerformed
 
     private void botonUsuariosGerenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonUsuariosGerenteActionPerformed
         card2.show(jPanel3, "USUARIOS");
@@ -1932,10 +2016,10 @@ public class GUIgerente extends javax.swing.JFrame {
 
         ControladorSede cSede = new ControladorSede();
 
-        ArrayList<Sede> sedes = cSede.consultarSedes();
+        sedesCrearUsuario = cSede.consultarSedes();
 
-        for (int i = 0; i < sedes.size(); i++) {
-            comboBoxSedeCrearUsuario.addItem(sedes.get(i).getNombre());
+        for (int i = 0; i < sedesCrearUsuario.size(); i++) {
+            comboBoxSedeCrearUsuario.addItem(sedesCrearUsuario.get(i).getNombre());
         }
     }//GEN-LAST:event_botonUsuariosGerenteActionPerformed
 
@@ -2026,10 +2110,10 @@ public class GUIgerente extends javax.swing.JFrame {
 
         ControladorSede cSede = new ControladorSede();
 
-        ArrayList<Sede> sedes = cSede.consultarSedes();
+        sedesCrearUsuario = cSede.consultarSedes();
 
-        for (int i = 0; i < sedes.size(); i++) {
-            comboBoxSedeCrearUsuario.addItem(sedes.get(i).getNombre());
+        for (int i = 0; i < sedesCrearUsuario.size(); i++) {
+            comboBoxSedeCrearUsuario.addItem(sedesCrearUsuario.get(i).getNombre());
         }
     }//GEN-LAST:event_botonCrearUsuarioActionPerformed
 
@@ -2049,17 +2133,127 @@ public class GUIgerente extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_botonAyudaCrearUsuarioActionPerformed
 
-    private void jComboBox5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox5ActionPerformed
+    private void comboBoxAtributoUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxAtributoUsuarioActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox5ActionPerformed
+    }//GEN-LAST:event_comboBoxAtributoUsuarioActionPerformed
 
     private void botonAyudaCrearUsuario1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAyudaCrearUsuario1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_botonAyudaCrearUsuario1ActionPerformed
 
-    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton10ActionPerformed
+    private void botonModificarAtributoUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonModificarAtributoUsuarioActionPerformed
+       try{
+           int cedula = Integer.parseInt(cedula_modificar_usuario.getText());
+           
+           if(comboBoxAtributoUsuario.getSelectedIndex() == 0){
+                 JOptionPane.showMessageDialog(rootPane, "DEBE SELECCIONAR UN ATRIBUTO PARA MODIFICAR", "AutosABC", JOptionPane.ERROR_MESSAGE);
+           }
+           
+           else {
+               int index = comboBoxAtributoUsuario.getSelectedIndex();
+               ControladorUsuario cUsuario = new ControladorUsuario();
+               int result;
+               switch(index) {
+                   case 1:
+                       String nombre = nuevo_valor_usuario.getText();
+                       cUsuario = new ControladorUsuario();
+                       result = cUsuario.cambiarNombre(cedula, nombre);
+                       if ((result == -2) | (result == -3)) {
+                           JOptionPane.showMessageDialog(rootPane, "OCURRIO UN PROBLEMA CON LA BASE DE DATOS, CONTACTE CON SOPORTE", "AutosABC", JOptionPane.ERROR_MESSAGE);
+                       }
+                       else {
+                           JOptionPane.showMessageDialog(rootPane, "SE HA MODIFICADO CON EXITO", "AutosABC", JOptionPane.INFORMATION_MESSAGE);
+                       }
+                       break;
+                   case 2:
+                       String direccion = nuevo_valor_usuario.getText();
+                       cUsuario = new ControladorUsuario();
+                       result = cUsuario.cambiarDireccion(cedula, direccion);
+                       if ((result == -2) | (result == -3)) {
+                           JOptionPane.showMessageDialog(rootPane, "OCURRIO UN PROBLEMA CON LA BASE DE DATOS, CONTACTE CON SOPORTE", "AutosABC", JOptionPane.ERROR_MESSAGE);
+                       }
+                       else {
+                           JOptionPane.showMessageDialog(rootPane, "SE HA MODIFICADO CON EXITO", "AutosABC", JOptionPane.INFORMATION_MESSAGE);
+                       }
+                       break;
+                   case 3:
+                       String email = nuevo_valor_usuario.getText();
+                       cUsuario = new ControladorUsuario();
+                       result = cUsuario.cambiarEmail(cedula, email);
+                       if ((result == -2) | (result == -3)) {
+                           JOptionPane.showMessageDialog(rootPane, "OCURRIO UN PROBLEMA CON LA BASE DE DATOS, CONTACTE CON SOPORTE", "AutosABC", JOptionPane.ERROR_MESSAGE);
+                       }
+                       else {
+                           JOptionPane.showMessageDialog(rootPane, "SE HA MODIFICADO CON EXITO", "AutosABC", JOptionPane.INFORMATION_MESSAGE);
+                       }
+                       break;
+                   case 4:
+                       String telefono = Long.toString(Long.parseLong(nuevo_valor_usuario.getText()));
+                       cUsuario = new ControladorUsuario();
+                       result = cUsuario.cambiarTelefono(cedula, telefono);
+                       if ((result == -2) | (result == -3)) {
+                           JOptionPane.showMessageDialog(rootPane, "OCURRIO UN PROBLEMA CON LA BASE DE DATOS, CONTACTE CON SOPORTE", "AutosABC", JOptionPane.ERROR_MESSAGE);
+                       }
+                       else {
+                           JOptionPane.showMessageDialog(rootPane, "SE HA MODIFICADO CON EXITO", "AutosABC", JOptionPane.INFORMATION_MESSAGE);
+                       }
+                       break;
+                   case 5:
+                       int sede = Integer.parseInt(nuevo_valor_usuario.getText());
+                       cUsuario = new ControladorUsuario();
+                       result = cUsuario.cambiarSede(cedula, sede);
+                       if ((result == -2) | (result == -3)) {
+                           JOptionPane.showMessageDialog(rootPane, "OCURRIO UN PROBLEMA CON LA BASE DE DATOS, CONTACTE CON SOPORTE", "AutosABC", JOptionPane.ERROR_MESSAGE);
+                       }
+                       else {
+                           JOptionPane.showMessageDialog(rootPane, "SE HA MODIFICADO CON EXITO", "AutosABC", JOptionPane.INFORMATION_MESSAGE);
+                       }
+                       break;
+                   case 6:
+                       String estado = nuevo_valor_usuario.getText();
+                       cUsuario = new ControladorUsuario();
+                       result = cUsuario.cambiarEstado(cedula, estado);
+                       if ((result == -2) | (result == -3)) {
+                           JOptionPane.showMessageDialog(rootPane, "OCURRIO UN PROBLEMA CON LA BASE DE DATOS, CONTACTE CON SOPORTE", "AutosABC", JOptionPane.ERROR_MESSAGE);
+                       }
+                       else {
+                           JOptionPane.showMessageDialog(rootPane, "SE HA MODIFICADO CON EXITO", "AutosABC", JOptionPane.INFORMATION_MESSAGE);
+                       }
+                       break;
+                   case 7:
+                       int salario = Integer.parseInt(nuevo_valor_usuario.getText());
+                       cUsuario = new ControladorUsuario();
+                       result = cUsuario.cambiarSalario(cedula, salario);
+                       if ((result == -2) | (result == -3)) {
+                           JOptionPane.showMessageDialog(rootPane, "OCURRIO UN PROBLEMA CON LA BASE DE DATOS, CONTACTE CON SOPORTE", "AutosABC", JOptionPane.ERROR_MESSAGE);
+                       }
+                       else {
+                           JOptionPane.showMessageDialog(rootPane, "SE HA MODIFICADO CON EXITO", "AutosABC", JOptionPane.INFORMATION_MESSAGE);
+                       }
+                       break;
+                   case 8:
+                       String UsuANDPass = nuevo_valor_usuario.getText();
+                       cUsuario = new ControladorUsuario();
+                       Encriptacion encripto = new Encriptacion();
+                       ArrayList<String> cuentaE = encripto.encriptar(UsuANDPass);
+                       ArrayList<String> contrasenaE = encripto.encriptar(UsuANDPass);
+                       String PIN = contrasenaE.get(1) + cuentaE.get(1);
+                       result = cUsuario.cambiarUsuANDpass(cedula, cuentaE.get(0), contrasenaE.get(0));
+                       if ((result == -2) | (result == -3)) {
+                           JOptionPane.showMessageDialog(rootPane, "OCURRIO UN PROBLEMA CON LA BASE DE DATOS, CONTACTE CON SOPORTE", "AutosABC", JOptionPane.ERROR_MESSAGE);
+                       }
+                       else {
+                           JOptionPane.showMessageDialog(rootPane, "SE HA MODIFICADO CON EXITO\n\nEL PIN PARA EL USUARIO ES:" + PIN, "AutosABC", JOptionPane.INFORMATION_MESSAGE);
+                       }
+                       break;
+               }
+           }
+       }
+       catch(NumberFormatException e) {
+             JOptionPane.showMessageDialog(rootPane, "LA CEDULA DEBEN SER NUMEROS, AL GIUAL QUE\n"
+                     + "1) LA SEDE DEL USUARIO\n2) SALARIO USUARIO\n3) TELEFONO USUARIO", "AutosABC", JOptionPane.ERROR_MESSAGE);
+       }
+    }//GEN-LAST:event_botonModificarAtributoUsuarioActionPerformed
 
     private void botonInventarioGerenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonInventarioGerenteActionPerformed
        card2.show(jPanel3, "INVENTARIO");
@@ -2232,10 +2426,6 @@ public class GUIgerente extends javax.swing.JFrame {
 
                     int id_sede_usuario = sedes.get(sede - 1).getId();
 
-                    Sede sede_usuario = new Sede();
-
-                    sede_usuario.setId(id_sede_usuario);
-
                     Encriptacion encripto = new Encriptacion();
                     
                     ArrayList<String> pesos_cuenta = encripto.encriptar(usuario);
@@ -2246,7 +2436,7 @@ public class GUIgerente extends javax.swing.JFrame {
                     ControladorUsuario nuevoUsuario = new ControladorUsuario();
                     int result = nuevoUsuario.insertarUsuario(
                             cedula,
-                            sede_usuario, 
+                            id_sede_usuario, 
                             nombre, 
                             nacimiento, 
                             direccion,
@@ -2425,8 +2615,336 @@ public class GUIgerente extends javax.swing.JFrame {
        radioBotonGeneroM.setSelected(false);
     }//GEN-LAST:event_radioBotonGeneroFActionPerformed
 
+    private void comboBoxSedeCambioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxSedeCambioActionPerformed
+        if (comboBoxSedeCambio.getSelectedIndex() == 0) {
+           areTextoModificacionSede.setText("SELECCIONE UNA SEDE PARA IMPRIMIR LA INFORMACIÓN O REALIZA UNA MODIFICACION");
+        }
+       
+        else {
+           int index = comboBoxSedeCambio.getSelectedIndex();
+           if ((sedesCambioSede.isEmpty()) | (bloqueoAction == 1)) {
+           
+           }
+           
+           else {
+             String informacionSede = "IDENTIFICACION SEDE:  "  + sedesCambioSede.get(index - 1).getId() + "\n" + 
+                                      "NOMBRE SEDE:  "  + sedesCambioSede.get(index - 1).getNombre() + "\n" + 
+                                      "CIUDAD SEDE:  "  + sedesCambioSede.get(index - 1).getCiudad() + "\n" + 
+                                      "DIRECCION SEDE:  "  + sedesCambioSede.get(index - 1).getDireccion() + "\n" + 
+                                      "TELEFONO SEDE:  "  + sedesCambioSede.get(index - 1).getTelefono() + "\n" +
+                                      "FAX SEDE:  "  + sedesCambioSede.get(index - 1).getFax() + "\n\n\n";
+             areTextoModificacionSede.setText(informacionSede);
+           }
+           
+       }
+    }//GEN-LAST:event_comboBoxSedeCambioActionPerformed
+
+    private void comboBoxDatoACambiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxDatoACambiarActionPerformed
+       if (comboBoxSedeCambio.getSelectedIndex() == 0) {
+           valor_actual_sede.setText("SELECCIONE UN ATRIBUTO");
+        }
+       
+        else {
+           int indexS = comboBoxSedeCambio.getSelectedIndex();
+           int indexA = comboBoxDatoACambiar.getSelectedIndex();
+           if (indexA == 0) {
+               
+           }
+           
+           else {
+            String dato;
+            switch (indexA){
+                 
+                case 1:
+                    dato = "" + sedesCambioSede.get(indexS - 1).getNombre();
+                    valor_actual_sede.setText(dato);
+                    break;
+                case 2:
+                    dato = "" + sedesCambioSede.get(indexS - 1).getCiudad();
+                    valor_actual_sede.setText(dato);
+                    break;
+                case 3:
+                    dato = "" + sedesCambioSede.get(indexS - 1).getDireccion();
+                    valor_actual_sede.setText(dato);
+                    break;
+                case 4:
+                    dato = "" + sedesCambioSede.get(indexS - 1).getTelefono();
+                    valor_actual_sede.setText(dato);
+                    break;
+                case 5:
+                    dato = "" + sedesCambioSede.get(indexS - 1).getFax();
+                    valor_actual_sede.setText(dato);
+                    break;
+             }
+           }      
+       }
+    }//GEN-LAST:event_comboBoxDatoACambiarActionPerformed
+
+    private void botonAplicarCambioSedeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAplicarCambioSedeActionPerformed
+       int indexS = comboBoxSedeCambio.getSelectedIndex();
+       int indexA = comboBoxDatoACambiar.getSelectedIndex();
+       String nuevo_valor = valor_nuevo_sede.getText();
+       
+       if ((indexS == 0) | (indexS == 0) | (nuevo_valor.equals(""))) {
+           JOptionPane.showMessageDialog(rootPane, "DATOS ERRONEOS, RECUERDE QUE: \n1) DEBE SELECCIONAR UNA SEDE\n2) DEBE SELECCIONAR UN ATRIBUTO\n3) DEBE INTRODUCIR UN VALOR EN EL CAMPO ''NUEVO VALOR''", "AutosABC", JOptionPane.ERROR_MESSAGE);
+       }
+       
+       else {
+           ControladorSede cSede = new ControladorSede();
+           int result = 0;
+           switch (indexA){
+                 
+                case 1:
+                    cSede = new ControladorSede();
+                    result = cSede.cambiarNombre(sedesCambioSede.get(indexS - 1).getId(), nuevo_valor);
+                    if ((result == -2) | (result == -3)) {
+                        JOptionPane.showMessageDialog(rootPane, "OCURRIO UN PROBLEMA CON LA BASE DE DATOS, CONTACTE CON SOPORTE", "AutosABC", JOptionPane.ERROR_MESSAGE);
+                    }
+                    else {
+                        JOptionPane.showMessageDialog(rootPane, "SE HA MODIFICADO CON EXITO", "AutosABC", JOptionPane.INFORMATION_MESSAGE);
+                        cSede = new ControladorSede();
+                        sedesCambioSede = cSede.consultarSedes();
+                        botonRefrescarSede.setEnabled(true);
+                        botonAplicarCambioSede.setEnabled(false);
+                        bloqueoAction = 1;
+                    }
+                    break;
+                case 2:
+                    cSede = new ControladorSede();
+                    result = cSede.cambiarCiudad(sedesCambioSede.get(indexS - 1).getId(), nuevo_valor);
+                    if ((result == -2) | (result == -3)) {
+                        JOptionPane.showMessageDialog(rootPane, "OCURRIO UN PROBLEMA CON LA BASE DE DATOS, CONTACTE CON SOPORTE", "AutosABC", JOptionPane.ERROR_MESSAGE);
+                    }
+                    else {
+                        JOptionPane.showMessageDialog(rootPane, "SE HA MODIFICADO CON EXITO", "AutosABC", JOptionPane.INFORMATION_MESSAGE);
+                        cSede = new ControladorSede();
+                        sedesCambioSede = cSede.consultarSedes();
+                        botonRefrescarSede.setEnabled(true);
+                        botonAplicarCambioSede.setEnabled(false);
+                        bloqueoAction = 1;
+                    }
+                    break;
+                case 3:
+                    cSede = new ControladorSede();
+                    result = cSede.cambiarDireccion(sedesCambioSede.get(indexS - 1).getId(), nuevo_valor);
+                    if ((result == -2) | (result == -3)) {
+                        JOptionPane.showMessageDialog(rootPane, "OCURRIO UN PROBLEMA CON LA BASE DE DATOS, CONTACTE CON SOPORTE", "AutosABC", JOptionPane.ERROR_MESSAGE);
+                    }
+                    else {
+                        JOptionPane.showMessageDialog(rootPane, "SE HA MODIFICADO CON EXITO", "AutosABC", JOptionPane.INFORMATION_MESSAGE);
+                        cSede = new ControladorSede();
+                        sedesCambioSede = cSede.consultarSedes();
+                        botonRefrescarSede.setEnabled(true);
+                        botonAplicarCambioSede.setEnabled(false);
+                        bloqueoAction = 1;
+                    }
+                    break;
+                case 4:
+                    cSede = new ControladorSede();
+                    result = cSede.cambiarTelefono(sedesCambioSede.get(indexS - 1).getId(), nuevo_valor);
+                    if ((result == -2) | (result == -3)) {
+                        JOptionPane.showMessageDialog(rootPane, "OCURRIO UN PROBLEMA CON LA BASE DE DATOS, CONTACTE CON SOPORTE", "AutosABC", JOptionPane.ERROR_MESSAGE);
+                    }
+                    else {
+                        JOptionPane.showMessageDialog(rootPane, "SE HA MODIFICADO CON EXITO", "AutosABC", JOptionPane.INFORMATION_MESSAGE);
+                        cSede = new ControladorSede();
+                        sedesCambioSede = cSede.consultarSedes();
+                        botonRefrescarSede.setEnabled(true);
+                        botonAplicarCambioSede.setEnabled(false);
+                        bloqueoAction = 1;
+                    }
+                    break;
+                case 5:
+                    cSede = new ControladorSede();
+                    result = cSede.cambiarFax(sedesCambioSede.get(indexS - 1).getId(), nuevo_valor);
+                    if ((result == -2) | (result == -3)) {
+                        JOptionPane.showMessageDialog(rootPane, "OCURRIO UN PROBLEMA CON LA BASE DE DATOS, CONTACTE CON SOPORTE", "AutosABC", JOptionPane.ERROR_MESSAGE);
+                    }
+                    else {
+                        JOptionPane.showMessageDialog(rootPane, "SE HA MODIFICADO CON EXITO", "AutosABC", JOptionPane.INFORMATION_MESSAGE);
+                        cSede = new ControladorSede();
+                        sedesCambioSede = cSede.consultarSedes();
+                        botonRefrescarSede.setEnabled(true);
+                        botonAplicarCambioSede.setEnabled(false);
+                        bloqueoAction = 1;
+                    }
+                    break;
+             }
+    }
+    }//GEN-LAST:event_botonAplicarCambioSedeActionPerformed
+
+    private void botonRefrescarSedeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRefrescarSedeActionPerformed
+        comboBoxSedeCambio.removeAllItems();
+        comboBoxSedeCambio.addItem("Seleccione una");
+
+        for (int i = 0; i < sedesCambioSede.size(); i++) {
+            comboBoxSedeCambio.addItem(sedesCambioSede.get(i).getNombre());
+        }
+        botonRefrescarSede.setEnabled(false);
+        areTextoModificacionSede.setText("");
+        valor_actual_sede.setText("");
+        botonAplicarCambioSede.setEnabled(true);
+        bloqueoAction = 0;
+    }//GEN-LAST:event_botonRefrescarSedeActionPerformed
+
+    private void botonModificarVehiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonModificarVehiculoActionPerformed
+        try{
+           int id_vehiculo = Integer.parseInt(id_modificar_vehiculo.getText());
+           
+           if(comboBoxAtributoVehiculo.getSelectedIndex() == 0){
+                 JOptionPane.showMessageDialog(rootPane, "DEBE SELECCIONAR UN ATRIBUTO PARA MODIFICAR", "AutosABC", JOptionPane.ERROR_MESSAGE);
+           }
+           
+           else {
+               int index = comboBoxAtributoVehiculo.getSelectedIndex();
+               ControladorVehiculo cVehiculo = new ControladorVehiculo();
+               int result;
+               switch(index) {
+                   case 1:
+                       int sede = Integer.parseInt(nuevo_valor_vehiculo.getText());
+                       cVehiculo = new ControladorVehiculo();
+                       result = cVehiculo.modificarSede(id_vehiculo, sede);
+                       if ((result == -2) | (result == -3)) {
+                           JOptionPane.showMessageDialog(rootPane, "OCURRIO UN PROBLEMA CON LA BASE DE DATOS, CONTACTE CON SOPORTE", "AutosABC", JOptionPane.ERROR_MESSAGE);
+                       }
+                       else {
+                           JOptionPane.showMessageDialog(rootPane, "SE HA MODIFICADO CON EXITO", "AutosABC", JOptionPane.INFORMATION_MESSAGE);
+                       }
+                       break;
+                   case 2:
+                       int precio = Integer.parseInt(nuevo_valor_vehiculo.getText());
+                       cVehiculo = new ControladorVehiculo();
+                       result = cVehiculo.modificarPrecio(id_vehiculo, precio);
+                       if ((result == -2) | (result == -3)) {
+                           JOptionPane.showMessageDialog(rootPane, "OCURRIO UN PROBLEMA CON LA BASE DE DATOS, CONTACTE CON SOPORTE", "AutosABC", JOptionPane.ERROR_MESSAGE);
+                       }
+                       else {
+                           JOptionPane.showMessageDialog(rootPane, "SE HA MODIFICADO CON EXITO", "AutosABC", JOptionPane.INFORMATION_MESSAGE);
+                       }
+                       break;
+                   case 3:
+                       int iva = Integer.parseInt(nuevo_valor_vehiculo.getText());
+                       cVehiculo = new ControladorVehiculo();
+                       result = cVehiculo.modificarIva(id_vehiculo, iva);
+                       if ((result == -2) | (result == -3)) {
+                           JOptionPane.showMessageDialog(rootPane, "OCURRIO UN PROBLEMA CON LA BASE DE DATOS, CONTACTE CON SOPORTE", "AutosABC", JOptionPane.ERROR_MESSAGE);
+                       }
+                       else {
+                           JOptionPane.showMessageDialog(rootPane, "SE HA MODIFICADO CON EXITO", "AutosABC", JOptionPane.INFORMATION_MESSAGE);
+                       }
+                       break;
+                   case 4:
+                       String estado = nuevo_valor_vehiculo.getText();
+                       cVehiculo = new ControladorVehiculo();
+                       result = cVehiculo.modificarEstado(id_vehiculo, estado);
+                       if ((result == -2) | (result == -3)) {
+                           JOptionPane.showMessageDialog(rootPane, "OCURRIO UN PROBLEMA CON LA BASE DE DATOS, CONTACTE CON SOPORTE", "AutosABC", JOptionPane.ERROR_MESSAGE);
+                       }
+                       else {
+                           JOptionPane.showMessageDialog(rootPane, "SE HA MODIFICADO CON EXITO", "AutosABC", JOptionPane.INFORMATION_MESSAGE);
+                       }
+                       break;
+               }
+           }
+       }
+       catch(NumberFormatException e) {
+             JOptionPane.showMessageDialog(rootPane, "EL ID DEBEN SER NUMEROS, AL GIUAL QUE\n"
+                     + "1) LA SEDE DEL VEHICULO\n2) EL PRECIO DEL VEHICULO\n3) EL IVA DEL VEHICULO", "AutosABC", JOptionPane.ERROR_MESSAGE);
+       }
+    }//GEN-LAST:event_botonModificarVehiculoActionPerformed
+
+    private void botonModificarRepuestoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonModificarRepuestoActionPerformed
+        try{
+           int id_repuesto = Integer.parseInt(id_modificar_respuesto.getText());
+           
+           if(comboBoxAtributoRepuesto.getSelectedIndex() == 0){
+                 JOptionPane.showMessageDialog(rootPane, "DEBE SELECCIONAR UN ATRIBUTO PARA MODIFICAR", "AutosABC", JOptionPane.ERROR_MESSAGE);
+           }
+           
+           else {
+               int index = comboBoxAtributoRepuesto.getSelectedIndex();
+               ControladorRepuesto cRepuesto = new ControladorRepuesto();
+               int result;
+               switch(index) {
+                   case 1:
+                       int sede = Integer.parseInt(nuevo_valor_repuesto.getText());
+                       cRepuesto = new ControladorRepuesto();
+                       result = cRepuesto.cambiarSede(id_repuesto, sede);
+                       if ((result == -2) | (result == -3)) {
+                           JOptionPane.showMessageDialog(rootPane, "OCURRIO UN PROBLEMA CON LA BASE DE DATOS, CONTACTE CON SOPORTE", "AutosABC", JOptionPane.ERROR_MESSAGE);
+                       }
+                       else {
+                           JOptionPane.showMessageDialog(rootPane, "SE HA MODIFICADO CON EXITO", "AutosABC", JOptionPane.INFORMATION_MESSAGE);
+                       }
+                       break;
+                   case 2:
+                       String nombre = nuevo_valor_vehiculo.getText();
+                       cRepuesto = new ControladorRepuesto();
+                       result = cRepuesto.cambiarNombre(id_repuesto, nombre);
+                       if ((result == -2) | (result == -3)) {
+                           JOptionPane.showMessageDialog(rootPane, "OCURRIO UN PROBLEMA CON LA BASE DE DATOS, CONTACTE CON SOPORTE", "AutosABC", JOptionPane.ERROR_MESSAGE);
+                       }
+                       else {
+                           JOptionPane.showMessageDialog(rootPane, "SE HA MODIFICADO CON EXITO", "AutosABC", JOptionPane.INFORMATION_MESSAGE);
+                       }
+                       break;
+                   case 3:
+                       int cantidad = Integer.parseInt(nuevo_valor_repuesto.getText());
+                       cRepuesto = new ControladorRepuesto();
+                       result = cRepuesto.cambiarCantidad(id_repuesto, cantidad);
+                       if ((result == -2) | (result == -3)) {
+                           JOptionPane.showMessageDialog(rootPane, "OCURRIO UN PROBLEMA CON LA BASE DE DATOS, CONTACTE CON SOPORTE", "AutosABC", JOptionPane.ERROR_MESSAGE);
+                       }
+                       else {
+                           JOptionPane.showMessageDialog(rootPane, "SE HA MODIFICADO CON EXITO", "AutosABC", JOptionPane.INFORMATION_MESSAGE);
+                       }
+                       break;
+                   case 4:
+                       int precio = Integer.parseInt(nuevo_valor_repuesto.getText());
+                       cRepuesto = new ControladorRepuesto();
+                       result = cRepuesto.cambiarPrecio(id_repuesto, precio);
+                       if ((result == -2) | (result == -3)) {
+                           JOptionPane.showMessageDialog(rootPane, "OCURRIO UN PROBLEMA CON LA BASE DE DATOS, CONTACTE CON SOPORTE", "AutosABC", JOptionPane.ERROR_MESSAGE);
+                       }
+                       else {
+                           JOptionPane.showMessageDialog(rootPane, "SE HA MODIFICADO CON EXITO", "AutosABC", JOptionPane.INFORMATION_MESSAGE);
+                       }
+                       break;
+                   case 5:
+                       int iva = Integer.parseInt(nuevo_valor_repuesto.getText());
+                       cRepuesto = new ControladorRepuesto();
+                       result = cRepuesto.cambiarIva(id_repuesto, iva);
+                       if ((result == -2) | (result == -3)) {
+                           JOptionPane.showMessageDialog(rootPane, "OCURRIO UN PROBLEMA CON LA BASE DE DATOS, CONTACTE CON SOPORTE", "AutosABC", JOptionPane.ERROR_MESSAGE);
+                       }
+                       else {
+                           JOptionPane.showMessageDialog(rootPane, "SE HA MODIFICADO CON EXITO", "AutosABC", JOptionPane.INFORMATION_MESSAGE);
+                       }
+                       break;
+                   case 6:
+                       int asociar_vehiculo = Integer.parseInt(nuevo_valor_repuesto.getText());
+                       ControladorRepuestosDeVehiculo cRV = new ControladorRepuestosDeVehiculo();
+                       result = cRV.insertarVinculo(id_repuesto, asociar_vehiculo);
+                       if ((result == -2) | (result == -3)) {
+                           JOptionPane.showMessageDialog(rootPane, "OCURRIO UN PROBLEMA CON LA BASE DE DATOS, CONTACTE CON SOPORTE", "AutosABC", JOptionPane.ERROR_MESSAGE);
+                       }
+                       else {
+                           JOptionPane.showMessageDialog(rootPane, "SE HA MODIFICADO CON EXITO", "AutosABC", JOptionPane.INFORMATION_MESSAGE);
+                       }
+                       break;     
+               }
+           }
+       }
+       catch(NumberFormatException e) {
+             JOptionPane.showMessageDialog(rootPane, "EL ID DEBEN SER NUMEROS, AL GIUAL QUE\n"
+                     + "1) LA SEDE DEL REPUESTO\n2) EL PRECIO DEL REPUESTO\n3) EL IVA DEL REPUESTO\n4) LA CANTIDAD DEL REPUESTO\n5) EL VEHICULO A ASOCIAR, PUES REPRESENTA EL ID DEL MISMO", "AutosABC", JOptionPane.ERROR_MESSAGE);
+       }
+    }//GEN-LAST:event_botonModificarRepuestoActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextArea areTextoModificacionSede;
     private javax.swing.JTextArea areaVehiculosAñadidos;
+    private javax.swing.JButton botonAplicarCambioSede;
     private javax.swing.JButton botonAyudaCrearUsuario;
     private javax.swing.JButton botonAyudaCrearUsuario1;
     private javax.swing.JButton botonAñadirRepuesto;
@@ -2437,20 +2955,31 @@ public class GUIgerente extends javax.swing.JFrame {
     private javax.swing.JButton botonCrearUsuario;
     private javax.swing.JButton botonCrearUsuarioConfirmacion;
     private javax.swing.JButton botonInventarioGerente;
+    private javax.swing.JButton botonModificarAtributoUsuario;
     private javax.swing.JButton botonModificarInventario;
+    private javax.swing.JButton botonModificarRepuesto;
+    private javax.swing.JButton botonModificarSede;
     private javax.swing.JButton botonModificarUsuario;
+    private javax.swing.JButton botonModificarVehiculo;
     private javax.swing.JButton botonPanelInventarioCrearRepuesto;
     private javax.swing.JButton botonPanelInventarioCrearVehiculo;
+    private javax.swing.JButton botonRefrescarSede;
     private javax.swing.JButton botonReportesGerente;
     private javax.swing.JButton botonSedesGerente;
     private javax.swing.JButton botonUsuariosGerente;
     private javax.swing.JTextField cantidad_repuesto;
     private javax.swing.JTextField cantidad_vehiculo;
+    private javax.swing.JTextField cedula_modificar_usuario;
     private javax.swing.JTextField cedula_usuario;
     private javax.swing.JTextField ciudad_sede;
     private javax.swing.JTextField color_vehiculo;
+    private javax.swing.JComboBox<String> comboBoxAtributoRepuesto;
+    private javax.swing.JComboBox<String> comboBoxAtributoUsuario;
+    private javax.swing.JComboBox<String> comboBoxAtributoVehiculo;
     private javax.swing.JComboBox<String> comboBoxCargoUsuario;
+    private javax.swing.JComboBox<String> comboBoxDatoACambiar;
     private javax.swing.JComboBox<String> comboBoxRepuestoVehiculo;
+    private javax.swing.JComboBox<String> comboBoxSedeCambio;
     private javax.swing.JComboBox<String> comboBoxSedeCrearUsuario;
     private javax.swing.JComboBox<String> comboBoxSedeRepuestosInventario;
     private javax.swing.JComboBox<String> comboBoxSedeVehiculosInventario;
@@ -2463,22 +2992,17 @@ public class GUIgerente extends javax.swing.JFrame {
     private javax.swing.JTextField direccion_usuario;
     private javax.swing.JTextField email_usuario;
     private javax.swing.JTextField fax_sede;
+    private javax.swing.JTextField id_modificar_respuesto;
+    private javax.swing.JTextField id_modificar_vehiculo;
     private javax.swing.JTextField id_sede;
-    private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
-    private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton14;
     private javax.swing.JButton jButton15;
     private javax.swing.JButton jButton16;
-    private javax.swing.JButton jButton18;
-    private javax.swing.JButton jButton19;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
     private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JComboBox<String> jComboBox5;
-    private javax.swing.JComboBox<String> jComboBox6;
-    private javax.swing.JComboBox<String> jComboBox7;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -2514,6 +3038,7 @@ public class GUIgerente extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel40;
+    private javax.swing.JLabel jLabel41;
     private javax.swing.JLabel jLabel42;
     private javax.swing.JLabel jLabel43;
     private javax.swing.JLabel jLabel44;
@@ -2552,24 +3077,16 @@ public class GUIgerente extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextArea jTextArea2;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField16;
-    private javax.swing.JTextField jTextField17;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField33;
-    private javax.swing.JTextField jTextField38;
-    private javax.swing.JTextField jTextField39;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField40;
-    private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField marca_vehiculo;
     private javax.swing.JTextField modelo_vehiculo;
     private javax.swing.JTextField nacimiento_usuario;
     private javax.swing.JTextField nombre_repuesto;
     private javax.swing.JTextField nombre_sede;
     private javax.swing.JTextField nombre_usuario;
+    private javax.swing.JTextField nuevo_valor_repuesto;
+    private javax.swing.JTextField nuevo_valor_usuario;
+    private javax.swing.JTextField nuevo_valor_vehiculo;
     private javax.swing.JPanel panelConsultarSede;
     private javax.swing.JPanel panelCrearInventario;
     private javax.swing.JPanel panelCrearInventarioCrearRepuesto;
@@ -2602,5 +3119,7 @@ public class GUIgerente extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> seleccionarSede;
     private javax.swing.JTextField telefono_sede;
     private javax.swing.JTextField telefono_usuario;
+    private javax.swing.JTextField valor_actual_sede;
+    private javax.swing.JTextField valor_nuevo_sede;
     // End of variables declaration//GEN-END:variables
 }

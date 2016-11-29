@@ -36,7 +36,7 @@ CREATE TABLE usuarios (
 	id_sede INT,
 	nombre VARCHAR(100),
 	fecha_nacimiento DATE,
-	direcion VARCHAR(100),
+	direccion VARCHAR(100),
 	genero CHAR(1),
 	e_mail VARCHAR(100),
 	cargo INT,
@@ -166,16 +166,16 @@ INSERT INTO usuarios  VALUES (34958478,   07, 'Jairo Diaz',         '1984-07-11'
 
 
 --INSERT INTO vehiculos VALUES (id, id-sede,  color, marca, referencia, tipo, traccion, modelo, precio, iva);
-INSERT INTO vehiculos VALUES (nextval('secuencia_id_vehiculo'), 01, 'verde',    'Mazda',     '3',        'sedan', 'trasera',   '2013', 54989999,   20000,   'Disponible');
-INSERT INTO vehiculos VALUES (nextval('secuencia_id_vehiculo'), 01, 'negro',    'Chevrolet', 'spak',     'coupe', 'doble',     '2016', 89579999,   30000,   'Disponible');
-INSERT INTO vehiculos VALUES (nextval('secuencia_id_vehiculo'), 01, 'rojo',     'Honda',     'huang',    'sedan', 'delantera', '2014', 34560000,   20000,   'Disponible');
-INSERT INTO vehiculos VALUES (nextval('secuencia_id_vehiculo'), 01, 'azul',     'Audi',      'scorpion', 'sedan', 'trasera',   '2013', 54697000,   30000,   'Disponible');
-INSERT INTO vehiculos VALUES (nextval('secuencia_id_vehiculo'), 01, 'blanco',   'Kia',       'soul',     'sedan', 'doble',     '2015', 67986000,   40000,   'Disponible');
-INSERT INTO vehiculos VALUES (nextval('secuencia_id_vehiculo'), 01, 'verde',    'pagani',    'zonda',    'coupe', 'trasera',   '2016', 2050060000, 1000000, 'Disponible');
-INSERT INTO vehiculos VALUES (nextval('secuencia_id_vehiculo'), 01, 'negro',    'Chevrolet', 'camaro',   'coupe', 'trasera',   '2015', 120495598,  10000,   'Disponible');
-INSERT INTO	vehiculos VALUES (nextval('secuencia_id_vehiculo'), 01, 'amarillo', 'Ford',      'Mustang',  'coupe', 'trasera',   '2014', 100490509,  200000,  'Disponible');
-INSERT INTO vehiculos VALUES (nextval('secuencia_id_vehiculo'), 01, 'blando',   'Kia',       'Cerato',   'coupe', 'trasera',   '2015', 85698958,   50000,   'Disponible');
-INSERT INTO vehiculos VALUES (nextval('secuencia_id_vehiculo'), 01, 'rojo',     'Chevrolet', 'Spark-GT', 'sedan', 'delantera', '2015', 46596958,   20000,   'Disponible');
+INSERT INTO vehiculos VALUES (nextval('secuencia_id_vehiculo'), 01, 'verde',    'Mazda',     '3',        'sedan', 'trasera',   '2013', 54989999,   20000,   'DISPONIBLE');
+INSERT INTO vehiculos VALUES (nextval('secuencia_id_vehiculo'), 01, 'negro',    'Chevrolet', 'spak',     'coupe', 'doble',     '2016', 89579999,   30000,   'DISPONIBLE');
+INSERT INTO vehiculos VALUES (nextval('secuencia_id_vehiculo'), 01, 'rojo',     'Honda',     'huang',    'sedan', 'delantera', '2014', 34560000,   20000,   'DISPONIBLE');
+INSERT INTO vehiculos VALUES (nextval('secuencia_id_vehiculo'), 01, 'azul',     'Audi',      'scorpion', 'sedan', 'trasera',   '2013', 54697000,   30000,   'DISPONIBLE');
+INSERT INTO vehiculos VALUES (nextval('secuencia_id_vehiculo'), 01, 'blanco',   'Kia',       'soul',     'sedan', 'doble',     '2015', 67986000,   40000,   'DISPONIBLE');
+INSERT INTO vehiculos VALUES (nextval('secuencia_id_vehiculo'), 01, 'verde',    'pagani',    'zonda',    'coupe', 'trasera',   '2016', 2050060000, 1000000, 'DISPONIBLE');
+INSERT INTO vehiculos VALUES (nextval('secuencia_id_vehiculo'), 01, 'negro',    'Chevrolet', 'camaro',   'coupe', 'trasera',   '2015', 120495598,  10000,   'DISPONIBLE');
+INSERT INTO	vehiculos VALUES (nextval('secuencia_id_vehiculo'), 01, 'amarillo', 'Ford',      'Mustang',  'coupe', 'trasera',   '2014', 100490509,  200000,  'DISPONIBLE');
+INSERT INTO vehiculos VALUES (nextval('secuencia_id_vehiculo'), 01, 'blando',   'Kia',       'Cerato',   'coupe', 'trasera',   '2015', 85698958,   50000,   'DISPONIBLE');
+INSERT INTO vehiculos VALUES (nextval('secuencia_id_vehiculo'), 01, 'rojo',     'Chevrolet', 'Spark-GT', 'sedan', 'delantera', '2015', 46596958,   20000,   'DISPONIBLE');
 
 --INSERT INTO repuestos VALUES (id-respuesto, id-sede, nombre, cantidad, percion-un, iva, descripcion);
 INSERT INTO repuestos VALUES (nextval('secuencia_id_repuesto'), 01, 'Rin',                         20, 80000,   200,   'rin para llanta de auto');

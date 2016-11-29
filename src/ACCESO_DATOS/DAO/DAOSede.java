@@ -58,7 +58,7 @@ public class DAOSede {
         ArrayList<Sede> sedes = new ArrayList<>();
         
         String sql_select;
-        sql_select="SELECT id_sede,nombre FROM  sedes";
+        sql_select="SELECT * FROM  sedes";
          try{
             Connection conn = fachada.getConnetion();
             Statement sentencia = conn.createStatement();
@@ -70,6 +70,10 @@ public class DAOSede {
                unaSede.setId(tabla.getInt(1));
               
                unaSede.setNombre(tabla.getString(2));
+               unaSede.setCiudad(tabla.getString(3));
+               unaSede.setDireccion(tabla.getString(4));
+               unaSede.setTelefono(tabla.getString(5));
+               unaSede.setFax(tabla.getString(6));
                
 
                sedes.add(unaSede);
@@ -85,5 +89,95 @@ public class DAOSede {
          }
          
         return sedes;
+    }
+    
+    public int updateNombre(Sede sede) {
+        String update_statement = "UPDATE sedes SET nombre = '" + sede.getNombre() + "' WHERE id_sede = " + sede.getId();
+        int numFilas = -1;
+        try {
+            Connection conn = fachada.getConnetion();
+            Statement sentencia = conn.createStatement();
+            numFilas = sentencia.executeUpdate(update_statement);
+            conn.close();
+            fachada.closeConection();
+            return numFilas;
+        } catch (SQLException ex) {
+            return -2;
+        } catch (Exception ex) {
+            return -3;
+        }
+        
+    }
+    
+    public int updateCiudad(Sede sede) {
+        String update_statement = "UPDATE sedes SET ciudad = '" + sede.getCiudad() + "' WHERE id_sede = " + sede.getId();
+        int numFilas = -1;
+        try {
+            Connection conn = fachada.getConnetion();
+            Statement sentencia = conn.createStatement();
+            numFilas = sentencia.executeUpdate(update_statement);
+            conn.close();
+            fachada.closeConection();
+            return numFilas;
+        } catch (SQLException ex) {
+            return -2;
+        } catch (Exception ex) {
+            return -3;
+        }
+        
+    }
+    
+    public int updateDireccion(Sede sede) {
+        String update_statement = "UPDATE sedes SET direccion = '" + sede.getDireccion() + "' WHERE id_sede = " + sede.getId();
+        int numFilas = -1;
+        try {
+            Connection conn = fachada.getConnetion();
+            Statement sentencia = conn.createStatement();
+            numFilas = sentencia.executeUpdate(update_statement);
+            conn.close();
+            fachada.closeConection();
+            return numFilas;
+        } catch (SQLException ex) {
+            return -2;
+        } catch (Exception ex) {
+            return -3;
+        }
+        
+    }
+    
+    public int updateTelefono(Sede sede) {
+        String update_statement = "UPDATE sedes SET telefono = '" + sede.getTelefono() + "' WHERE id_sede = " + sede.getId();
+        int numFilas = -1;
+        try {
+            Connection conn = fachada.getConnetion();
+            Statement sentencia = conn.createStatement();
+            numFilas = sentencia.executeUpdate(update_statement);
+            conn.close();
+            fachada.closeConection();
+            return numFilas;
+        } catch (SQLException ex) {
+            return -2;
+        } catch (Exception ex) {
+            return -3;
+        }
+        
+    }
+    
+    public int updateFax(Sede sede) {
+        String update_statement = "UPDATE sedes SET fax = '" + sede.getFax() + "' WHERE id_sede = " + sede.getId();
+        int numFilas = -1;
+        try {
+            Connection conn = fachada.getConnetion();
+            Statement sentencia = conn.createStatement();
+            numFilas = sentencia.executeUpdate(update_statement);
+            conn.close();
+            fachada.closeConection();
+            return numFilas;
+        } catch (SQLException ex) {
+            return -2;
+        } catch (Exception ex) {
+            return -3;
+        }
+        
     }
 }

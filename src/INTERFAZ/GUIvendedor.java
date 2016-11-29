@@ -5,15 +5,22 @@
  */
 package INTERFAZ;
 
-import java.awt.CardLayout;
 import javax.swing.JOptionPane;
-
 import java.awt.CardLayout;
-import javax.swing.*;
-import java.sql.*;
 import ACCESO_DATOS.controladores.*;
 import ACCESO_DATOS.entidades_y_relaciones.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFileChooser;
+
+import com.itextpdf.text.*;
+import com.itextpdf.text.pdf.PdfWriter;
+import java.awt.event.ItemEvent;
+
 
 /**
  *
@@ -26,13 +33,17 @@ public class GUIvendedor extends javax.swing.JFrame {
     private CardLayout contenedorVentaCotizacion;
     private CardLayout contenedorCuenta;
     GUIlogin login;
+    private Usuario vendedorLogin;
+    private ArrayList<Vehiculo> vehiculosCotizacion;
+    private ArrayList<Vehiculo> vehiculosVenta;
     
     /**
      * Creates new form GUIvendedor
      */
-    public GUIvendedor(GUIlogin login2) {
+    public GUIvendedor(GUIlogin login2, Usuario vendedorLogeado) {
         initComponents();
         login = login2;
+        vendedorLogin = vendedorLogeado;
         login.setVisible(false);
         contenedorPrincipal = new CardLayout();
         contenedorCuenta = new CardLayout();
@@ -62,6 +73,19 @@ public class GUIvendedor extends javax.swing.JFrame {
         panelContenedorVenta.add(panelRealizarVenta);
         panelContenedorVenta.add(panelRealizarCotizacion);
         
+        comboBoxVehiculoVenta.removeAllItems();
+        comboBoxVehiculoVenta.addItem("Seleccione una");
+      
+        ControladorVehiculo cVehiculo = new ControladorVehiculo();
+       
+        vehiculosVenta = cVehiculo.consultarVehiculos();
+       
+        for (int i = 0; i < vehiculosVenta.size(); i++) {
+           comboBoxVehiculoVenta.addItem(vehiculosVenta.get(i).getMarca() + " | " +
+                                         vehiculosVenta.get(i).getReferencia() + " | " +
+                                         vehiculosVenta.get(i).getModelo() );
+        }
+        
         getContentPane().setLayout(contenedorPrincipal);
         getContentPane().add(panelVendedor);
         panelVendedor.setBounds(0,0,737,522);
@@ -71,22 +95,8 @@ public class GUIvendedor extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setVisible(true);
         
-        comboBoxSedeRealizarVenta.removeAllItems();
-        comboBoxSedeRealizarCotizacion.removeAllItems();
-        comboBoxSedeRealizarVenta.addItem("Seleccione una");
-        comboBoxSedeRealizarCotizacion.addItem("Seleccione una");
+        
        
-        ControladorSede cSede = new ControladorSede();
-       
-        ArrayList<Sede> sedes = cSede.consultarSedes();
-       
-        for (int i = 0; i < sedes.size(); i++) {
-           comboBoxSedeRealizarVenta.addItem(sedes.get(i).getNombre());
-        }
-       
-        for (int i = 0; i < sedes.size(); i++) {
-           comboBoxSedeRealizarCotizacion.addItem(sedes.get(i).getNombre());
-        }
     }
 
     /**
@@ -124,32 +134,27 @@ public class GUIvendedor extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        jButton13 = new javax.swing.JButton();
+        botonRegistrarVenta = new javax.swing.JButton();
         jButton14 = new javax.swing.JButton();
-        fax_sede = new javax.swing.JTextField();
-        ciudad_sede = new javax.swing.JTextField();
-        nombre_sede = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
+        cedula_cliente = new javax.swing.JTextField();
+        nombre_cliente = new javax.swing.JTextField();
+        comboBoxVehiculoVenta = new javax.swing.JComboBox<>();
+        radioBotonEfectivo = new javax.swing.JRadioButton();
+        radioBotonTarjeta = new javax.swing.JRadioButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        areaTextoVenta = new javax.swing.JTextArea();
         jLabel17 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jLabel19 = new javax.swing.JLabel();
-        comboBoxSedeRealizarVenta = new javax.swing.JComboBox<>();
+        telefono_cliente = new javax.swing.JTextField();
         panelRealizarCotizacion = new javax.swing.JPanel();
-        jButton15 = new javax.swing.JButton();
+        botonRegistrarCotizacion = new javax.swing.JButton();
         jButton16 = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        comboBoxVehiculosCotizacion = new javax.swing.JComboBox<>();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea2 = new javax.swing.JTextArea();
+        areaTextoCotizacion = new javax.swing.JTextArea();
         jLabel11 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
-        comboBoxSedeRealizarCotizacion = new javax.swing.JComboBox<>();
+        botonMostrarVehiculoCotizacion = new javax.swing.JButton();
         panelInformacion = new javax.swing.JPanel();
         jButton20 = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -266,7 +271,7 @@ public class GUIvendedor extends javax.swing.JFrame {
 
         jPanel8.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        botonGenerarVenta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/ICONO-COTIZAR-VEHICULO.png"))); // NOI18N
+        botonGenerarVenta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/ICONO-VENDER-VEHICULO.png"))); // NOI18N
         botonGenerarVenta.setToolTipText("Al hacer click en este boton, se desplegará  el menu para realizar una venta");
         botonGenerarVenta.setAutoscrolls(true);
         botonGenerarVenta.addActionListener(new java.awt.event.ActionListener() {
@@ -275,7 +280,7 @@ public class GUIvendedor extends javax.swing.JFrame {
             }
         });
 
-        botonGenerarCotizacion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/ICONO-VENDER-VEHICULO.png"))); // NOI18N
+        botonGenerarCotizacion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/ICONO-COTIZAR-VEHICULO.png"))); // NOI18N
         botonGenerarCotizacion.setToolTipText("Al hacer click en este boton, se desplegará  el menu para realizar una cotizacion");
         botonGenerarCotizacion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -480,17 +485,19 @@ public class GUIvendedor extends javax.swing.JFrame {
         jLabel6.setText("NOMBRE COMPRADOR:");
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel7.setText("CEDULA_CLIENTE:");
+        jLabel7.setText("CEDULA CLIENTE:");
         jLabel7.setToolTipText("");
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel8.setText("VEHICULO:");
         jLabel8.setToolTipText("");
 
-        jLabel10.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel10.setText("CEDULA VENDEDOR:");
-
-        jButton13.setText("REGISTRAR VENTA");
+        botonRegistrarVenta.setText("REGISTRAR VENTA");
+        botonRegistrarVenta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonRegistrarVentaActionPerformed(evt);
+            }
+        });
 
         jButton14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/INTERFAZ/icono ayuda.jpg"))); // NOI18N
         jButton14.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -501,22 +508,31 @@ public class GUIvendedor extends javax.swing.JFrame {
             }
         });
 
-        ciudad_sede.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ciudad_sedeActionPerformed(evt);
+        comboBoxVehiculoVenta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboBoxVehiculoVenta.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                comboBoxVehiculoVentaItemStateChanged(evt);
             }
         });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        radioBotonEfectivo.setText("Efectivo");
+        radioBotonEfectivo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radioBotonEfectivoActionPerformed(evt);
+            }
+        });
 
-        jRadioButton1.setText("Efectivo");
+        radioBotonTarjeta.setText("Tarjeta");
+        radioBotonTarjeta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radioBotonTarjetaActionPerformed(evt);
+            }
+        });
 
-        jRadioButton2.setText("Tarjeta");
-
-        jTextArea1.setEditable(false);
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        areaTextoVenta.setEditable(false);
+        areaTextoVenta.setColumns(20);
+        areaTextoVenta.setRows(5);
+        jScrollPane1.setViewportView(areaTextoVenta);
 
         jLabel17.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel17.setText("FORMA DE PAGO:");
@@ -524,11 +540,6 @@ public class GUIvendedor extends javax.swing.JFrame {
 
         jLabel18.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel18.setText("TELEFONO COMPRADOR:");
-
-        jLabel19.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel19.setText("SEDE VENTA:");
-
-        comboBoxSedeRealizarVenta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout panelRealizarVentaLayout = new javax.swing.GroupLayout(panelRealizarVenta);
         panelRealizarVenta.setLayout(panelRealizarVentaLayout);
@@ -539,48 +550,37 @@ public class GUIvendedor extends javax.swing.JFrame {
                 .addGroup(panelRealizarVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRealizarVentaLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jRadioButton2))
+                        .addComponent(radioBotonTarjeta))
                     .addComponent(jScrollPane1)
                     .addGroup(panelRealizarVentaLayout.createSequentialGroup()
-                        .addComponent(jLabel10)
-                        .addGap(29, 29, 29)
-                        .addComponent(fax_sede))
-                    .addGroup(panelRealizarVentaLayout.createSequentialGroup()
-                        .addComponent(jLabel18)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField1))
+                        .addComponent(jButton14, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(botonRegistrarVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panelRealizarVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(panelRealizarVentaLayout.createSequentialGroup()
-                            .addComponent(jButton14, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton13, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(panelRealizarVentaLayout.createSequentialGroup()
+                        .addGroup(panelRealizarVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(panelRealizarVentaLayout.createSequentialGroup()
+                                .addComponent(jLabel8)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(comboBoxVehiculoVenta, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel17)
+                                .addGap(18, 18, 18)
+                                .addComponent(radioBotonEfectivo)
+                                .addGap(77, 77, 77))
                             .addGroup(panelRealizarVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(panelRealizarVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addGroup(panelRealizarVentaLayout.createSequentialGroup()
-                                        .addComponent(jLabel8)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jLabel17)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jRadioButton1)
-                                        .addGap(77, 77, 77))
-                                    .addGroup(panelRealizarVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel5)
-                                        .addGroup(panelRealizarVentaLayout.createSequentialGroup()
-                                            .addGroup(panelRealizarVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(jLabel6)
-                                                .addComponent(jLabel7))
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addGroup(panelRealizarVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(ciudad_sede, javax.swing.GroupLayout.PREFERRED_SIZE, 438, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(nombre_sede, javax.swing.GroupLayout.PREFERRED_SIZE, 438, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(jLabel5)
                                 .addGroup(panelRealizarVentaLayout.createSequentialGroup()
-                                    .addComponent(jLabel19)
-                                    .addGap(67, 67, 67)
-                                    .addComponent(comboBoxSedeRealizarVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGap(0, 0, Short.MAX_VALUE))))
+                                    .addGroup(panelRealizarVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel6)
+                                        .addComponent(jLabel7))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addGroup(panelRealizarVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(cedula_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 438, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(nombre_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 438, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addGroup(panelRealizarVentaLayout.createSequentialGroup()
+                            .addComponent(jLabel18)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(telefono_cliente))))
                 .addContainerGap())
         );
         panelRealizarVentaLayout.setVerticalGroup(
@@ -590,37 +590,29 @@ public class GUIvendedor extends javax.swing.JFrame {
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(15, 15, 15)
                 .addGroup(panelRealizarVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(nombre_sede, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(nombre_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6))
                 .addGap(18, 18, 18)
                 .addGroup(panelRealizarVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ciudad_sede, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cedula_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(panelRealizarVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jRadioButton1)
-                    .addComponent(jRadioButton2)
+                    .addComponent(comboBoxVehiculoVenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(radioBotonEfectivo)
+                    .addComponent(radioBotonTarjeta)
                     .addComponent(jLabel17))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelRealizarVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel10)
-                    .addComponent(fax_sede, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(panelRealizarVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel18)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelRealizarVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel19)
-                    .addComponent(comboBoxSedeRealizarVenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                    .addComponent(telefono_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(40, 40, 40)
                 .addGroup(panelRealizarVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton14, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton13, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(botonRegistrarVenta, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -629,7 +621,12 @@ public class GUIvendedor extends javax.swing.JFrame {
         panelRealizarCotizacion.setRequestFocusEnabled(false);
         panelRealizarCotizacion.setVerifyInputWhenFocusTarget(false);
 
-        jButton15.setText("REGISTRAR COTIZACION");
+        botonRegistrarCotizacion.setText("REGISTRAR COTIZACION");
+        botonRegistrarCotizacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonRegistrarCotizacionActionPerformed(evt);
+            }
+        });
 
         jButton16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/INTERFAZ/icono ayuda.jpg"))); // NOI18N
         jButton16.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -644,22 +641,28 @@ public class GUIvendedor extends javax.swing.JFrame {
         jLabel9.setText("VEHICULO:");
         jLabel9.setToolTipText("");
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboBoxVehiculosCotizacion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboBoxVehiculosCotizacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboBoxVehiculosCotizacionActionPerformed(evt);
+            }
+        });
 
-        jTextArea2.setEditable(false);
-        jTextArea2.setColumns(20);
-        jTextArea2.setRows(5);
-        jScrollPane2.setViewportView(jTextArea2);
+        areaTextoCotizacion.setEditable(false);
+        areaTextoCotizacion.setColumns(20);
+        areaTextoCotizacion.setRows(5);
+        jScrollPane2.setViewportView(areaTextoCotizacion);
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel11.setText("COTIZACION");
         jLabel11.setToolTipText("");
 
-        jLabel15.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel15.setText("SEDE:");
-        jLabel15.setToolTipText("");
-
-        comboBoxSedeRealizarCotizacion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        botonMostrarVehiculoCotizacion.setText("MOSTRAR VEHICULO");
+        botonMostrarVehiculoCotizacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonMostrarVehiculoCotizacionActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelRealizarCotizacionLayout = new javax.swing.GroupLayout(panelRealizarCotizacion);
         panelRealizarCotizacion.setLayout(panelRealizarCotizacionLayout);
@@ -670,20 +673,19 @@ public class GUIvendedor extends javax.swing.JFrame {
                 .addGroup(panelRealizarCotizacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 564, Short.MAX_VALUE)
                     .addGroup(panelRealizarCotizacionLayout.createSequentialGroup()
-                        .addComponent(jLabel9)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel15)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(comboBoxSedeRealizarCotizacion, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(panelRealizarCotizacionLayout.createSequentialGroup()
-                        .addComponent(jLabel11)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(panelRealizarCotizacionLayout.createSequentialGroup()
                         .addComponent(jButton16, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton15, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(botonRegistrarCotizacion, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelRealizarCotizacionLayout.createSequentialGroup()
+                        .addGroup(panelRealizarCotizacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel11)
+                            .addGroup(panelRealizarCotizacionLayout.createSequentialGroup()
+                                .addComponent(jLabel9)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(comboBoxVehiculosCotizacion, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(39, 39, 39)
+                                .addComponent(botonMostrarVehiculoCotizacion, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         panelRealizarCotizacionLayout.setVerticalGroup(
@@ -691,20 +693,17 @@ public class GUIvendedor extends javax.swing.JFrame {
             .addGroup(panelRealizarCotizacionLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel11)
-                .addGap(7, 7, 7)
-                .addGroup(panelRealizarCotizacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelRealizarCotizacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel15)
-                        .addComponent(comboBoxSedeRealizarCotizacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panelRealizarCotizacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel9)
-                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(6, 6, 6)
+                .addGroup(panelRealizarCotizacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(comboBoxVehiculosCotizacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(botonMostrarVehiculoCotizacion))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(panelRealizarCotizacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton16, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton15, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(botonRegistrarCotizacion, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -925,32 +924,25 @@ public class GUIvendedor extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(rootPane, "Aqui va un texto de ayuda");
     }//GEN-LAST:event_jButton14ActionPerformed
 
-    private void ciudad_sedeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ciudad_sedeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ciudad_sedeActionPerformed
-
     private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
         JOptionPane.showMessageDialog(rootPane, "Aqui va un texto de ayuda");
     }//GEN-LAST:event_jButton16ActionPerformed
 
     private void botonVentaCotizacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonVentaCotizacionActionPerformed
         contenedorVentaCotizacionCuenta.show(panelContenedorVendedor, "VENTA/COTIZACION");
-        comboBoxSedeRealizarVenta.removeAllItems();
-        comboBoxSedeRealizarCotizacion.removeAllItems();
-        comboBoxSedeRealizarVenta.addItem("Seleccione una");
-        comboBoxSedeRealizarCotizacion.addItem("Seleccione una");
+        comboBoxVehiculoVenta.removeAllItems();
+        comboBoxVehiculoVenta.addItem("Seleccione una");
+      
+        ControladorVehiculo cVehiculo = new ControladorVehiculo();
        
-        ControladorSede cSede = new ControladorSede();
+        vehiculosVenta = cVehiculo.consultarVehiculos();
        
-        ArrayList<Sede> sedes = cSede.consultarSedes();
-       
-        for (int i = 0; i < sedes.size(); i++) {
-           comboBoxSedeRealizarVenta.addItem(sedes.get(i).getNombre());
+        for (int i = 0; i < vehiculosVenta.size(); i++) {
+           comboBoxVehiculoVenta.addItem(vehiculosVenta.get(i).getMarca() + " | " +
+                                         vehiculosVenta.get(i).getReferencia() + " | " +
+                                         vehiculosVenta.get(i).getModelo() );
         }
        
-        for (int i = 0; i < sedes.size(); i++) {
-           comboBoxSedeRealizarCotizacion.addItem(sedes.get(i).getNombre());
-        }
     }//GEN-LAST:event_botonVentaCotizacionActionPerformed
 
     private void botonCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCuentaActionPerformed
@@ -961,15 +953,17 @@ public class GUIvendedor extends javax.swing.JFrame {
     private void botonGenerarVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonGenerarVentaActionPerformed
         contenedorVentaCotizacion.show(panelContenedorVenta, "REALIZAR-VENTA");
          
-        comboBoxSedeRealizarVenta.removeAllItems();
-        comboBoxSedeRealizarVenta.addItem("Seleccione una");
-
-        ControladorSede cSede = new ControladorSede();
+        comboBoxVehiculoVenta.removeAllItems();
+        comboBoxVehiculoVenta.addItem("Seleccione una");
+      
+        ControladorVehiculo cVehiculo = new ControladorVehiculo();
        
-        ArrayList<Sede> sedes = cSede.consultarSedes();
+        vehiculosVenta = cVehiculo.consultarVehiculos();
        
-        for (int i = 0; i < sedes.size(); i++) {
-           comboBoxSedeRealizarVenta.addItem(sedes.get(i).getNombre());
+        for (int i = 0; i < vehiculosVenta.size(); i++) {
+           comboBoxVehiculoVenta.addItem(vehiculosVenta.get(i).getMarca() + " | " +
+                                         vehiculosVenta.get(i).getReferencia() + " | " +
+                                         vehiculosVenta.get(i).getModelo() );
         }
        
     }//GEN-LAST:event_botonGenerarVentaActionPerformed
@@ -977,15 +971,17 @@ public class GUIvendedor extends javax.swing.JFrame {
     private void botonGenerarCotizacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonGenerarCotizacionActionPerformed
         contenedorVentaCotizacion.show(panelContenedorVenta, "REALIZAR-COTIZACION");
         
-        comboBoxSedeRealizarCotizacion.removeAllItems();
-        comboBoxSedeRealizarCotizacion.addItem("Seleccione una");
+        comboBoxVehiculosCotizacion.removeAllItems();
+        comboBoxVehiculosCotizacion.addItem("Seleccione una");
+        
+        ControladorVehiculo cVehiculo = new ControladorVehiculo();
        
-        ControladorSede cSede = new ControladorSede();
+        vehiculosCotizacion = cVehiculo.consultarVehiculos();
        
-        ArrayList<Sede> sedes = cSede.consultarSedes();
-       
-        for (int i = 0; i < sedes.size(); i++) {
-           comboBoxSedeRealizarCotizacion.addItem(sedes.get(i).getNombre());
+        for (int i = 0; i < vehiculosCotizacion.size(); i++) {
+           comboBoxVehiculosCotizacion.addItem(vehiculosCotizacion.get(i).getMarca() + " | " +
+                                               vehiculosCotizacion.get(i).getReferencia() + " | " +
+                                               vehiculosCotizacion.get(i).getModelo());
         }
     }//GEN-LAST:event_botonGenerarCotizacionActionPerformed
 
@@ -1001,12 +997,267 @@ public class GUIvendedor extends javax.swing.JFrame {
         contenedorCuenta.show(panelContenedorCuenta,"CONTRASENA");
     }//GEN-LAST:event_botonContrasenaCuentaActionPerformed
 
+    private void comboBoxVehiculosCotizacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxVehiculosCotizacionActionPerformed
+ 
+       
+    }//GEN-LAST:event_comboBoxVehiculosCotizacionActionPerformed
+
+    private void botonMostrarVehiculoCotizacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonMostrarVehiculoCotizacionActionPerformed
+       int index = comboBoxVehiculosCotizacion.getSelectedIndex();
+       
+       if (index == 0){
+           JOptionPane.showMessageDialog(rootPane, "POR FAVOR SELECCIONE UN VEHICULO", "AutosABC", JOptionPane.INFORMATION_MESSAGE);
+       }
+       
+       else {
+           
+           String informacionVehiculo = "";
+           
+           informacionVehiculo = "Marca: " + vehiculosCotizacion.get(index - 1).getMarca() + "\n" +
+                                 "Referencia: " + vehiculosCotizacion.get(index - 1).getReferencia() + "\n" +
+                                 "Modelo: " + vehiculosCotizacion.get(index - 1).getModelo() + "\n" +
+                                 "Color: " + vehiculosCotizacion.get(index - 1).getColor() + "\n" +
+                                 "Tipo: " + vehiculosCotizacion.get(index - 1).getTipo() + "\n" +
+                                 "Traccion: " + vehiculosCotizacion.get(index - 1).getTraccion() + "\n" +
+                                 "Precio: $ " + vehiculosCotizacion.get(index - 1).getPrecio() + " COP \n" +
+                                 "IVA: $" + vehiculosCotizacion.get(index - 1).getIva() + " COP \n";
+           
+           areaTextoCotizacion.setText(informacionVehiculo);
+           
+           
+       }
+    }//GEN-LAST:event_botonMostrarVehiculoCotizacionActionPerformed
+
+    private void botonRegistrarCotizacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRegistrarCotizacionActionPerformed
+        ControladorCotizacion cCotizar = new ControladorCotizacion();
+        
+        int index = comboBoxVehiculosCotizacion.getSelectedIndex();
+        if (index > 0) {
+            int result = cCotizar.insertarCotizacion(vendedorLogin.getCedula(), vehiculosCotizacion.get(index- 1).getVehiculo(), vendedorLogin.getSede());
+            
+            if ((result == -2 ) | (result == -3)) {
+                JOptionPane.showMessageDialog(rootPane, "NO SE REGISTRO EL VEHICULO, OCURRIO UN PROBLEMA \n AL REGISTRAR EL VEHICULO EN LA BASE DE DATOS", "AutosABC", JOptionPane.ERROR_MESSAGE);
+            }
+            
+            else {
+                int response = JOptionPane.showConfirmDialog(rootPane, "SE HA REGISTRADO CON EXITO LA COTIZACION, ¿DESEA IMPRIMIR EL RECIBO?", "AutosABC", JOptionPane.INFORMATION_MESSAGE);
+                if (response == JOptionPane.YES_OPTION) {
+                    JOptionPane.showMessageDialog(rootPane, "POR FAVOR ESPECIFIQUE LA RUTA Y EL NOMBRE DEL ARCHIVO \n DONDE SE GUARDARÁ EL ARCHIVO DE LA COTIZACION", "AutosABC", JOptionPane.INFORMATION_MESSAGE);
+                    JFileChooser dir = new JFileChooser("Cotizaciones/");
+                    int option = dir.showSaveDialog(this);
+                    if (option == JFileChooser.APPROVE_OPTION) {
+                        File f = dir.getSelectedFile();
+                        String archivo = f.toString();
+                        ControladorCotizacion cCoti = new ControladorCotizacion();
+                        int result2 = cCoti.consultarUltimaCotizacion();
+                        try {
+                            FileOutputStream archivoAguardar = new FileOutputStream(archivo + ".pdf");
+                            Document doc = new Document();
+                            PdfWriter.getInstance(doc, archivoAguardar);
+                            doc.open();
+                            Paragraph p = new Paragraph("COTIZACION DE VEHICULO\n\n", FontFactory.getFont("Arial",16,Font.ITALIC,BaseColor.RED));
+                            p.setAlignment(Element.ALIGN_CENTER);
+                            String informacionCotizacion = "";
+                            informacionCotizacion = "Cotización Numero: " + result2 + "\n" +
+                                                    "Marca: " + vehiculosCotizacion.get(index - 1).getMarca() + "\n" +
+                                                    "Referencia: " + vehiculosCotizacion.get(index - 1).getReferencia() + "\n" +
+                                                    "Modelo: " + vehiculosCotizacion.get(index - 1).getModelo() + "\n" +
+                                                    "Color: " + vehiculosCotizacion.get(index - 1).getColor() + "\n" +
+                                                    "Tipo: " + vehiculosCotizacion.get(index - 1).getTipo() + "\n" +
+                                                    "Traccion: " + vehiculosCotizacion.get(index - 1).getTraccion() + "\n" +
+                                                    "Precio: $ " + vehiculosCotizacion.get(index - 1).getPrecio() + " COP \n" +
+                                                    "IVA: $" + vehiculosCotizacion.get(index - 1).getIva() + " COP \n" +
+                                                    "Vendedor: " + vendedorLogin.getCedula()+ "\n" +
+                                                    "Sede: " + vendedorLogin.getSede() + "\n\n";
+                            Paragraph p2 = new Paragraph(informacionCotizacion, FontFactory.getFont("Arial",12,Font.ITALIC,BaseColor.BLACK));
+                            Paragraph p3 = new Paragraph("AUTOS ABC", FontFactory.getFont("Arial",16,Font.ITALIC,BaseColor.RED));
+                            p3.setAlignment(Element.ALIGN_RIGHT);
+                            Image imagen = Image.getInstance("C:\\Users\\aleja_000\\Documents\\NetBeansProjects\\Proyecto-AutosABC-DS1\\src\\iconos\\logotipo.png");
+                            imagen.scaleAbsolute(200, 66);
+                            imagen.setAlignment(Element.ALIGN_CENTER);
+                            doc.add(imagen);
+                            doc.add(p);
+                            doc.add(p2);
+                            doc.add(p3);
+                            doc.close();
+                        } catch (FileNotFoundException ex) {
+                            
+                        }
+                        catch (Exception ex) {
+                            
+                        }
+                    }
+                    
+                    else {
+                    
+                    }
+                    JOptionPane.showMessageDialog(rootPane, "RECIBO GENERADO CON EXITO", "AutosABC", JOptionPane.INFORMATION_MESSAGE);
+                }
+                
+                else {
+                
+                }
+            }
+        }
+        
+        else {
+            JOptionPane.showMessageDialog(rootPane, "POR FAVOR SELECCIONE UN VEHICULO", "AutosABC", JOptionPane.ERROR_MESSAGE);
+        }
+        
+        
+    }//GEN-LAST:event_botonRegistrarCotizacionActionPerformed
+
+    private void comboBoxVehiculoVentaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboBoxVehiculoVentaItemStateChanged
+        if(evt.getStateChange() == ItemEvent.SELECTED) {
+            int index = comboBoxVehiculoVenta.getSelectedIndex();
+
+            if (index == 0){
+                
+            }
+
+            else {
+
+                String informacionVehiculo = "";
+
+                informacionVehiculo = "Marca: " + vehiculosVenta.get(index - 1).getMarca() + "\n" +
+                                      "Referencia: " + vehiculosVenta.get(index - 1).getReferencia() + "\n" +
+                                      "Modelo: " + vehiculosVenta.get(index - 1).getModelo() + "\n" +
+                                      "Color: " + vehiculosVenta.get(index - 1).getColor() + "\n" +
+                                      "Tipo: " + vehiculosVenta.get(index - 1).getTipo() + "\n" +
+                                      "Traccion: " + vehiculosVenta.get(index - 1).getTraccion() + "\n" +
+                                      "Precio: $ " + vehiculosVenta.get(index - 1).getPrecio() + " COP \n" +
+                                      "IVA: $" + vehiculosVenta.get(index - 1).getIva() + " COP \n";
+
+                areaTextoVenta.setText(informacionVehiculo);
+
+            }
+        }
+    }//GEN-LAST:event_comboBoxVehiculoVentaItemStateChanged
+
+    private void radioBotonEfectivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioBotonEfectivoActionPerformed
+        radioBotonTarjeta.setSelected(false);
+    }//GEN-LAST:event_radioBotonEfectivoActionPerformed
+
+    private void radioBotonTarjetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioBotonTarjetaActionPerformed
+       radioBotonEfectivo.setSelected(false);
+    }//GEN-LAST:event_radioBotonTarjetaActionPerformed
+
+    private void botonRegistrarVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRegistrarVentaActionPerformed
+        try {
+            String nombreC = nombre_cliente.getText();
+            String cedulaC = Long.toString(Long.parseLong(cedula_cliente.getText()));
+            String telefonoC = Long.toString(Long.parseLong(telefono_cliente.getText()));
+            int cedulaV = vendedorLogin.getCedula();
+            int sede = vendedorLogin.getSede();
+            int index = comboBoxVehiculoVenta.getSelectedIndex();
+            String pago = "";
+            if(radioBotonEfectivo.isSelected()){
+                pago = "EFECTIVO";
+            }
+            else if(radioBotonTarjeta.isSelected()){
+                pago = "TARJETA";
+            }
+            
+            if((index == 0) | (nombreC.equals("")) | (pago.equals(""))){
+                JOptionPane.showMessageDialog(rootPane, "ALGUN DATO ESTA ERRONEO, RECUERDE QUE:\n"
+                        + "\n1) NO DEBE HABER CAMPOS VACIOS\n2) DEBE SELECCIONAR ALGUN VEHICULO\n3) SELECCIONAR UNA FORMA DE PAGO", "AutosABC", JOptionPane.ERROR_MESSAGE);
+            }
+            else {
+                ControladorVenta cVenta = new ControladorVenta();
+                
+                int result = cVenta.insertarVenta(vehiculosVenta.get(index - 1).getVehiculo(), cedulaV, sede, pago, cedulaC, nombreC, telefonoC);
+                
+                if ((result == -2) | (result == -3)) {
+                    JOptionPane.showMessageDialog(rootPane, "ERROR EN LA BASE DE DATOS, NO SE PUDO REGISTRAR LA VENTA. \n        PORFAVOR CONTACTE CON SOPORTE", "AutosABC", JOptionPane.ERROR_MESSAGE);
+                }
+                
+                else {
+                    ControladorVehiculo cVehiculo = new ControladorVehiculo();
+                    int result2 = cVehiculo.modificarEstado(vehiculosVenta.get(index - 1).getVehiculo(), "VENDIDO");
+                    int response = JOptionPane.showConfirmDialog(rootPane, "SE HA REGISTRADO CON EXITO LA VENTA, ¿DESEA IMPRIMIR EL RECIBO?", "AutosABC", JOptionPane.INFORMATION_MESSAGE);
+                    
+                    if (response == JOptionPane.YES_OPTION) {
+                        JOptionPane.showMessageDialog(rootPane, "POR FAVOR ESPECIFIQUE LA RUTA Y EL NOMBRE DEL ARCHIVO \n DONDE SE GUARDARÁ EL ARCHIVO DE LA COTIZACION", "AutosABC", JOptionPane.INFORMATION_MESSAGE);
+                        JFileChooser dir = new JFileChooser("Ventas/");
+                        int option = dir.showSaveDialog(this);
+                        if (option == JFileChooser.APPROVE_OPTION) {
+                            File f = dir.getSelectedFile();
+                            String archivo = f.toString();
+                            cVenta  = new ControladorVenta();
+                            int result3 = cVenta.consultarUltimaVenta();
+                            try {
+                                FileOutputStream archivoAguardar = new FileOutputStream(archivo + ".pdf");
+                                Document doc = new Document();
+                                PdfWriter.getInstance(doc, archivoAguardar);
+                                doc.open();
+                                Paragraph p = new Paragraph("VENTA DE VEHICULO\n\n", FontFactory.getFont("Arial",16,Font.ITALIC,BaseColor.BLUE));
+                                p.setAlignment(Element.ALIGN_CENTER);
+                                String informacionVenta = "";
+                                informacionVenta =      "Venta Numero: " + result3 + "\n" +
+                                                        "Marca Vehiculo: " + vehiculosVenta.get(index - 1).getMarca() + "\n" +
+                                                        "Referencia Vehiculo: " + vehiculosVenta.get(index - 1).getReferencia() + "\n" +
+                                                        "Modelo Vehiculo: " + vehiculosVenta.get(index - 1).getModelo() + "\n" +
+                                                        "Color Vehiculo: " + vehiculosVenta.get(index - 1).getColor() + "\n" +
+                                                        "Tipo: " + vehiculosVenta.get(index - 1).getTipo() + "\n" +
+                                                        "Traccion: " + vehiculosVenta.get(index - 1).getTraccion() + "\n" +
+                                                        "Precio Vehiculo: $ " + vehiculosVenta.get(index - 1).getPrecio() + " COP \n" +
+                                                        "IVA: $" + vehiculosVenta.get(index - 1).getIva() + " COP \n" +
+                                                        "TOTAL: $" + (vehiculosVenta.get(index - 1).getIva() + vehiculosVenta.get(index - 1).getPrecio()) + " COP \n" +
+                                                        "Forma de Pago: " + pago + "\n" +
+                                                        "Cedula Comprador: " + cedulaC + "\n" +
+                                                        "Nombre Comprador: " + nombreC + "\n" +
+                                                        "Telefono Comprador: " + telefonoC + "\n" +
+                                                        "Vendedor: " + vendedorLogin.getCedula()+ "\n" +
+                                                        "Identificacion Sede Venta: " + vendedorLogin.getSede() + "\n\n\n\n";
+                                Paragraph p2 = new Paragraph(informacionVenta, FontFactory.getFont("Arial",12,Font.ITALIC,BaseColor.BLACK));
+                                Image imagen = Image.getInstance("C:\\Users\\aleja_000\\Documents\\NetBeansProjects\\Proyecto-AutosABC-DS1\\src\\iconos\\logotipo.png");
+                                imagen.scaleAbsolute(200, 66);
+                                imagen.setAlignment(Element.ALIGN_CENTER);
+                                Image imagen2 = Image.getInstance("C:\\Users\\aleja_000\\Documents\\NetBeansProjects\\Proyecto-AutosABC-DS1\\src\\iconos\\FIRMA-VENTA.png");
+                                imagen2.scaleAbsolute(200, 50);
+                                imagen2.setAlignment(Element.ALIGN_RIGHT);
+                                doc.add(imagen);
+                                doc.add(p);
+                                doc.add(p2);
+                                doc.add(imagen2);
+                                doc.close();
+                            } catch (FileNotFoundException ex) {
+                                JOptionPane.showMessageDialog(rootPane, "RUTA DEL ARCHIVO NO ENCONTRADA, NO SE GENERO EL RECIBO", "AutosABC", JOptionPane.ERROR_MESSAGE);
+                            }
+                            catch (Exception ex) {
+                                JOptionPane.showMessageDialog(rootPane, "HA OCURRIDO UN ERROR DESCONOCIDO AL GUARDAR EL ARCHIVO", "AutosABC", JOptionPane.ERROR_MESSAGE);
+                            }
+                            
+                            JOptionPane.showMessageDialog(rootPane, "RECIBO GENERADO CON EXITO", "AutosABC", JOptionPane.INFORMATION_MESSAGE);
+                        }
+
+                        else {
+
+                        }
+                        
+                    }
+
+                    else {
+
+                    }
+                }
+            }
+
+        }
+        
+        catch(NumberFormatException e) {
+            JOptionPane.showMessageDialog(rootPane, "EL TELEFONO Y LA CEDULA DEBEN SER NUMEROS", "AutosABC", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_botonRegistrarVentaActionPerformed
+
     /**
      * @param args the command line arguments
      */
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextArea areaTextoCotizacion;
+    private javax.swing.JTextArea areaTextoVenta;
     private javax.swing.JButton botonAyudaGeneral;
     private javax.swing.JButton botonAyudaGeneral1;
     private javax.swing.JButton botonContrasenaCuenta;
@@ -1015,30 +1266,25 @@ public class GUIvendedor extends javax.swing.JFrame {
     private javax.swing.JButton botonGenerarVenta;
     private javax.swing.JButton botonInformacionCuenta;
     private javax.swing.JButton botonLogout;
+    private javax.swing.JButton botonMostrarVehiculoCotizacion;
+    private javax.swing.JButton botonRegistrarCotizacion;
+    private javax.swing.JButton botonRegistrarVenta;
     private javax.swing.JButton botonVentaCotizacion;
-    private javax.swing.JTextField ciudad_sede;
+    private javax.swing.JTextField cedula_cliente;
     private javax.swing.JComboBox<String> comboBoxCambioLoginVendedor;
-    private javax.swing.JComboBox<String> comboBoxSedeRealizarCotizacion;
-    private javax.swing.JComboBox<String> comboBoxSedeRealizarVenta;
-    private javax.swing.JTextField fax_sede;
+    private javax.swing.JComboBox<String> comboBoxVehiculoVenta;
+    private javax.swing.JComboBox<String> comboBoxVehiculosCotizacion;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton13;
     private javax.swing.JButton jButton14;
-    private javax.swing.JButton jButton15;
     private javax.swing.JButton jButton16;
     private javax.swing.JButton jButton20;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -1055,20 +1301,15 @@ public class GUIvendedor extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel8;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextArea jTextArea2;
     private javax.swing.JTextArea jTextArea3;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField nombre_sede;
+    private javax.swing.JTextField nombre_cliente;
     private javax.swing.JPanel panelContenedorCuenta;
     private javax.swing.JPanel panelContenedorVendedor;
     private javax.swing.JPanel panelContenedorVenta;
@@ -1079,5 +1320,8 @@ public class GUIvendedor extends javax.swing.JFrame {
     private javax.swing.JPanel panelRealizarVenta;
     private javax.swing.JPanel panelVendedor;
     private javax.swing.JPanel panelVenta;
+    private javax.swing.JRadioButton radioBotonEfectivo;
+    private javax.swing.JRadioButton radioBotonTarjeta;
+    private javax.swing.JTextField telefono_cliente;
     // End of variables declaration//GEN-END:variables
 }

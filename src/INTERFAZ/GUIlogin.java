@@ -237,7 +237,7 @@ public class GUIlogin extends javax.swing.JFrame {
                                     jefeDeTaller = new GUIJefeTaller(this);
                                     break;
                                 case 3:
-                                    vendedor = new GUIvendedor(this);
+                                    vendedor = new GUIvendedor(this, users.get(i));
                                     break;
                                 default:
                                     JOptionPane.showMessageDialog(rootPane, "Ha ocurrido un error critico,\n no se reconocio el cargo de la cuenta ingresada");

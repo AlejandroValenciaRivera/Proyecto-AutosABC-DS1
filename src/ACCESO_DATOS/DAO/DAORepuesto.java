@@ -102,7 +102,7 @@ public class DAORepuesto {
      * @proposito Los siguientes metodos actualizaran un atributo de un Repuesto que se le envia como parametro y se actualiza en la base de datos
      */
     public int updateId_sede(Repuesto repuesto){
-        String update_statement = "UPDATE repuestos SET id_sede = " + repuesto.getId_sede()+ " WHERE id_vehiculo = " + repuesto.getId_repuesto();
+        String update_statement = "UPDATE repuestos SET id_sede = " + repuesto.getId_sede()+ " WHERE id_repuesto = " + repuesto.getId_repuesto();
         int numFilas = -1;
         try {
             Connection conn = fachada.getConnetion();
@@ -110,12 +110,13 @@ public class DAORepuesto {
             numFilas = sentencia.executeUpdate(update_statement);
             conn.close();
             fachada.closeConection();
+            return numFilas;
         } catch (SQLException ex) {
             return -2;
         } catch (Exception ex) {
             return -3;
         }
-        return numFilas;
+        
     }
     
     /**
@@ -124,7 +125,7 @@ public class DAORepuesto {
      * @return int
      */
     public int updateNombre(Repuesto repuesto){
-        String update_statement = "UPDATE repuestos SET nombre = '" + repuesto.getNombre()+ "' WHERE id_vehiculo = " + repuesto.getId_repuesto();
+        String update_statement = "UPDATE repuestos SET nombre = '" + repuesto.getNombre()+ "' WHERE id_repuesto = " + repuesto.getId_repuesto();
         int numFilas = -1;
         try {
             Connection conn = fachada.getConnetion();
@@ -132,12 +133,13 @@ public class DAORepuesto {
             numFilas = sentencia.executeUpdate(update_statement);
             conn.close();
             fachada.closeConection();
+            return numFilas;
         } catch (SQLException ex) {
             return -2;
         } catch (Exception ex) {
             return -3;
         }
-        return numFilas;
+        
     }
     
     /**
@@ -146,7 +148,7 @@ public class DAORepuesto {
      * @return int
      */
     public int updateCantidad(Repuesto repuesto){
-        String update_statement = "UPDATE repuestos SET cantidad = " + repuesto.getCantidad()+ " WHERE id_vehiculo = " + repuesto.getId_repuesto();
+        String update_statement = "UPDATE repuestos SET cantidad = " + repuesto.getCantidad()+ " WHERE id_repuesto = " + repuesto.getId_repuesto();
         int numFilas = -1;
         try {
             Connection conn = fachada.getConnetion();
@@ -154,12 +156,13 @@ public class DAORepuesto {
             numFilas = sentencia.executeUpdate(update_statement);
             conn.close();
             fachada.closeConection();
+            return numFilas;
         } catch (SQLException ex) {
             return -2;
         } catch (Exception ex) {
             return -3;
         }
-        return numFilas;
+        
     }
     
     /**
@@ -168,7 +171,7 @@ public class DAORepuesto {
      * @return int
      */
     public int updatePrecio_unidad(Repuesto repuesto){
-        String update_statement = "UPDATE repuestos SET precio_unidad = " + repuesto.getPrecio_unidad()+ " WHERE id_vehiculo = " + repuesto.getId_repuesto();
+        String update_statement = "UPDATE repuestos SET precio_unidad = " + repuesto.getPrecio_unidad()+ " WHERE id_repuesto = " + repuesto.getId_repuesto();
         int numFilas = -1;
         try {
             Connection conn = fachada.getConnetion();
@@ -176,12 +179,13 @@ public class DAORepuesto {
             numFilas = sentencia.executeUpdate(update_statement);
             conn.close();
             fachada.closeConection();
+            return numFilas;
         } catch (SQLException ex) {
             return -2;
         } catch (Exception ex) {
             return -3;
         }
-        return numFilas;
+        
     }
     
     /**
@@ -190,7 +194,7 @@ public class DAORepuesto {
      * @return int
      */
     public int updateIva(Repuesto repuesto){
-        String update_statement = "UPDATE repuestos SET iva = " + repuesto.getIva()+ " WHERE id_vehiculo = " + repuesto.getId_repuesto();
+        String update_statement = "UPDATE repuestos SET iva = " + repuesto.getIva()+ " WHERE id_repuesto = " + repuesto.getId_repuesto();
         int numFilas = -1;
         try {
             Connection conn = fachada.getConnetion();
@@ -198,35 +202,15 @@ public class DAORepuesto {
             numFilas = sentencia.executeUpdate(update_statement);
             conn.close();
             fachada.closeConection();
+            return numFilas;
         } catch (SQLException ex) {
             return -2;
         } catch (Exception ex) {
             return -3;
         }
-        return numFilas;
+        
     }
     
-    /**
-     * 
-     * @param repuesto
-     * @return int
-     */
-    public int updateDescripcion(Repuesto repuesto){
-        String update_statement = "UPDATE repuestos SET descripcion = '" + repuesto.getDescripcion()+ "' WHERE id_vehiculo = " + repuesto.getId_repuesto();
-        int numFilas = -1;
-        try {
-            Connection conn = fachada.getConnetion();
-            Statement sentencia = conn.createStatement();
-            numFilas = sentencia.executeUpdate(update_statement);
-            conn.close();
-            fachada.closeConection();
-        } catch (SQLException ex) {
-            return -2;
-        } catch (Exception ex) {
-            return -3;
-        }
-        return numFilas;
-    }
     
     /**
      * +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++FIN PARTE UPDATES PARA REPUESTOS++++++++++++++++++++++++++++++++++++++++

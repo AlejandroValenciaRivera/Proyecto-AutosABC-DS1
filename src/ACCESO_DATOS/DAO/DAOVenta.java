@@ -29,15 +29,15 @@ public class DAOVenta {
     public int guardarVenta(Venta venta) {
        
         String sql_guardar = "INSERT INTO venta VALUES ("
-                + venta.getId_venta()+ ", "
+                + "nextval('secuencia_id_venta'), "
                 + venta.getId_vehiculo()+", "
                 + venta.getId_usuario() + ", "
                 + venta.getId_sede()+ ", '"
                 + venta.getForma_pago() + "', "
-                + venta.getFecha() + ", "
-                + venta.getCedula_cliente() +  ", '"
-                + venta.getNombre_cliente() + "', "
-                + venta.getTelefono_cliente() + ")";
+                + "now(), '"
+                + venta.getCedula_cliente() +  "', '"
+                + venta.getNombre_cliente() + "', '"
+                + venta.getTelefono_cliente() + "')";
         int numFilas = -1;
         try{
             Connection conn = fachada.getConnetion();
@@ -45,6 +45,7 @@ public class DAOVenta {
             numFilas = sentencia.executeUpdate(sql_guardar);
             conn.close();
             fachada.closeConection();
+            return numFilas;
         }
         catch(SQLException e){ 
             return -2; 
@@ -52,7 +53,7 @@ public class DAOVenta {
         catch(Exception e){ 
             return -3; 
         }
-        return numFilas;
+        
     
     }
      /**
@@ -62,71 +63,30 @@ public class DAOVenta {
      * @author Juan José Varela V
      * @proposito recibe un id Venta, realiza la consulta en la base de datos y devuelve un objeto venta
      */   
-    public Venta consultarVenta(int idVenta) {
+    public int consultarVentaReciente() {
 
         Venta ven = new Venta();
-        String unRep = "SELECT id_venta, "
-                + "id_vehiculo,"
-                + "id_usuario,"
-                + "id_sede, "
-                + "formaDePago, "
-                + "fecha, "
-                + "cedula_cliente, "
-                + "nombre_cliente, "
-                + "telefono_cliente "
-                + "FROM venta WHERE id_venta = " + idVenta;
+        String unRep = "SELECT * FROM venta";
         try{
             Connection conn = fachada.getConnetion();
             Statement sentencia = conn.createStatement();
             ResultSet tabla = sentencia.executeQuery(unRep);
             
-            ven.setId_venta(tabla.getInt(1));
-            ven.setId_vehiculo(tabla.getInt(2));
-            ven.setId_usuario(tabla.getInt(3));
-            ven.setId_sede(tabla.getInt(4));
-            ven.setForma_pago(tabla.getString(5));
-            ven.setFecha(tabla.getDate(6));
-            ven.setCedula_cliente(tabla.getInt(7));
-            ven.setNombre_cliente(tabla.getString(8));
-            ven.setTelefono_cliente(tabla.getInt(9));
-            
-            fachada.closeConection();
-        }
-        catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "         Ha ocurrido un problema, \n consulta con la base de datos fallida", "AutosABC", JOptionPane.ERROR_MESSAGE);        }
-        catch (Exception ex){
-            JOptionPane.showMessageDialog(null, "Ha ocurrido un problema!!", "AutosABC", JOptionPane.ERROR_MESSAGE);
-        }
-        return ven;
-    }
-     /**
-     * 
-     * @param Venta
-     * @return int
-     * @author Juan José Varela V
-     * @proposito metodo que modifica registros en la base de datos
-     *              a partir de un objeto venta que se recibe
-     */   
-    public int update(Venta venta){
-        String update_statement = "UPDATE venta SET id_vehiculo = " + venta.getId_vehiculo()
-                + ", id_usuario = " + venta.getId_usuario()
-                + ", id_sede = " + venta.getId_sede()
-                + ", formaDePago = " + venta.getForma_pago()
-                + ", fecha = " + venta.getFecha()
-                + " WHERE id_venta = " + venta.getId_venta();
-        int numFilas = -1;
-        try {
-            Connection conn = fachada.getConnetion();
-            Statement sentencia = conn.createStatement();
-            numFilas = sentencia.executeUpdate(update_statement);
+            int numFilas = 0;
+            while(tabla.next()){
+                numFilas++;
+            }
             conn.close();
             fachada.closeConection();
-        } catch (SQLException ex) {
+            return numFilas;
+        }
+        catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "         Ha ocurrido un problema, \n consulta con la base de datos fallida", "AutosABC", JOptionPane.ERROR_MESSAGE); 
             return -2;
-        } catch (Exception ex) {
+        }
+        catch (Exception ex){
+            JOptionPane.showMessageDialog(null, "Ha ocurrido un problema!!", "AutosABC", JOptionPane.ERROR_MESSAGE);
             return -3;
         }
-        return numFilas;
     }
-    
 }

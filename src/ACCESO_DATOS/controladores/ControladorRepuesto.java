@@ -47,4 +47,59 @@ public class ControladorRepuesto {
         
         return repuesto2;
     }
+    
+    public int cambiarSede(int id_repuesto, int sede){
+        Repuesto repuesto = new Repuesto();
+        
+        repuesto.setId_repuesto(id_repuesto);
+        repuesto.setId_sede(sede);
+        
+        int result = daoRepuesto.updateId_sede(repuesto);
+        
+        return result;
+    }
+    
+    public int cambiarNombre(int id_repuesto, String nombre){
+        Repuesto repuesto = new Repuesto();
+        
+        repuesto.setId_repuesto(id_repuesto);
+        repuesto.setNombre(nombre);
+        
+        int result = daoRepuesto.updateNombre(repuesto);
+        
+        return result;
+    }
+    
+    public int cambiarCantidad(int id_repuesto, int cantidad){
+        Repuesto repuesto = new Repuesto();
+        
+        repuesto.setId_repuesto(id_repuesto);
+        repuesto.setCantidad(cantidad);
+        
+        int result = daoRepuesto.updateCantidad(repuesto);
+        
+        return result;
+    }
+    public int cambiarPrecio(int id_repuesto, int precio){
+        Repuesto repuesto = new Repuesto();
+       
+        repuesto.setId_repuesto(id_repuesto);
+        repuesto.setPrecio_unidad(precio);
+        
+        int result = daoRepuesto.updatePrecio_unidad(repuesto);
+        
+        return result;
+    }
+    
+    public int cambiarIva(int id_repuesto, int iva){
+        Repuesto repuesto = new Repuesto();
+        
+        repuesto.setId_repuesto(id_repuesto);
+        repuesto.setIva(iva);
+        
+        int result = daoRepuesto.updateIva(repuesto);
+        
+        return result;
+    }
+    
 }

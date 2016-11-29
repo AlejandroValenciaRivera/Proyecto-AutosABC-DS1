@@ -12,8 +12,6 @@ public class Cotizacion {
 	int id_vehiculo ;
 	int id_usuario ;
 	int id_sede ;
-	int precio ;
-	int iva ;
 	Date fecha;
 
     public int getId_cotizacion() {
@@ -30,14 +28,6 @@ public class Cotizacion {
 
     public int getId_sede() {
         return id_sede;
-    }
-
-    public int getPrecio() {
-        return precio;
-    }
-
-    public int getIva() {
-        return iva;
     }
 
     public Date getFecha() {
@@ -58,14 +48,6 @@ public class Cotizacion {
 
     public void setId_sede(int id_sede) {
         this.id_sede = id_sede;
-    }
-
-    public void setPrecio(int precio) {
-        this.precio = precio;
-    }
-
-    public void setIva(int iva) {
-        this.iva = iva;
     }
 
     public void setFecha(Date fecha) {

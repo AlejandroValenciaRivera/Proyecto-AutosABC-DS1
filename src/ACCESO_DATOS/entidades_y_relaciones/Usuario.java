@@ -12,7 +12,7 @@ import java.sql.*;
  */
 public class Usuario {
     int cedula;
-    Sede id_sede;
+    int id_sede;
     String nombre;
     Date fecha_nacimiento;
     String direccion;
@@ -32,7 +32,7 @@ public class Usuario {
     public int getCedula() {
         return cedula;
     }
-    public Sede getSede() {
+    public int getSede() {
         return id_sede;
     }
     public String getNombre() {
@@ -71,7 +71,7 @@ public class Usuario {
     public void setCedula(int cedula) {
         this.cedula = cedula;
     }
-    public void setSede(Sede sede) {
+    public void setSede(int sede) {
         id_sede = sede;
     }
     public void setNombre(String nombre) {

@@ -117,7 +117,7 @@ public class DAOVehiculo {
                 + "traccion, "
                 + "modelo, "
                 + "precio, "
-                + "iva, estado FROM vehiculos";
+                + "iva, estado FROM vehiculos WHERE estado = 'DISPONIBLE'";
         
         ArrayList<Vehiculo> vehiculos = new ArrayList<>();
         
@@ -173,145 +173,13 @@ public class DAOVehiculo {
             numFilas = sentencia.executeUpdate(update_statement);
             conn.close();
             fachada.closeConection();
+            return numFilas;
         } catch (SQLException ex) {
             return -2;
         } catch (Exception ex) {
             return -3;
         }
-        return numFilas;
-    }
-
-    /**
-     *
-     * @param vehiculo
-     * @return int
-     */
-    public int updateColor(Vehiculo vehiculo) {
-        String update_statement = "UPDATE vehiculos SET color = '" + vehiculo.getColor() + "' WHERE id_vehiculo = " + vehiculo.getVehiculo();
-        int numFilas = -1;
-        try {
-            Connection conn = fachada.getConnetion();
-            Statement sentencia = conn.createStatement();
-            numFilas = sentencia.executeUpdate(update_statement);
-            conn.close();
-            fachada.closeConection();
-        } catch (SQLException ex) {
-            return -2;
-        } catch (Exception ex) {
-            return -3;
-        }
-        return numFilas;
-
-    }
-
-    /**
-     *
-     * @param vehiculo
-     * @return int
-     */
-    public int updateMarca(Vehiculo vehiculo) {
-        String update_statement = "UPDATE vehiculos SET marca = '" + vehiculo.getMarca() + "' WHERE id_vehiculo = " + vehiculo.getVehiculo();
-        int numFilas = -1;
-        try {
-            Connection conn = fachada.getConnetion();
-            Statement sentencia = conn.createStatement();
-            numFilas = sentencia.executeUpdate(update_statement);
-            conn.close();
-            fachada.closeConection();
-        } catch (SQLException ex) {
-            return -2;
-        } catch (Exception ex) {
-            return -3;
-        }
-        return numFilas;
-    }
-
-    /**
-     *
-     * @param vehiculo
-     * @return int
-     */
-    public int updateReferencia(Vehiculo vehiculo) {
-        String update_statement = "UPDATE vehiculos SET referencia = '" + vehiculo.getReferencia() + "' WHERE id_vehiculo = " + vehiculo.getVehiculo();
-        int numFilas = -1;
-        try {
-            Connection conn = fachada.getConnetion();
-            Statement sentencia = conn.createStatement();
-            numFilas = sentencia.executeUpdate(update_statement);
-            conn.close();
-            fachada.closeConection();
-        } catch (SQLException ex) {
-            return -2;
-        } catch (Exception ex) {
-            return -3;
-        }
-        return numFilas;
-    }
-
-    /**
-     *
-     * @param vehiculo
-     * @return int
-     */
-    public int updateTipo(Vehiculo vehiculo) {
-        String update_statement = "UPDATE vehiculos SET tipo = '" + vehiculo.getTipo() + "' WHERE id_vehiculo = " + vehiculo.getVehiculo();
-        int numFilas = -1;
-        try {
-            Connection conn = fachada.getConnetion();
-            Statement sentencia = conn.createStatement();
-            numFilas = sentencia.executeUpdate(update_statement);
-            conn.close();
-            fachada.closeConection();
-        } catch (SQLException ex) {
-            return -2;
-        } catch (Exception ex) {
-            return -3;
-        }
-        return numFilas;
-    }
-
-    /**
-     *
-     * @param vehiculo
-     * @return int
-     */
-    public int updateTraccion(Vehiculo vehiculo) {
-        String update_statement = "UPDATE vehiculos SET traccion = '" + vehiculo.getTraccion() + "' WHERE id_vehiculo = " + vehiculo.getVehiculo();
-        int numFilas = -1;
-        try {
-            Connection conn = fachada.getConnetion();
-            Statement sentencia = conn.createStatement();
-            numFilas = sentencia.executeUpdate(update_statement);
-            conn.close();
-            fachada.closeConection();
-        } catch (SQLException ex) {
-            return -2;
-        } catch (Exception ex) {
-            return -3;
-        }
-        return numFilas;
-    }
-
-    /**
-     *
-     * @param vehiculo
-     * @return int
-     */
-    public int updateModelo(Vehiculo vehiculo) {
-        String update_statement = "UPDATE vehiculos SET modelo = '" + vehiculo.getModelo() + "' WHERE id_vehiculo = " + vehiculo.getVehiculo();
-        int numFilas = -1;
-        try {
-            Connection conn = fachada.getConnetion();
-            Statement sentencia = conn.createStatement();
-            numFilas = sentencia.executeUpdate(update_statement);
-            conn.close();
-            fachada.closeConection();
-        } catch (SQLException ex) {
-            return -2;
-        } catch (Exception ex) {
-            return -3;
-        }
-        return numFilas;
+        
     }
 
     /**
@@ -328,12 +196,13 @@ public class DAOVehiculo {
             numFilas = sentencia.executeUpdate(update_statement);
             conn.close();
             fachada.closeConection();
+            return numFilas;
         } catch (SQLException ex) {
             return -2;
         } catch (Exception ex) {
             return -3;
         }
-        return numFilas;
+        
     }
 
     /**
@@ -350,12 +219,13 @@ public class DAOVehiculo {
             numFilas = sentencia.executeUpdate(update_statement);
             conn.close();
             fachada.closeConection();
+            return numFilas;
         } catch (SQLException ex) {
             return -2;
         } catch (Exception ex) {
             return -3;
         }
-        return numFilas;
+        
     }
     
     public int updateEstado(Vehiculo vehiculo) {
@@ -367,12 +237,13 @@ public class DAOVehiculo {
             numFilas = sentencia.executeUpdate(update_statement);
             conn.close();
             fachada.closeConection();
+            return numFilas;
         } catch (SQLException ex) {
             return -2;
         } catch (Exception ex) {
             return -3;
         }
-        return numFilas;
+        
     }
     /**
      * +++++++++++++++++++++++++++++++++++++++++++++++++++FIN PARTE UPDATE PARA VEHICULOS++++++++++++++++++++++++++++++++++++++++++*

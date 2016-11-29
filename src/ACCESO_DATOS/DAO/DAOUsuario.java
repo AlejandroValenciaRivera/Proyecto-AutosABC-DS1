@@ -26,7 +26,7 @@ public class DAOUsuario {
         String sql_guardar;
         sql_guardar="INSERT INTO Usuarios VALUES (" +
                 usu.getCedula() + ", " + 
-                usu.getSede().getId() +  ", '" +
+                usu.getSede() +  ", '" +
                 usu.getNombre() + "', '"  +
                 usu.getFecha() + "', '" +
                 usu.getDireccion() + "' , '" +
@@ -66,7 +66,7 @@ public class DAOUsuario {
         ArrayList<Usuario> users = new ArrayList<>();
         
         String sql_select;
-        sql_select="SELECT cuenta,contrasena,cargo FROM  usuarios";
+        sql_select="SELECT cuenta,contrasena,cargo, id_sede, cedula FROM  usuarios";
          try{
             Connection conn = fachada.getConnetion();
             Statement sentencia = conn.createStatement();
@@ -80,6 +80,10 @@ public class DAOUsuario {
                user.setContrasena(tabla.getString(2));
                
                user.setCargo(tabla.getInt(3));
+               
+               user.setSede(tabla.getInt(4));
+               
+               user.setCedula(tabla.getInt(5));
 
                users.add(user);
             }
@@ -95,5 +99,153 @@ public class DAOUsuario {
          }
          
         return users;
+    }
+    
+    public int updateNombre(Usuario usuario) {
+        String update_statement = "UPDATE usuarios SET nombre = '" + usuario.getNombre() + "' WHERE cedula = " + usuario.getCedula();
+        int numFilas = -1;
+        try {
+            Connection conn = fachada.getConnetion();
+            Statement sentencia = conn.createStatement();
+            numFilas = sentencia.executeUpdate(update_statement);
+            conn.close();
+            fachada.closeConection();
+            return numFilas;
+        } catch (SQLException ex) {
+            return -2;
+        } catch (Exception ex) {
+            return -3;
+        }
+        
+    }
+    
+    public int updateDireccion(Usuario usuario) {
+        String update_statement = "UPDATE usuarios SET direccion = '" + usuario.getDireccion() + "' WHERE cedula = " + usuario.getCedula();
+        int numFilas = -1;
+        try {
+            Connection conn = fachada.getConnetion();
+            Statement sentencia = conn.createStatement();
+            numFilas = sentencia.executeUpdate(update_statement);
+            conn.close();
+            fachada.closeConection();
+            return numFilas;
+        } catch (SQLException ex) {
+            return -2;
+        } catch (Exception ex) {
+            return -3;
+        }
+        
+    }
+    
+    public int updateEmail(Usuario usuario) {
+        String update_statement = "UPDATE usuarios SET e_mail = '" + usuario.getEmail() + "' WHERE cedula = " + usuario.getCedula();
+        int numFilas = -1;
+        try {
+            Connection conn = fachada.getConnetion();
+            Statement sentencia = conn.createStatement();
+            numFilas = sentencia.executeUpdate(update_statement);
+            conn.close();
+            fachada.closeConection();
+            return numFilas;
+        } catch (SQLException ex) {
+            return -2;
+        } catch (Exception ex) {
+            return -3;
+        }
+        
+    }
+    
+    public int updateTelefono(Usuario usuario) {
+        String update_statement = "UPDATE usuarios SET telefono = '" + usuario.getTelefono() + "' WHERE cedula = " + usuario.getCedula();
+        int numFilas = -1;
+        try {
+            Connection conn = fachada.getConnetion();
+            Statement sentencia = conn.createStatement();
+            numFilas = sentencia.executeUpdate(update_statement);
+            conn.close();
+            fachada.closeConection();
+            return numFilas;
+        } catch (SQLException ex) {
+            return -2;
+        } catch (Exception ex) {
+            return -3;
+        }
+        
+    }
+    
+    public int updateSede(Usuario usuario) {
+        String update_statement = "UPDATE usuarios SET id_sede = '" + usuario.getSede() + "' WHERE cedula = " + usuario.getCedula();
+        int numFilas = -1;
+        try {
+            Connection conn = fachada.getConnetion();
+            Statement sentencia = conn.createStatement();
+            numFilas = sentencia.executeUpdate(update_statement);
+            conn.close();
+            fachada.closeConection();
+            return numFilas;
+        } catch (SQLException ex) {
+            return -2;
+        } catch (Exception ex) {
+            return -3;
+        }
+        
+    }
+    
+    public int updateEstado(Usuario usuario) {
+        String update_statement = "UPDATE usuarios SET estado = '" + usuario.getEstado() + "' WHERE cedula = " + usuario.getCedula();
+        int numFilas = -1;
+        try {
+            Connection conn = fachada.getConnetion();
+            Statement sentencia = conn.createStatement();
+            numFilas = sentencia.executeUpdate(update_statement);
+            conn.close();
+            fachada.closeConection();
+            return numFilas;
+        } catch (SQLException ex) {
+            return -2;
+        } catch (Exception ex) {
+            return -3;
+        }
+        
+    }
+    
+    public int updateSalario(Usuario usuario) {
+        String update_statement = "UPDATE usuarios SET salario = '" + usuario.getSalario() + "' WHERE cedula = " + usuario.getCedula();
+        int numFilas = -1;
+        try {
+            Connection conn = fachada.getConnetion();
+            Statement sentencia = conn.createStatement();
+            numFilas = sentencia.executeUpdate(update_statement);
+            conn.close();
+            fachada.closeConection();
+            return numFilas;
+        } catch (SQLException ex) {
+            return -2;
+        } catch (Exception ex) {
+            return -3;
+        }
+        
+    }
+    
+    public int updateUsuANDpass(Usuario usuario) {
+        String update_statement  = "UPDATE usuarios SET cuenta = '" + usuario.getCuenta() + "' WHERE cedula = " + usuario.getCedula();
+        String update_statement2 = "UPDATE usuarios SET contrasena = '" + usuario.getContrasena() + "' WHERE cedula = " + usuario.getCedula();
+        int numFilas = -1;
+        try {
+            Connection conn = fachada.getConnetion();
+            Statement sentencia = conn.createStatement();
+            numFilas = sentencia.executeUpdate(update_statement);
+            numFilas = sentencia.executeUpdate(update_statement2);
+            conn.close();
+            fachada.closeConection();
+            return numFilas;
+        } catch (SQLException ex) {
+            System.out.println(ex);
+            return -2;
+        } catch (Exception ex) {
+            System.out.println("11 --" + ex);
+            return -3;
+        }
+        
     }
 }
