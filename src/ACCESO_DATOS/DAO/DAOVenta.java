@@ -8,6 +8,7 @@ package ACCESO_DATOS.DAO;
 import ACCESO_DATOS.conexion.*;
 import ACCESO_DATOS.entidades_y_relaciones.*;
 import java.sql.*;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 /**
  *
@@ -87,6 +88,44 @@ public class DAOVenta {
         catch (Exception ex){
             JOptionPane.showMessageDialog(null, "Ha ocurrido un problema!!", "AutosABC", JOptionPane.ERROR_MESSAGE);
             return -3;
+        }
+    }
+    
+    public ArrayList<Venta> consultarVentas() {
+        
+        ArrayList<Venta> ventas = new ArrayList<>();
+        Venta ven = new Venta();
+        String unRep = "SELECT * FROM venta";
+        try{
+            Connection conn = fachada.getConnetion();
+            Statement sentencia = conn.createStatement();
+            ResultSet tabla = sentencia.executeQuery(unRep);
+            while(tabla.next()){
+                ven = new Venta();
+                
+                ven.setId_venta(tabla.getInt(1));
+                ven.setId_vehiculo(tabla.getInt(2));
+                ven.setId_usuario(tabla.getInt(3));
+                ven.setId_sede(tabla.getInt(4));
+                ven.setForma_pago(tabla.getString(5));
+                ven.setFecha(tabla.getDate(6));
+                ven.setCedula_cliente(tabla.getString(7));
+                ven.setNombre_cliente(tabla.getString(8));
+                ven.setTelefono_cliente(tabla.getString(9));
+                
+                ventas.add(ven);
+            }
+            conn.close();
+            fachada.closeConection();
+            return ventas;
+        }
+        catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "         Ha ocurrido un problema, \n consulta con la base de datos fallida", "AutosABC", JOptionPane.ERROR_MESSAGE); 
+            return ventas;
+        }
+        catch (Exception ex){
+            JOptionPane.showMessageDialog(null, "Ha ocurrido un problema!!", "AutosABC", JOptionPane.ERROR_MESSAGE);
+            return ventas;
         }
     }
 }

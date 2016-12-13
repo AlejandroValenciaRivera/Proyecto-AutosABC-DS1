@@ -110,4 +110,38 @@ public class DAOCotizacion {
             return -3;
         }
     }
+    
+    public ArrayList<Cotizacion> consultarCotizaciones( ){
+        Cotizacion cot = new Cotizacion();
+        ArrayList<Cotizacion> cotizaciones = new ArrayList<>();
+        String unRep = "SELECT id_cotizacion, "
+                + "id_vehiculo,"
+                + "id_usuario,"
+                + "id_sede, "
+                + "fecha "
+                + "FROM cotizacion";
+        try{
+            Connection conn = fachada.getConnetion();
+            Statement sentencia = conn.createStatement();
+            ResultSet tabla = sentencia.executeQuery(unRep);
+            
+            while (tabla.next()) {
+                cot = new Cotizacion();
+                cot.setId_cotizacion(tabla.getInt(1));
+                cot.setId_vehiculo(tabla.getInt(2));
+                cot.setId_usuario(tabla.getInt(3));
+                cot.setId_sede(tabla.getInt(4));
+                cot.setFecha(tabla.getDate(5));
+                
+                cotizaciones.add(cot);
+            }
+            fachada.closeConection();
+        }
+        catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "         Ha ocurrido un problema, \n consulta con la base de datos fallida", "AutosABC", JOptionPane.ERROR_MESSAGE);        }
+        catch (Exception ex){
+            JOptionPane.showMessageDialog(null, "Ha ocurrido un problema!!", "AutosABC", JOptionPane.ERROR_MESSAGE);
+        }
+        return cotizaciones;
+    }
 }

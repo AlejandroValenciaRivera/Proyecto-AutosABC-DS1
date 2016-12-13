@@ -96,7 +96,7 @@ public class GUIlogin extends javax.swing.JFrame {
                 .addGap(26, 26, 26)
                 .addGroup(panelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton2))
                 .addGroup(panelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelLoginLayout.createSequentialGroup()
                         .addGap(38, 38, 38)
@@ -127,7 +127,7 @@ public class GUIlogin extends javax.swing.JFrame {
                     .addGroup(panelLoginLayout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(7, 7, 7)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jButton2))
                     .addGroup(panelLoginLayout.createSequentialGroup()
                         .addGroup(panelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -234,7 +234,7 @@ public class GUIlogin extends javax.swing.JFrame {
                                     gerente = new GUIgerente(this);
                                     break;
                                 case 2:
-                                    jefeDeTaller = new GUIJefeTaller(this);
+                                    jefeDeTaller = new GUIJefeTaller(this, users.get(i));
                                     break;
                                 case 3:
                                     vendedor = new GUIvendedor(this, users.get(i));

@@ -8,6 +8,7 @@ package ACCESO_DATOS.controladores;
 import ACCESO_DATOS.DAO.*;
 import ACCESO_DATOS.entidades_y_relaciones.*;
 import java.sql.*;
+import java.util.ArrayList;
 /**
  *
  * @author aleja_000
@@ -31,6 +32,11 @@ public class ControladorCotizacion {
     }
     public int consultarUltimaCotizacion(){
         int result = daoCotizacion.consultarCotizacionReciente();
+        return result;
+    }
+    
+    public ArrayList<Cotizacion> consultarCotizaciones(){
+        ArrayList<Cotizacion> result = daoCotizacion.consultarCotizaciones();
         return result;
     }
     

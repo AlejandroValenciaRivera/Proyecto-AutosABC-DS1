@@ -44,6 +44,12 @@ public class ControladorVehiculo {
         return vehiculos;
     }
     
+    public ArrayList<Vehiculo> consultarVehiculos2(){
+        ArrayList<Vehiculo> vehiculos = daoVehiculo.consultarVehiculos2();
+ 
+        return vehiculos;
+    }
+    
     public int modificarEstado(int id_vehiculo, String estado){
         Vehiculo vehiculo = new Vehiculo();
         

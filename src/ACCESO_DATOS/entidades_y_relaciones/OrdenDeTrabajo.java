@@ -6,11 +6,12 @@ package ACCESO_DATOS.entidades_y_relaciones;
  * @author aleja_000
  */
 public class OrdenDeTrabajo {
-        int  id_orden ;
+        int id_orden ;
 	int id_usuario;
 	int id_repuesto;
 	int id_vehiculo ;
         int id_sede ;
+        int cantidad_repuesto;
 	String descripcion ;
 
     public int getId_orden() {
@@ -31,6 +32,10 @@ public class OrdenDeTrabajo {
 
     public int getId_sede() {
         return id_sede;
+    }
+    
+    public int getCantidadRepuesto() {
+        return cantidad_repuesto;
     }
 
     public void setId_orden(int id_orden) {
@@ -59,6 +64,10 @@ public class OrdenDeTrabajo {
 
     public String getDescripcion() {
         return descripcion;
+    }
+    
+    public void setCantidadRepuesto(int cantidad_repuesto) {
+        this.cantidad_repuesto = cantidad_repuesto;
     }
         
   

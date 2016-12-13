@@ -94,6 +94,45 @@ public class DAORepuesto {
         return rep;
     }
     
+    public ArrayList<Repuesto> consultarRepuestos(){
+        Repuesto rep = new Repuesto();
+        ArrayList<Repuesto> repuestos = new ArrayList<>();
+        String unRep = "SELECT id_repuesto, "
+                + "id_sede, "
+                + "nombre, "
+                + "cantidad, "
+                + "precio_unidad, "
+                + "iva, "
+                + "descripcion "
+                + "FROM repuestos" ;
+        try{
+            Connection conn = fachada.getConnetion();
+            Statement sentencia = conn.createStatement();
+            ResultSet tabla = sentencia.executeQuery(unRep);
+            while (tabla.next()) {
+                rep = new Repuesto();
+                
+                rep.setId_repuesto(tabla.getInt(1));
+                rep.setId_sede(tabla.getInt(2));
+                rep.setNombre(tabla.getString(3));
+                rep.setCantidad(tabla.getInt(4));
+                rep.setPrecio_unidad(tabla.getInt(5));
+                rep.setIva(tabla.getInt(6));
+                rep.setDescripcion(tabla.getString(7));
+
+                repuestos.add(rep);
+            }
+            conn.close();
+            fachada.closeConection();
+        }
+        catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "         Ha ocurrido un problema, \n consulta con la base de datos fallida", "AutosABC", JOptionPane.ERROR_MESSAGE);        }
+        catch (Exception ex){
+            JOptionPane.showMessageDialog(null, "Ha ocurrido un problema!!", "AutosABC", JOptionPane.ERROR_MESSAGE);
+        }
+        return repuestos;
+    }
+    
     /**
      * ++++++++++++++++++++++++++++++++++++++++++++++++++++PARTE UPDATE PARA REPUESTOS+++++++++++++++++++++++++++++++++++++++++++++++++++++
      * @param repuesto

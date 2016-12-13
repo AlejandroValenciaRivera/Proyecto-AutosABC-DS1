@@ -155,6 +155,55 @@ public class DAOVehiculo {
         return vehiculos;
     }
     
+    public ArrayList<Vehiculo> consultarVehiculos2() {
+        Vehiculo unVehiculo = new Vehiculo();
+        String sql_select = "SELECT id_vehiculo, "
+                + "id_sede,  "
+                + "color, "
+                + "marca, "
+                + "referencia, "
+                + "tipo, "
+                + "traccion, "
+                + "modelo, "
+                + "precio, "
+                + "iva, estado FROM vehiculos";
+        
+        ArrayList<Vehiculo> vehiculos = new ArrayList<>();
+        
+        try {
+            Connection conn = fachada.getConnetion();
+            Statement sentencia = conn.createStatement();
+            ResultSet tabla = sentencia.executeQuery(sql_select);
+            
+            while(tabla.next()){
+                unVehiculo = new Vehiculo();
+                unVehiculo.setVehiculo(tabla.getInt(1));
+                unVehiculo.setId_sede(tabla.getInt(2));
+                unVehiculo.setColor(tabla.getString(3));
+                unVehiculo.setMarca(tabla.getString(4));
+                unVehiculo.setReferencia(tabla.getString(5));
+                unVehiculo.setTipo(tabla.getString(6));
+                unVehiculo.setTraccion(tabla.getString(7));
+                unVehiculo.setModelo(tabla.getString(8));
+                unVehiculo.setPrecio(tabla.getInt(9));
+                unVehiculo.setIva(tabla.getInt(10));
+                unVehiculo.setEstado(tabla.getString(11));
+                
+                vehiculos.add(unVehiculo);
+            
+            }
+            
+
+            fachada.closeConection();
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "         Ha ocurrido un problema, \n consulta con la base de datos fallida", "AutosABC", JOptionPane.ERROR_MESSAGE);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Ha ocurrido un problema!!", "AutosABC", JOptionPane.ERROR_MESSAGE);
+        }
+        return vehiculos;
+    }
+    
     /**
      * +++++++++++++++++++++++++++++++++PARTE DE UPDATE PARA VEHICULOS++++++++++++++++++++++++++++++++++++++++++++++++++
      *

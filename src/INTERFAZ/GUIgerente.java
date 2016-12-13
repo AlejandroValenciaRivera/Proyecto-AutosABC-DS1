@@ -12,6 +12,7 @@ import ACCESO_DATOS.controladores.*;
 import ACCESO_DATOS.entidades_y_relaciones.*;
 import Login.Encriptacion;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 /**
  *
@@ -34,10 +35,10 @@ public class GUIgerente extends javax.swing.JFrame {
     ArrayList<Sede> sedesCambioSede;
     ArrayList<Sede> sedesCrearUsuario;
     int bloqueoAction;
-    /**
-     * Creates new form AutosABC
-     * @param login2
-     */
+    int reporteEscogido;
+    JComboBox comboBoxMesReporte1;
+    JTextField campoValorReporte2;
+
     public GUIgerente(GUIlogin login2) {
         initComponents();
         login = login2;
@@ -60,18 +61,18 @@ public class GUIgerente extends javax.swing.JFrame {
         card2.addLayoutComponent(panelInventarioGerente, "INVENTARIO");
         card2.addLayoutComponent(panelReportesGerente, "REPORTES");
         
+        card3.addLayoutComponent(panelCrearSede, "CREAR-SEDE");
         card3.addLayoutComponent(panelConsultarSede, "CONSULTAR-SEDE");
         card3.addLayoutComponent(panelModificarSede, "MODIFICAR-SEDE");
-        card3.addLayoutComponent(panelCrearSede, "CREAR-SEDE");
         
-        card4.addLayoutComponent(panelSedeConsultaFiltroOFF, "SIN-FILTRO");
-        card4.addLayoutComponent(panelSedeConsultaFiltroON, "CON-FILTRO");
-        
+     
         ventanaUsuarios.addLayoutComponent(panelCrearUsuario,"CREAR-USUARIO");
         ventanaUsuarios.addLayoutComponent(panelModificarUsuario,"MODIFICAR-USUARIO");
+        ventanaUsuarios.addLayoutComponent(panelConsultarUsuario, "CONSULTA-USUARIO");
         
         ventanaInventario.addLayoutComponent(panelCrearInventario,"CREAR-INVENTARIO");
         ventanaInventario.addLayoutComponent(panelModificarInventario,"MODIFICAR-INVENTARIO");
+        ventanaInventario.addLayoutComponent(panelConsultarInventario, "CONSULTA-INVENTARIO");
         
         ventanaInventarioCrearVehiculo.addLayoutComponent(panelCrearInventarioCrearVehiculo,"CREAR-VEHICULO-MOSTRAR");
         ventanaInventarioCrearVehiculo.addLayoutComponent(panelCrearInventarioCrearVehiculoVacio,"CREAR-VEHICULO-OCULTAR");
@@ -87,7 +88,6 @@ public class GUIgerente extends javax.swing.JFrame {
 
         jPanel3.setLayout(card2);
         jPanel9.setLayout(card3);
-        jPanel14.setLayout(card4);
         jPanel11.setLayout(ventanaUsuarios);
         jPanel13.setLayout(ventanaInventario);
         jPanel7.setLayout(ventanaInventarioCrearVehiculo);
@@ -100,18 +100,17 @@ public class GUIgerente extends javax.swing.JFrame {
         jPanel3.add(panelInventarioGerente);
         jPanel3.add(panelReportesGerente);
         
-        jPanel9.add(panelConsultarSede);
-        jPanel9.add(panelModificarSede);
         jPanel9.add(panelCrearSede);
-        
-        jPanel14.add(panelSedeConsultaFiltroON);
-        jPanel14.add(panelSedeConsultaFiltroOFF);
+        jPanel9.add(panelModificarSede);
+        jPanel9.add(panelConsultarSede);
         
         jPanel11.add(panelCrearUsuario);
         jPanel11.add(panelModificarUsuario);
+        jPanel11.add(panelConsultarUsuario);
         
         jPanel13.add(panelCrearInventario);
         jPanel13.add(panelModificarInventario);
+        jPanel13.add(panelConsultarInventario);
         
         jPanel7.add(panelCrearInventarioCrearVehiculo);
         jPanel7.add(panelCrearInventarioCrearVehiculoVacio);
@@ -137,6 +136,9 @@ public class GUIgerente extends javax.swing.JFrame {
         vehiculos = cVehiculo.consultarVehiculos();
         vehiculosAenviar = new ArrayList<>();
         bloqueoAction = 0;
+        reporteEscogido = 0;
+        comboBoxMesReporte1 = new JComboBox();
+        campoValorReporte2 = new JTextField();
     }
 
     /**
@@ -166,23 +168,37 @@ public class GUIgerente extends javax.swing.JFrame {
         jPanel10 = new javax.swing.JPanel();
         botonCrearUsuario = new javax.swing.JButton();
         botonModificarUsuario = new javax.swing.JButton();
+        botonConsultarUsuario = new javax.swing.JButton();
         jPanel11 = new javax.swing.JPanel();
         panelInventarioGerente = new javax.swing.JPanel();
         jPanel12 = new javax.swing.JPanel();
         botonCrearInventario = new javax.swing.JButton();
         botonModificarInventario = new javax.swing.JButton();
+        botonConsultarInventario = new javax.swing.JButton();
         jPanel13 = new javax.swing.JPanel();
         panelReportesGerente = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
-        jLabel33 = new javax.swing.JLabel();
+        jPanel14 = new javax.swing.JPanel();
+        botonReporteNumero1 = new javax.swing.JButton();
+        botonReporteNumero2 = new javax.swing.JButton();
+        botonReporte3 = new javax.swing.JButton();
+        botonReporte4 = new javax.swing.JButton();
+        botonReporte5 = new javax.swing.JButton();
+        botonReporte6 = new javax.swing.JButton();
+        jButton18 = new javax.swing.JButton();
+        jPanel18 = new javax.swing.JPanel();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        areaTextoReportes = new javax.swing.JTextArea();
+        botonExportarReporte = new javax.swing.JButton();
         panelConsultarSede = new javax.swing.JPanel();
         seleccionarSede = new javax.swing.JComboBox<>();
-        jComboBox2 = new javax.swing.JComboBox<>();
-        seleccionFiltroSede = new javax.swing.JComboBox<>();
-        jButton8 = new javax.swing.JButton();
+        atributoSede = new javax.swing.JComboBox<>();
+        boton_consultar_sede = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
-        jPanel14 = new javax.swing.JPanel();
+        areaTextoConsultaSede = new javax.swing.JTextArea();
+        jLabel47 = new javax.swing.JLabel();
+        valor_consulta_sede = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         panelModificarSede = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
@@ -212,10 +228,6 @@ public class GUIgerente extends javax.swing.JFrame {
         ciudad_sede = new javax.swing.JTextField();
         nombre_sede = new javax.swing.JTextField();
         id_sede = new javax.swing.JTextField();
-        panelSedeConsultaFiltroOFF = new javax.swing.JPanel();
-        panelSedeConsultaFiltroON = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
         panelCrearUsuario = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
@@ -327,6 +339,30 @@ public class GUIgerente extends javax.swing.JFrame {
         nuevo_valor_repuesto = new javax.swing.JTextField();
         panelModificarInventarioModificarVehiculoVacio = new javax.swing.JPanel();
         panelModificarInventarioModificarRepuestoVacio = new javax.swing.JPanel();
+        panelConsultarUsuario = new javax.swing.JPanel();
+        comboBoxBusquedaUsuario = new javax.swing.JComboBox<>();
+        boton_consultar_usuario = new javax.swing.JButton();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        areaTextoConsultaUsuario = new javax.swing.JTextArea();
+        jLabel48 = new javax.swing.JLabel();
+        valor_consulta_usuario = new javax.swing.JTextField();
+        jButton2 = new javax.swing.JButton();
+        panelConsultarInventario = new javax.swing.JPanel();
+        comboBosBusquedaInventario = new javax.swing.JComboBox<>();
+        boton_consultar_inventario = new javax.swing.JButton();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        areaTextoConsultaInventario = new javax.swing.JTextArea();
+        jLabel49 = new javax.swing.JLabel();
+        valor_consulta_inventario = new javax.swing.JTextField();
+        jButton3 = new javax.swing.JButton();
+        radioBotonVehiculo = new javax.swing.JRadioButton();
+        radioBotonRepuesto = new javax.swing.JRadioButton();
+        radioBotonVenta = new javax.swing.JRadioButton();
+        radioBotonCotizacion = new javax.swing.JRadioButton();
+        radioBotonOrden = new javax.swing.JRadioButton();
+        construccion = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel33 = new javax.swing.JLabel();
 
         jPanel3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
 
@@ -542,6 +578,14 @@ public class GUIgerente extends javax.swing.JFrame {
             }
         });
 
+        botonConsultarUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/ICONO-CONSULTAR-USUARIO.png"))); // NOI18N
+        botonConsultarUsuario.setToolTipText("Al hacer click en este boton, se desplegará  el menu para modificar usuarios");
+        botonConsultarUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonConsultarUsuarioActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
         jPanel10Layout.setHorizontalGroup(
@@ -549,17 +593,25 @@ public class GUIgerente extends javax.swing.JFrame {
             .addGroup(jPanel10Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(botonModificarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(botonCrearUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(botonModificarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel10Layout.createSequentialGroup()
+                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(botonCrearUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(botonConsultarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel10Layout.createSequentialGroup()
                 .addGap(27, 27, 27)
                 .addComponent(botonCrearUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(42, 42, 42)
+                .addGap(18, 18, 18)
                 .addComponent(botonModificarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(botonConsultarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -617,6 +669,13 @@ public class GUIgerente extends javax.swing.JFrame {
             }
         });
 
+        botonConsultarInventario.setToolTipText("Al hacer click en este boton, se desplegará  el menu para modificar vehiculos o repuestos");
+        botonConsultarInventario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonConsultarInventarioActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
         jPanel12.setLayout(jPanel12Layout);
         jPanel12Layout.setHorizontalGroup(
@@ -624,8 +683,9 @@ public class GUIgerente extends javax.swing.JFrame {
             .addGroup(jPanel12Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(botonCrearInventario, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(botonModificarInventario, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(botonCrearInventario, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(botonConsultarInventario, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel12Layout.setVerticalGroup(
@@ -633,8 +693,10 @@ public class GUIgerente extends javax.swing.JFrame {
             .addGroup(jPanel12Layout.createSequentialGroup()
                 .addGap(27, 27, 27)
                 .addComponent(botonCrearInventario, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(42, 42, 42)
+                .addGap(18, 18, 18)
                 .addComponent(botonModificarInventario, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(botonConsultarInventario, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -674,25 +736,121 @@ public class GUIgerente extends javax.swing.JFrame {
 
         panelReportesGerente.setPreferredSize(new java.awt.Dimension(717, 388));
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        jPanel14.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jLabel33.setIcon(new javax.swing.ImageIcon(getClass().getResource("/INTERFAZ/icono-construccion.jpg"))); // NOI18N
+        botonReporteNumero1.setText("R1");
+        botonReporteNumero1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonReporteNumero1ActionPerformed(evt);
+            }
+        });
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(75, Short.MAX_VALUE)
-                .addComponent(jLabel33)
-                .addGap(54, 54, 54))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        botonReporteNumero2.setText("R2");
+        botonReporteNumero2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonReporteNumero2ActionPerformed(evt);
+            }
+        });
+
+        botonReporte3.setText("R3");
+        botonReporte3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonReporte3ActionPerformed(evt);
+            }
+        });
+
+        botonReporte4.setText("R4");
+        botonReporte4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonReporte4ActionPerformed(evt);
+            }
+        });
+
+        botonReporte5.setText("R5");
+        botonReporte5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonReporte5ActionPerformed(evt);
+            }
+        });
+
+        botonReporte6.setText("R6");
+        botonReporte6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonReporte6ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
+        jPanel14.setLayout(jPanel14Layout);
+        jPanel14Layout.setHorizontalGroup(
+            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel14Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel33, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(botonReporte6, javax.swing.GroupLayout.DEFAULT_SIZE, 69, Short.MAX_VALUE)
+                    .addComponent(botonReporte5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(botonReporte4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(botonReporte3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(botonReporteNumero2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(botonReporteNumero1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton18, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
+        );
+        jPanel14Layout.setVerticalGroup(
+            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel14Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(botonReporteNumero1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(botonReporteNumero2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(botonReporte3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(botonReporte4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(botonReporte5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(botonReporte6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton18, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        jPanel18.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        areaTextoReportes.setEditable(false);
+        areaTextoReportes.setColumns(20);
+        areaTextoReportes.setRows(5);
+        jScrollPane6.setViewportView(areaTextoReportes);
+
+        botonExportarReporte.setText("EXPORTAR");
+        botonExportarReporte.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonExportarReporteActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel18Layout = new javax.swing.GroupLayout(jPanel18);
+        jPanel18.setLayout(jPanel18Layout);
+        jPanel18Layout.setHorizontalGroup(
+            jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel18Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane6)
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel18Layout.createSequentialGroup()
+                .addContainerGap(255, Short.MAX_VALUE)
+                .addComponent(botonExportarReporte)
+                .addGap(244, 244, 244))
+        );
+        jPanel18Layout.setVerticalGroup(
+            jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel18Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(botonExportarReporte)
+                .addContainerGap(25, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout panelReportesGerenteLayout = new javax.swing.GroupLayout(panelReportesGerente);
@@ -701,14 +859,18 @@ public class GUIgerente extends javax.swing.JFrame {
             panelReportesGerenteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelReportesGerenteLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jPanel18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         panelReportesGerenteLayout.setVerticalGroup(
             panelReportesGerenteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelReportesGerenteLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelReportesGerenteLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(panelReportesGerenteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -717,36 +879,30 @@ public class GUIgerente extends javax.swing.JFrame {
 
         seleccionarSede.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Categoria", "Inventario", "Informacion", "Usuarios", "Ordenes Taller" }));
-        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
+        atributoSede.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Buscar por...", "Identificacion", "Nombre", "Ciudad" }));
+        atributoSede.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox2ActionPerformed(evt);
+                atributoSedeActionPerformed(evt);
             }
         });
 
-        seleccionFiltroSede.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Filtro", "Una sede", "Todas las sedes" }));
-        seleccionFiltroSede.addActionListener(new java.awt.event.ActionListener() {
+        boton_consultar_sede.setText("CONSULTAR");
+        boton_consultar_sede.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                seleccionFiltroSedeActionPerformed(evt);
+                boton_consultar_sedeActionPerformed(evt);
             }
         });
 
-        jButton8.setText("CONSULTAR");
+        areaTextoConsultaSede.setEditable(false);
+        areaTextoConsultaSede.setColumns(20);
+        areaTextoConsultaSede.setRows(5);
+        jScrollPane1.setViewportView(areaTextoConsultaSede);
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        jLabel47.setText("VALOR BUSQUEDA:");
 
-        javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
-        jPanel14.setLayout(jPanel14Layout);
-        jPanel14Layout.setHorizontalGroup(
-            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 389, Short.MAX_VALUE)
-        );
-        jPanel14Layout.setVerticalGroup(
-            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 30, Short.MAX_VALUE)
-        );
+        jLabel4.setText("SEDE O ATRIBUTO:");
+
+        jButton1.setText("AYUDA");
 
         javax.swing.GroupLayout panelConsultarSedeLayout = new javax.swing.GroupLayout(panelConsultarSede);
         panelConsultarSede.setLayout(panelConsultarSedeLayout);
@@ -759,31 +915,38 @@ public class GUIgerente extends javax.swing.JFrame {
                     .addGroup(panelConsultarSedeLayout.createSequentialGroup()
                         .addGroup(panelConsultarSedeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(panelConsultarSedeLayout.createSequentialGroup()
-                                .addComponent(seleccionarSede, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(seleccionFiltroSede, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)))
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(seleccionarSede, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(atributoSede, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(panelConsultarSedeLayout.createSequentialGroup()
+                                .addComponent(jLabel47)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(valor_consulta_sede, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(36, 36, 36)
+                        .addGroup(panelConsultarSedeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(boton_consultar_sede, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)
+                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         panelConsultarSedeLayout.setVerticalGroup(
             panelConsultarSedeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelConsultarSedeLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(panelConsultarSedeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton8, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelConsultarSedeLayout.createSequentialGroup()
-                        .addGroup(panelConsultarSedeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(seleccionarSede, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(seleccionFiltroSede, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(panelConsultarSedeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelConsultarSedeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(seleccionarSede, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(atributoSede, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel4))
+                    .addComponent(boton_consultar_sede))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE)
+                .addGroup(panelConsultarSedeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel47)
+                    .addComponent(valor_consulta_sede, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1))
+                .addGap(19, 19, 19)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 266, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -1026,43 +1189,6 @@ public class GUIgerente extends javax.swing.JFrame {
                     .addComponent(jButton14, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(botonCrearSede, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
-        );
-
-        panelSedeConsultaFiltroOFF.setPreferredSize(new java.awt.Dimension(389, 30));
-
-        javax.swing.GroupLayout panelSedeConsultaFiltroOFFLayout = new javax.swing.GroupLayout(panelSedeConsultaFiltroOFF);
-        panelSedeConsultaFiltroOFF.setLayout(panelSedeConsultaFiltroOFFLayout);
-        panelSedeConsultaFiltroOFFLayout.setHorizontalGroup(
-            panelSedeConsultaFiltroOFFLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 389, Short.MAX_VALUE)
-        );
-        panelSedeConsultaFiltroOFFLayout.setVerticalGroup(
-            panelSedeConsultaFiltroOFFLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 30, Short.MAX_VALUE)
-        );
-
-        panelSedeConsultaFiltroON.setPreferredSize(new java.awt.Dimension(389, 30));
-
-        jLabel4.setText("IDENTIFICACION SEDE:");
-
-        javax.swing.GroupLayout panelSedeConsultaFiltroONLayout = new javax.swing.GroupLayout(panelSedeConsultaFiltroON);
-        panelSedeConsultaFiltroON.setLayout(panelSedeConsultaFiltroONLayout);
-        panelSedeConsultaFiltroONLayout.setHorizontalGroup(
-            panelSedeConsultaFiltroONLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelSedeConsultaFiltroONLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-        panelSedeConsultaFiltroONLayout.setVerticalGroup(
-            panelSedeConsultaFiltroONLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelSedeConsultaFiltroONLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(panelSedeConsultaFiltroONLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(14, 14, 14))
         );
 
         panelCrearUsuario.setPreferredSize(new java.awt.Dimension(586, 366));
@@ -1952,6 +2078,222 @@ public class GUIgerente extends javax.swing.JFrame {
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
+        panelConsultarUsuario.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        panelConsultarUsuario.setPreferredSize(new java.awt.Dimension(586, 366));
+
+        comboBoxBusquedaUsuario.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Buscar por...", "Todos", "Cedula", "Sede", "Nombre", "Genero", "Cargo", "Salario", "Estado" }));
+        comboBoxBusquedaUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboBoxBusquedaUsuarioActionPerformed(evt);
+            }
+        });
+
+        boton_consultar_usuario.setText("CONSULTAR");
+        boton_consultar_usuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boton_consultar_usuarioActionPerformed(evt);
+            }
+        });
+
+        areaTextoConsultaUsuario.setEditable(false);
+        areaTextoConsultaUsuario.setColumns(20);
+        areaTextoConsultaUsuario.setRows(5);
+        jScrollPane4.setViewportView(areaTextoConsultaUsuario);
+
+        jLabel48.setText("VALOR BUSQUEDA:");
+
+        jButton2.setText("AYUDA");
+
+        javax.swing.GroupLayout panelConsultarUsuarioLayout = new javax.swing.GroupLayout(panelConsultarUsuario);
+        panelConsultarUsuario.setLayout(panelConsultarUsuarioLayout);
+        panelConsultarUsuarioLayout.setHorizontalGroup(
+            panelConsultarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelConsultarUsuarioLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panelConsultarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane4)
+                    .addGroup(panelConsultarUsuarioLayout.createSequentialGroup()
+                        .addGroup(panelConsultarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panelConsultarUsuarioLayout.createSequentialGroup()
+                                .addComponent(jLabel48)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(valor_consulta_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(comboBoxBusquedaUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(36, 36, 36)
+                        .addGroup(panelConsultarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(boton_consultar_usuario, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)
+                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap())
+        );
+        panelConsultarUsuarioLayout.setVerticalGroup(
+            panelConsultarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelConsultarUsuarioLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panelConsultarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(boton_consultar_usuario)
+                    .addComponent(comboBoxBusquedaUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(panelConsultarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel48)
+                    .addComponent(valor_consulta_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton2))
+                .addGap(19, 19, 19)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 266, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        panelConsultarInventario.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        panelConsultarInventario.setPreferredSize(new java.awt.Dimension(586, 366));
+
+        comboBosBusquedaInventario.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione Consulta" }));
+
+        boton_consultar_inventario.setText("CONSULTAR");
+        boton_consultar_inventario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boton_consultar_inventarioActionPerformed(evt);
+            }
+        });
+
+        areaTextoConsultaInventario.setEditable(false);
+        areaTextoConsultaInventario.setColumns(20);
+        areaTextoConsultaInventario.setRows(5);
+        jScrollPane5.setViewportView(areaTextoConsultaInventario);
+
+        jLabel49.setText("VALOR BUSQUEDA:");
+
+        jButton3.setText("AYUDA");
+
+        radioBotonVehiculo.setText("Vehiculo");
+        radioBotonVehiculo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radioBotonVehiculoActionPerformed(evt);
+            }
+        });
+
+        radioBotonRepuesto.setText("Repuesto");
+        radioBotonRepuesto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radioBotonRepuestoActionPerformed(evt);
+            }
+        });
+
+        radioBotonVenta.setText("Venta");
+        radioBotonVenta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radioBotonVentaActionPerformed(evt);
+            }
+        });
+
+        radioBotonCotizacion.setText("Cotizacion");
+        radioBotonCotizacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radioBotonCotizacionActionPerformed(evt);
+            }
+        });
+
+        radioBotonOrden.setText("Orden");
+        radioBotonOrden.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radioBotonOrdenActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panelConsultarInventarioLayout = new javax.swing.GroupLayout(panelConsultarInventario);
+        panelConsultarInventario.setLayout(panelConsultarInventarioLayout);
+        panelConsultarInventarioLayout.setHorizontalGroup(
+            panelConsultarInventarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelConsultarInventarioLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panelConsultarInventarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane5)
+                    .addGroup(panelConsultarInventarioLayout.createSequentialGroup()
+                        .addGroup(panelConsultarInventarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(panelConsultarInventarioLayout.createSequentialGroup()
+                                .addComponent(radioBotonVehiculo)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(radioBotonRepuesto)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(radioBotonVenta))
+                            .addComponent(comboBosBusquedaInventario, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(radioBotonCotizacion)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(radioBotonOrden)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 76, Short.MAX_VALUE)
+                        .addGroup(panelConsultarInventarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(boton_consultar_inventario, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
+                            .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(panelConsultarInventarioLayout.createSequentialGroup()
+                        .addGroup(panelConsultarInventarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(valor_consulta_inventario, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel49))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        panelConsultarInventarioLayout.setVerticalGroup(
+            panelConsultarInventarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelConsultarInventarioLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panelConsultarInventarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(boton_consultar_inventario)
+                    .addComponent(radioBotonVehiculo)
+                    .addComponent(radioBotonRepuesto)
+                    .addComponent(radioBotonVenta)
+                    .addComponent(radioBotonCotizacion)
+                    .addComponent(radioBotonOrden))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(panelConsultarInventarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton3)
+                    .addComponent(comboBosBusquedaInventario, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel49)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(valor_consulta_inventario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        construccion.setPreferredSize(new java.awt.Dimension(717, 388));
+
+        jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        jLabel33.setIcon(new javax.swing.ImageIcon(getClass().getResource("/INTERFAZ/icono-construccion.jpg"))); // NOI18N
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(71, Short.MAX_VALUE)
+                .addComponent(jLabel33)
+                .addGap(58, 58, 58))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel33, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        javax.swing.GroupLayout construccionLayout = new javax.swing.GroupLayout(construccion);
+        construccion.setLayout(construccionLayout);
+        construccionLayout.setHorizontalGroup(
+            construccionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(construccionLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        construccionLayout.setVerticalGroup(
+            construccionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(construccionLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("AUTOS ABC -- GERENTE");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -1986,7 +2328,16 @@ public class GUIgerente extends javax.swing.JFrame {
         
         seleccionarSede.removeAllItems();
         seleccionarSede.addItem("Selecione una sede");
-      
+        seleccionarSede.addItem("Todas las sedes");
+        
+        ControladorSede cSede = new ControladorSede();
+        
+        ArrayList<Sede> sedes = cSede.consultarSedes();
+        
+        for (int i = 0; i < sedes.size(); i++){
+            seleccionarSede.addItem(sedes.get(i).getNombre());
+        }
+ 
     }//GEN-LAST:event_jButton15ActionPerformed
 
     private void botonModificarSedeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonModificarSedeActionPerformed
@@ -2082,20 +2433,9 @@ public class GUIgerente extends javax.swing.JFrame {
 
     }//GEN-LAST:event_botonCrearSedeActionPerformed
 
-    private void seleccionFiltroSedeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_seleccionFiltroSedeActionPerformed
-        if (seleccionFiltroSede.getSelectedIndex() == 1) {
-            card4.show(jPanel14, "CON-FILTRO");
-        }
-        
-        else {
-            
-            card4.show(jPanel14, "SIN-FILTRO");
-        }
-    }//GEN-LAST:event_seleccionFiltroSedeActionPerformed
-
-    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
+    private void atributoSedeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_atributoSedeActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox2ActionPerformed
+    }//GEN-LAST:event_atributoSedeActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         setVisible(false);
@@ -2941,19 +3281,2869 @@ public class GUIgerente extends javax.swing.JFrame {
        }
     }//GEN-LAST:event_botonModificarRepuestoActionPerformed
 
+    private void boton_consultar_sedeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_consultar_sedeActionPerformed
+       
+        ControladorSede cSede = new ControladorSede();
+        
+        ArrayList<Sede> sedes = cSede.consultarSedes();
+        
+       int index1 = seleccionarSede.getSelectedIndex();
+       int index2 = atributoSede.getSelectedIndex();
+       
+       if ((index1 == 0)){
+           if ((index2 == 0)){
+           
+           }
+           else {
+               String informacion ="";
+               String valorS = "";
+               switch (index2) {
+                   case 1:
+                        try {
+                            int valorI = Integer.parseInt(valor_consulta_sede.getText());
+                            informacion = "";
+                            areaTextoConsultaSede.setText("");
+                            for (int i = 0; i < sedes.size(); i++){
+                                if (valorI == sedes.get(i).getId()) {
+                                    informacion = "------------------------------------------------------\n" 
+                                            + "IDENTIFICACION SEDE: " + sedes.get(i).getId()+ "\n" 
+                                            + "NOMBRE SEDE: " + sedes.get(i).getNombre() + "\n" 
+                                            + "CIUDAD SEDE: " + sedes.get(i).getCiudad() + "\n" 
+                                            + "DIRECION SEDE: " + sedes.get(i).getDireccion() + "\n" 
+                                            + "TELEFONO SEDE: " + sedes.get(i).getTelefono() + "\n" 
+                                            + "FAX SEDE: " + sedes.get(i).getFax() + "\n"
+                                            + "------------------------------------------------------\n" ;
+                                    areaTextoConsultaSede.append(informacion);
+                                }
+                            }
+                        }
+                        
+                        catch (NumberFormatException ex) {
+                            JOptionPane.showMessageDialog(rootPane, "ERROR: EL VALOR DE BUSQUEDA DEBE SER NUMERICO EN ESTE CASO", "AutosABC", JOptionPane.ERROR_MESSAGE);
+                        }
+                       break;
+                   case 2:
+                       valorS = valor_consulta_sede.getText();
+                       informacion = "";
+                       areaTextoConsultaSede.setText("");
+                       for (int i = 0; i < sedes.size(); i++){
+                            if (valorS.equalsIgnoreCase(sedes.get(i).getNombre())) {
+                                informacion = "------------------------------------------------------\n" 
+                                    + "IDENTIFICACION SEDE: " + sedes.get(i).getId()+ "\n" 
+                                    + "NOMBRE SEDE: " + sedes.get(i).getNombre() + "\n" 
+                                    + "CIUDAD SEDE: " + sedes.get(i).getCiudad() + "\n" 
+                                    + "DIRECION SEDE: " + sedes.get(i).getDireccion() + "\n" 
+                                    + "TELEFONO SEDE: " + sedes.get(i).getTelefono() + "\n" 
+                                    + "FAX SEDE: " + sedes.get(i).getFax() + "\n"
+                                    + "------------------------------------------------------\n" ;
+                                areaTextoConsultaSede.append(informacion);
+                            }
+                       }
+                       break;
+                   case 3:
+                       valorS = valor_consulta_sede.getText();
+                       informacion = "";
+                       areaTextoConsultaSede.setText("");
+                       for (int i = 0; i < sedes.size(); i++){
+                            if (valorS.equalsIgnoreCase(sedes.get(i).getCiudad())) {
+                                informacion = "------------------------------------------------------\n" 
+                                    + "IDENTIFICACION SEDE: " + sedes.get(i).getId()+ "\n" 
+                                    + "NOMBRE SEDE: " + sedes.get(i).getNombre() + "\n" 
+                                    + "CIUDAD SEDE: " + sedes.get(i).getCiudad() + "\n" 
+                                    + "DIRECION SEDE: " + sedes.get(i).getDireccion() + "\n" 
+                                    + "TELEFONO SEDE: " + sedes.get(i).getTelefono() + "\n" 
+                                    + "FAX SEDE: " + sedes.get(i).getFax() + "\n"
+                                    + "------------------------------------------------------\n" ;
+                                areaTextoConsultaSede.append(informacion);
+                            }
+                       }
+                       break;
+               }
+           }
+       }
+       
+       else if (index1 == 1) {
+           String informacion = "";
+           areaTextoConsultaSede.setText("");
+           for (int i = 0; i < sedes.size(); i++){
+               informacion = "------------------------------------------------------\n" 
+                           + "IDENTIFICACION SEDE: " + sedes.get(i).getId()+ "\n" 
+                           + "NOMBRE SEDE: " + sedes.get(i).getNombre() + "\n" 
+                           + "CIUDAD SEDE: " + sedes.get(i).getCiudad() + "\n" 
+                           + "DIRECION SEDE: " + sedes.get(i).getDireccion() + "\n" 
+                           + "TELEFONO SEDE: " + sedes.get(i).getTelefono() + "\n" 
+                           + "FAX SEDE: " + sedes.get(i).getFax() + "\n"
+                           + "------------------------------------------------------\n" ;
+               areaTextoConsultaSede.append(informacion);
+           }
+       }
+       
+       else {
+           
+           String informacion = "";
+               informacion = "------------------------------------------------------\n" 
+                           + "IDENTIFICACION SEDE: " + sedes.get(index1 - 1).getId()+ "\n" 
+                           + "NOMBRE SEDE: " + sedes.get(index1 - 1).getNombre() + "\n" 
+                           + "CIUDAD SEDE: " + sedes.get(index1 - 1).getCiudad() + "\n" 
+                           + "DIRECION SEDE: " + sedes.get(index1 - 1).getDireccion() + "\n" 
+                           + "TELEFONO SEDE: " + sedes.get(index1 - 1).getTelefono() + "\n" 
+                           + "FAX SEDE: " + sedes.get(index1 - 1).getFax() + "\n"
+                           + "------------------------------------------------------\n" ;
+               areaTextoConsultaSede.setText(informacion);
+
+           
+       }
+       
+       
+    }//GEN-LAST:event_boton_consultar_sedeActionPerformed
+
+    private void botonConsultarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonConsultarUsuarioActionPerformed
+       ventanaUsuarios.show(jPanel11, "CONSULTA-USUARIO");
+    }//GEN-LAST:event_botonConsultarUsuarioActionPerformed
+
+    private void comboBoxBusquedaUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxBusquedaUsuarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboBoxBusquedaUsuarioActionPerformed
+
+    private void boton_consultar_usuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_consultar_usuarioActionPerformed
+        int index = comboBoxBusquedaUsuario.getSelectedIndex();
+        
+        ControladorUsuario cU = new ControladorUsuario();
+        
+        ArrayList<Usuario> usuariosS = cU.consultarUsuarios(); 
+        if (index == 0) {
+            JOptionPane.showMessageDialog(rootPane, "DEBE SELECCIONAR UNA BUSQUEDA", "AutosABC", JOptionPane.ERROR_MESSAGE);
+        }
+        
+        else if (index == 1) {
+            String informacion = "";
+            for (int i = 0; i < usuariosS.size(); i++) {
+                informacion += "--------------------------------------------------------\n";
+                informacion += "CEDULA USUARIO: " + usuariosS.get(i).getCedula() + "\n";
+                informacion += "SEDE DONDE LABORA: " + usuariosS.get(i).getSede()+ "\n";
+                informacion += "NOMBRE USUARIO: " + usuariosS.get(i).getNombre() + "\n";
+                informacion += "FECHA DE NACIMIENTO: " + usuariosS.get(i).getFecha() + "\n";
+                informacion += "DIRECCION DEL USUARIO: " + usuariosS.get(i).getDireccion() + "\n";
+                informacion += "GENERO DEL USUARIO: " + usuariosS.get(i).getGenero() + "\n";
+                informacion += "EMAIL DEL USUARIO: " + usuariosS.get(i).getEmail() + "\n";
+                informacion += "CARGO DEL USUARIO: " + usuariosS.get(i).getCargo() + "\n";
+                informacion += "SALARIO DEL USUARIO: " + usuariosS.get(i).getSalario() + "\n";
+                informacion += "TELEFONO DEL USUARIO: " + usuariosS.get(i).getTelefono() + "\n";
+                informacion += "ESTADO DEL USUARIO: " + usuariosS.get(i).getEstado() + "\n";
+                informacion += "--------------------------------------------------------\n";
+            }
+            areaTextoConsultaUsuario.setText(informacion);
+        }
+        
+        else {
+            String informacion = "";
+            index = index - 2;
+            switch(index) {
+                
+                case 0:
+                    try {
+                        int cedula = Integer.parseInt(valor_consulta_usuario.getText());
+                        informacion = "";
+                        for (int i = 0; i < usuariosS.size(); i++) {
+                            if (cedula == usuariosS.get(i).getCedula()) {
+                                informacion += "--------------------------------------------------------\n";
+                                informacion += "CEDULA USUARIO: " + usuariosS.get(i).getCedula() + "\n";
+                                informacion += "SEDE DONDE LABORA: " + usuariosS.get(i).getSede()+ "\n";
+                                informacion += "NOMBRE USUARIO: " + usuariosS.get(i).getNombre() + "\n";
+                                informacion += "FECHA DE NACIMIENTO: " + usuariosS.get(i).getFecha() + "\n";
+                                informacion += "DIRECCION DEL USUARIO: " + usuariosS.get(i).getDireccion() + "\n";
+                                informacion += "GENERO DEL USUARIO: " + usuariosS.get(i).getGenero() + "\n";
+                                informacion += "EMAIL DEL USUARIO: " + usuariosS.get(i).getEmail() + "\n";
+                                informacion += "CARGO DEL USUARIO: " + usuariosS.get(i).getCargo() + "\n";
+                                informacion += "SALARIO DEL USUARIO: " + usuariosS.get(i).getSalario() + "\n";
+                                informacion += "TELEFONO DEL USUARIO: " + usuariosS.get(i).getTelefono() + "\n";
+                                informacion += "ESTADO DEL USUARIO: " + usuariosS.get(i).getEstado() + "\n";
+                                informacion += "--------------------------------------------------------\n";
+                            }
+                        }
+                        areaTextoConsultaUsuario.setText(informacion);
+                    }
+                    catch (NumberFormatException e) {
+                        JOptionPane.showMessageDialog(rootPane, "DEBE SELECCIONAR UNA BUSQUEDA", "AutosABC", JOptionPane.ERROR_MESSAGE);
+                    }
+                    break;
+                case 1:
+                    try {
+                        int sede = Integer.parseInt(valor_consulta_usuario.getText());
+                        informacion = "";
+                        for (int i = 0; i < usuariosS.size(); i++) {
+                            if (sede == usuariosS.get(i).getSede()) {
+                                informacion += "--------------------------------------------------------\n";
+                                informacion += "CEDULA USUARIO: " + usuariosS.get(i).getCedula() + "\n";
+                                informacion += "SEDE DONDE LABORA: " + usuariosS.get(i).getSede()+ "\n";
+                                informacion += "NOMBRE USUARIO: " + usuariosS.get(i).getNombre() + "\n";
+                                informacion += "FECHA DE NACIMIENTO: " + usuariosS.get(i).getFecha() + "\n";
+                                informacion += "DIRECCION DEL USUARIO: " + usuariosS.get(i).getDireccion() + "\n";
+                                informacion += "GENERO DEL USUARIO: " + usuariosS.get(i).getGenero() + "\n";
+                                informacion += "EMAIL DEL USUARIO: " + usuariosS.get(i).getEmail() + "\n";
+                                informacion += "CARGO DEL USUARIO: " + usuariosS.get(i).getCargo() + "\n";
+                                informacion += "SALARIO DEL USUARIO: " + usuariosS.get(i).getSalario() + "\n";
+                                informacion += "TELEFONO DEL USUARIO: " + usuariosS.get(i).getTelefono() + "\n";
+                                informacion += "ESTADO DEL USUARIO: " + usuariosS.get(i).getEstado() + "\n";
+                                informacion += "--------------------------------------------------------\n";
+                            }
+                        }
+                        areaTextoConsultaUsuario.setText(informacion);
+                    }
+                    catch (NumberFormatException e) {
+                        JOptionPane.showMessageDialog(rootPane, "DEBE SELECCIONAR UNA BUSQUEDA", "AutosABC", JOptionPane.ERROR_MESSAGE);
+                    }
+                    break;
+                case 2:
+                    try {
+                        String nombre = valor_consulta_usuario.getText();
+                        informacion = "";
+                        for (int i = 0; i < usuariosS.size(); i++) {
+                            if (usuariosS.get(i).getNombre().contains(nombre)) {
+                                informacion += "--------------------------------------------------------\n";
+                                informacion += "CEDULA USUARIO: " + usuariosS.get(i).getCedula() + "\n";
+                                informacion += "SEDE DONDE LABORA: " + usuariosS.get(i).getSede()+ "\n";
+                                informacion += "NOMBRE USUARIO: " + usuariosS.get(i).getNombre() + "\n";
+                                informacion += "FECHA DE NACIMIENTO: " + usuariosS.get(i).getFecha() + "\n";
+                                informacion += "DIRECCION DEL USUARIO: " + usuariosS.get(i).getDireccion() + "\n";
+                                informacion += "GENERO DEL USUARIO: " + usuariosS.get(i).getGenero() + "\n";
+                                informacion += "EMAIL DEL USUARIO: " + usuariosS.get(i).getEmail() + "\n";
+                                informacion += "CARGO DEL USUARIO: " + usuariosS.get(i).getCargo() + "\n";
+                                informacion += "SALARIO DEL USUARIO: " + usuariosS.get(i).getSalario() + "\n";
+                                informacion += "TELEFONO DEL USUARIO: " + usuariosS.get(i).getTelefono() + "\n";
+                                informacion += "ESTADO DEL USUARIO: " + usuariosS.get(i).getEstado() + "\n";
+                                informacion += "--------------------------------------------------------\n";
+                            }
+                        }
+                        areaTextoConsultaUsuario.setText(informacion);
+                    }
+                    catch (NumberFormatException e) {
+                        JOptionPane.showMessageDialog(rootPane, "DEBE SELECCIONAR UNA BUSQUEDA", "AutosABC", JOptionPane.ERROR_MESSAGE);
+                    }
+                    break;
+                case 3:
+                    try {
+                        char genero = valor_consulta_usuario.getText().charAt(0);
+                        informacion = "";
+                        for (int i = 0; i < usuariosS.size(); i++) {
+                            if (usuariosS.get(i).getGenero() == genero) {
+                                informacion += "--------------------------------------------------------\n";
+                                informacion += "CEDULA USUARIO: " + usuariosS.get(i).getCedula() + "\n";
+                                informacion += "SEDE DONDE LABORA: " + usuariosS.get(i).getSede()+ "\n";
+                                informacion += "NOMBRE USUARIO: " + usuariosS.get(i).getNombre() + "\n";
+                                informacion += "FECHA DE NACIMIENTO: " + usuariosS.get(i).getFecha() + "\n";
+                                informacion += "DIRECCION DEL USUARIO: " + usuariosS.get(i).getDireccion() + "\n";
+                                informacion += "GENERO DEL USUARIO: " + usuariosS.get(i).getGenero() + "\n";
+                                informacion += "EMAIL DEL USUARIO: " + usuariosS.get(i).getEmail() + "\n";
+                                informacion += "CARGO DEL USUARIO: " + usuariosS.get(i).getCargo() + "\n";
+                                informacion += "SALARIO DEL USUARIO: " + usuariosS.get(i).getSalario() + "\n";
+                                informacion += "TELEFONO DEL USUARIO: " + usuariosS.get(i).getTelefono() + "\n";
+                                informacion += "ESTADO DEL USUARIO: " + usuariosS.get(i).getEstado() + "\n";
+                                informacion += "--------------------------------------------------------\n";
+                            }
+                        }
+                        areaTextoConsultaUsuario.setText(informacion);
+                    }
+                    catch (StringIndexOutOfBoundsException e) {
+                        JOptionPane.showMessageDialog(rootPane, "NO SE PERMITEN CAMPOS VACIOS", "AutosABC", JOptionPane.ERROR_MESSAGE);
+                    }
+                    break;
+                case 4:
+                    if (valor_consulta_usuario.getText().equalsIgnoreCase("GERENTE")) {
+                        informacion = "";
+                        for (int i = 0; i < usuariosS.size(); i++) {
+                            if (usuariosS.get(i).getCargo() == 1) {
+                                informacion += "--------------------------------------------------------\n";
+                                informacion += "CEDULA USUARIO: " + usuariosS.get(i).getCedula() + "\n";
+                                informacion += "SEDE DONDE LABORA: " + usuariosS.get(i).getSede()+ "\n";
+                                informacion += "NOMBRE USUARIO: " + usuariosS.get(i).getNombre() + "\n";
+                                informacion += "FECHA DE NACIMIENTO: " + usuariosS.get(i).getFecha() + "\n";
+                                informacion += "DIRECCION DEL USUARIO: " + usuariosS.get(i).getDireccion() + "\n";
+                                informacion += "GENERO DEL USUARIO: " + usuariosS.get(i).getGenero() + "\n";
+                                informacion += "EMAIL DEL USUARIO: " + usuariosS.get(i).getEmail() + "\n";
+                                informacion += "CARGO DEL USUARIO: GERENTE \n";
+                                informacion += "SALARIO DEL USUARIO: " + usuariosS.get(i).getSalario() + "\n";
+                                informacion += "TELEFONO DEL USUARIO: " + usuariosS.get(i).getTelefono() + "\n";
+                                informacion += "ESTADO DEL USUARIO: " + usuariosS.get(i).getEstado() + "\n";
+                                informacion += "--------------------------------------------------------\n";
+                            }
+                        }
+                        areaTextoConsultaUsuario.setText(informacion);
+                    }
+                    
+                    else if (valor_consulta_usuario.getText().equalsIgnoreCase("VENDEDOR")) {
+                        informacion = "";
+                        for (int i = 0; i < usuariosS.size(); i++) {
+                            if (usuariosS.get(i).getCargo() == 3) {
+                                informacion += "--------------------------------------------------------\n";
+                                informacion += "CEDULA USUARIO: " + usuariosS.get(i).getCedula() + "\n";
+                                informacion += "SEDE DONDE LABORA: " + usuariosS.get(i).getSede()+ "\n";
+                                informacion += "NOMBRE USUARIO: " + usuariosS.get(i).getNombre() + "\n";
+                                informacion += "FECHA DE NACIMIENTO: " + usuariosS.get(i).getFecha() + "\n";
+                                informacion += "DIRECCION DEL USUARIO: " + usuariosS.get(i).getDireccion() + "\n";
+                                informacion += "GENERO DEL USUARIO: " + usuariosS.get(i).getGenero() + "\n";
+                                informacion += "EMAIL DEL USUARIO: " + usuariosS.get(i).getEmail() + "\n";
+                                informacion += "CARGO DEL USUARIO: VENDEDOR \n";
+                                informacion += "SALARIO DEL USUARIO: " + usuariosS.get(i).getSalario() + "\n";
+                                informacion += "TELEFONO DEL USUARIO: " + usuariosS.get(i).getTelefono() + "\n";
+                                informacion += "ESTADO DEL USUARIO: " + usuariosS.get(i).getEstado() + "\n";
+                                informacion += "--------------------------------------------------------\n";
+                            }
+                        }
+                        areaTextoConsultaUsuario.setText(informacion);
+                    }
+                    
+                    else if(valor_consulta_usuario.getText().equalsIgnoreCase("JEFE DE TALLER")) {
+                        informacion = "";
+                        for (int i = 0; i < usuariosS.size(); i++) {
+                            if (usuariosS.get(i).getCargo() == 2) {
+                                informacion += "--------------------------------------------------------\n";
+                                informacion += "CEDULA USUARIO: " + usuariosS.get(i).getCedula() + "\n";
+                                informacion += "SEDE DONDE LABORA: " + usuariosS.get(i).getSede()+ "\n";
+                                informacion += "NOMBRE USUARIO: " + usuariosS.get(i).getNombre() + "\n";
+                                informacion += "FECHA DE NACIMIENTO: " + usuariosS.get(i).getFecha() + "\n";
+                                informacion += "DIRECCION DEL USUARIO: " + usuariosS.get(i).getDireccion() + "\n";
+                                informacion += "GENERO DEL USUARIO: " + usuariosS.get(i).getGenero() + "\n";
+                                informacion += "EMAIL DEL USUARIO: " + usuariosS.get(i).getEmail() + "\n";
+                                informacion += "CARGO DEL USUARIO: JEFE DE TALLER \n";
+                                informacion += "SALARIO DEL USUARIO: " + usuariosS.get(i).getSalario() + "\n";
+                                informacion += "TELEFONO DEL USUARIO: " + usuariosS.get(i).getTelefono() + "\n";
+                                informacion += "ESTADO DEL USUARIO: " + usuariosS.get(i).getEstado() + "\n";
+                                informacion += "--------------------------------------------------------\n";
+                            }
+                        }
+                        areaTextoConsultaUsuario.setText(informacion);
+                    }
+                    else {
+                        JOptionPane.showMessageDialog(rootPane, "ESTE CAMPO SÓLO ADMITE 3 VALORES DE BUSQUEDA: \n 1) GERENTE\n2) VENDEDOR\n 3) JEFE DE TALLER", "AutosABC", JOptionPane.ERROR_MESSAGE);
+                    }
+                    break;
+                case 5:
+                    try {
+                        String formato = valor_consulta_usuario.getText();
+                        informacion = "";
+                        if ((formato.charAt(0) == '>') && (formato.charAt(1) == '=')) {
+                            String numero = "";
+                            for (int i = 2; i < formato.length(); i++){
+                                numero += formato.charAt(i);
+                            }
+                            int valor = Integer.parseInt(numero);
+                            for (int i = 0; i < usuariosS.size(); i++) {
+                                if (usuariosS.get(i).getSalario() >= valor) {
+                                    informacion += "--------------------------------------------------------\n";
+                                    informacion += "CEDULA USUARIO: " + usuariosS.get(i).getCedula() + "\n";
+                                    informacion += "SEDE DONDE LABORA: " + usuariosS.get(i).getSede()+ "\n";
+                                    informacion += "NOMBRE USUARIO: " + usuariosS.get(i).getNombre() + "\n";
+                                    informacion += "FECHA DE NACIMIENTO: " + usuariosS.get(i).getFecha() + "\n";
+                                    informacion += "DIRECCION DEL USUARIO: " + usuariosS.get(i).getDireccion() + "\n";
+                                    informacion += "GENERO DEL USUARIO: " + usuariosS.get(i).getGenero() + "\n";
+                                    informacion += "EMAIL DEL USUARIO: " + usuariosS.get(i).getEmail() + "\n";
+                                    informacion += "CARGO DEL USUARIO: " + usuariosS.get(i).getCargo() + "\n";
+                                    informacion += "SALARIO DEL USUARIO: " + usuariosS.get(i).getSalario() + "\n";
+                                    informacion += "TELEFONO DEL USUARIO: " + usuariosS.get(i).getTelefono() + "\n";
+                                    informacion += "ESTADO DEL USUARIO: " + usuariosS.get(i).getEstado() + "\n";
+                                    informacion += "--------------------------------------------------------\n";
+                                }
+                            }
+                            areaTextoConsultaUsuario.setText(informacion);
+                        }
+                        else if ((formato.charAt(0) == '<') && (formato.charAt(1) == '=')) {
+                            String numero = "";
+                            for (int i = 2; i < formato.length(); i++){
+                                numero += formato.charAt(i);
+                            }
+                            int valor = Integer.parseInt(numero);
+                            for (int i = 0; i < usuariosS.size(); i++) {
+                                if (usuariosS.get(i).getSalario() <= valor) {
+                                    informacion += "--------------------------------------------------------\n";
+                                    informacion += "CEDULA USUARIO: " + usuariosS.get(i).getCedula() + "\n";
+                                    informacion += "SEDE DONDE LABORA: " + usuariosS.get(i).getSede()+ "\n";
+                                    informacion += "NOMBRE USUARIO: " + usuariosS.get(i).getNombre() + "\n";
+                                    informacion += "FECHA DE NACIMIENTO: " + usuariosS.get(i).getFecha() + "\n";
+                                    informacion += "DIRECCION DEL USUARIO: " + usuariosS.get(i).getDireccion() + "\n";
+                                    informacion += "GENERO DEL USUARIO: " + usuariosS.get(i).getGenero() + "\n";
+                                    informacion += "EMAIL DEL USUARIO: " + usuariosS.get(i).getEmail() + "\n";
+                                    informacion += "CARGO DEL USUARIO: " + usuariosS.get(i).getCargo() + "\n";
+                                    informacion += "SALARIO DEL USUARIO: " + usuariosS.get(i).getSalario() + "\n";
+                                    informacion += "TELEFONO DEL USUARIO: " + usuariosS.get(i).getTelefono() + "\n";
+                                    informacion += "ESTADO DEL USUARIO: " + usuariosS.get(i).getEstado() + "\n";
+                                    informacion += "--------------------------------------------------------\n";
+                                }
+                            }
+                            areaTextoConsultaUsuario.setText(informacion);
+                        }
+                        
+                        else if ((formato.charAt(0) == '=') && (formato.charAt(1) == '=')) {
+                            String numero = "";
+                            for (int i = 2; i < formato.length(); i++){
+                                numero += formato.charAt(i);
+                            }
+                            int valor = Integer.parseInt(numero);
+                            for (int i = 0; i < usuariosS.size(); i++) {
+                                if (usuariosS.get(i).getSalario() == valor) {
+                                    informacion += "--------------------------------------------------------\n";
+                                    informacion += "CEDULA USUARIO: " + usuariosS.get(i).getCedula() + "\n";
+                                    informacion += "SEDE DONDE LABORA: " + usuariosS.get(i).getSede()+ "\n";
+                                    informacion += "NOMBRE USUARIO: " + usuariosS.get(i).getNombre() + "\n";
+                                    informacion += "FECHA DE NACIMIENTO: " + usuariosS.get(i).getFecha() + "\n";
+                                    informacion += "DIRECCION DEL USUARIO: " + usuariosS.get(i).getDireccion() + "\n";
+                                    informacion += "GENERO DEL USUARIO: " + usuariosS.get(i).getGenero() + "\n";
+                                    informacion += "EMAIL DEL USUARIO: " + usuariosS.get(i).getEmail() + "\n";
+                                    informacion += "CARGO DEL USUARIO: " + usuariosS.get(i).getCargo() + "\n";
+                                    informacion += "SALARIO DEL USUARIO: " + usuariosS.get(i).getSalario() + "\n";
+                                    informacion += "TELEFONO DEL USUARIO: " + usuariosS.get(i).getTelefono() + "\n";
+                                    informacion += "ESTADO DEL USUARIO: " + usuariosS.get(i).getEstado() + "\n";
+                                    informacion += "--------------------------------------------------------\n";
+                                }
+                            }
+                            areaTextoConsultaUsuario.setText(informacion);
+                        }
+                        else {
+                            JOptionPane.showMessageDialog(rootPane, "FORMATO INCORRECTO, DEBE ANTERPONER ANTES DEL NUMERO:\n 1) '>=' PARA SALARIOS MAYORES O IGUALES AL INGRESADO\n 2) '<=' PARA SALARIOS MENORES O IGUALES AL INGRESADO\n 3) '==' PARA VALORES ESTRICTAMENTE IGUALES AL INGRESADO", "AutosABC", JOptionPane.ERROR_MESSAGE);
+                        }
+                        
+                    }
+                    catch (NumberFormatException e) {
+                        JOptionPane.showMessageDialog(rootPane, "EL SALARIO DEBE SER NUMERICO", "AutosABC", JOptionPane.ERROR_MESSAGE);
+                    }
+                    catch (StringIndexOutOfBoundsException e) {
+                        JOptionPane.showMessageDialog(rootPane, "FORMATO INCORRECTO, DEBE ANTERPONER ANTES DEL NUMERO:\n 1) '>=' PARA SALARIOS MAYORES O IGUALES AL INGRESADO\n 2) '<=' PARA SALARIOS MENORES O IGUALES AL INGRESADO\n 3) '==' PARA VALORES ESTRICTAMENTE IGUALES AL INGRESADO", "AutosABC", JOptionPane.ERROR_MESSAGE);
+                    }
+                    break;
+                case 6:
+                    if (valor_consulta_usuario.getText().equalsIgnoreCase("ACTIVO")) {
+                        informacion = "";
+                        for (int i = 0; i < usuariosS.size(); i++) {
+                            if (usuariosS.get(i).getEstado().equalsIgnoreCase("ACTIVO")) {
+                                informacion += "--------------------------------------------------------\n";
+                                informacion += "CEDULA USUARIO: " + usuariosS.get(i).getCedula() + "\n";
+                                informacion += "SEDE DONDE LABORA: " + usuariosS.get(i).getSede()+ "\n";
+                                informacion += "NOMBRE USUARIO: " + usuariosS.get(i).getNombre() + "\n";
+                                informacion += "FECHA DE NACIMIENTO: " + usuariosS.get(i).getFecha() + "\n";
+                                informacion += "DIRECCION DEL USUARIO: " + usuariosS.get(i).getDireccion() + "\n";
+                                informacion += "GENERO DEL USUARIO: " + usuariosS.get(i).getGenero() + "\n";
+                                informacion += "EMAIL DEL USUARIO: " + usuariosS.get(i).getEmail() + "\n";
+                                informacion += "CARGO DEL USUARIO: GERENTE \n";
+                                informacion += "SALARIO DEL USUARIO: " + usuariosS.get(i).getSalario() + "\n";
+                                informacion += "TELEFONO DEL USUARIO: " + usuariosS.get(i).getTelefono() + "\n";
+                                informacion += "ESTADO DEL USUARIO: " + usuariosS.get(i).getEstado() + "\n";
+                                informacion += "--------------------------------------------------------\n";
+                            }
+                        }
+                        areaTextoConsultaUsuario.setText(informacion);
+                    }
+                    
+                    else if (valor_consulta_usuario.getText().equalsIgnoreCase("INACTIVO")) {
+                        informacion = "";
+                        for (int i = 0; i < usuariosS.size(); i++) {
+                            if (usuariosS.get(i).getEstado().equalsIgnoreCase("INACTIVO")) {
+                                informacion += "--------------------------------------------------------\n";
+                                informacion += "CEDULA USUARIO: " + usuariosS.get(i).getCedula() + "\n";
+                                informacion += "SEDE DONDE LABORA: " + usuariosS.get(i).getSede()+ "\n";
+                                informacion += "NOMBRE USUARIO: " + usuariosS.get(i).getNombre() + "\n";
+                                informacion += "FECHA DE NACIMIENTO: " + usuariosS.get(i).getFecha() + "\n";
+                                informacion += "DIRECCION DEL USUARIO: " + usuariosS.get(i).getDireccion() + "\n";
+                                informacion += "GENERO DEL USUARIO: " + usuariosS.get(i).getGenero() + "\n";
+                                informacion += "EMAIL DEL USUARIO: " + usuariosS.get(i).getEmail() + "\n";
+                                informacion += "CARGO DEL USUARIO: VENDEDOR \n";
+                                informacion += "SALARIO DEL USUARIO: " + usuariosS.get(i).getSalario() + "\n";
+                                informacion += "TELEFONO DEL USUARIO: " + usuariosS.get(i).getTelefono() + "\n";
+                                informacion += "ESTADO DEL USUARIO: " + usuariosS.get(i).getEstado() + "\n";
+                                informacion += "--------------------------------------------------------\n";
+                            }
+                        }
+                        areaTextoConsultaUsuario.setText(informacion);
+                    }
+                    else {
+                        JOptionPane.showMessageDialog(rootPane, "ESTE CAMPO SÓLO ADMITE 2 VALORES DE BUSQUEDA: \n 1) ACTIVO\n2) INACTIVO\n", "AutosABC", JOptionPane.ERROR_MESSAGE);
+                    }
+                    break;
+            }
+        }
+    }//GEN-LAST:event_boton_consultar_usuarioActionPerformed
+
+    private void botonConsultarInventarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonConsultarInventarioActionPerformed
+       ventanaInventario.show(jPanel13, "CONSULTA-INVENTARIO");
+    }//GEN-LAST:event_botonConsultarInventarioActionPerformed
+
+    private void boton_consultar_inventarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_consultar_inventarioActionPerformed
+       if (radioBotonVehiculo.isSelected()){
+           ControladorVehiculo cV = new ControladorVehiculo();
+           
+           ArrayList<Vehiculo>  vehiculosI = cV.consultarVehiculos2();
+           
+           int index = comboBosBusquedaInventario.getSelectedIndex();
+           if (index == 0){
+               JOptionPane.showMessageDialog(rootPane, "DEBE SELECCIONAR UNA BUSQUEDA", "AutosABC", JOptionPane.ERROR_MESSAGE);
+           }
+           else if(index == 1) {
+               String informacion = "";
+               for (int i = 0; i < vehiculosI.size(); i++){
+                   informacion += "--------------------------------------------\n";
+                   informacion += "IDENTIFICACION VEHICULO: " + vehiculosI.get(i).getVehiculo() + "\n";
+                   informacion += "SEDE VEHICULO: " + vehiculosI.get(i).getId_sede() + "\n";
+                   informacion += "COLOR DEL VEHICULO: " + vehiculosI.get(i).getColor()+ "\n";
+                   informacion += "MARCA DEL VEHICULO: " + vehiculosI.get(i).getMarca()+ "\n";
+                   informacion += "REFERENCIA DEL VEHICULO: " + vehiculosI.get(i).getReferencia()+ "\n";
+                   informacion += "TIPO DEL VEHICULO: " + vehiculosI.get(i).getTipo() + "\n";
+                   informacion += "TRACCION DEL VEHICULO: " + vehiculosI.get(i).getTraccion() + "\n";
+                   informacion += "MODELO DEL VEHICULO: " + vehiculosI.get(i).getModelo() + "\n";
+                   informacion += "PRECIO DLE VEHICULO: " + vehiculosI.get(i).getPrecio() + "\n";
+                   informacion += "IVA DEL VEHICULO: " + vehiculosI.get(i).getIva() + "\n";
+                   informacion += "ESTADO DEL VEHICULO: " + vehiculosI.get(i).getEstado() + "\n";
+                   informacion += "--------------------------------------------\n";
+               }
+               areaTextoConsultaInventario.setText(informacion);
+           }
+           else {
+                index = index - 2;
+                String informacion = "";
+                switch (index) {
+                    case 0:
+                        try {
+                            int id = Integer.parseInt(valor_consulta_inventario.getText());
+                            
+                            informacion = "";
+                            for (int i = 0; i < vehiculosI.size(); i++){
+                                if (id == vehiculosI.get(i).getVehiculo()) {
+                                    informacion += "--------------------------------------------\n";
+                                    informacion += "IDENTIFICACION VEHICULO: " + vehiculosI.get(i).getVehiculo() + "\n";
+                                    informacion += "SEDE VEHICULO: " + vehiculosI.get(i).getId_sede() + "\n";
+                                    informacion += "COLOR DEL VEHICULO: " + vehiculosI.get(i).getColor()+ "\n";
+                                    informacion += "MARCA DEL VEHICULO: " + vehiculosI.get(i).getMarca()+ "\n";
+                                    informacion += "REFERENCIA DEL VEHICULO: " + vehiculosI.get(i).getReferencia()+ "\n";
+                                    informacion += "TIPO DEL VEHICULO: " + vehiculosI.get(i).getTipo() + "\n";
+                                    informacion += "TRACCION DEL VEHICULO:   " + vehiculosI.get(i).getTraccion() + "\n";
+                                    informacion += "MODELO DEL VEHICULO: " + vehiculosI.get(i).getModelo() + "\n";
+                                    informacion += "PRECIO DLE VEHICULO: " + vehiculosI.get(i).getPrecio() + "\n";
+                                    informacion += "IVA DEL VEHICULO: " + vehiculosI.get(i).getIva() + "\n";
+                                    informacion += "ESTADO DEL VEHICULO: " + vehiculosI.get(i).getEstado() + "\n";
+                                    informacion += "--------------------------------------------\n";
+                                }
+                            }
+                            areaTextoConsultaInventario.setText(informacion);
+                        }
+                        catch(NumberFormatException e) {
+                            JOptionPane.showMessageDialog(rootPane, "ESTE VALOR DE CONSULTA DEBE SER NUMERICO", "AutosABC", JOptionPane.ERROR_MESSAGE);
+                        }
+                        break;
+                    case 1:
+                        try {
+                            int id = Integer.parseInt(valor_consulta_inventario.getText());
+                            
+                            informacion = "";
+                            for (int i = 0; i < vehiculosI.size(); i++){
+                                if (id == vehiculosI.get(i).getId_sede()) {
+                                    informacion += "--------------------------------------------\n";
+                                    informacion += "IDENTIFICACION VEHICULO: " + vehiculosI.get(i).getVehiculo() + "\n";
+                                    informacion += "SEDE VEHICULO: " + vehiculosI.get(i).getId_sede() + "\n";
+                                    informacion += "COLOR DEL VEHICULO: " + vehiculosI.get(i).getColor()+ "\n";
+                                    informacion += "MARCA DEL VEHICULO: " + vehiculosI.get(i).getMarca()+ "\n";
+                                    informacion += "REFERENCIA DEL VEHICULO: " + vehiculosI.get(i).getReferencia()+ "\n";
+                                    informacion += "TIPO DEL VEHICULO: " + vehiculosI.get(i).getTipo() + "\n";
+                                    informacion += "TRACCION DEL VEHICULO:   " + vehiculosI.get(i).getTraccion() + "\n";
+                                    informacion += "MODELO DEL VEHICULO: " + vehiculosI.get(i).getModelo() + "\n";
+                                    informacion += "PRECIO DLE VEHICULO: " + vehiculosI.get(i).getPrecio() + "\n";
+                                    informacion += "IVA DEL VEHICULO: " + vehiculosI.get(i).getIva() + "\n";
+                                    informacion += "ESTADO DEL VEHICULO: " + vehiculosI.get(i).getEstado() + "\n";
+                                    informacion += "--------------------------------------------\n";
+                                }
+                            }
+                            areaTextoConsultaInventario.setText(informacion);
+                        }
+                        catch(NumberFormatException e) {
+                            JOptionPane.showMessageDialog(rootPane, "ESTE VALOR DE CONSULTA DEBE SER NUMERICO,\nYA QUE REPRESENTA LA IDENTIFICACION DE LA SEDE", "AutosABC", JOptionPane.ERROR_MESSAGE);
+                        }
+                        break;
+                    case 2:
+                            String color = valor_consulta_inventario.getText();
+                            
+                            informacion = "";
+                            for (int i = 0; i < vehiculosI.size(); i++){
+                                if (vehiculosI.get(i).getColor().equalsIgnoreCase(color)) {
+                                    informacion += "--------------------------------------------\n";
+                                    informacion += "IDENTIFICACION VEHICULO: " + vehiculosI.get(i).getVehiculo() + "\n";
+                                    informacion += "SEDE VEHICULO: " + vehiculosI.get(i).getId_sede() + "\n";
+                                    informacion += "COLOR DEL VEHICULO: " + vehiculosI.get(i).getColor()+ "\n";
+                                    informacion += "MARCA DEL VEHICULO: " + vehiculosI.get(i).getMarca()+ "\n";
+                                    informacion += "REFERENCIA DEL VEHICULO: " + vehiculosI.get(i).getReferencia()+ "\n";
+                                    informacion += "TIPO DEL VEHICULO: " + vehiculosI.get(i).getTipo() + "\n";
+                                    informacion += "TRACCION DEL VEHICULO:   " + vehiculosI.get(i).getTraccion() + "\n";
+                                    informacion += "MODELO DEL VEHICULO: " + vehiculosI.get(i).getModelo() + "\n";
+                                    informacion += "PRECIO DLE VEHICULO: " + vehiculosI.get(i).getPrecio() + "\n";
+                                    informacion += "IVA DEL VEHICULO: " + vehiculosI.get(i).getIva() + "\n";
+                                    informacion += "ESTADO DEL VEHICULO: " + vehiculosI.get(i).getEstado() + "\n";
+                                    informacion += "--------------------------------------------\n";
+                                }
+                            }
+                            areaTextoConsultaInventario.setText(informacion);
+                        break;
+                    case 3:
+                            String marca = valor_consulta_inventario.getText();
+                            
+                            informacion = "";
+                            for (int i = 0; i < vehiculosI.size(); i++){
+                                if (vehiculosI.get(i).getMarca().equalsIgnoreCase(marca)) {
+                                    informacion += "--------------------------------------------\n";
+                                    informacion += "IDENTIFICACION VEHICULO: " + vehiculosI.get(i).getVehiculo() + "\n";
+                                    informacion += "SEDE VEHICULO: " + vehiculosI.get(i).getId_sede() + "\n";
+                                    informacion += "COLOR DEL VEHICULO: " + vehiculosI.get(i).getColor()+ "\n";
+                                    informacion += "MARCA DEL VEHICULO: " + vehiculosI.get(i).getMarca()+ "\n";
+                                    informacion += "REFERENCIA DEL VEHICULO: " + vehiculosI.get(i).getReferencia()+ "\n";
+                                    informacion += "TIPO DEL VEHICULO: " + vehiculosI.get(i).getTipo() + "\n";
+                                    informacion += "TRACCION DEL VEHICULO:   " + vehiculosI.get(i).getTraccion() + "\n";
+                                    informacion += "MODELO DEL VEHICULO: " + vehiculosI.get(i).getModelo() + "\n";
+                                    informacion += "PRECIO DLE VEHICULO: " + vehiculosI.get(i).getPrecio() + "\n";
+                                    informacion += "IVA DEL VEHICULO: " + vehiculosI.get(i).getIva() + "\n";
+                                    informacion += "ESTADO DEL VEHICULO: " + vehiculosI.get(i).getEstado() + "\n";
+                                    informacion += "--------------------------------------------\n";
+                                }
+                            }
+                            areaTextoConsultaInventario.setText(informacion);
+                        break;
+                    case 4:
+                        String referencia = valor_consulta_inventario.getText();
+                            
+                            informacion = "";
+                            for (int i = 0; i < vehiculosI.size(); i++){
+                                if (vehiculosI.get(i).getReferencia().equalsIgnoreCase(referencia)) {
+                                    informacion += "--------------------------------------------\n";
+                                    informacion += "IDENTIFICACION VEHICULO: " + vehiculosI.get(i).getVehiculo() + "\n";
+                                    informacion += "SEDE VEHICULO: " + vehiculosI.get(i).getId_sede() + "\n";
+                                    informacion += "COLOR DEL VEHICULO: " + vehiculosI.get(i).getColor()+ "\n";
+                                    informacion += "MARCA DEL VEHICULO: " + vehiculosI.get(i).getMarca()+ "\n";
+                                    informacion += "REFERENCIA DEL VEHICULO: " + vehiculosI.get(i).getReferencia()+ "\n";
+                                    informacion += "TIPO DEL VEHICULO: " + vehiculosI.get(i).getTipo() + "\n";
+                                    informacion += "TRACCION DEL VEHICULO:   " + vehiculosI.get(i).getTraccion() + "\n";
+                                    informacion += "MODELO DEL VEHICULO: " + vehiculosI.get(i).getModelo() + "\n";
+                                    informacion += "PRECIO DLE VEHICULO: " + vehiculosI.get(i).getPrecio() + "\n";
+                                    informacion += "IVA DEL VEHICULO: " + vehiculosI.get(i).getIva() + "\n";
+                                    informacion += "ESTADO DEL VEHICULO: " + vehiculosI.get(i).getEstado() + "\n";
+                                    informacion += "--------------------------------------------\n";
+                                }
+                            }
+                            areaTextoConsultaInventario.setText(informacion);
+                        break;
+                    case 5:
+                        String tipo = valor_consulta_inventario.getText();
+                            
+                            informacion = "";
+                            for (int i = 0; i < vehiculosI.size(); i++){
+                                if (vehiculosI.get(i).getTipo().equalsIgnoreCase(tipo)) {
+                                    informacion += "--------------------------------------------\n";
+                                    informacion += "IDENTIFICACION VEHICULO: " + vehiculosI.get(i).getVehiculo() + "\n";
+                                    informacion += "SEDE VEHICULO: " + vehiculosI.get(i).getId_sede() + "\n";
+                                    informacion += "COLOR DEL VEHICULO: " + vehiculosI.get(i).getColor()+ "\n";
+                                    informacion += "MARCA DEL VEHICULO: " + vehiculosI.get(i).getMarca()+ "\n";
+                                    informacion += "REFERENCIA DEL VEHICULO: " + vehiculosI.get(i).getReferencia()+ "\n";
+                                    informacion += "TIPO DEL VEHICULO: " + vehiculosI.get(i).getTipo() + "\n";
+                                    informacion += "TRACCION DEL VEHICULO:   " + vehiculosI.get(i).getTraccion() + "\n";
+                                    informacion += "MODELO DEL VEHICULO: " + vehiculosI.get(i).getModelo() + "\n";
+                                    informacion += "PRECIO DLE VEHICULO: " + vehiculosI.get(i).getPrecio() + "\n";
+                                    informacion += "IVA DEL VEHICULO: " + vehiculosI.get(i).getIva() + "\n";
+                                    informacion += "ESTADO DEL VEHICULO: " + vehiculosI.get(i).getEstado() + "\n";
+                                    informacion += "--------------------------------------------\n";
+                                }
+                            }
+                            areaTextoConsultaInventario.setText(informacion);
+                        break;
+                    case 6:
+                        String traccion = valor_consulta_inventario.getText();
+                            
+                            informacion = "";
+                            for (int i = 0; i < vehiculosI.size(); i++){
+                                if (vehiculosI.get(i).getTraccion().equalsIgnoreCase(traccion)) {
+                                    informacion += "--------------------------------------------\n";
+                                    informacion += "IDENTIFICACION VEHICULO: " + vehiculosI.get(i).getVehiculo() + "\n";
+                                    informacion += "SEDE VEHICULO: " + vehiculosI.get(i).getId_sede() + "\n";
+                                    informacion += "COLOR DEL VEHICULO: " + vehiculosI.get(i).getColor()+ "\n";
+                                    informacion += "MARCA DEL VEHICULO: " + vehiculosI.get(i).getMarca()+ "\n";
+                                    informacion += "REFERENCIA DEL VEHICULO: " + vehiculosI.get(i).getReferencia()+ "\n";
+                                    informacion += "TIPO DEL VEHICULO: " + vehiculosI.get(i).getTipo() + "\n";
+                                    informacion += "TRACCION DEL VEHICULO:   " + vehiculosI.get(i).getTraccion() + "\n";
+                                    informacion += "MODELO DEL VEHICULO: " + vehiculosI.get(i).getModelo() + "\n";
+                                    informacion += "PRECIO DLE VEHICULO: " + vehiculosI.get(i).getPrecio() + "\n";
+                                    informacion += "IVA DEL VEHICULO: " + vehiculosI.get(i).getIva() + "\n";
+                                    informacion += "ESTADO DEL VEHICULO: " + vehiculosI.get(i).getEstado() + "\n";
+                                    informacion += "--------------------------------------------\n";
+                                }
+                            }
+                            areaTextoConsultaInventario.setText(informacion);
+                        break;
+                    case 7:
+                        try {
+                            String modelo = Integer.toString(Integer.parseInt(valor_consulta_inventario.getText()));
+                            
+                            informacion = "";
+                            for (int i = 0; i < vehiculosI.size(); i++){
+                                if (vehiculosI.get(i).getModelo().equalsIgnoreCase(modelo)) {
+                                    informacion += "--------------------------------------------\n";
+                                    informacion += "IDENTIFICACION VEHICULO: " + vehiculosI.get(i).getVehiculo() + "\n";
+                                    informacion += "SEDE VEHICULO: " + vehiculosI.get(i).getId_sede() + "\n";
+                                    informacion += "COLOR DEL VEHICULO: " + vehiculosI.get(i).getColor()+ "\n";
+                                    informacion += "MARCA DEL VEHICULO: " + vehiculosI.get(i).getMarca()+ "\n";
+                                    informacion += "REFERENCIA DEL VEHICULO: " + vehiculosI.get(i).getReferencia()+ "\n";
+                                    informacion += "TIPO DEL VEHICULO: " + vehiculosI.get(i).getTipo() + "\n";
+                                    informacion += "TRACCION DEL VEHICULO:   " + vehiculosI.get(i).getTraccion() + "\n";
+                                    informacion += "MODELO DEL VEHICULO: " + vehiculosI.get(i).getModelo() + "\n";
+                                    informacion += "PRECIO DLE VEHICULO: " + vehiculosI.get(i).getPrecio() + "\n";
+                                    informacion += "IVA DEL VEHICULO: " + vehiculosI.get(i).getIva() + "\n";
+                                    informacion += "ESTADO DEL VEHICULO: " + vehiculosI.get(i).getEstado() + "\n";
+                                    informacion += "--------------------------------------------\n";
+                                }
+                            }
+                            areaTextoConsultaInventario.setText(informacion);
+                        }
+                        catch(NumberFormatException e) {
+                            JOptionPane.showMessageDialog(rootPane, "ESTE VALOR DE CONSULTA DEBE SER NUMERICO,\nYA QUE REPRESENTA EL AÑO DEL VEHICULO", "AutosABC", JOptionPane.ERROR_MESSAGE);
+                        }
+                        break;
+                    case 8:
+                        String formato = valor_consulta_inventario.getText();
+                        
+                        if ((formato.charAt(0) == '>') && (formato.charAt(1) == '=')) {
+                            try {
+                                String precio = "";
+                                
+                                for (int i = 2; i < formato.length(); i++) {
+                                    precio += formato.charAt(i);
+                                }
+                                
+                                int valor = Integer.parseInt(precio);
+
+                                informacion = "";
+                                for (int i = 0; i < vehiculosI.size(); i++){
+                                    if (vehiculosI.get(i).getPrecio() >= valor) {
+                                        informacion += "--------------------------------------------\n";
+                                        informacion += "IDENTIFICACION VEHICULO: " + vehiculosI.get(i).getVehiculo() + "\n";
+                                        informacion += "SEDE VEHICULO: " + vehiculosI.get(i).getId_sede() + "\n";
+                                        informacion += "COLOR DEL VEHICULO: " + vehiculosI.get(i).getColor()+ "\n";
+                                        informacion += "MARCA DEL VEHICULO: " + vehiculosI.get(i).getMarca()+ "\n";
+                                        informacion += "REFERENCIA DEL VEHICULO: " + vehiculosI.get(i).getReferencia()+ "\n";
+                                        informacion += "TIPO DEL VEHICULO: " + vehiculosI.get(i).getTipo() + "\n";
+                                        informacion += "TRACCION DEL VEHICULO:   " + vehiculosI.get(i).getTraccion() + "\n";
+                                        informacion += "MODELO DEL VEHICULO: " + vehiculosI.get(i).getModelo() + "\n";
+                                        informacion += "PRECIO DLE VEHICULO: " + vehiculosI.get(i).getPrecio() + "\n";
+                                        informacion += "IVA DEL VEHICULO: " + vehiculosI.get(i).getIva() + "\n";
+                                        informacion += "ESTADO DEL VEHICULO: " + vehiculosI.get(i).getEstado() + "\n";
+                                        informacion += "--------------------------------------------\n";
+                                    }
+                                }
+                                areaTextoConsultaInventario.setText(informacion);
+                            }
+                            catch(NumberFormatException e) {
+                                JOptionPane.showMessageDialog(rootPane, "EL PRECIO DEBE SER NUMERICO", "AutosABC", JOptionPane.ERROR_MESSAGE);
+                            }
+                        }
+                        else  if((formato.charAt(0) == '<') && (formato.charAt(1) == '=')) {
+                            try {
+                                String precio = "";
+                                
+                                for (int i = 2; i < formato.length(); i++) {
+                                    precio += formato.charAt(i);
+                                }
+                                
+                                int valor = Integer.parseInt(precio);
+
+                                informacion = "";
+                                for (int i = 0; i < vehiculosI.size(); i++){
+                                    if (vehiculosI.get(i).getPrecio() <= valor) {
+                                        informacion += "--------------------------------------------\n";
+                                        informacion += "IDENTIFICACION VEHICULO: " + vehiculosI.get(i).getVehiculo() + "\n";
+                                        informacion += "SEDE VEHICULO: " + vehiculosI.get(i).getId_sede() + "\n";
+                                        informacion += "COLOR DEL VEHICULO: " + vehiculosI.get(i).getColor()+ "\n";
+                                        informacion += "MARCA DEL VEHICULO: " + vehiculosI.get(i).getMarca()+ "\n";
+                                        informacion += "REFERENCIA DEL VEHICULO: " + vehiculosI.get(i).getReferencia()+ "\n";
+                                        informacion += "TIPO DEL VEHICULO: " + vehiculosI.get(i).getTipo() + "\n";
+                                        informacion += "TRACCION DEL VEHICULO:   " + vehiculosI.get(i).getTraccion() + "\n";
+                                        informacion += "MODELO DEL VEHICULO: " + vehiculosI.get(i).getModelo() + "\n";
+                                        informacion += "PRECIO DLE VEHICULO: " + vehiculosI.get(i).getPrecio() + "\n";
+                                        informacion += "IVA DEL VEHICULO: " + vehiculosI.get(i).getIva() + "\n";
+                                        informacion += "ESTADO DEL VEHICULO: " + vehiculosI.get(i).getEstado() + "\n";
+                                        informacion += "--------------------------------------------\n";
+                                    }
+                                }
+                                areaTextoConsultaInventario.setText(informacion);
+                            }
+                            catch(NumberFormatException e) {
+                                JOptionPane.showMessageDialog(rootPane, "EL PRECIO DEBE SER NUMERICO", "AutosABC", JOptionPane.ERROR_MESSAGE);
+                            }
+                        
+                        }
+                        else if ((formato.charAt(0) == '=') && (formato.charAt(1) == '=')) {
+                            try {
+                                String precio = "";
+                                
+                                for (int i = 2; i < formato.length(); i++) {
+                                    precio += formato.charAt(i);
+                                }
+                                
+                                int valor = Integer.parseInt(precio);
+
+                                informacion = "";
+                                for (int i = 0; i < vehiculosI.size(); i++){
+                                    if (valor == vehiculosI.get(i).getPrecio()) {
+                                        informacion += "--------------------------------------------\n";
+                                        informacion += "IDENTIFICACION VEHICULO: " + vehiculosI.get(i).getVehiculo() + "\n";
+                                        informacion += "SEDE VEHICULO: " + vehiculosI.get(i).getId_sede() + "\n";
+                                        informacion += "COLOR DEL VEHICULO: " + vehiculosI.get(i).getColor()+ "\n";
+                                        informacion += "MARCA DEL VEHICULO: " + vehiculosI.get(i).getMarca()+ "\n";
+                                        informacion += "REFERENCIA DEL VEHICULO: " + vehiculosI.get(i).getReferencia()+ "\n";
+                                        informacion += "TIPO DEL VEHICULO: " + vehiculosI.get(i).getTipo() + "\n";
+                                        informacion += "TRACCION DEL VEHICULO:   " + vehiculosI.get(i).getTraccion() + "\n";
+                                        informacion += "MODELO DEL VEHICULO: " + vehiculosI.get(i).getModelo() + "\n";
+                                        informacion += "PRECIO DLE VEHICULO: " + vehiculosI.get(i).getPrecio() + "\n";
+                                        informacion += "IVA DEL VEHICULO: " + vehiculosI.get(i).getIva() + "\n";
+                                        informacion += "ESTADO DEL VEHICULO: " + vehiculosI.get(i).getEstado() + "\n";
+                                        informacion += "--------------------------------------------\n";
+                                    }
+                                }
+                                areaTextoConsultaInventario.setText(informacion);
+                            }
+                            catch(NumberFormatException e) {
+                                JOptionPane.showMessageDialog(rootPane, "EL PRECIO DEBE SER NUMERICO", "AutosABC", JOptionPane.ERROR_MESSAGE);
+                            }
+                        }
+                        else {
+                            JOptionPane.showMessageDialog(rootPane, "FORMATO DE CONSULTA INVALIDO, RECUERDE QUE EL PRECIO DEBE SER NUMERICO Y ADEMÁS PONER ANTES DEL PRECIO:\n"
+                                    + "1) PONER '>=' PARA CONSULTAR PRECIOS MAYORES O IGUALES AL INGRESADO\n"
+                                    + "2) PONER '<=' PARA CONSULTAR PRECIOS MENORES O IGUALES AL INGRESADO\n"
+                                    + "3) PONER '==' PARA CONSULTAR PRECIOS ESTRICTAMENTE IGUALES AL INGRESADO\n", "AutosABC", JOptionPane.ERROR_MESSAGE);
+                        }
+                        break;
+                    case 9:
+                            String estado = valor_consulta_inventario.getText();
+                            
+                            informacion = "";
+                            for (int i = 0; i < vehiculosI.size(); i++){
+                                if (vehiculosI.get(i).getEstado().equalsIgnoreCase(estado)) {
+                                    informacion += "--------------------------------------------\n";
+                                    informacion += "IDENTIFICACION VEHICULO: " + vehiculosI.get(i).getVehiculo() + "\n";
+                                    informacion += "SEDE VEHICULO: " + vehiculosI.get(i).getId_sede() + "\n";
+                                    informacion += "COLOR DEL VEHICULO: " + vehiculosI.get(i).getColor()+ "\n";
+                                    informacion += "MARCA DEL VEHICULO: " + vehiculosI.get(i).getMarca()+ "\n";
+                                    informacion += "REFERENCIA DEL VEHICULO: " + vehiculosI.get(i).getReferencia()+ "\n";
+                                    informacion += "TIPO DEL VEHICULO: " + vehiculosI.get(i).getTipo() + "\n";
+                                    informacion += "TRACCION DEL VEHICULO:   " + vehiculosI.get(i).getTraccion() + "\n";
+                                    informacion += "MODELO DEL VEHICULO: " + vehiculosI.get(i).getModelo() + "\n";
+                                    informacion += "PRECIO DLE VEHICULO: " + vehiculosI.get(i).getPrecio() + "\n";
+                                    informacion += "IVA DEL VEHICULO: " + vehiculosI.get(i).getIva() + "\n";
+                                    informacion += "ESTADO DEL VEHICULO: " + vehiculosI.get(i).getEstado() + "\n";
+                                    informacion += "--------------------------------------------\n";
+                                }
+                            }
+                            areaTextoConsultaInventario.setText(informacion);
+                        break;
+                }
+           }
+       }
+       else if(radioBotonRepuesto.isSelected()) {
+           
+           ControladorRepuesto cR = new ControladorRepuesto();
+           
+           ArrayList<Repuesto> repuestosI = cR.consultarRepuestos();
+           
+           int index = comboBosBusquedaInventario.getSelectedIndex();
+           if (index == 0){
+               JOptionPane.showMessageDialog(rootPane, "DEBE SELECCIONAR UNA BUSQUEDA", "AutosABC", JOptionPane.ERROR_MESSAGE);
+           }
+           else if(index == 1) {
+               String informacion = "";
+               for (int i = 0; i < repuestosI.size(); i++){
+                   informacion += "--------------------------------------------\n";
+                   informacion += "IDENTIFICACION REPUESTO: " + repuestosI.get(i).getId_repuesto()+ "\n";
+                   informacion += "SEDE REPUESTO: " + repuestosI.get(i).getId_sede()+ "\n";
+                   informacion += "NOMBRE REPUESTO: " + repuestosI.get(i).getNombre()+ "\n";
+                   informacion += "CANTIDAD REPUESTO: " + repuestosI.get(i).getCantidad()+ "\n";
+                   informacion += "PRECIO REPUESTO: " + repuestosI.get(i).getPrecio_unidad()+ "\n";
+                   informacion += "IVA REPUESTO: " + repuestosI.get(i).getIva()+ "\n";
+                   informacion += "DESCRIPCION REPUESTO: " + repuestosI.get(i).getDescripcion()+ "\n";
+                   informacion += "--------------------------------------------\n";
+               }
+               areaTextoConsultaInventario.setText(informacion);
+           }
+           else {
+               String informacion = "";
+                index = index - 2;
+                switch (index) {
+                    case 0:
+                        try {
+                            informacion = "";
+                            int id = Integer.parseInt(valor_consulta_inventario.getText());
+                            for (int i = 0; i < repuestosI.size(); i++){
+                                if (id == repuestosI.get(i).getId_repuesto()){
+                                    informacion += "--------------------------------------------\n";
+                                    informacion += "IDENTIFICACION REPUESTO: " + repuestosI.get(i).getId_repuesto()+ "\n";
+                                    informacion += "SEDE REPUESTO: " + repuestosI.get(i).getId_sede()+ "\n";
+                                    informacion += "NOMBRE REPUESTO: " + repuestosI.get(i).getNombre()+ "\n";
+                                    informacion += "CANTIDAD REPUESTO: " + repuestosI.get(i).getCantidad()+ "\n";
+                                    informacion += "PRECIO REPUESTO: " + repuestosI.get(i).getPrecio_unidad()+ "\n";
+                                    informacion += "IVA REPUESTO: " + repuestosI.get(i).getIva()+ "\n";
+                                    informacion += "DESCRIPCION REPUESTO: " + repuestosI.get(i).getDescripcion()+ "\n";
+                                    informacion += "--------------------------------------------\n";
+                                }
+                            }
+                            areaTextoConsultaInventario.setText(informacion);
+                        }
+                        
+                        catch (NumberFormatException e){
+                            JOptionPane.showMessageDialog(rootPane, "ESTE VALOR DE CONSULTA DEBE SER NUMERICO", "AutosABC", JOptionPane.ERROR_MESSAGE);
+                        }
+                        break;
+                    case 1:
+                        try {
+                            informacion = "";
+                            int sede = Integer.parseInt(valor_consulta_inventario.getText());
+                            for (int i = 0; i < repuestosI.size(); i++){
+                                if (sede == repuestosI.get(i).getId_sede()){
+                                    informacion += "--------------------------------------------\n";
+                                    informacion += "IDENTIFICACION REPUESTO: " + repuestosI.get(i).getId_repuesto()+ "\n";
+                                    informacion += "SEDE REPUESTO: " + repuestosI.get(i).getId_sede()+ "\n";
+                                    informacion += "NOMBRE REPUESTO: " + repuestosI.get(i).getNombre()+ "\n";
+                                    informacion += "CANTIDAD REPUESTO: " + repuestosI.get(i).getCantidad()+ "\n";
+                                    informacion += "PRECIO REPUESTO: " + repuestosI.get(i).getPrecio_unidad()+ "\n";
+                                    informacion += "IVA REPUESTO: " + repuestosI.get(i).getIva()+ "\n";
+                                    informacion += "DESCRIPCION REPUESTO: " + repuestosI.get(i).getDescripcion()+ "\n";
+                                    informacion += "--------------------------------------------\n";
+                                }
+                            }
+                            areaTextoConsultaInventario.setText(informacion);
+                        }
+                        
+                        catch (NumberFormatException e){
+                            JOptionPane.showMessageDialog(rootPane, "ESTE VALOR DE CONSULTA DEBE SER NUMERICO", "AutosABC", JOptionPane.ERROR_MESSAGE);
+                        }
+                        break;
+                    case 2:
+                            informacion = "";
+                            String nombre = valor_consulta_inventario.getText();
+                            for (int i = 0; i < repuestosI.size(); i++){
+                                if (repuestosI.get(i).getNombre().equalsIgnoreCase(nombre)){
+                                    informacion += "--------------------------------------------\n";
+                                    informacion += "IDENTIFICACION REPUESTO: " + repuestosI.get(i).getId_repuesto()+ "\n";
+                                    informacion += "SEDE REPUESTO: " + repuestosI.get(i).getId_sede()+ "\n";
+                                    informacion += "NOMBRE REPUESTO: " + repuestosI.get(i).getNombre()+ "\n";
+                                    informacion += "CANTIDAD REPUESTO: " + repuestosI.get(i).getCantidad()+ "\n";
+                                    informacion += "PRECIO REPUESTO: " + repuestosI.get(i).getPrecio_unidad()+ "\n";
+                                    informacion += "IVA REPUESTO: " + repuestosI.get(i).getIva()+ "\n";
+                                    informacion += "DESCRIPCION REPUESTO: " + repuestosI.get(i).getDescripcion()+ "\n";
+                                    informacion += "--------------------------------------------\n";
+                                }
+                            }
+                            areaTextoConsultaInventario.setText(informacion);
+                        break;
+                    case 3:
+                        String formato = valor_consulta_inventario.getText();
+                        
+                        if (formato.equals("")) {
+                            JOptionPane.showMessageDialog(rootPane, "ERROR: CAMPO VACIO", "AutosABC", JOptionPane.ERROR_MESSAGE);
+                        }
+                        
+                        else {
+                            if ((formato.charAt(0) == '>') && (formato.charAt(1) == '=')) {
+                                try {
+                                    String precio = "";
+
+                                    for (int i = 2; i < formato.length(); i++) {
+                                        precio += formato.charAt(i);
+                                    }
+
+                                    int valor = Integer.parseInt(precio);
+
+                                    informacion = "";
+                                    for (int i = 0; i < repuestosI.size(); i++){
+                                        if (repuestosI.get(i).getPrecio_unidad() >= valor) {
+                                            informacion += "--------------------------------------------\n";
+                                            informacion += "IDENTIFICACION REPUESTO: " + repuestosI.get(i).getId_repuesto()+ "\n";
+                                            informacion += "SEDE REPUESTO: " + repuestosI.get(i).getId_sede()+ "\n";
+                                            informacion += "NOMBRE REPUESTO: " + repuestosI.get(i).getNombre()+ "\n";
+                                            informacion += "CANTIDAD REPUESTO: " + repuestosI.get(i).getCantidad()+ "\n";
+                                            informacion += "PRECIO REPUESTO: " + repuestosI.get(i).getPrecio_unidad()+ "\n";
+                                            informacion += "IVA REPUESTO: " + repuestosI.get(i).getIva()+ "\n";
+                                            informacion += "DESCRIPCION REPUESTO: " + repuestosI.get(i).getDescripcion()+ "\n";
+                                            informacion += "--------------------------------------------\n";
+                                        }
+                                    }
+                                    areaTextoConsultaInventario.setText(informacion);
+                                }
+                                catch(NumberFormatException e) {
+                                    JOptionPane.showMessageDialog(rootPane, "EL PRECIO DEBE SER NUMERICO", "AutosABC", JOptionPane.ERROR_MESSAGE);
+                                }
+                            }
+                            else  if((formato.charAt(0) == '<') && (formato.charAt(1) == '=')) {
+                                try {
+                                    String precio = "";
+
+                                    for (int i = 2; i < formato.length(); i++) {
+                                        precio += formato.charAt(i);
+                                    }
+
+                                    int valor = Integer.parseInt(precio);
+
+                                    informacion = "";
+                                    for (int i = 0; i < repuestosI.size(); i++){
+                                        if (repuestosI.get(i).getPrecio_unidad() <= valor) {
+                                            informacion += "--------------------------------------------\n";
+                                            informacion += "IDENTIFICACION REPUESTO: " + repuestosI.get(i).getId_repuesto()+ "\n";
+                                            informacion += "SEDE REPUESTO: " + repuestosI.get(i).getId_sede()+ "\n";
+                                            informacion += "NOMBRE REPUESTO: " + repuestosI.get(i).getNombre()+ "\n";
+                                            informacion += "CANTIDAD REPUESTO: " + repuestosI.get(i).getCantidad()+ "\n";
+                                            informacion += "PRECIO REPUESTO: " + repuestosI.get(i).getPrecio_unidad()+ "\n";
+                                            informacion += "IVA REPUESTO: " + repuestosI.get(i).getIva()+ "\n";
+                                            informacion += "DESCRIPCION REPUESTO: " + repuestosI.get(i).getDescripcion()+ "\n";
+                                            informacion += "--------------------------------------------\n";
+                                        }
+                                    }
+                                    areaTextoConsultaInventario.setText(informacion);
+                                }
+                                catch(NumberFormatException e) {
+                                    JOptionPane.showMessageDialog(rootPane, "EL PRECIO DEBE SER NUMERICO", "AutosABC", JOptionPane.ERROR_MESSAGE);
+                                }
+
+                            }
+                            else if ((formato.charAt(0) == '=') && (formato.charAt(1) == '=')) {
+                                try {
+                                    String precio = "";
+
+                                    for (int i = 2; i < formato.length(); i++) {
+                                        precio += formato.charAt(i);
+                                    }
+
+                                    int valor = Integer.parseInt(precio);
+
+                                    informacion = "";
+                                    for (int i = 0; i < repuestosI.size(); i++){
+                                        if (valor == repuestosI.get(i).getPrecio_unidad()) {
+                                            informacion += "--------------------------------------------\n";
+                                            informacion += "IDENTIFICACION REPUESTO: " + repuestosI.get(i).getId_repuesto()+ "\n";
+                                            informacion += "SEDE REPUESTO: " + repuestosI.get(i).getId_sede()+ "\n";
+                                            informacion += "NOMBRE REPUESTO: " + repuestosI.get(i).getNombre()+ "\n";
+                                            informacion += "CANTIDAD REPUESTO: " + repuestosI.get(i).getCantidad()+ "\n";
+                                            informacion += "PRECIO REPUESTO: " + repuestosI.get(i).getPrecio_unidad()+ "\n";
+                                            informacion += "IVA REPUESTO: " + repuestosI.get(i).getIva()+ "\n";
+                                            informacion += "DESCRIPCION REPUESTO: " + repuestosI.get(i).getDescripcion()+ "\n";
+                                            informacion += "--------------------------------------------\n";
+                                        }
+                                    }
+                                    areaTextoConsultaInventario.setText(informacion);
+                                }
+                                catch(NumberFormatException e) {
+                                    JOptionPane.showMessageDialog(rootPane, "EL PRECIO DEBE SER NUMERICO", "AutosABC", JOptionPane.ERROR_MESSAGE);
+                                }
+                            }
+                            else {
+                                JOptionPane.showMessageDialog(rootPane, "FORMATO DE CONSULTA INVALIDO, RECUERDE QUE EL PRECIO DEBE SER NUMERICO Y ADEMÁS PONER ANTES DEL PRECIO:\n"
+                                        + "1) PONER '>=' PARA CONSULTAR PRECIOS MAYORES O IGUALES AL INGRESADO\n"
+                                        + "2) PONER '<=' PARA CONSULTAR PRECIOS MENORES O IGUALES AL INGRESADO\n"
+                                        + "3) PONER '==' PARA CONSULTAR PRECIOS ESTRICTAMENTE IGUALES AL INGRESADO\n", "AutosABC", JOptionPane.ERROR_MESSAGE);
+                            }
+                        }
+                        break;
+                }
+           }
+       }
+       else if(radioBotonVenta.isSelected()) {
+           ControladorVenta cV = new ControladorVenta();
+           ControladorVehiculo cV2 = new ControladorVehiculo();
+           
+           ArrayList<Venta> ventasI = cV.consultarVentas();
+           ArrayList<Vehiculo> vehiculosI = cV2.consultarVehiculos2();
+           
+           int index = comboBosBusquedaInventario.getSelectedIndex();
+           if (index == 0){
+               JOptionPane.showMessageDialog(rootPane, "DEBE SELECCIONAR UNA BUSQUEDA", "AutosABC", JOptionPane.ERROR_MESSAGE);
+           }
+           else if(index == 1) {
+               String informacion = "";
+               for (int i = 0; i < ventasI.size(); i++){
+                   informacion += "--------------------------------------------\n";
+                   informacion += "IDENTIFICACION DE LA VENTA: " + ventasI.get(i).getId_venta()+ "\n";
+                   informacion += "VEHICULO VENDIDO: " + ventasI.get(i).getId_vehiculo()+ "\n";
+                   informacion += "CEDULA VENDEDOR: " + ventasI.get(i).getId_usuario()+ "\n";
+                   informacion += "SEDE DE LA VENTA: " + ventasI.get(i).getId_sede()+ "\n";
+                   informacion += "FECHA DE LA VENTA: " + ventasI.get(i).getFecha()+ "\n";
+                   informacion += "FORMA DE PAGO: " + ventasI.get(i).getForma_pago()+ "\n";
+                   informacion += "CEDULA COMPRADOR: " + ventasI.get(i).getCedula_cliente()+ "\n";
+                   informacion += "NOMBRE COMPRADOR: " + ventasI.get(i).getNombre_cliente()+ "\n";
+                   informacion += "TELEFONO COMPRADOR: " + ventasI.get(i).getTelefono_cliente()+ "\n";
+                   int precio = 0;
+                   for (int j = 0; j < vehiculosI.size(); j++) {
+                       if (ventasI.get(i).getId_vehiculo() == vehiculosI.get(j).getVehiculo()){
+                           precio = vehiculosI.get(j).getPrecio() + vehiculosI.get(j).getIva();
+                       }
+                   }
+                   informacion += "PRECIO DE LA VENTA: " + precio + "\n";
+                   informacion += "--------------------------------------------\n";
+               }
+               areaTextoConsultaInventario.setText(informacion);
+           }
+           else {
+                index = index - 2;
+                String informacion = "";
+                switch (index) {
+                    case 0:
+                        try {
+                            int id = Integer.parseInt(valor_consulta_inventario.getText());
+                            informacion = "";
+                            for (int i = 0; i < ventasI.size(); i++){
+                                if (id == ventasI.get(i).getId_venta()) {
+                                    informacion += "--------------------------------------------\n";
+                                    informacion += "IDENTIFICACION DE LA VENTA: " + ventasI.get(i).getId_venta()+ "\n";
+                                    informacion += "VEHICULO VENDIDO: " + ventasI.get(i).getId_vehiculo()+ "\n";
+                                    informacion += "CEDULA VENDEDOR: " + ventasI.get(i).getId_usuario()+ "\n";
+                                    informacion += "SEDE DE LA VENTA: " + ventasI.get(i).getId_sede()+ "\n";
+                                    informacion += "FECHA DE LA VENTA: " + ventasI.get(i).getFecha()+ "\n";
+                                    informacion += "FORMA DE PAGO: " + ventasI.get(i).getForma_pago()+ "\n";
+                                    informacion += "CEDULA COMPRADOR: " + ventasI.get(i).getCedula_cliente()+ "\n";
+                                    informacion += "NOMBRE COMPRADOR: " + ventasI.get(i).getNombre_cliente()+ "\n";
+                                    informacion += "TELEFONO COMPRADOR: " + ventasI.get(i).getTelefono_cliente()+ "\n";
+                                    int precio = 0;
+                                    for (int j = 0; j < vehiculosI.size(); j++) {
+                                        if (ventasI.get(i).getId_vehiculo() == vehiculosI.get(j).getVehiculo()){
+                                            precio = vehiculosI.get(j).getPrecio() + vehiculosI.get(j).getIva();
+                                        }
+                                    }
+                                    informacion += "PRECIO DE LA VENTA: " + precio + "\n";
+                                    informacion += "--------------------------------------------\n";
+                                }
+                            }
+                            areaTextoConsultaInventario.setText(informacion);
+                        }
+                        catch(NumberFormatException e){
+                            JOptionPane.showMessageDialog(rootPane, "ESTE VALOR DEBE SER NUMERICO", "AutosABC", JOptionPane.ERROR_MESSAGE);
+                        }
+                        break;
+                    case 1:
+                        try {
+                            int vehiculo = Integer.parseInt(valor_consulta_inventario.getText());
+                            informacion = "";
+                            for (int i = 0; i < ventasI.size(); i++){
+                                if (vehiculo == ventasI.get(i).getId_vehiculo()) {
+                                    informacion += "--------------------------------------------\n";
+                                    informacion += "IDENTIFICACION DE LA VENTA: " + ventasI.get(i).getId_venta()+ "\n";
+                                    informacion += "VEHICULO VENDIDO: " + ventasI.get(i).getId_vehiculo()+ "\n";
+                                    informacion += "CEDULA VENDEDOR: " + ventasI.get(i).getId_usuario()+ "\n";
+                                    informacion += "SEDE DE LA VENTA: " + ventasI.get(i).getId_sede()+ "\n";
+                                    informacion += "FECHA DE LA VENTA: " + ventasI.get(i).getFecha()+ "\n";
+                                    informacion += "FORMA DE PAGO: " + ventasI.get(i).getForma_pago()+ "\n";
+                                    informacion += "CEDULA COMPRADOR: " + ventasI.get(i).getCedula_cliente()+ "\n";
+                                    informacion += "NOMBRE COMPRADOR: " + ventasI.get(i).getNombre_cliente()+ "\n";
+                                    informacion += "TELEFONO COMPRADOR: " + ventasI.get(i).getTelefono_cliente()+ "\n";
+                                    int precio = 0;
+                                    for (int j = 0; j < vehiculosI.size(); j++) {
+                                        if (ventasI.get(i).getId_vehiculo() == vehiculosI.get(j).getVehiculo()){
+                                            precio = vehiculosI.get(j).getPrecio() + vehiculosI.get(j).getIva();
+                                        }
+                                    }
+                                    informacion += "PRECIO DE LA VENTA: " + precio + "\n";
+                                    informacion += "--------------------------------------------\n";
+                                }
+                            }
+                            areaTextoConsultaInventario.setText(informacion);
+                        }
+                        catch(NumberFormatException e){
+                            JOptionPane.showMessageDialog(rootPane, "ESTE VALOR DEBE SER NUMERICO", "AutosABC", JOptionPane.ERROR_MESSAGE);
+                        }
+                        break;
+                    case 2:
+                        try {
+                            int usuario = Integer.parseInt(valor_consulta_inventario.getText());
+                            informacion = "";
+                            for (int i = 0; i < ventasI.size(); i++){
+                                if (usuario == ventasI.get(i).getId_usuario()) {
+                                    informacion += "--------------------------------------------\n";
+                                    informacion += "IDENTIFICACION DE LA VENTA: " + ventasI.get(i).getId_venta()+ "\n";
+                                    informacion += "VEHICULO VENDIDO: " + ventasI.get(i).getId_vehiculo()+ "\n";
+                                    informacion += "CEDULA VENDEDOR: " + ventasI.get(i).getId_usuario()+ "\n";
+                                    informacion += "SEDE DE LA VENTA: " + ventasI.get(i).getId_sede()+ "\n";
+                                    informacion += "FECHA DE LA VENTA: " + ventasI.get(i).getFecha()+ "\n";
+                                    informacion += "FORMA DE PAGO: " + ventasI.get(i).getForma_pago()+ "\n";
+                                    informacion += "CEDULA COMPRADOR: " + ventasI.get(i).getCedula_cliente()+ "\n";
+                                    informacion += "NOMBRE COMPRADOR: " + ventasI.get(i).getNombre_cliente()+ "\n";
+                                    informacion += "TELEFONO COMPRADOR: " + ventasI.get(i).getTelefono_cliente()+ "\n";
+                                    int precio = 0;
+                                    for (int j = 0; j < vehiculosI.size(); j++) {
+                                        if (ventasI.get(i).getId_vehiculo() == vehiculosI.get(j).getVehiculo()){
+                                            precio = vehiculosI.get(j).getPrecio() + vehiculosI.get(j).getIva();
+                                        }
+                                    }
+                                    informacion += "PRECIO DE LA VENTA: " + precio + "\n";
+                                    informacion += "--------------------------------------------\n";
+                                }
+                            }
+                            areaTextoConsultaInventario.setText(informacion);
+                        }
+                        catch(NumberFormatException e){
+                            JOptionPane.showMessageDialog(rootPane, "ESTE VALOR DEBE SER NUMERICO", "AutosABC", JOptionPane.ERROR_MESSAGE);
+                        }
+                        break;
+                    case 3:
+                        try {
+                            int sede = Integer.parseInt(valor_consulta_inventario.getText());
+                            informacion = "";
+                            for (int i = 0; i < ventasI.size(); i++){
+                                if (sede == ventasI.get(i).getId_sede()) {
+                                    informacion += "--------------------------------------------\n";
+                                    informacion += "IDENTIFICACION DE LA VENTA: " + ventasI.get(i).getId_venta()+ "\n";
+                                    informacion += "VEHICULO VENDIDO: " + ventasI.get(i).getId_vehiculo()+ "\n";
+                                    informacion += "CEDULA VENDEDOR: " + ventasI.get(i).getId_usuario()+ "\n";
+                                    informacion += "SEDE DE LA VENTA: " + ventasI.get(i).getId_sede()+ "\n";
+                                    informacion += "FECHA DE LA VENTA: " + ventasI.get(i).getFecha()+ "\n";
+                                    informacion += "FORMA DE PAGO: " + ventasI.get(i).getForma_pago()+ "\n";
+                                    informacion += "CEDULA COMPRADOR: " + ventasI.get(i).getCedula_cliente()+ "\n";
+                                    informacion += "NOMBRE COMPRADOR: " + ventasI.get(i).getNombre_cliente()+ "\n";
+                                    informacion += "TELEFONO COMPRADOR: " + ventasI.get(i).getTelefono_cliente()+ "\n";
+                                    int precio = 0;
+                                    for (int j = 0; j < vehiculosI.size(); j++) {
+                                        if (ventasI.get(i).getId_vehiculo() == vehiculosI.get(j).getVehiculo()){
+                                            precio = vehiculosI.get(j).getPrecio() + vehiculosI.get(j).getIva();
+                                        }
+                                    }
+                                    informacion += "PRECIO DE LA VENTA: " + precio + "\n";
+                                    informacion += "--------------------------------------------\n";
+                                }
+                            }
+                            areaTextoConsultaInventario.setText(informacion);
+                        }
+                        catch(NumberFormatException e){
+                            JOptionPane.showMessageDialog(rootPane, "ESTE VALOR DEBE SER NUMERICO", "AutosABC", JOptionPane.ERROR_MESSAGE);
+                        }
+                        break;
+                    case 4:
+                        String formaPago = valor_consulta_inventario.getText();
+                        informacion = "";
+                        for (int i = 0; i < ventasI.size(); i++){
+                            if (ventasI.get(i).getForma_pago().equalsIgnoreCase(formaPago)) {
+                                informacion += "--------------------------------------------\n";
+                                informacion += "IDENTIFICACION DE LA VENTA: " + ventasI.get(i).getId_venta()+ "\n";
+                                informacion += "VEHICULO VENDIDO: " + ventasI.get(i).getId_vehiculo()+ "\n";
+                                informacion += "CEDULA VENDEDOR: " + ventasI.get(i).getId_usuario()+ "\n";
+                                informacion += "SEDE DE LA VENTA: " + ventasI.get(i).getId_sede()+ "\n";
+                                informacion += "FECHA DE LA VENTA: " + ventasI.get(i).getFecha()+ "\n";
+                                informacion += "FORMA DE PAGO: " + ventasI.get(i).getForma_pago()+ "\n";
+                                informacion += "CEDULA COMPRADOR: " + ventasI.get(i).getCedula_cliente()+ "\n";
+                                informacion += "NOMBRE COMPRADOR: " + ventasI.get(i).getNombre_cliente()+ "\n";
+                                informacion += "TELEFONO COMPRADOR: " + ventasI.get(i).getTelefono_cliente()+ "\n";
+                                int precio = 0;
+                                for (int j = 0; j < vehiculosI.size(); j++) {
+                                    if (ventasI.get(i).getId_vehiculo() == vehiculosI.get(j).getVehiculo()){
+                                         precio = vehiculosI.get(j).getPrecio() + vehiculosI.get(j).getIva();
+                                    }
+                                }
+                                informacion += "PRECIO DE LA VENTA: " + precio + "\n";
+                                informacion += "--------------------------------------------\n";
+                            }
+                        }
+                        areaTextoConsultaInventario.setText(informacion);
+                        break;
+                    case 5:
+                        try {
+                            int año = Integer.parseInt(valor_consulta_inventario.getText());
+                            informacion = "";
+                            for (int i = 0; i < ventasI.size(); i++){
+                                Calendar cal = Calendar.getInstance();
+                                cal.setTime(ventasI.get(i).getFecha());
+                                int year = cal.get(Calendar.YEAR);
+                                if (year == año) {
+                                    informacion += "--------------------------------------------\n";
+                                    informacion += "IDENTIFICACION DE LA VENTA: " + ventasI.get(i).getId_venta()+ "\n";
+                                    informacion += "VEHICULO VENDIDO: " + ventasI.get(i).getId_vehiculo()+ "\n";
+                                    informacion += "CEDULA VENDEDOR: " + ventasI.get(i).getId_usuario()+ "\n";
+                                    informacion += "SEDE DE LA VENTA: " + ventasI.get(i).getId_sede()+ "\n";
+                                    informacion += "FECHA DE LA VENTA: " + ventasI.get(i).getFecha()+ "\n";
+                                    informacion += "FORMA DE PAGO: " + ventasI.get(i).getForma_pago()+ "\n";
+                                    informacion += "CEDULA COMPRADOR: " + ventasI.get(i).getCedula_cliente()+ "\n";
+                                    informacion += "NOMBRE COMPRADOR: " + ventasI.get(i).getNombre_cliente()+ "\n";
+                                    informacion += "TELEFONO COMPRADOR: " + ventasI.get(i).getTelefono_cliente()+ "\n";
+                                    int precio = 0;
+                                    for (int j = 0; j < vehiculosI.size(); j++) {
+                                        if (ventasI.get(i).getId_vehiculo() == vehiculosI.get(j).getVehiculo()){
+                                            precio = vehiculosI.get(j).getPrecio() + vehiculosI.get(j).getIva();
+                                        }
+                                    }
+                                    informacion += "PRECIO DE LA VENTA: " + precio + "\n";
+                                    informacion += "--------------------------------------------\n";
+                                }
+                            }
+                            areaTextoConsultaInventario.setText(informacion);
+                        }
+                        catch(NumberFormatException e){
+                            JOptionPane.showMessageDialog(rootPane, "ESTE VALOR DEBE SER NUMERICO", "AutosABC", JOptionPane.ERROR_MESSAGE);
+                        }
+                        break;
+                    case 6:
+                        try {
+                            int mes = Integer.parseInt(valor_consulta_inventario.getText());
+                            informacion = "";
+                            for (int i = 0; i < ventasI.size(); i++){
+                                Calendar cal = Calendar.getInstance();
+                                cal.setTime(ventasI.get(i).getFecha());
+                                int month = cal.get(Calendar.MONTH) + 1;
+                                if (month == mes) {
+                                    informacion += "--------------------------------------------\n";
+                                    informacion += "IDENTIFICACION DE LA VENTA: " + ventasI.get(i).getId_venta()+ "\n";
+                                    informacion += "VEHICULO VENDIDO: " + ventasI.get(i).getId_vehiculo()+ "\n";
+                                    informacion += "CEDULA VENDEDOR: " + ventasI.get(i).getId_usuario()+ "\n";
+                                    informacion += "SEDE DE LA VENTA: " + ventasI.get(i).getId_sede()+ "\n";
+                                    informacion += "FECHA DE LA VENTA: " + ventasI.get(i).getFecha()+ "\n";
+                                    informacion += "FORMA DE PAGO: " + ventasI.get(i).getForma_pago()+ "\n";
+                                    informacion += "CEDULA COMPRADOR: " + ventasI.get(i).getCedula_cliente()+ "\n";
+                                    informacion += "NOMBRE COMPRADOR: " + ventasI.get(i).getNombre_cliente()+ "\n";
+                                    informacion += "TELEFONO COMPRADOR: " + ventasI.get(i).getTelefono_cliente()+ "\n";
+                                    int precio = 0;
+                                    for (int j = 0; j < vehiculosI.size(); j++) {
+                                        if (ventasI.get(i).getId_vehiculo() == vehiculosI.get(j).getVehiculo()){
+                                            precio = vehiculosI.get(j).getPrecio() + vehiculosI.get(j).getIva();
+                                        }
+                                    }
+                                    informacion += "PRECIO DE LA VENTA: " + precio + "\n";
+                                    informacion += "--------------------------------------------\n";
+                                }
+                            }
+                            areaTextoConsultaInventario.setText(informacion);
+                        }
+                        catch(NumberFormatException e){
+                            JOptionPane.showMessageDialog(rootPane, "ESTE VALOR DEBE SER NUMERICO", "AutosABC", JOptionPane.ERROR_MESSAGE);
+                        }
+                        break;
+                    case 7:
+                        try {
+                            int dia = Integer.parseInt(valor_consulta_inventario.getText());
+                            informacion = "";
+                            for (int i = 0; i < ventasI.size(); i++){
+                                Calendar cal = Calendar.getInstance();
+                                cal.setTime(ventasI.get(i).getFecha());
+                                int day = cal.get(Calendar.DAY_OF_MONTH);
+                                if (day == dia) {
+                                    informacion += "--------------------------------------------\n";
+                                    informacion += "IDENTIFICACION DE LA VENTA: " + ventasI.get(i).getId_venta()+ "\n";
+                                    informacion += "VEHICULO VENDIDO: " + ventasI.get(i).getId_vehiculo()+ "\n";
+                                    informacion += "CEDULA VENDEDOR: " + ventasI.get(i).getId_usuario()+ "\n";
+                                    informacion += "SEDE DE LA VENTA: " + ventasI.get(i).getId_sede()+ "\n";
+                                    informacion += "FECHA DE LA VENTA: " + ventasI.get(i).getFecha()+ "\n";
+                                    informacion += "FORMA DE PAGO: " + ventasI.get(i).getForma_pago()+ "\n";
+                                    informacion += "CEDULA COMPRADOR: " + ventasI.get(i).getCedula_cliente()+ "\n";
+                                    informacion += "NOMBRE COMPRADOR: " + ventasI.get(i).getNombre_cliente()+ "\n";
+                                    informacion += "TELEFONO COMPRADOR: " + ventasI.get(i).getTelefono_cliente()+ "\n";
+                                    int precio = 0;
+                                    for (int j = 0; j < vehiculosI.size(); j++) {
+                                        if (ventasI.get(i).getId_vehiculo() == vehiculosI.get(j).getVehiculo()){
+                                            precio = vehiculosI.get(j).getPrecio() + vehiculosI.get(j).getIva();
+                                        }
+                                    }
+                                    informacion += "PRECIO DE LA VENTA: " + precio + "\n";
+                                    informacion += "--------------------------------------------\n";
+                                }
+                            }
+                            areaTextoConsultaInventario.setText(informacion);
+                        }
+                        catch(NumberFormatException e){
+                            JOptionPane.showMessageDialog(rootPane, "ESTE VALOR DEBE SER NUMERICO", "AutosABC", JOptionPane.ERROR_MESSAGE);
+                        }
+                        break;
+                    case 8:
+                        try {
+                            String fecha = valor_consulta_inventario.getText();
+                            if ((fecha.charAt(4) == '/') && (fecha.charAt(7) == '/')){
+                                String añoS = "" + fecha.charAt(0) + fecha.charAt(1) + fecha.charAt(2) + fecha.charAt(3);
+                                String mesS = "" + fecha.charAt(5) + fecha.charAt(6);
+                                String diaS = "" + fecha.charAt(8) + fecha.charAt(9);
+                                int año = Integer.parseInt(añoS);
+                                int mes = Integer.parseInt(mesS);
+                                int dia = Integer.parseInt(diaS);
+                                informacion = "";
+                                for (int i = 0; i < ventasI.size(); i++){
+                                    Calendar cal = Calendar.getInstance();
+                                    cal.setTime(ventasI.get(i).getFecha());
+                                    int year = cal.get(Calendar.YEAR);
+                                    int month = cal.get(Calendar.MONTH) + 1;
+                                    int day = cal.get(Calendar.DAY_OF_MONTH);
+                                    if ((day == dia) && (month == mes) && (año == year)) {
+                                        informacion += "--------------------------------------------\n";
+                                        informacion += "IDENTIFICACION DE LA VENTA: " + ventasI.get(i).getId_venta()+ "\n";
+                                        informacion += "VEHICULO VENDIDO: " + ventasI.get(i).getId_vehiculo()+ "\n";
+                                        informacion += "CEDULA VENDEDOR: " + ventasI.get(i).getId_usuario()+ "\n";
+                                        informacion += "SEDE DE LA VENTA: " + ventasI.get(i).getId_sede()+ "\n";
+                                        informacion += "FECHA DE LA VENTA: " + ventasI.get(i).getFecha()+ "\n";
+                                        informacion += "FORMA DE PAGO: " + ventasI.get(i).getForma_pago()+ "\n";
+                                        informacion += "CEDULA COMPRADOR: " + ventasI.get(i).getCedula_cliente()+ "\n";
+                                        informacion += "NOMBRE COMPRADOR: " + ventasI.get(i).getNombre_cliente()+ "\n";
+                                        informacion += "TELEFONO COMPRADOR: " + ventasI.get(i).getTelefono_cliente()+ "\n";
+                                        int precio = 0;
+                                        for (int j = 0; j < vehiculosI.size(); j++) {
+                                            if (ventasI.get(i).getId_vehiculo() == vehiculosI.get(j).getVehiculo()){
+                                                precio = vehiculosI.get(j).getPrecio() + vehiculosI.get(j).getIva();
+                                            }
+                                        }
+                                        informacion += "PRECIO DE LA VENTA: " + precio + "\n";
+                                        informacion += "--------------------------------------------\n";
+                                    }
+                                }
+                                areaTextoConsultaInventario.setText(informacion);
+                            }
+                            
+                            else {
+                                JOptionPane.showMessageDialog(rootPane, "FORMATO INCORRECTO, ESTE CAMPO DEBE SEGUIR LA SIGUIENTE ESTRUCTURA: AAAA / MM / DD", "AutosABC", JOptionPane.ERROR_MESSAGE);
+                            }
+                            
+                        }
+                        catch(StringIndexOutOfBoundsException e){
+                            JOptionPane.showMessageDialog(rootPane, "FORMATO INCORRECTO, ESTE CAMPO DEBE SEGUIR LA SIGUIENTE ESTRUCTURA: AAAA / MM / DD", "AutosABC", JOptionPane.ERROR_MESSAGE);
+                        }
+                        catch(NumberFormatException e){
+                            JOptionPane.showMessageDialog(rootPane, "LA FECHA ESTA COMPUSTA DE NUMEROS, NO DE LETRAS", "AutosABC", JOptionPane.ERROR_MESSAGE);
+                        }
+                        break;
+                    case 9:
+                        try {
+                            String fecha = valor_consulta_inventario.getText();
+                            if (fecha.charAt(4) == '/'){
+                                String añoS = "" + fecha.charAt(0) + fecha.charAt(1) + fecha.charAt(2) + fecha.charAt(3);
+                                String mesS = "" + fecha.charAt(5) + fecha.charAt(6);
+                                int año = Integer.parseInt(añoS);
+                                int mes = Integer.parseInt(mesS);
+                                informacion = "";
+                                for (int i = 0; i < ventasI.size(); i++){
+                                    Calendar cal = Calendar.getInstance();
+                                    cal.setTime(ventasI.get(i).getFecha());
+                                    int year = cal.get(Calendar.YEAR);
+                                    int month = cal.get(Calendar.MONTH) + 1;
+                                    if ((month == mes) && (año == year)) {
+                                        informacion += "--------------------------------------------\n";
+                                        informacion += "IDENTIFICACION DE LA VENTA: " + ventasI.get(i).getId_venta()+ "\n";
+                                        informacion += "VEHICULO VENDIDO: " + ventasI.get(i).getId_vehiculo()+ "\n";
+                                        informacion += "CEDULA VENDEDOR: " + ventasI.get(i).getId_usuario()+ "\n";
+                                        informacion += "SEDE DE LA VENTA: " + ventasI.get(i).getId_sede()+ "\n";
+                                        informacion += "FECHA DE LA VENTA: " + ventasI.get(i).getFecha()+ "\n";
+                                        informacion += "FORMA DE PAGO: " + ventasI.get(i).getForma_pago()+ "\n";
+                                        informacion += "CEDULA COMPRADOR: " + ventasI.get(i).getCedula_cliente()+ "\n";
+                                        informacion += "NOMBRE COMPRADOR: " + ventasI.get(i).getNombre_cliente()+ "\n";
+                                        informacion += "TELEFONO COMPRADOR: " + ventasI.get(i).getTelefono_cliente()+ "\n";
+                                        int precio = 0;
+                                        for (int j = 0; j < vehiculosI.size(); j++) {
+                                            if (ventasI.get(i).getId_vehiculo() == vehiculosI.get(j).getVehiculo()){
+                                                precio = vehiculosI.get(j).getPrecio() + vehiculosI.get(j).getIva();
+                                            }
+                                        }
+                                        informacion += "PRECIO DE LA VENTA: " + precio + "\n";
+                                        informacion += "--------------------------------------------\n";
+                                    }
+                                }
+                                areaTextoConsultaInventario.setText(informacion);
+                            }
+                            
+                            else {
+                               JOptionPane.showMessageDialog(rootPane, "FORMATO INCORRECTO, ESTE CAMPO DEBE SEGUIR LA SIGUIENTE ESTRUCTURA: AAAA / MM", "AutosABC", JOptionPane.ERROR_MESSAGE);
+                            }  
+                            
+                        }
+                        catch(StringIndexOutOfBoundsException e){
+                            JOptionPane.showMessageDialog(rootPane, "FORMATO INCORRECTO, ESTE CAMPO DEBE SEGUIR LA SIGUIENTE ESTRUCTURA: AAAA / MM", "AutosABC", JOptionPane.ERROR_MESSAGE);
+                        }
+                        catch(NumberFormatException e){
+                            JOptionPane.showMessageDialog(rootPane, "LA FECHA ESTA COMPUSTA DE NUMEROS, NO DE LETRAS", "AutosABC", JOptionPane.ERROR_MESSAGE);
+                        }
+                        break;
+                }
+           }
+       }
+       else if (radioBotonCotizacion.isSelected()) {
+           ControladorCotizacion cC = new ControladorCotizacion();
+           ControladorVehiculo cV = new ControladorVehiculo();
+           
+           ArrayList<Cotizacion> cotizacionesI = cC.consultarCotizaciones();
+           ArrayList<Vehiculo> vehiculosI;
+           vehiculosI = cV.consultarVehiculos2();
+           
+           int index = comboBosBusquedaInventario.getSelectedIndex();
+           if (index == 0){
+               JOptionPane.showMessageDialog(rootPane, "DEBE SELECCIONAR UNA BUSQUEDA", "AutosABC", JOptionPane.ERROR_MESSAGE);
+           }
+           else if(index == 1) {
+               String informacion = "";
+               for (int i = 0; i < cotizacionesI.size(); i++){
+                   informacion += "--------------------------------------------\n";
+                   informacion += "IDENTIFICACION DE LA COTIZACION: " + cotizacionesI.get(i).getId_cotizacion()+ "\n";
+                   informacion += "VEHICULO COTIZADO: " + cotizacionesI.get(i).getId_vehiculo()+ "\n";
+                   informacion += "CEDULA VENDEDOR: " + cotizacionesI.get(i).getId_usuario()+ "\n";
+                   informacion += "SEDE DE LA COTIZACION: " + cotizacionesI.get(i).getId_sede()+ "\n";
+                   informacion += "FECHA DE LA COTIZACION: " + cotizacionesI.get(i).getFecha()+ "\n";
+                   int precio = 0;
+                   for (int j = 0; j < vehiculosI.size(); j++) {
+                       if (cotizacionesI.get(i).getId_vehiculo() == vehiculosI.get(j).getVehiculo()){
+                           precio = vehiculosI.get(j).getPrecio() + vehiculosI.get(j).getIva();
+                       }
+                   }
+                   informacion += "PRECIO DE LA COTIZACION: " + precio + "\n";
+                   informacion += "--------------------------------------------\n";
+               }
+               areaTextoConsultaInventario.setText(informacion);
+           }
+           else {
+               String informacion = "";
+                index = index - 2;
+                switch (index) {
+                    case 0:
+                        try {
+                            int id = Integer.parseInt(valor_consulta_inventario.getText());
+                            informacion = "";
+                            for (int i = 0; i < cotizacionesI.size(); i++){
+                                if (id == cotizacionesI.get(i).getId_cotizacion()) {
+                                    informacion += "--------------------------------------------\n";
+                                    informacion += "IDENTIFICACION DE LA COTIZACION: " + cotizacionesI.get(i).getId_cotizacion()+ "\n";
+                                    informacion += "VEHICULO COTIZADO: " + cotizacionesI.get(i).getId_vehiculo()+ "\n";
+                                    informacion += "CEDULA VENDEDOR: " + cotizacionesI.get(i).getId_usuario()+ "\n";
+                                    informacion += "SEDE DE LA COTIZACION: " + cotizacionesI.get(i).getId_sede()+ "\n";
+                                    informacion += "FECHA DE LA COTIZACION: " + cotizacionesI.get(i).getFecha()+ "\n";
+                                    int precio = 0;
+                                    for (int j = 0; j < vehiculosI.size(); j++) {
+                                        if (cotizacionesI.get(i).getId_vehiculo() == vehiculosI.get(j).getVehiculo()){
+                                            precio = vehiculosI.get(j).getPrecio() + vehiculosI.get(j).getIva();
+                                        }
+                                    }
+                                    informacion += "PRECIO DE LA COTIZACION: " + precio + "\n";
+                                    informacion += "--------------------------------------------\n";
+                                }
+                            }
+                            areaTextoConsultaInventario.setText(informacion);
+                        }
+                        
+                        catch (NumberFormatException e) {
+                            JOptionPane.showMessageDialog(rootPane, "EL VALOR DE BUSQUEDA DEBE SER NUMERICO EN ESTE CASO", "AutosABC", JOptionPane.ERROR_MESSAGE);
+                        }
+                        break;
+                    case 1:
+                        try {
+                            int vehiculo = Integer.parseInt(valor_consulta_inventario.getText());
+                            informacion = "";
+                            for (int i = 0; i < cotizacionesI.size(); i++){
+                                if (vehiculo == cotizacionesI.get(i).getId_vehiculo()) {
+                                    informacion += "--------------------------------------------\n";
+                                    informacion += "IDENTIFICACION DE LA COTIZACION: " + cotizacionesI.get(i).getId_cotizacion()+ "\n";
+                                    informacion += "VEHICULO COTIZADO: " + cotizacionesI.get(i).getId_vehiculo()+ "\n";
+                                    informacion += "CEDULA VENDEDOR: " + cotizacionesI.get(i).getId_usuario()+ "\n";
+                                    informacion += "SEDE DE LA COTIZACION: " + cotizacionesI.get(i).getId_sede()+ "\n";
+                                    informacion += "FECHA DE LA COTIZACION: " + cotizacionesI.get(i).getFecha()+ "\n";
+                                    int precio = 0;
+                                    for (int j = 0; j < vehiculosI.size(); j++) {
+                                        if (cotizacionesI.get(i).getId_vehiculo() == vehiculosI.get(j).getVehiculo()){
+                                            precio = vehiculosI.get(j).getPrecio() + vehiculosI.get(j).getIva();
+                                        }
+                                    }
+                                    informacion += "PRECIO DE LA COTIZACION: " + precio + "\n";
+                                    informacion += "--------------------------------------------\n";
+                                }
+                            }
+                            areaTextoConsultaInventario.setText(informacion);
+                        }
+                        
+                        catch (NumberFormatException e) {
+                            JOptionPane.showMessageDialog(rootPane, "EL VALOR DE BUSQUEDA DEBE SER NUMERICO EN ESTE CASO", "AutosABC", JOptionPane.ERROR_MESSAGE);
+                        }
+                        break;
+                    case 2:
+                        try {
+                            int cedula = Integer.parseInt(valor_consulta_inventario.getText());
+                            informacion = "";
+                            for (int i = 0; i < cotizacionesI.size(); i++){
+                                if (cedula == cotizacionesI.get(i).getId_usuario()) {
+                                    informacion += "--------------------------------------------\n";
+                                    informacion += "IDENTIFICACION DE LA COTIZACION: " + cotizacionesI.get(i).getId_cotizacion()+ "\n";
+                                    informacion += "VEHICULO COTIZADO: " + cotizacionesI.get(i).getId_vehiculo()+ "\n";
+                                    informacion += "CEDULA VENDEDOR: " + cotizacionesI.get(i).getId_usuario()+ "\n";
+                                    informacion += "SEDE DE LA COTIZACION: " + cotizacionesI.get(i).getId_sede()+ "\n";
+                                    informacion += "FECHA DE LA COTIZACION: " + cotizacionesI.get(i).getFecha()+ "\n";
+                                    int precio = 0;
+                                    for (int j = 0; j < vehiculosI.size(); j++) {
+                                        if (cotizacionesI.get(i).getId_vehiculo() == vehiculosI.get(j).getVehiculo()){
+                                            precio = vehiculosI.get(j).getPrecio() + vehiculosI.get(j).getIva();
+                                        }
+                                    }
+                                    informacion += "PRECIO DE LA COTIZACION: " + precio + "\n";
+                                    informacion += "--------------------------------------------\n";
+                                }
+                            }
+                            areaTextoConsultaInventario.setText(informacion);
+                        }
+                        
+                        catch (NumberFormatException e) {
+                            JOptionPane.showMessageDialog(rootPane, "EL VALOR DE BUSQUEDA DEBE SER NUMERICO EN ESTE CASO", "AutosABC", JOptionPane.ERROR_MESSAGE);
+                        }
+                        break;
+                    case 3:
+                        try {
+                            int sede = Integer.parseInt(valor_consulta_inventario.getText());
+                            informacion = "";
+                            for (int i = 0; i < cotizacionesI.size(); i++){
+                                if (sede == cotizacionesI.get(i).getId_sede()) {
+                                    informacion += "--------------------------------------------\n";
+                                    informacion += "IDENTIFICACION DE LA COTIZACION: " + cotizacionesI.get(i).getId_cotizacion()+ "\n";
+                                    informacion += "VEHICULO COTIZADO: " + cotizacionesI.get(i).getId_vehiculo()+ "\n";
+                                    informacion += "CEDULA VENDEDOR: " + cotizacionesI.get(i).getId_usuario()+ "\n";
+                                    informacion += "SEDE DE LA COTIZACION: " + cotizacionesI.get(i).getId_sede()+ "\n";
+                                    informacion += "FECHA DE LA COTIZACION: " + cotizacionesI.get(i).getFecha()+ "\n";
+                                    int precio = 0;
+                                    for (int j = 0; j < vehiculosI.size(); j++) {
+                                        if (cotizacionesI.get(i).getId_vehiculo() == vehiculosI.get(j).getVehiculo()){
+                                            precio = vehiculosI.get(j).getPrecio() + vehiculosI.get(j).getIva();
+                                        }
+                                    }
+                                    informacion += "PRECIO DE LA COTIZACION: " + precio + "\n";
+                                    informacion += "--------------------------------------------\n";
+                                }
+                            }
+                            areaTextoConsultaInventario.setText(informacion);
+                        }
+                        
+                        catch (NumberFormatException e) {
+                            JOptionPane.showMessageDialog(rootPane, "EL VALOR DE BUSQUEDA DEBE SER NUMERICO EN ESTE CASO", "AutosABC", JOptionPane.ERROR_MESSAGE);
+                        }
+                        break;
+                    case 4:
+                        try {
+                            int año = Integer.parseInt(valor_consulta_inventario.getText());
+                            informacion = "";
+                            for (int i = 0; i < cotizacionesI.size(); i++){
+                                Calendar cal = Calendar.getInstance();
+                                cal.setTime(cotizacionesI.get(i).getFecha());
+                                int year = cal.get(Calendar.YEAR);
+                                if (year == año) {
+                                    informacion += "--------------------------------------------\n";
+                                    informacion += "IDENTIFICACION DE LA COTIZACION: " + cotizacionesI.get(i).getId_cotizacion()+ "\n";
+                                    informacion += "VEHICULO COTIZADO: " + cotizacionesI.get(i).getId_vehiculo()+ "\n";
+                                    informacion += "CEDULA VENDEDOR: " + cotizacionesI.get(i).getId_usuario()+ "\n";
+                                    informacion += "SEDE DE LA COTIZACION: " + cotizacionesI.get(i).getId_sede()+ "\n";
+                                    informacion += "FECHA DE LA COTIZACION: " + cotizacionesI.get(i).getFecha()+ "\n";
+                                    int precio = 0;
+                                    for (int j = 0; j < vehiculosI.size(); j++) {
+                                        if (cotizacionesI.get(i).getId_vehiculo() == vehiculosI.get(j).getVehiculo()){
+                                            precio = vehiculosI.get(j).getPrecio() + vehiculosI.get(j).getIva();
+                                        }
+                                    }
+                                    informacion += "PRECIO DE LA COTIZACION: " + precio + "\n";
+                                    informacion += "--------------------------------------------\n";
+                                }
+                            }
+                            areaTextoConsultaInventario.setText(informacion);
+                        }
+                        catch(NumberFormatException e){
+                            JOptionPane.showMessageDialog(rootPane, "ESTE VALOR DEBE SER NUMERICO", "AutosABC", JOptionPane.ERROR_MESSAGE);
+                        }
+                        break;
+                    case 5:
+                        try {
+                            int mes = Integer.parseInt(valor_consulta_inventario.getText());
+                            informacion = "";
+                            for (int i = 0; i < cotizacionesI.size(); i++){
+                                Calendar cal = Calendar.getInstance();
+                                cal.setTime(cotizacionesI.get(i).getFecha());
+                                int month = cal.get(Calendar.MONTH) + 1;
+                                if (month == mes) {
+                                    informacion += "--------------------------------------------\n";
+                                    informacion += "IDENTIFICACION DE LA COTIZACION: " + cotizacionesI.get(i).getId_cotizacion()+ "\n";
+                                    informacion += "VEHICULO COTIZADO: " + cotizacionesI.get(i).getId_vehiculo()+ "\n";
+                                    informacion += "CEDULA VENDEDOR: " + cotizacionesI.get(i).getId_usuario()+ "\n";
+                                    informacion += "SEDE DE LA COTIZACION: " + cotizacionesI.get(i).getId_sede()+ "\n";
+                                    informacion += "FECHA DE LA COTIZACION: " + cotizacionesI.get(i).getFecha()+ "\n";
+                                    int precio = 0;
+                                    for (int j = 0; j < vehiculosI.size(); j++) {
+                                        if (cotizacionesI.get(i).getId_vehiculo() == vehiculosI.get(j).getVehiculo()){
+                                            precio = vehiculosI.get(j).getPrecio() + vehiculosI.get(j).getIva();
+                                        }
+                                    }
+                                    informacion += "PRECIO DE LA COTIZACION: " + precio + "\n";
+                                    informacion += "--------------------------------------------\n";
+                                }
+                            }
+                            areaTextoConsultaInventario.setText(informacion);
+                        }
+                        catch(NumberFormatException e){
+                            JOptionPane.showMessageDialog(rootPane, "ESTE VALOR DEBE SER NUMERICO", "AutosABC", JOptionPane.ERROR_MESSAGE);
+                        }
+                        break;
+                    case 6:
+                        try {
+                            int dia = Integer.parseInt(valor_consulta_inventario.getText());
+                            informacion = "";
+                            for (int i = 0; i < cotizacionesI.size(); i++){
+                                Calendar cal = Calendar.getInstance();
+                                cal.setTime(cotizacionesI.get(i).getFecha());
+                                int day = cal.get(Calendar.DAY_OF_MONTH);
+                                if (day == dia) {
+                                    informacion += "--------------------------------------------\n";
+                                    informacion += "IDENTIFICACION DE LA COTIZACION: " + cotizacionesI.get(i).getId_cotizacion()+ "\n";
+                                    informacion += "VEHICULO COTIZADO: " + cotizacionesI.get(i).getId_vehiculo()+ "\n";
+                                    informacion += "CEDULA VENDEDOR: " + cotizacionesI.get(i).getId_usuario()+ "\n";
+                                    informacion += "SEDE DE LA COTIZACION: " + cotizacionesI.get(i).getId_sede()+ "\n";
+                                    informacion += "FECHA DE LA COTIZACION: " + cotizacionesI.get(i).getFecha()+ "\n";
+                                    int precio = 0;
+                                    for (int j = 0; j < vehiculosI.size(); j++) {
+                                        if (cotizacionesI.get(i).getId_vehiculo() == vehiculosI.get(j).getVehiculo()){
+                                            precio = vehiculosI.get(j).getPrecio() + vehiculosI.get(j).getIva();
+                                        }
+                                    }
+                                    informacion += "PRECIO DE LA COTIZACION: " + precio + "\n";
+                                    informacion += "--------------------------------------------\n";
+                                }
+                            }
+                            areaTextoConsultaInventario.setText(informacion);
+                        }
+                        catch(NumberFormatException e){
+                            JOptionPane.showMessageDialog(rootPane, "ESTE VALOR DEBE SER NUMERICO", "AutosABC", JOptionPane.ERROR_MESSAGE);
+                        }
+                        break;
+                    case 7:
+                        try {
+                            String fecha = valor_consulta_inventario.getText();
+                            if ((fecha.charAt(4) == '/') && (fecha.charAt(7) == '/')){
+                                String añoS = "" + fecha.charAt(0) + fecha.charAt(1) + fecha.charAt(2) + fecha.charAt(3);
+                                String mesS = "" + fecha.charAt(5) + fecha.charAt(6);
+                                String diaS = "" + fecha.charAt(8) + fecha.charAt(9);
+                                int año = Integer.parseInt(añoS);
+                                int mes = Integer.parseInt(mesS);
+                                int dia = Integer.parseInt(diaS);
+                                informacion = "";
+                                for (int i = 0; i < cotizacionesI.size(); i++){
+                                    Calendar cal = Calendar.getInstance();
+                                    cal.setTime(cotizacionesI.get(i).getFecha());
+                                    int year = cal.get(Calendar.YEAR);
+                                    int month = cal.get(Calendar.MONTH) + 1;
+                                    int day = cal.get(Calendar.DAY_OF_MONTH);
+                                    if ((day == dia) && (month == mes) && (año == year)) {
+                                        informacion += "IDENTIFICACION DE LA COTIZACION: " + cotizacionesI.get(i).getId_cotizacion()+ "\n";
+                                        informacion += "VEHICULO COTIZADO: " + cotizacionesI.get(i).getId_vehiculo()+ "\n";
+                                        informacion += "CEDULA VENDEDOR: " + cotizacionesI.get(i).getId_usuario()+ "\n";
+                                        informacion += "SEDE DE LA COTIZACION: " + cotizacionesI.get(i).getId_sede()+ "\n";
+                                        informacion += "FECHA DE LA COTIZACION: " + cotizacionesI.get(i).getFecha()+ "\n";
+                                        int precio = 0;
+                                        for (int j = 0; j < vehiculosI.size(); j++) {
+                                            if (cotizacionesI.get(i).getId_vehiculo() == vehiculosI.get(j).getVehiculo()){
+                                                precio = vehiculosI.get(j).getPrecio() + vehiculosI.get(j).getIva();
+                                            }
+                                        }
+                                        informacion += "PRECIO DE LA COTIZACION: " + precio + "\n";
+                                        informacion += "--------------------------------------------\n";
+                                    }
+                                }
+                                areaTextoConsultaInventario.setText(informacion);
+                            }
+                            
+                            else {
+                                JOptionPane.showMessageDialog(rootPane, "FORMATO INCORRECTO, ESTE CAMPO DEBE SEGUIR LA SIGUIENTE ESTRUCTURA: AAAA / MM / DD", "AutosABC", JOptionPane.ERROR_MESSAGE);
+                            }
+                            
+                        }
+                        catch(StringIndexOutOfBoundsException e){
+                            JOptionPane.showMessageDialog(rootPane, "FORMATO INCORRECTO, ESTE CAMPO DEBE SEGUIR LA SIGUIENTE ESTRUCTURA: AAAA / MM / DD", "AutosABC", JOptionPane.ERROR_MESSAGE);
+                        }
+                        catch(NumberFormatException e){
+                            JOptionPane.showMessageDialog(rootPane, "LA FECHA ESTA COMPUSTA DE NUMEROS, NO DE LETRAS", "AutosABC", JOptionPane.ERROR_MESSAGE);
+                        }
+                        break;
+                    case 8:
+                        try {
+                            String fecha = valor_consulta_inventario.getText();
+                            if (fecha.charAt(4) == '/'){
+                                String añoS = "" + fecha.charAt(0) + fecha.charAt(1) + fecha.charAt(2) + fecha.charAt(3);
+                                String mesS = "" + fecha.charAt(5) + fecha.charAt(6);
+                                int año = Integer.parseInt(añoS);
+                                int mes = Integer.parseInt(mesS);
+                                informacion = "";
+                                for (int i = 0; i < cotizacionesI.size(); i++){
+                                    Calendar cal = Calendar.getInstance();
+                                    cal.setTime(cotizacionesI.get(i).getFecha());
+                                    int year = cal.get(Calendar.YEAR);
+                                    int month = cal.get(Calendar.MONTH) + 1;
+                                    if ((month == mes) && (año == year)) {
+                                        informacion += "IDENTIFICACION DE LA COTIZACION: " + cotizacionesI.get(i).getId_cotizacion()+ "\n";
+                                        informacion += "VEHICULO COTIZADO: " + cotizacionesI.get(i).getId_vehiculo()+ "\n";
+                                        informacion += "CEDULA VENDEDOR: " + cotizacionesI.get(i).getId_usuario()+ "\n";
+                                        informacion += "SEDE DE LA COTIZACION: " + cotizacionesI.get(i).getId_sede()+ "\n";
+                                        informacion += "FECHA DE LA COTIZACION: " + cotizacionesI.get(i).getFecha()+ "\n";
+                                        int precio = 0;
+                                        for (int j = 0; j < vehiculosI.size(); j++) {
+                                            if (cotizacionesI.get(i).getId_vehiculo() == vehiculosI.get(j).getVehiculo()){
+                                                precio = vehiculosI.get(j).getPrecio() + vehiculosI.get(j).getIva();
+                                            }
+                                        }
+                                        informacion += "PRECIO DE LA COTIZACION: " + precio + "\n";
+                                        informacion += "--------------------------------------------\n";
+                                    }
+                                }
+                                areaTextoConsultaInventario.setText(informacion);
+                            }
+                            
+                            else {
+                                JOptionPane.showMessageDialog(rootPane, "FORMATO INCORRECTO, ESTE CAMPO DEBE SEGUIR LA SIGUIENTE ESTRUCTURA: AAAA / MM", "AutosABC", JOptionPane.ERROR_MESSAGE);
+                            }                          
+                        }
+                        catch(StringIndexOutOfBoundsException e){
+                            JOptionPane.showMessageDialog(rootPane, "FORMATO INCORRECTO, ESTE CAMPO DEBE SEGUIR LA SIGUIENTE ESTRUCTURA: AAAA / MM", "AutosABC", JOptionPane.ERROR_MESSAGE);
+                        }
+                        catch(NumberFormatException e){
+                            JOptionPane.showMessageDialog(rootPane, "LA FECHA ESTA COMPUSTA DE NUMEROS, NO DE LETRAS", "AutosABC", JOptionPane.ERROR_MESSAGE);
+                        }
+                        break;
+                }
+           }
+       }
+       else if(radioBotonOrden.isSelected()) {
+           ControladorOrdenDeTrabajo cR = new ControladorOrdenDeTrabajo();
+           
+           ArrayList<OrdenDeTrabajo> ordenesI = cR.consultarOrdenes();
+           
+           int index = comboBosBusquedaInventario.getSelectedIndex();
+           if (index == 0){
+               JOptionPane.showMessageDialog(rootPane, "DEBE SELECCIONAR UNA BUSQUEDA", "AutosABC", JOptionPane.ERROR_MESSAGE);
+           }
+           else if(index == 1) {
+               String informacion = "";
+               for (int i = 0; i < ordenesI.size(); i++){
+                   informacion += "--------------------------------------------\n";
+                   informacion += "IDENTIFICACION DE LA ORDEN: " + ordenesI.get(i).getId_repuesto()+ "\n";
+                   informacion += "CEDULA JEFE DE TALLER: " + ordenesI.get(i).getId_usuario()+ "\n";
+                   informacion += "REPUESTO DE LA ORDEN: " +  ordenesI.get(i).getId_repuesto()+ "\n";
+                   informacion += "VEHICULO IMPLICADO: " + ordenesI.get(i).getId_vehiculo()+ "\n";
+                   informacion += "SEDE DE LA ORDEN: " + ordenesI.get(i).getId_sede()+ "\n";
+                   informacion += "CANTIDAD DEL REPUESTO REQUERIDA: " + ordenesI.get(i).getCantidadRepuesto()+ "\n";
+                   informacion += "DESCRIPCION DE LA ORDEN: " + ordenesI.get(i).getDescripcion()+ "\n";
+                   informacion += "--------------------------------------------\n";
+               }
+               areaTextoConsultaInventario.setText(informacion);
+           }
+           else {
+               String informacion = "";
+                index = index - 2;
+                switch (index) {
+                    case 0:
+                        try {
+                            int id = Integer.parseInt(valor_consulta_inventario.getText());
+                            informacion = "";
+                            for (int i = 0; i < ordenesI.size(); i++){
+                                if (id == ordenesI.get(i).getId_repuesto()){
+                                    informacion += "--------------------------------------------\n";
+                                    informacion += "IDENTIFICACION DE LA ORDEN: " + ordenesI.get(i).getId_repuesto()+ "\n";
+                                    informacion += "CEDULA JEFE DE TALLER: " + ordenesI.get(i).getId_usuario()+ "\n";
+                                    informacion += "REPUESTO DE LA ORDEN: " +  ordenesI.get(i).getId_repuesto()+ "\n";
+                                    informacion += "VEHICULO IMPLICADO: " + ordenesI.get(i).getId_vehiculo()+ "\n";
+                                    informacion += "SEDE DE LA ORDEN: " + ordenesI.get(i).getId_sede()+ "\n";
+                                    informacion += "CANTIDAD DEL REPUESTO REQUERIDA: " + ordenesI.get(i).getCantidadRepuesto()+ "\n";
+                                    informacion += "DESCRIPCION DE LA ORDEN: " + ordenesI.get(i).getDescripcion()+ "\n";
+                                    informacion += "--------------------------------------------\n";
+                                }
+                            }
+                            areaTextoConsultaInventario.setText(informacion);
+                        }
+                        catch (NumberFormatException e) {
+                            JOptionPane.showMessageDialog(rootPane, "ESTE VALOR DE BUSQUEDA DEBE SER NUEMRICO", "AutosABC", JOptionPane.ERROR_MESSAGE);
+                        }
+                        break;
+                    case 1:
+                        try {
+                            int cedula = Integer.parseInt(valor_consulta_inventario.getText());
+                            informacion = "";
+                            for (int i = 0; i < ordenesI.size(); i++){
+                                if (cedula == ordenesI.get(i).getId_usuario()){
+                                    informacion += "--------------------------------------------\n";
+                                    informacion += "IDENTIFICACION DE LA ORDEN: " + ordenesI.get(i).getId_repuesto()+ "\n";
+                                    informacion += "CEDULA JEFE DE TALLER: " + ordenesI.get(i).getId_usuario()+ "\n";
+                                    informacion += "REPUESTO DE LA ORDEN: " +  ordenesI.get(i).getId_repuesto()+ "\n";
+                                    informacion += "VEHICULO IMPLICADO: " + ordenesI.get(i).getId_vehiculo()+ "\n";
+                                    informacion += "SEDE DE LA ORDEN: " + ordenesI.get(i).getId_sede()+ "\n";
+                                    informacion += "CANTIDAD DEL REPUESTO REQUERIDA: " + ordenesI.get(i).getCantidadRepuesto()+ "\n";
+                                    informacion += "DESCRIPCION DE LA ORDEN: " + ordenesI.get(i).getDescripcion()+ "\n";
+                                    informacion += "--------------------------------------------\n";
+                                }
+                            }
+                            areaTextoConsultaInventario.setText(informacion);
+                        }
+                        catch (NumberFormatException e) {
+                            JOptionPane.showMessageDialog(rootPane, "ESTE VALOR DE BUSQUEDA DEBE SER NUEMRICO", "AutosABC", JOptionPane.ERROR_MESSAGE);
+                        }
+                        break;
+                    case 2:
+                        try {
+                            int repuesto = Integer.parseInt(valor_consulta_inventario.getText());
+                            informacion = "";
+                            for (int i = 0; i < ordenesI.size(); i++){
+                                if (repuesto == ordenesI.get(i).getId_repuesto()){
+                                    informacion += "--------------------------------------------\n";
+                                    informacion += "IDENTIFICACION DE LA ORDEN: " + ordenesI.get(i).getId_repuesto()+ "\n";
+                                    informacion += "CEDULA JEFE DE TALLER: " + ordenesI.get(i).getId_usuario()+ "\n";
+                                    informacion += "REPUESTO DE LA ORDEN: " +  ordenesI.get(i).getId_repuesto()+ "\n";
+                                    informacion += "VEHICULO IMPLICADO: " + ordenesI.get(i).getId_vehiculo()+ "\n";
+                                    informacion += "SEDE DE LA ORDEN: " + ordenesI.get(i).getId_sede()+ "\n";
+                                    informacion += "CANTIDAD DEL REPUESTO REQUERIDA: " + ordenesI.get(i).getCantidadRepuesto()+ "\n";
+                                    informacion += "DESCRIPCION DE LA ORDEN: " + ordenesI.get(i).getDescripcion()+ "\n";
+                                    informacion += "--------------------------------------------\n";
+                                }
+                            }
+                            areaTextoConsultaInventario.setText(informacion);
+                        }
+                        catch (NumberFormatException e) {
+                            JOptionPane.showMessageDialog(rootPane, "ESTE VALOR DE BUSQUEDA DEBE SER NUEMRICO", "AutosABC", JOptionPane.ERROR_MESSAGE);
+                        }
+                        break;
+                    case 3:
+                        try {
+                            int vehiculo = Integer.parseInt(valor_consulta_inventario.getText());
+                            informacion = "";
+                            for (int i = 0; i < ordenesI.size(); i++){
+                                if (vehiculo == ordenesI.get(i).getId_vehiculo()){
+                                    informacion += "--------------------------------------------\n";
+                                    informacion += "IDENTIFICACION DE LA ORDEN: " + ordenesI.get(i).getId_repuesto()+ "\n";
+                                    informacion += "CEDULA JEFE DE TALLER: " + ordenesI.get(i).getId_usuario()+ "\n";
+                                    informacion += "REPUESTO DE LA ORDEN: " +  ordenesI.get(i).getId_repuesto()+ "\n";
+                                    informacion += "VEHICULO IMPLICADO: " + ordenesI.get(i).getId_vehiculo()+ "\n";
+                                    informacion += "SEDE DE LA ORDEN: " + ordenesI.get(i).getId_sede()+ "\n";
+                                    informacion += "CANTIDAD DEL REPUESTO REQUERIDA: " + ordenesI.get(i).getCantidadRepuesto()+ "\n";
+                                    informacion += "DESCRIPCION DE LA ORDEN: " + ordenesI.get(i).getDescripcion()+ "\n";
+                                    informacion += "--------------------------------------------\n";
+                                }
+                            }
+                            areaTextoConsultaInventario.setText(informacion);
+                        }
+                        catch (NumberFormatException e) {
+                            JOptionPane.showMessageDialog(rootPane, "ESTE VALOR DE BUSQUEDA DEBE SER NUEMRICO", "AutosABC", JOptionPane.ERROR_MESSAGE);
+                        }
+                        break;
+                    case 4:
+                        try {
+                            int sede = Integer.parseInt(valor_consulta_inventario.getText());
+                            informacion = "";
+                            for (int i = 0; i < ordenesI.size(); i++){
+                                if (sede == ordenesI.get(i).getId_sede()){
+                                    informacion += "--------------------------------------------\n";
+                                    informacion += "IDENTIFICACION DE LA ORDEN: " + ordenesI.get(i).getId_repuesto()+ "\n";
+                                    informacion += "CEDULA JEFE DE TALLER: " + ordenesI.get(i).getId_usuario()+ "\n";
+                                    informacion += "REPUESTO DE LA ORDEN: " +  ordenesI.get(i).getId_repuesto()+ "\n";
+                                    informacion += "VEHICULO IMPLICADO: " + ordenesI.get(i).getId_vehiculo()+ "\n";
+                                    informacion += "SEDE DE LA ORDEN: " + ordenesI.get(i).getId_sede()+ "\n";
+                                    informacion += "CANTIDAD DEL REPUESTO REQUERIDA: " + ordenesI.get(i).getCantidadRepuesto()+ "\n";
+                                    informacion += "DESCRIPCION DE LA ORDEN: " + ordenesI.get(i).getDescripcion()+ "\n";
+                                    informacion += "--------------------------------------------\n";
+                                }
+                            }
+                            areaTextoConsultaInventario.setText(informacion);
+                        }
+                        catch (NumberFormatException e) {
+                            JOptionPane.showMessageDialog(rootPane, "ESTE VALOR DE BUSQUEDA DEBE SER NUEMRICO", "AutosABC", JOptionPane.ERROR_MESSAGE);
+                        }
+                        break;
+                }
+           }
+       }
+       else {
+           JOptionPane.showMessageDialog(rootPane, "DEBE SELECCIONAR UN ELEMENTO DE CONSULTA", "AutosABC", JOptionPane.ERROR_MESSAGE);
+       }
+    }//GEN-LAST:event_boton_consultar_inventarioActionPerformed
+
+    private void radioBotonVehiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioBotonVehiculoActionPerformed
+        if (radioBotonVehiculo.isSelected()) {
+            comboBosBusquedaInventario.removeAllItems();
+            comboBosBusquedaInventario.addItem("Busqueda por ...");
+            comboBosBusquedaInventario.addItem("Todas");
+            comboBosBusquedaInventario.addItem("Identificacion");
+            comboBosBusquedaInventario.addItem("Sede");
+            comboBosBusquedaInventario.addItem("Color");
+            comboBosBusquedaInventario.addItem("Marca");
+            comboBosBusquedaInventario.addItem("Referencia");
+            comboBosBusquedaInventario.addItem("Tipo");
+            comboBosBusquedaInventario.addItem("Traccion");
+            comboBosBusquedaInventario.addItem("Modelo");
+            comboBosBusquedaInventario.addItem("Precio");
+            comboBosBusquedaInventario.addItem("Estado");
+            
+        }
+        else {
+            comboBosBusquedaInventario.removeAllItems();
+            comboBosBusquedaInventario.addItem("Seleccione Consulta");
+        }
+        radioBotonRepuesto.setSelected(false);
+        radioBotonVenta.setSelected(false);
+        radioBotonCotizacion.setSelected(false);
+        radioBotonOrden.setSelected(false);
+    }//GEN-LAST:event_radioBotonVehiculoActionPerformed
+
+    private void radioBotonRepuestoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioBotonRepuestoActionPerformed
+        if (radioBotonRepuesto.isSelected()) {
+            comboBosBusquedaInventario.removeAllItems();
+            comboBosBusquedaInventario.addItem("Busqueda por ...");
+            comboBosBusquedaInventario.addItem("Todas");
+            comboBosBusquedaInventario.addItem("Identificacion");
+            comboBosBusquedaInventario.addItem("Sede");
+            comboBosBusquedaInventario.addItem("Nombre");
+            comboBosBusquedaInventario.addItem("Precio");
+   
+        }
+        else {
+            comboBosBusquedaInventario.removeAllItems();
+            comboBosBusquedaInventario.addItem("Seleccione Consulta");
+        }
+        radioBotonVehiculo.setSelected(false);
+        radioBotonVenta.setSelected(false);
+        radioBotonCotizacion.setSelected(false);
+        radioBotonOrden.setSelected(false);
+    }//GEN-LAST:event_radioBotonRepuestoActionPerformed
+
+    private void radioBotonVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioBotonVentaActionPerformed
+        if (radioBotonVenta.isSelected()) {
+            comboBosBusquedaInventario.removeAllItems();
+            comboBosBusquedaInventario.addItem("Busqueda por ...");
+            comboBosBusquedaInventario.addItem("Todas");
+            comboBosBusquedaInventario.addItem("Identificacion");
+            comboBosBusquedaInventario.addItem("Vehiculo");
+            comboBosBusquedaInventario.addItem("Cedula Vendedor");
+            comboBosBusquedaInventario.addItem("Sede");
+            comboBosBusquedaInventario.addItem("Forma de Pago");
+            comboBosBusquedaInventario.addItem("Año");
+            comboBosBusquedaInventario.addItem("Mes");
+            comboBosBusquedaInventario.addItem("Dia");
+            comboBosBusquedaInventario.addItem("Años / Mes / Dia");
+            comboBosBusquedaInventario.addItem("Año / Mes");
+            
+        }
+        else {
+            comboBosBusquedaInventario.removeAllItems();
+            comboBosBusquedaInventario.addItem("Seleccione Consulta");
+        }
+        radioBotonRepuesto.setSelected(false);
+        radioBotonVehiculo.setSelected(false);
+        radioBotonCotizacion.setSelected(false);
+        radioBotonOrden.setSelected(false);
+    }//GEN-LAST:event_radioBotonVentaActionPerformed
+
+    private void radioBotonCotizacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioBotonCotizacionActionPerformed
+        if (radioBotonCotizacion.isSelected()) {
+            comboBosBusquedaInventario.removeAllItems();
+            comboBosBusquedaInventario.addItem("Busqueda por ...");
+            comboBosBusquedaInventario.addItem("Todas");
+            comboBosBusquedaInventario.addItem("Identificacion");
+            comboBosBusquedaInventario.addItem("Vehiculo");
+            comboBosBusquedaInventario.addItem("Cedula Vendedor");
+            comboBosBusquedaInventario.addItem("Sede");
+            comboBosBusquedaInventario.addItem("Año");
+            comboBosBusquedaInventario.addItem("Mes");
+            comboBosBusquedaInventario.addItem("Dia");
+            comboBosBusquedaInventario.addItem("Años/Mes/Dia");
+            comboBosBusquedaInventario.addItem("Año/Mes");
+            
+        }
+        else {
+            comboBosBusquedaInventario.removeAllItems();
+            comboBosBusquedaInventario.addItem("Seleccione Consulta");
+        }
+        radioBotonRepuesto.setSelected(false);
+        radioBotonVehiculo.setSelected(false);
+        radioBotonVenta.setSelected(false);
+        radioBotonOrden.setSelected(false);
+    }//GEN-LAST:event_radioBotonCotizacionActionPerformed
+
+    private void radioBotonOrdenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioBotonOrdenActionPerformed
+        if (radioBotonOrden.isSelected()) {
+            comboBosBusquedaInventario.removeAllItems();
+            comboBosBusquedaInventario.addItem("Busqueda por ...");
+            comboBosBusquedaInventario.addItem("Todas");
+            comboBosBusquedaInventario.addItem("Identificacion");
+            comboBosBusquedaInventario.addItem("Cedula Jefe de Taller");
+            comboBosBusquedaInventario.addItem("Repuesto");
+            comboBosBusquedaInventario.addItem("Vehiculo");
+            comboBosBusquedaInventario.addItem("Sede");
+            
+        }
+        else {
+            comboBosBusquedaInventario.removeAllItems();
+            comboBosBusquedaInventario.addItem("Seleccione Consulta");
+        }
+        radioBotonRepuesto.setSelected(false);
+        radioBotonVehiculo.setSelected(false);
+        radioBotonVenta.setSelected(false);
+        radioBotonCotizacion.setSelected(false);
+    }//GEN-LAST:event_radioBotonOrdenActionPerformed
+
+    private void botonReporte6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonReporte6ActionPerformed
+        campoValorReporte2 = new JTextField("INGRESE EL ID DE LA SEDE");
+        JOptionPane.showMessageDialog(rootPane, campoValorReporte2);
+
+        ControladorVenta cV = new ControladorVenta();
+        ControladorVehiculo cVh = new ControladorVehiculo();
+        ControladorSede cS = new ControladorSede();
+
+        ArrayList<Vehiculo> vehiculosC = cVh.consultarVehiculos2();
+        ArrayList<Venta> ventas = cV.consultarVentas();
+        ArrayList<Sede> sedes = cS.consultarSedes();
+        int venta = 0;
+        int sede = 0;
+        int result = 0;
+
+        while (result == 0) {
+            try {
+                sede = Integer.parseInt(campoValorReporte2.getText());
+                result = 1;
+            }
+
+            catch(NumberFormatException e){
+                result = 0;
+                campoValorReporte2.setText("DEBE SER UN NUMERO");
+                JOptionPane.showMessageDialog(rootPane, campoValorReporte2);
+            }
+        }
+        String informacion = "";
+
+        comboBoxMesReporte1 = new JComboBox();
+
+        comboBoxMesReporte1.addItem("Seleccione un mes");
+        comboBoxMesReporte1.addItem("ENERO");
+        comboBoxMesReporte1.addItem("FEBRERO");
+        comboBoxMesReporte1.addItem("MARZO");
+        comboBoxMesReporte1.addItem("ABRIL");
+        comboBoxMesReporte1.addItem("MAYO");
+        comboBoxMesReporte1.addItem("JUNIO");
+        comboBoxMesReporte1.addItem("JULIO");
+        comboBoxMesReporte1.addItem("AGOSTO");
+        comboBoxMesReporte1.addItem("SEPTIEMBRE");
+        comboBoxMesReporte1.addItem("OCTUBRE");
+        comboBoxMesReporte1.addItem("NOVIEMBRE");
+        comboBoxMesReporte1.addItem("DICIEMBRE");
+        comboBoxMesReporte1.addItem("TODOS LOS MESES");
+
+        JOptionPane.showMessageDialog(rootPane, comboBoxMesReporte1);
+
+        while (comboBoxMesReporte1.getSelectedIndex() == 0) {
+            JOptionPane.showMessageDialog(rootPane, comboBoxMesReporte1);
+        }
+
+        if (comboBoxMesReporte1.getSelectedIndex() == 13){
+
+            for (int x = 1; x <= 12; x++){
+                for (int i = 0; i < ventas.size(); i++){
+                    for (int j = 0; j < vehiculosC.size(); j++){
+                        Calendar cal = Calendar.getInstance();
+                        cal.setTime(ventas.get(i).getFecha());
+                        int month = cal.get(Calendar.MONTH) + 1;
+                        if ((ventas.get(i).getId_vehiculo() == vehiculosC.get(j).getVehiculo())
+                            && (ventas.get(i).getId_sede() == sede)
+                            && (month == x)){
+                            venta = venta + 1;
+                            break;
+                        }
+                    }
+                }
+
+                switch (x){
+                    case 1:
+                    informacion += "-----------------------------------------\n";
+                    informacion += "MES: ENERO\n";
+                    informacion += "NUMERO DE VEHICULOS VENDIDOS: " + venta + "\n";
+                    informacion += "-----------------------------------------\n";
+                    break;
+                    case 2:
+                    informacion += "-----------------------------------------\n";
+                    informacion += "MES: FEBRERO\n";
+                    informacion += "NUMERO DE VEHICULOS VENDIDOS: " + venta + "\n";
+                    informacion += "-----------------------------------------\n";
+                    break;
+                    case 3:
+                    informacion += "-----------------------------------------\n";
+                    informacion += "MES: MARZO\n";
+                    informacion += "NUMERO DE VEHICULOS VENDIDOS: " + venta + "\n";
+                    informacion += "-----------------------------------------\n";
+                    break;
+                    case 4:
+                    informacion += "-----------------------------------------\n";
+                    informacion += "MES: ABRIL\n";
+                    informacion += "NUMERO DE VEHICULOS VENDIDOS: " + venta + "\n";
+                    informacion += "-----------------------------------------\n";
+                    break;
+                    case 5:
+                    informacion += "-----------------------------------------\n";
+                    informacion += "MES: MAYO\n";
+                    informacion += "NUMERO DE VEHICULOS VENDIDOS: " + venta + "\n";
+                    informacion += "-----------------------------------------\n";
+                    break;
+                    case 6:
+                    informacion += "-----------------------------------------\n";
+                    informacion += "MES: JUNIO\n";
+                    informacion += "NUMERO DE VEHICULOS VENDIDOS: " + venta + "\n";
+                    informacion += "-----------------------------------------\n";
+                    break;
+                    case 7:
+                    informacion += "-----------------------------------------\n";
+                    informacion += "MES: JULIO\n";
+                    informacion += "NUMERO DE VEHICULOS VENDIDOS: " + venta + "\n";
+                    informacion += "-----------------------------------------\n";
+                    break;
+                    case 8:
+                    informacion += "-----------------------------------------\n";
+                    informacion += "MES: AGOSTO\n";
+                    informacion += "NUMERO DE VEHICULOS VENDIDOS: " + venta + "\n";
+                    informacion += "-----------------------------------------\n";
+                    break;
+                    case 9:
+                    informacion += "-----------------------------------------\n";
+                    informacion += "MES: SEPTIEMBRE\n";
+                    informacion += "NUMERO DE VEHICULOS VENDIDOS: " + venta + "\n";
+                    informacion += "-----------------------------------------\n";
+                    break;
+                    case 10:
+                    informacion += "-----------------------------------------\n";
+                    informacion += "MES: OCTUBRE\n";
+                    informacion += "NUMERO DE VEHICULOS VENDIDOS: " + venta + "\n";
+                    informacion += "-----------------------------------------\n";
+                    break;
+                    case 11:
+                    informacion += "-----------------------------------------\n";
+                    informacion += "MES: NOVIEMBRE\n";
+                    informacion += "NUMERO DE VEHICULOS VENDIDOS: " + venta + "\n";
+                    informacion += "-----------------------------------------\n";
+                    break;
+                    case 12:
+                    informacion += "-----------------------------------------\n";
+                    informacion += "MES: DICIEMBRE\n";
+                    informacion += "NUMERO DE VEHICULOS VENDIDOS: " + venta + "\n";
+                    informacion += "-----------------------------------------\n";
+                    break;
+                }
+                venta = 0;
+            }
+        }
+        else {
+            for (int i = 0; i < ventas.size(); i++){
+                for (int j = 0; j < vehiculosC.size(); j++){
+                    Calendar cal = Calendar.getInstance();
+                    cal.setTime(ventas.get(i).getFecha());
+                    int month = cal.get(Calendar.MONTH) + 1;
+                    if ((ventas.get(i).getId_vehiculo() == vehiculosC.get(j).getVehiculo())
+                        && (ventas.get(i).getId_sede() == sede)
+                        && (month == comboBoxMesReporte1.getSelectedIndex())){
+                        venta = venta + 1;
+                        break;
+                    }
+                }
+
+                switch (comboBoxMesReporte1.getSelectedIndex()){
+                    case 1:
+                    informacion += "-----------------------------------------\n";
+                    informacion += "MES: ENERO\n";
+                    informacion += "NUMERO DE VEHICULOS VENDIDOS: " + venta + "\n";
+                    informacion += "-----------------------------------------\n";
+                    break;
+                    case 2:
+                    informacion += "-----------------------------------------\n";
+                    informacion += "MES: FEBRERO\n";
+                    informacion += "NUMERO DE VEHICULOS VENDIDOS: " + venta + "\n";
+                    informacion += "-----------------------------------------\n";
+                    break;
+                    case 3:
+                    informacion += "-----------------------------------------\n";
+                    informacion += "MES: MARZO\n";
+                    informacion += "NUMERO DE VEHICULOS VENDIDOS: " + venta + "\n";
+                    informacion += "-----------------------------------------\n";
+                    break;
+                    case 4:
+                    informacion += "-----------------------------------------\n";
+                    informacion += "MES: ABRIL\n";
+                    informacion += "NUMERO DE VEHICULOS VENDIDOS: " + venta + "\n";
+                    informacion += "-----------------------------------------\n";
+                    break;
+                    case 5:
+                    informacion += "-----------------------------------------\n";
+                    informacion += "MES: MAYO\n";
+                    informacion += "NUMERO DE VEHICULOS VENDIDOS: " + venta + "\n";
+                    informacion += "-----------------------------------------\n";
+                    break;
+                    case 6:
+                    informacion += "-----------------------------------------\n";
+                    informacion += "MES: JUNIO\n";
+                    informacion += "NUMERO DE VEHICULOS VENDIDOS: " + venta + "\n";
+                    informacion += "-----------------------------------------\n";
+                    break;
+                    case 7:
+                    informacion += "-----------------------------------------\n";
+                    informacion += "MES: JULIO\n";
+                    informacion += "NUMERO DE VEHICULOS VENDIDOS: " + venta + "\n";
+                    informacion += "-----------------------------------------\n";
+                    break;
+                    case 8:
+                    informacion += "-----------------------------------------\n";
+                    informacion += "MES: AGOSTO\n";
+                    informacion += "NUMERO DE VEHICULOS VENDIDOS: " + venta + "\n";
+                    informacion += "-----------------------------------------\n";
+                    break;
+                    case 9:
+                    informacion += "-----------------------------------------\n";
+                    informacion += "MES: SEPTIEMBRE\n";
+                    informacion += "NUMERO DE VEHICULOS VENDIDOS: " + venta + "\n";
+                    informacion += "-----------------------------------------\n";
+                    break;
+                    case 10:
+                    informacion += "-----------------------------------------\n";
+                    informacion += "MES: OCTUBRE\n";
+                    informacion += "NUMERO DE VEHICULOS VENDIDOS: " + venta + "\n";
+                    informacion += "-----------------------------------------\n";
+                    break;
+                    case 11:
+                    informacion += "-----------------------------------------\n";
+                    informacion += "MES: NOVIEMBRE\n";
+                    informacion += "NUMERO DE VEHICULOS VENDIDOS: " + venta + "\n";
+                    informacion += "-----------------------------------------\n";
+                    break;
+                    case 12:
+                    informacion += "-----------------------------------------\n";
+                    informacion += "MES: DICIEMBRE\n";
+                    informacion += "NUMERO DE VEHICULOS VENDIDOS: " + venta + "\n";
+                    informacion += "-----------------------------------------\n";
+                    break;
+                }
+            }
+        }
+
+        areaTextoReportes.setText(informacion);
+        reporteEscogido = 6;
+    }//GEN-LAST:event_botonReporte6ActionPerformed
+
+    private void botonReporte5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonReporte5ActionPerformed
+        campoValorReporte2 = new JTextField("INGRESE LA MARCA DEL VEHICULO");
+        JOptionPane.showMessageDialog(rootPane, campoValorReporte2);
+
+        ControladorVenta cV = new ControladorVenta();
+        ControladorVehiculo cVh = new ControladorVehiculo();
+
+        ArrayList<Vehiculo> vehiculosC = cVh.consultarVehiculos2();
+        ArrayList<Venta> ventas = cV.consultarVentas();
+        int venta = 0;
+
+        String marca = campoValorReporte2.getText();
+        String informacion = "";
+
+        comboBoxMesReporte1 = new JComboBox();
+
+        comboBoxMesReporte1.addItem("Seleccione un mes");
+        comboBoxMesReporte1.addItem("ENERO");
+        comboBoxMesReporte1.addItem("FEBRERO");
+        comboBoxMesReporte1.addItem("MARZO");
+        comboBoxMesReporte1.addItem("ABRIL");
+        comboBoxMesReporte1.addItem("MAYO");
+        comboBoxMesReporte1.addItem("JUNIO");
+        comboBoxMesReporte1.addItem("JULIO");
+        comboBoxMesReporte1.addItem("AGOSTO");
+        comboBoxMesReporte1.addItem("SEPTIEMBRE");
+        comboBoxMesReporte1.addItem("OCTUBRE");
+        comboBoxMesReporte1.addItem("NOVIEMBRE");
+        comboBoxMesReporte1.addItem("DICIEMBRE");
+        comboBoxMesReporte1.addItem("TODOS LOS MESES");
+
+        JOptionPane.showMessageDialog(rootPane, comboBoxMesReporte1);
+
+        while (comboBoxMesReporte1.getSelectedIndex() == 0) {
+            JOptionPane.showMessageDialog(rootPane, comboBoxMesReporte1);
+        }
+
+        if (comboBoxMesReporte1.getSelectedIndex() == 13){
+
+            for (int x = 1; x <= 12; x++){
+                for (int i = 0; i < ventas.size(); i++){
+                    for (int j = 0; j < vehiculosC.size(); j++){
+                        Calendar cal = Calendar.getInstance();
+                        cal.setTime(ventas.get(i).getFecha());
+                        int month = cal.get(Calendar.MONTH) + 1;
+                        if ((ventas.get(i).getId_vehiculo() == vehiculosC.get(j).getVehiculo())
+                            && (vehiculosC.get(j).getMarca().equalsIgnoreCase(marca))
+                            && (month == x)){
+                            venta = venta + 1;
+                            break;
+                        }
+                    }
+                }
+
+                switch (x){
+                    case 1:
+                    informacion += "-----------------------------------------\n";
+                    informacion += "MES: ENERO\n";
+                    informacion += "NUMERO DE VEHICULOS VENDIDOS: " + venta + "\n";
+                    informacion += "-----------------------------------------\n";
+                    break;
+                    case 2:
+                    informacion += "-----------------------------------------\n";
+                    informacion += "MES: FEBRERO\n";
+                    informacion += "NUMERO DE VEHICULOS VENDIDOS: " + venta + "\n";
+                    informacion += "-----------------------------------------\n";
+                    break;
+                    case 3:
+                    informacion += "-----------------------------------------\n";
+                    informacion += "MES: MARZO\n";
+                    informacion += "NUMERO DE VEHICULOS VENDIDOS: " + venta + "\n";
+                    informacion += "-----------------------------------------\n";
+                    break;
+                    case 4:
+                    informacion += "-----------------------------------------\n";
+                    informacion += "MES: ABRIL\n";
+                    informacion += "NUMERO DE VEHICULOS VENDIDOS: " + venta + "\n";
+                    informacion += "-----------------------------------------\n";
+                    break;
+                    case 5:
+                    informacion += "-----------------------------------------\n";
+                    informacion += "MES: MAYO\n";
+                    informacion += "NUMERO DE VEHICULOS VENDIDOS: " + venta + "\n";
+                    informacion += "-----------------------------------------\n";
+                    break;
+                    case 6:
+                    informacion += "-----------------------------------------\n";
+                    informacion += "MES: JUNIO\n";
+                    informacion += "NUMERO DE VEHICULOS VENDIDOS: " + venta + "\n";
+                    informacion += "-----------------------------------------\n";
+                    break;
+                    case 7:
+                    informacion += "-----------------------------------------\n";
+                    informacion += "MES: JULIO\n";
+                    informacion += "NUMERO DE VEHICULOS VENDIDOS: " + venta + "\n";
+                    informacion += "-----------------------------------------\n";
+                    break;
+                    case 8:
+                    informacion += "-----------------------------------------\n";
+                    informacion += "MES: AGOSTO\n";
+                    informacion += "NUMERO DE VEHICULOS VENDIDOS: " + venta + "\n";
+                    informacion += "-----------------------------------------\n";
+                    break;
+                    case 9:
+                    informacion += "-----------------------------------------\n";
+                    informacion += "MES: SEPTIEMBRE\n";
+                    informacion += "NUMERO DE VEHICULOS VENDIDOS: " + venta + "\n";
+                    informacion += "-----------------------------------------\n";
+                    break;
+                    case 10:
+                    informacion += "-----------------------------------------\n";
+                    informacion += "MES: OCTUBRE\n";
+                    informacion += "NUMERO DE VEHICULOS VENDIDOS: " + venta + "\n";
+                    informacion += "-----------------------------------------\n";
+                    break;
+                    case 11:
+                    informacion += "-----------------------------------------\n";
+                    informacion += "MES: NOVIEMBRE\n";
+                    informacion += "NUMERO DE VEHICULOS VENDIDOS: " + venta + "\n";
+                    informacion += "-----------------------------------------\n";
+                    break;
+                    case 12:
+                    informacion += "-----------------------------------------\n";
+                    informacion += "MES: DICIEMBRE\n";
+                    informacion += "NUMERO DE VEHICULOS VENDIDOS: " + venta + "\n";
+                    informacion += "-----------------------------------------\n";
+                    break;
+                }
+                venta = 0;
+            }
+        }
+        else {
+            for (int i = 0; i < ventas.size(); i++){
+                for (int j = 0; j < vehiculosC.size(); j++){
+                    Calendar cal = Calendar.getInstance();
+                    cal.setTime(ventas.get(i).getFecha());
+                    int month = cal.get(Calendar.MONTH) + 1;
+                    if ((ventas.get(i).getId_vehiculo() == vehiculosC.get(j).getVehiculo())
+                        && (vehiculosC.get(j).getMarca().equalsIgnoreCase(marca))
+                        && (month == comboBoxMesReporte1.getSelectedIndex())){
+                        venta = venta + 1;
+                        break;
+                    }
+                }
+
+                switch (comboBoxMesReporte1.getSelectedIndex()){
+                    case 1:
+                    informacion += "-----------------------------------------\n";
+                    informacion += "MES: ENERO\n";
+                    informacion += "NUMERO DE VEHICULOS VENDIDOS: " + venta + "\n";
+                    informacion += "-----------------------------------------\n";
+                    break;
+                    case 2:
+                    informacion += "-----------------------------------------\n";
+                    informacion += "MES: FEBRERO\n";
+                    informacion += "NUMERO DE VEHICULOS VENDIDOS: " + venta + "\n";
+                    informacion += "-----------------------------------------\n";
+                    break;
+                    case 3:
+                    informacion += "-----------------------------------------\n";
+                    informacion += "MES: MARZO\n";
+                    informacion += "NUMERO DE VEHICULOS VENDIDOS: " + venta + "\n";
+                    informacion += "-----------------------------------------\n";
+                    break;
+                    case 4:
+                    informacion += "-----------------------------------------\n";
+                    informacion += "MES: ABRIL\n";
+                    informacion += "NUMERO DE VEHICULOS VENDIDOS: " + venta + "\n";
+                    informacion += "-----------------------------------------\n";
+                    break;
+                    case 5:
+                    informacion += "-----------------------------------------\n";
+                    informacion += "MES: MAYO\n";
+                    informacion += "NUMERO DE VEHICULOS VENDIDOS: " + venta + "\n";
+                    informacion += "-----------------------------------------\n";
+                    break;
+                    case 6:
+                    informacion += "-----------------------------------------\n";
+                    informacion += "MES: JUNIO\n";
+                    informacion += "NUMERO DE VEHICULOS VENDIDOS: " + venta + "\n";
+                    informacion += "-----------------------------------------\n";
+                    break;
+                    case 7:
+                    informacion += "-----------------------------------------\n";
+                    informacion += "MES: JULIO\n";
+                    informacion += "NUMERO DE VEHICULOS VENDIDOS: " + venta + "\n";
+                    informacion += "-----------------------------------------\n";
+                    break;
+                    case 8:
+                    informacion += "-----------------------------------------\n";
+                    informacion += "MES: AGOSTO\n";
+                    informacion += "NUMERO DE VEHICULOS VENDIDOS: " + venta + "\n";
+                    informacion += "-----------------------------------------\n";
+                    break;
+                    case 9:
+                    informacion += "-----------------------------------------\n";
+                    informacion += "MES: SEPTIEMBRE\n";
+                    informacion += "NUMERO DE VEHICULOS VENDIDOS: " + venta + "\n";
+                    informacion += "-----------------------------------------\n";
+                    break;
+                    case 10:
+                    informacion += "-----------------------------------------\n";
+                    informacion += "MES: OCTUBRE\n";
+                    informacion += "NUMERO DE VEHICULOS VENDIDOS: " + venta + "\n";
+                    informacion += "-----------------------------------------\n";
+                    break;
+                    case 11:
+                    informacion += "-----------------------------------------\n";
+                    informacion += "MES: NOVIEMBRE\n";
+                    informacion += "NUMERO DE VEHICULOS VENDIDOS: " + venta + "\n";
+                    informacion += "-----------------------------------------\n";
+                    break;
+                    case 12:
+                    informacion += "-----------------------------------------\n";
+                    informacion += "MES: DICIEMBRE\n";
+                    informacion += "NUMERO DE VEHICULOS VENDIDOS: " + venta + "\n";
+                    informacion += "-----------------------------------------\n";
+                    break;
+                }
+            }
+        }
+
+        areaTextoReportes.setText(informacion);
+        reporteEscogido = 5;
+    }//GEN-LAST:event_botonReporte5ActionPerformed
+
+    private void botonReporte4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonReporte4ActionPerformed
+        ControladorSede cS = new ControladorSede();
+        ControladorVenta cV = new ControladorVenta();
+        ControladorVehiculo cVh = new ControladorVehiculo();
+
+        ArrayList<Sede> sedes = cS.consultarSedes();
+        ArrayList<Venta> ventas = cV.consultarVentas();
+        ArrayList<Vehiculo> vehiculos = cVh.consultarVehiculos2();
+        int venta = 0;
+        int precio = 0;
+        String informacion = "";
+        for (int i = 0; i < sedes.size(); i++){
+            for (int j = 0; j < ventas.size(); j++){
+                if (ventas.get(j).getId_sede() == sedes.get(i).getId()){
+                    venta = venta + 1 ;
+                    for (int x = 0; x < vehiculos.size(); x++) {
+                        if (vehiculos.get(x).getVehiculo() == ventas.get(j).getId_vehiculo()){
+                            precio = precio + vehiculos.get(x).getPrecio() + vehiculos.get(x).getIva();
+                        }
+                    }
+                }
+            }
+
+            informacion += "-------------------------------------------\n";
+            informacion += "ID DE LA SEDE: " + sedes.get(i).getId() +"\n";
+            informacion += "TOTAL VEHICULOS VENDIDOS: " + venta +"\n";
+            informacion += "TOTAL VENTAS DE LA SEDE: " + precio +"\n";
+            informacion += "-------------------------------------------\n";
+
+            venta = 0;
+            precio = 0;
+
+        }
+
+        areaTextoReportes.setText(informacion);
+        reporteEscogido = 4;
+    }//GEN-LAST:event_botonReporte4ActionPerformed
+
+    private void botonReporte3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonReporte3ActionPerformed
+        campoValorReporte2 = new JTextField("INGRESE LA MARCA DEL VEHICULO");
+        JOptionPane.showMessageDialog(rootPane, campoValorReporte2);
+
+        ControladorVenta cV = new ControladorVenta();
+        ControladorVehiculo cVh = new ControladorVehiculo();
+
+        ArrayList<Vehiculo> vehiculosC = cVh.consultarVehiculos2();
+        ArrayList<Venta> ventas = cV.consultarVentas();
+        int venta = 0;
+
+        String marca = campoValorReporte2.getText();
+        String informacion = "";
+        for (int i = 0; i < ventas.size(); i++){
+            for (int j = 0; j < vehiculosC.size(); j++){
+                if ((ventas.get(i).getId_vehiculo() == vehiculosC.get(j).getVehiculo()) && (vehiculosC.get(j).getMarca().equalsIgnoreCase(marca))){
+                    venta = venta + 1;
+                }
+            }
+        }
+
+        informacion = "LA MARCA DE VEHICULO: " + marca + " HA VENDIDO " + venta + " Vehiculos";
+
+        areaTextoReportes.setText(informacion);
+        reporteEscogido = 3;
+    }//GEN-LAST:event_botonReporte3ActionPerformed
+
+    private void botonReporteNumero2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonReporteNumero2ActionPerformed
+        campoValorReporte2 = new JTextField("INGRESE LA CEDULA");
+        JOptionPane.showMessageDialog(rootPane, campoValorReporte2);
+        int result = 0;
+        int cedula = 0;
+
+        ControladorUsuario cU = new ControladorUsuario();
+        ControladorVenta cV = new ControladorVenta();
+
+        ArrayList<Usuario> usuarios = cU.consultarUsuarios();
+        ArrayList<Venta> ventas = cV.consultarVentas();
+        int venta = 0;
+
+        while (result == 0) {
+            try {
+                cedula = Integer.parseInt(campoValorReporte2.getText());
+                result = 1;
+            }
+
+            catch(NumberFormatException e){
+                result = 0;
+                campoValorReporte2.setText("DEBE SER UN NUMERO");
+                JOptionPane.showMessageDialog(rootPane, campoValorReporte2);
+            }
+        }
+        Calendar cal = Calendar.getInstance();
+        int year = cal.get(Calendar.YEAR);
+        String informacion = "";
+
+        for (int i = 0; i < usuarios.size(); i++) {
+            if ((usuarios.get(i).getCedula() == cedula) && (usuarios.get(i).getCargo() == 3)) {
+                for (int j = 1; j <= 12; j++) {
+                    for (int x = 0; x < ventas.size(); x++){
+                        Calendar cal2 = Calendar.getInstance();
+                        cal2.setTime(ventas.get(x).getFecha());
+                        int año = cal2.get(Calendar.YEAR);
+                        int mes = cal2.get(Calendar.MONTH) + 1;
+                        if ((año == year) && (mes == j) && (ventas.get(x).getId_usuario() == cedula)){
+                            venta = venta + 1;
+                        }
+                    }
+                    switch (j) {
+                        case 1:
+                        informacion += "-----------------------------------------\n";
+                        informacion += "MES: ENERO\n";
+                        informacion += "NUMERO DE VENTAS HECHAS: " + venta + "\n";
+                        informacion += "-----------------------------------------\n";
+                        break;
+                        case 2:
+                        informacion += "-----------------------------------------\n";
+                        informacion += "MES: FEBRERO\n";
+                        informacion += "NUMERO DE VENTAS HECHAS: " + venta + "\n";
+                        informacion += "-----------------------------------------\n";
+                        break;
+                        case 3:
+                        informacion += "-----------------------------------------\n";
+                        informacion += "MES: MARZO\n";
+                        informacion += "NUMERO DE VENTAS HECHAS: " + venta + "\n";
+                        informacion += "-----------------------------------------\n";
+                        break;
+                        case 4:
+                        informacion += "-----------------------------------------\n";
+                        informacion += "MES: ABRIL\n";
+                        informacion += "NUMERO DE VENTAS HECHAS: " + venta + "\n";
+                        informacion += "-----------------------------------------\n";
+                        break;
+                        case 5:
+                        informacion += "-----------------------------------------\n";
+                        informacion += "MES: MAYO\n";
+                        informacion += "NUMERO DE VENTAS HECHAS: " + venta + "\n";
+                        informacion += "-----------------------------------------\n";
+                        break;
+                        case 6:
+                        informacion += "-----------------------------------------\n";
+                        informacion += "MES: JUNIO\n";
+                        informacion += "NUMERO DE VENTAS HECHAS: " + venta + "\n";
+                        informacion += "-----------------------------------------\n";
+                        break;
+                        case 7:
+                        informacion += "-----------------------------------------\n";
+                        informacion += "MES:JULIO\n";
+                        informacion += "NUMERO DE VENTAS HECHAS: " + venta + "\n";
+                        informacion += "-----------------------------------------\n";
+                        break;
+                        case 8:
+                        informacion += "-----------------------------------------\n";
+                        informacion += "MES: AGOSTO\n";
+                        informacion += "NUMERO DE VENTAS HECHAS: " + venta + "\n";
+                        informacion += "-----------------------------------------\n";
+                        break;
+                        case 9:
+                        informacion += "-----------------------------------------\n";
+                        informacion += "MES: SEPTIEMBRE\n";
+                        informacion += "NUMERO DE VENTAS HECHAS: " + venta + "\n";
+                        informacion += "-----------------------------------------\n";
+                        break;
+                        case 10:
+                        informacion += "-----------------------------------------\n";
+                        informacion += "MES: OCTUBRE\n";
+                        informacion += "NUMERO DE VENTAS HECHAS: " + venta + "\n";
+                        informacion += "-----------------------------------------\n";
+                        break;
+                        case 11:
+                        informacion += "-----------------------------------------\n";
+                        informacion += "MES: NOVIEMBRE\n";
+                        informacion += "NUMERO DE VENTAS HECHAS: " + venta + "\n";
+                        informacion += "-----------------------------------------\n";
+                        break;
+                        case 12:
+                        informacion += "-----------------------------------------\n";
+                        informacion += "MES: DICIEMBRE\n";
+                        informacion += "NUMERO DE VENTAS HECHAS: " + venta + "\n";
+                        informacion += "-----------------------------------------\n";
+                        break;
+                    }
+                    venta = 0;
+                }
+                reporteEscogido = 2;
+                break;
+            }
+            else if((i + 1) == usuarios.size()){
+                JOptionPane.showMessageDialog(rootPane, "ESTE USUARIO NO EXISE O NO ES UN VENDEDOR");
+            }
+
+        }
+
+        areaTextoReportes.setText(informacion);
+
+    }//GEN-LAST:event_botonReporteNumero2ActionPerformed
+
+    private void botonReporteNumero1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonReporteNumero1ActionPerformed
+        ControladorUsuario cU = new ControladorUsuario();
+        ControladorVenta cV = new ControladorVenta();
+        ControladorVehiculo cVh = new ControladorVehiculo();
+
+        ArrayList<Usuario> usuarios = cU.consultarUsuarios();
+        ArrayList<Venta> ventas = cV.consultarVentas();
+        ArrayList<Vehiculo> vehiculosC = cVh.consultarVehiculos2();
+        int venta = 0;
+        int precio = 0;
+
+        comboBoxMesReporte1 = new JComboBox();
+
+        comboBoxMesReporte1.addItem("Seleccione un mes");
+        comboBoxMesReporte1.addItem("ENERO");
+        comboBoxMesReporte1.addItem("FEBRERO");
+        comboBoxMesReporte1.addItem("MARZO");
+        comboBoxMesReporte1.addItem("ABRIL");
+        comboBoxMesReporte1.addItem("MAYO");
+        comboBoxMesReporte1.addItem("JUNIO");
+        comboBoxMesReporte1.addItem("JULIO");
+        comboBoxMesReporte1.addItem("AGOSTO");
+        comboBoxMesReporte1.addItem("SEPTIEMBRE");
+        comboBoxMesReporte1.addItem("OCTUBRE");
+        comboBoxMesReporte1.addItem("NOVIEMBRE");
+        comboBoxMesReporte1.addItem("DICIEMBRE");
+        comboBoxMesReporte1.addItem("TODOS LOS MESES");
+
+        JOptionPane.showMessageDialog(rootPane, comboBoxMesReporte1);
+
+        while (comboBoxMesReporte1.getSelectedIndex() == 0) {
+            JOptionPane.showMessageDialog(rootPane, comboBoxMesReporte1);
+        }
+        if (comboBoxMesReporte1.getSelectedIndex() == 13){
+            String informacion = "";
+            for (int i = 0; i < usuarios.size(); i++){
+                if (usuarios.get(i).getCargo() == 3) {
+                    for (int j=0; j < ventas.size(); j++){
+                        if (ventas.get(j).getId_usuario() == usuarios.get(i).getCedula()){
+                            venta = venta + 1;
+                            for (int x = 0; x < vehiculosC.size(); x++){
+                                if (ventas.get(j).getId_vehiculo()== vehiculosC.get(x).getVehiculo()){
+                                    precio = precio + vehiculosC.get(x).getPrecio() + vehiculosC.get(x).getIva();
+                                }
+                            }
+                        }
+                    }
+                }
+                informacion += "-------------------------------------------------\n"
+                + "CEDULA DLE VENDEDOR: " + usuarios.get(i).getCedula() + "\n"
+                + "TOTAL AUTOS VENDEDIDOS: " + venta +  "\n"
+                + "TOTAL PRECIO VENTAS: " + precio + "\n"
+                + "-------------------------------------------------------\n";
+                venta = 0;
+                precio = 0;
+            }
+
+            areaTextoReportes.setText(informacion);
+
+            reporteEscogido = 1;
+        }
+
+        else {
+            String informacion = "";
+            for (int i = 0; i < usuarios.size(); i++){
+                if (usuarios.get(i).getCargo() == 3) {
+                    for (int j=0; j < ventas.size(); j++){
+                        Calendar cal = Calendar.getInstance();
+                        cal.setTime(ventas.get(j).getFecha());
+                        int mesVenta = cal.get(Calendar.MONTH) + 1;
+                        if ((ventas.get(j).getId_usuario() == usuarios.get(i).getCedula()) && (mesVenta == comboBoxMesReporte1.getSelectedIndex())){
+                            venta = venta + 1;
+                            for (int x = 0; x < vehiculosC.size(); x++){
+                                if (ventas.get(j).getId_vehiculo()== vehiculosC.get(x).getVehiculo()){
+                                    precio = precio + vehiculosC.get(x).getPrecio() + vehiculosC.get(x).getIva();
+                                }
+                            }
+                        }
+                    }
+                }
+                informacion += "-------------------------------------------------\n"
+                + "CEDULA DLE VENDEDOR: " + usuarios.get(i).getCedula() + "\n"
+                + "TOTAL AUTOS VENDEDIDOS: " + venta +  "\n"
+                + "TOTAL PRECIO VENTAS: " + precio + "\n"
+                + "-------------------------------------------------------\n";
+                venta = 0;
+                precio = 0;
+            }
+
+            areaTextoReportes.setText(informacion);
+
+            reporteEscogido = 1;
+        }
+
+    }//GEN-LAST:event_botonReporteNumero1ActionPerformed
+
+    private void botonExportarReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonExportarReporteActionPerformed
+        JOptionPane.showMessageDialog(rootPane, "ESTA FUNCIONALIDAD AUN NO SE ENCUENTRA DISPONIBLE ENE STA VERSION DEL SOFTWARE");
+    }//GEN-LAST:event_botonExportarReporteActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea areTextoModificacionSede;
+    private javax.swing.JTextArea areaTextoConsultaInventario;
+    private javax.swing.JTextArea areaTextoConsultaSede;
+    private javax.swing.JTextArea areaTextoConsultaUsuario;
+    private javax.swing.JTextArea areaTextoReportes;
     private javax.swing.JTextArea areaVehiculosAñadidos;
+    private javax.swing.JComboBox<String> atributoSede;
     private javax.swing.JButton botonAplicarCambioSede;
     private javax.swing.JButton botonAyudaCrearUsuario;
     private javax.swing.JButton botonAyudaCrearUsuario1;
     private javax.swing.JButton botonAñadirRepuesto;
     private javax.swing.JButton botonAñadirRepuestoVehiculo;
     private javax.swing.JButton botonAñadirVehiculo;
+    private javax.swing.JButton botonConsultarInventario;
+    private javax.swing.JButton botonConsultarUsuario;
     private javax.swing.JButton botonCrearInventario;
     private javax.swing.JButton botonCrearSede;
     private javax.swing.JButton botonCrearUsuario;
     private javax.swing.JButton botonCrearUsuarioConfirmacion;
+    private javax.swing.JButton botonExportarReporte;
     private javax.swing.JButton botonInventarioGerente;
     private javax.swing.JButton botonModificarAtributoUsuario;
     private javax.swing.JButton botonModificarInventario;
@@ -2964,18 +6154,29 @@ public class GUIgerente extends javax.swing.JFrame {
     private javax.swing.JButton botonPanelInventarioCrearRepuesto;
     private javax.swing.JButton botonPanelInventarioCrearVehiculo;
     private javax.swing.JButton botonRefrescarSede;
+    private javax.swing.JButton botonReporte3;
+    private javax.swing.JButton botonReporte4;
+    private javax.swing.JButton botonReporte5;
+    private javax.swing.JButton botonReporte6;
+    private javax.swing.JButton botonReporteNumero1;
+    private javax.swing.JButton botonReporteNumero2;
     private javax.swing.JButton botonReportesGerente;
     private javax.swing.JButton botonSedesGerente;
     private javax.swing.JButton botonUsuariosGerente;
+    private javax.swing.JButton boton_consultar_inventario;
+    private javax.swing.JButton boton_consultar_sede;
+    private javax.swing.JButton boton_consultar_usuario;
     private javax.swing.JTextField cantidad_repuesto;
     private javax.swing.JTextField cantidad_vehiculo;
     private javax.swing.JTextField cedula_modificar_usuario;
     private javax.swing.JTextField cedula_usuario;
     private javax.swing.JTextField ciudad_sede;
     private javax.swing.JTextField color_vehiculo;
+    private javax.swing.JComboBox<String> comboBosBusquedaInventario;
     private javax.swing.JComboBox<String> comboBoxAtributoRepuesto;
     private javax.swing.JComboBox<String> comboBoxAtributoUsuario;
     private javax.swing.JComboBox<String> comboBoxAtributoVehiculo;
+    private javax.swing.JComboBox<String> comboBoxBusquedaUsuario;
     private javax.swing.JComboBox<String> comboBoxCargoUsuario;
     private javax.swing.JComboBox<String> comboBoxDatoACambiar;
     private javax.swing.JComboBox<String> comboBoxRepuestoVehiculo;
@@ -2985,6 +6186,7 @@ public class GUIgerente extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> comboBoxSedeVehiculosInventario;
     private javax.swing.JComboBox<String> comboBoxTipoVehiculo;
     private javax.swing.JComboBox<String> comboBoxTraccionVehiculo;
+    private javax.swing.JPanel construccion;
     private javax.swing.JTextField contrasena_usuario;
     private javax.swing.JTextField cuenta_usuario;
     private javax.swing.JTextField descripcion_repuesto;
@@ -2995,14 +6197,16 @@ public class GUIgerente extends javax.swing.JFrame {
     private javax.swing.JTextField id_modificar_respuesto;
     private javax.swing.JTextField id_modificar_vehiculo;
     private javax.swing.JTextField id_sede;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton14;
     private javax.swing.JButton jButton15;
     private javax.swing.JButton jButton16;
+    private javax.swing.JButton jButton18;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
-    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -3043,6 +6247,9 @@ public class GUIgerente extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel43;
     private javax.swing.JLabel jLabel44;
     private javax.swing.JLabel jLabel45;
+    private javax.swing.JLabel jLabel47;
+    private javax.swing.JLabel jLabel48;
+    private javax.swing.JLabel jLabel49;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel52;
     private javax.swing.JLabel jLabel53;
@@ -3065,6 +6272,7 @@ public class GUIgerente extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel16;
     private javax.swing.JPanel jPanel17;
+    private javax.swing.JPanel jPanel18;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -3075,9 +6283,10 @@ public class GUIgerente extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField marca_vehiculo;
     private javax.swing.JTextField modelo_vehiculo;
     private javax.swing.JTextField nacimiento_usuario;
@@ -3087,7 +6296,9 @@ public class GUIgerente extends javax.swing.JFrame {
     private javax.swing.JTextField nuevo_valor_repuesto;
     private javax.swing.JTextField nuevo_valor_usuario;
     private javax.swing.JTextField nuevo_valor_vehiculo;
+    private javax.swing.JPanel panelConsultarInventario;
     private javax.swing.JPanel panelConsultarSede;
+    private javax.swing.JPanel panelConsultarUsuario;
     private javax.swing.JPanel panelCrearInventario;
     private javax.swing.JPanel panelCrearInventarioCrearRepuesto;
     private javax.swing.JPanel panelCrearInventarioCrearRepuestoVacio;
@@ -3105,21 +6316,26 @@ public class GUIgerente extends javax.swing.JFrame {
     private javax.swing.JPanel panelModificarSede;
     private javax.swing.JPanel panelModificarUsuario;
     private javax.swing.JPanel panelReportesGerente;
-    private javax.swing.JPanel panelSedeConsultaFiltroOFF;
-    private javax.swing.JPanel panelSedeConsultaFiltroON;
     private javax.swing.JPanel panelSedeGerente;
     private javax.swing.JPanel panelUsuariosGerente;
     private javax.swing.JTextField precio_repuesto;
     private javax.swing.JTextField precio_vehiculo;
+    private javax.swing.JRadioButton radioBotonCotizacion;
     private javax.swing.JRadioButton radioBotonGeneroF;
     private javax.swing.JRadioButton radioBotonGeneroM;
+    private javax.swing.JRadioButton radioBotonOrden;
+    private javax.swing.JRadioButton radioBotonRepuesto;
+    private javax.swing.JRadioButton radioBotonVehiculo;
+    private javax.swing.JRadioButton radioBotonVenta;
     private javax.swing.JTextField referencia_vehiculo;
     private javax.swing.JTextField salario_usuario;
-    private javax.swing.JComboBox<String> seleccionFiltroSede;
     private javax.swing.JComboBox<String> seleccionarSede;
     private javax.swing.JTextField telefono_sede;
     private javax.swing.JTextField telefono_usuario;
     private javax.swing.JTextField valor_actual_sede;
+    private javax.swing.JTextField valor_consulta_inventario;
+    private javax.swing.JTextField valor_consulta_sede;
+    private javax.swing.JTextField valor_consulta_usuario;
     private javax.swing.JTextField valor_nuevo_sede;
     // End of variables declaration//GEN-END:variables
 }

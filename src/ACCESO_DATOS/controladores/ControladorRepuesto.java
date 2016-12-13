@@ -8,6 +8,7 @@ package ACCESO_DATOS.controladores;
 import ACCESO_DATOS.DAO.*;
 import ACCESO_DATOS.entidades_y_relaciones.*;
 import java.sql.*;
+import java.util.ArrayList;
 /**
  *
  * @author aleja_000
@@ -44,6 +45,13 @@ public class ControladorRepuesto {
         repuesto.setDescripcion(descripcion);
         
         Repuesto repuesto2 = daoRepuesto.consultarRepuesto2(repuesto);
+        
+        return repuesto2;
+    }
+    
+    public ArrayList<Repuesto> consultarRepuestos(){
+
+        ArrayList<Repuesto> repuesto2 = daoRepuesto.consultarRepuestos();
         
         return repuesto2;
     }

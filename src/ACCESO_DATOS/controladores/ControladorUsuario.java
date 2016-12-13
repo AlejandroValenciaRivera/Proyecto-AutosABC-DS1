@@ -47,6 +47,18 @@ public class ControladorUsuario {
                 
     }
     
+    public ArrayList<Usuario> consultarUsuarios(){
+        ArrayList<Usuario> users = daoUsuario.consultarUsuarios();
+        return users;
+                
+    }
+    
+    public Usuario consultarUsuario(int cedula){
+        Usuario user = daoUsuario.ConsultarUsuario(cedula);
+        return user;
+                
+    }
+    
     public int cambiarNombre(int cedula, String nombre){
         Usuario usuario = new Usuario();
         

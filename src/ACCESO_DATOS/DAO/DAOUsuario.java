@@ -57,7 +57,48 @@ public class DAOUsuario {
     }
     
     public Usuario ConsultarUsuario(int cedula){
-        return null;
+        Usuario user = new Usuario();
+        
+        String sql_select;
+        sql_select="SELECT * FROM  usuarios WHERE cedula =" + cedula;
+         try{
+            Connection conn = fachada.getConnetion();
+            Statement sentencia = conn.createStatement();
+            ResultSet tabla = sentencia.executeQuery(sql_select);
+
+            while(tabla.next()){
+               user = new Usuario();
+               
+               user.setCedula(tabla.getInt(1));
+               
+               user.setSede(tabla.getInt(2));
+               
+               user.setNombre(tabla.getString(3));
+               
+               user.setFecha(tabla.getDate(4));
+               
+               user.setDireccion(tabla.getString(5));
+               
+               user.setGenero(tabla.getString(6).charAt(0));
+               
+               user.setEmail(tabla.getString(7));
+               
+               user.setCargo(tabla.getInt(8));
+               
+               user.setTelefono(tabla.getString(10));             
+
+            }
+
+            fachada.closeConection();
+         }
+         catch(SQLException e){ 
+             JOptionPane.showMessageDialog(null, "Ha ocurrido un problema, \n consulta con la base de datos fallida");
+         }
+         catch(Exception e){ 
+             JOptionPane.showMessageDialog(null, " Conexion con la base de datos fallida. \n Contacte inmediatamente con soporte");
+         }
+         
+        return user;
     }
     
     public ArrayList<Usuario> consultarLogin(){
@@ -84,6 +125,63 @@ public class DAOUsuario {
                user.setSede(tabla.getInt(4));
                
                user.setCedula(tabla.getInt(5));
+
+               users.add(user);
+            }
+
+            fachada.closeConection();
+            return users;
+         }
+         catch(SQLException e){ 
+             JOptionPane.showMessageDialog(null, "Ha ocurrido un problema, \n consulta con la base de datos fallida");
+         }
+         catch(Exception e){ 
+             JOptionPane.showMessageDialog(null, " Conexion con la base de datos fallida. \n Contacte inmediatamente con soporte");
+         }
+         
+        return users;
+    }
+    
+    public ArrayList<Usuario> consultarUsuarios(){
+        
+        Usuario user;
+        ArrayList<Usuario> users = new ArrayList<>();
+        
+        String sql_select;
+        sql_select="SELECT * FROM  usuarios";
+         try{
+            Connection conn = fachada.getConnetion();
+            Statement sentencia = conn.createStatement();
+            ResultSet tabla = sentencia.executeQuery(sql_select);
+
+            while(tabla.next()){
+               user = new Usuario();
+               
+               user.setCedula(tabla.getInt(1));
+              
+               user.setSede(tabla.getInt(2));
+               
+               user.setNombre(tabla.getString(3));
+               
+               user.setFecha(tabla.getDate(4));
+               
+               user.setDireccion(tabla.getString(5));
+               
+               user.setGenero(tabla.getString(6).charAt(0));
+               
+               user.setEmail(tabla.getString(7));
+               
+               user.setCargo(tabla.getInt(8));
+               
+               user.setSalario(tabla.getInt(9));
+               
+               user.setTelefono(tabla.getString(10));
+               
+               user.setEstado(tabla.getString(11));
+               
+               user.setCuenta(tabla.getString(12));
+               
+               user.setContrasena(tabla.getString(13));
 
                users.add(user);
             }

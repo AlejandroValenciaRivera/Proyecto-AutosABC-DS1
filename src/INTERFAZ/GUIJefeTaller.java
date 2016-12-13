@@ -5,7 +5,10 @@
  */
 package INTERFAZ;
 
+import ACCESO_DATOS.controladores.*;
+import ACCESO_DATOS.entidades_y_relaciones.*;
 import java.awt.CardLayout;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /**
@@ -18,13 +21,15 @@ public class GUIJefeTaller extends javax.swing.JFrame {
     private CardLayout contenedorOrdenCuenta;
     private CardLayout contenedorOrden;
     private CardLayout contenedorCuenta;
+    private Usuario jefeLogin;
     /**
      * Creates new form GUIJefeTaller
      */
-    public GUIJefeTaller(GUIlogin login2) {
+    public GUIJefeTaller(GUIlogin login2, Usuario user) {
         initComponents();
         login = login2;
         login.setVisible(false);
+        jefeLogin = user;
         
         contenedorPrincipal = new CardLayout();
         contenedorOrdenCuenta = new CardLayout();
@@ -51,6 +56,28 @@ public class GUIJefeTaller extends javax.swing.JFrame {
         panelContenedorOrden.setLayout(contenedorOrden);
         panelContenedorOrden.add(panelOrdenCrearOrden);
         panelContenedorOrden.add(panelOrdenMostrarOrdenes);
+
+        ControladorVehiculo cV = new ControladorVehiculo();
+        ControladorRepuesto cR = new ControladorRepuesto();
+        
+        ArrayList<Vehiculo> vehiculos = cV.consultarVehiculos();
+        ArrayList<Repuesto> repuestos = cR.consultarRepuestos();
+        
+        comboBoxVehiculoOrden.removeAllItems();
+        comboBoxVehiculoOrden.addItem("Seleccione un vehiculo");
+        String añadir = "";
+        for (int i = 0; i < vehiculos.size(); i++) {
+            añadir = vehiculos.get(i).getMarca() + " | " + vehiculos.get(i).getReferencia() + " | " + vehiculos.get(i).getModelo();
+            comboBoxVehiculoOrden.addItem(añadir);
+        }
+        
+        comboBoxRepuestoVehiculo.removeAllItems();
+        comboBoxRepuestoVehiculo.addItem("Seleccione uno");
+        
+        for (int i = 0; i < repuestos.size(); i++) {
+            añadir = repuestos.get(i).getNombre();
+            comboBoxRepuestoVehiculo.addItem(añadir);
+        }
         
         getContentPane().setLayout(contenedorPrincipal);
         getContentPane().add(panelJefeDeTaller);
@@ -114,19 +141,19 @@ public class GUIJefeTaller extends javax.swing.JFrame {
         jTextField6 = new javax.swing.JTextField();
         panelOrdenCrearOrden = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
         jLabel7 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
-        jLabel8 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        comboBoxVehiculoOrden = new javax.swing.JComboBox<>();
         jLabel9 = new javax.swing.JLabel();
-        jComboBox3 = new javax.swing.JComboBox<>();
+        comboBoxRepuestoVehiculo = new javax.swing.JComboBox<>();
         jLabel10 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        botonCrearOrden = new javax.swing.JButton();
         jPanel7 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         areaTextoCrearOrden = new javax.swing.JTextArea();
+        jLabel6 = new javax.swing.JLabel();
+        numero_de_orden = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        cantidad_repuesto_orden = new javax.swing.JTextField();
         panelOrdenMostrarOrdenes = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
         areaTextoConsultarOrdenes = new javax.swing.JTextArea();
@@ -637,23 +664,22 @@ public class GUIJefeTaller extends javax.swing.JFrame {
 
         jLabel5.setText("CREAR ORDEN DE TALLER:");
 
-        jLabel6.setText("SEDE:");
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         jLabel7.setText("VEHICULO:");
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jLabel8.setText("CEDULA JEFE TALLER:");
+        comboBoxVehiculoOrden.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel9.setText("REPUESTO PARA EL VEHICULO:");
 
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboBoxRepuestoVehiculo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel10.setText("DESCRIPCION DE LA ORDEN:");
 
-        jButton2.setText("AÑADIR ORDEN");
+        botonCrearOrden.setText("AÑADIR ORDEN");
+        botonCrearOrden.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonCrearOrdenActionPerformed(evt);
+            }
+        });
 
         jPanel7.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
 
@@ -678,41 +704,48 @@ public class GUIJefeTaller extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        jLabel6.setText("NUMERO DE ORDEN: ");
+
+        jLabel8.setText("CANTIDAD: ");
+
         javax.swing.GroupLayout panelOrdenCrearOrdenLayout = new javax.swing.GroupLayout(panelOrdenCrearOrden);
         panelOrdenCrearOrden.setLayout(panelOrdenCrearOrdenLayout);
         panelOrdenCrearOrdenLayout.setHorizontalGroup(
             panelOrdenCrearOrdenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelOrdenCrearOrdenLayout.createSequentialGroup()
-                .addGroup(panelOrdenCrearOrdenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelOrdenCrearOrdenLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(panelOrdenCrearOrdenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(panelOrdenCrearOrdenLayout.createSequentialGroup()
-                            .addContainerGap()
-                            .addGroup(panelOrdenCrearOrdenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(panelOrdenCrearOrdenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabel5)
+                .addGroup(panelOrdenCrearOrdenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(panelOrdenCrearOrdenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(comboBoxVehiculoOrden, javax.swing.GroupLayout.PREFERRED_SIZE, 490, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(panelOrdenCrearOrdenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelOrdenCrearOrdenLayout.createSequentialGroup()
+                                .addGroup(panelOrdenCrearOrdenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(panelOrdenCrearOrdenLayout.createSequentialGroup()
-                                        .addComponent(jLabel6)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jLabel7)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addContainerGap()
+                                        .addGroup(panelOrdenCrearOrdenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel5)
+                                            .addComponent(jLabel7)
+                                            .addComponent(jLabel10)))
                                     .addGroup(panelOrdenCrearOrdenLayout.createSequentialGroup()
-                                        .addComponent(jLabel8)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jTextField1))
+                                        .addGap(224, 224, 224)
+                                        .addComponent(botonCrearOrden)))
+                                .addGap(225, 225, 225))
+                            .addGroup(panelOrdenCrearOrdenLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(panelOrdenCrearOrdenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addGroup(panelOrdenCrearOrdenLayout.createSequentialGroup()
                                         .addComponent(jLabel9)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jComboBox3, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                                .addComponent(jLabel10)))
-                        .addGroup(panelOrdenCrearOrdenLayout.createSequentialGroup()
-                            .addGap(224, 224, 224)
-                            .addComponent(jButton2))))
+                                        .addComponent(comboBoxRepuestoVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jLabel8)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(cantidad_repuesto_orden))))))
+                    .addGroup(panelOrdenCrearOrdenLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(numero_de_orden)))
                 .addContainerGap(26, Short.MAX_VALUE))
         );
         panelOrdenCrearOrdenLayout.setVerticalGroup(
@@ -722,25 +755,25 @@ public class GUIJefeTaller extends javax.swing.JFrame {
                 .addComponent(jLabel5)
                 .addGap(18, 18, 18)
                 .addGroup(panelOrdenCrearOrdenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(panelOrdenCrearOrdenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(comboBoxVehiculoOrden, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelOrdenCrearOrdenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
-                    .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(comboBoxRepuestoVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8)
+                    .addComponent(cantidad_repuesto_orden, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panelOrdenCrearOrdenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(numero_de_orden, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(9, 9, 9)
                 .addComponent(jLabel10)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton2)
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addComponent(botonCrearOrden)
+                .addContainerGap(29, Short.MAX_VALUE))
         );
 
         panelOrdenMostrarOrdenes.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -799,7 +832,45 @@ public class GUIJefeTaller extends javax.swing.JFrame {
 
     private void botonCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCuentaActionPerformed
         contenedorOrdenCuenta.show(panelContenedorJefe, "PANEL-CUENTA");
-
+        ControladorUsuario cUsuario = new ControladorUsuario();
+        Usuario user = cUsuario.consultarUsuario(jefeLogin.getCedula());
+        char genero = user.getGenero();
+        int cargo = user.getCargo();
+        String generoS = "";
+        String cargoS = "";
+        
+        if (cargo == 1){
+            cargoS = "GERENTE";
+        }
+        
+        else if(cargo == 2){
+            cargoS = "JEFE DE TALLER";
+        }
+        
+        else if (cargo == 3) {
+            cargoS = "VENDEDOR";
+        }
+        
+        if (genero == 'M') {
+            generoS = "MASCULINO";
+        }
+        
+        else if (genero == 'F') {
+            generoS = "FEMENINO";
+        }
+        
+        String informacion = "INFORMACION DEL USUARIO:\n\n" +
+                             "CEDULA: " + user.getCedula() + "\n" +
+                             "SEDE DONDE TRABAJA: " + user.getSede() + "\n" +
+                             "NOMBRE DEL USUARIO: " + user.getNombre() + "\n" +
+                             "FECHA DE NACIMIENTO: " + user.getFecha() + "\n" +
+                             "DIRECCION DE RESIDENCIA: " + user.getDireccion() + "\n" +
+                             "GENERO: " + generoS + "\n" +
+                             "EMAIL DEL USUARIO: " + user.getEmail() + "\n" +
+                             "CARGO DEL USUARIO: " + cargoS + "\n" +
+                             "TELEFONO DE CONTACTO: " + user.getTelefono() + "\n";
+        
+        areaTextoConsultarCuenta.setText(informacion);
     }//GEN-LAST:event_botonCuentaActionPerformed
 
     private void botonInformacionCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonInformacionCuentaActionPerformed
@@ -828,11 +899,128 @@ public class GUIJefeTaller extends javax.swing.JFrame {
 
     private void botonGenerarVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonGenerarVentaActionPerformed
         contenedorOrden.show(panelContenedorOrden, "CREAR-ORDEN");
+        
+        ControladorVehiculo cV = new ControladorVehiculo();
+        ControladorRepuesto cR = new ControladorRepuesto();
+        
+        ArrayList<Vehiculo> vehiculos = cV.consultarVehiculos();
+        ArrayList<Repuesto> repuestos = cR.consultarRepuestos();
+        
+        comboBoxVehiculoOrden.removeAllItems();
+        comboBoxVehiculoOrden.addItem("Seleccione un vehiculo");
+        String añadir = "";
+        for (int i = 0; i < vehiculos.size(); i++) {
+            añadir = vehiculos.get(i).getMarca() + " | " + vehiculos.get(i).getReferencia() + " | " + vehiculos.get(i).getModelo();
+            comboBoxVehiculoOrden.addItem(añadir);
+        }
+        
+        comboBoxRepuestoVehiculo.removeAllItems();
+        comboBoxRepuestoVehiculo.addItem("Seleccione uno");
+        
+        for (int i = 0; i < repuestos.size(); i++) {
+            añadir = repuestos.get(i).getNombre();
+            comboBoxRepuestoVehiculo.addItem(añadir);
+        }
+        
+        
     }//GEN-LAST:event_botonGenerarVentaActionPerformed
 
     private void botonConsultarOrdenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonConsultarOrdenActionPerformed
         contenedorOrden.show(panelContenedorOrden, "MOSTRAR-ORDENES");
+        areaTextoConsultarOrdenes.setText("");
+        ControladorOrdenDeTrabajo cOrden = new ControladorOrdenDeTrabajo();
+        
+        ArrayList<OrdenDeTrabajo> ordenes = cOrden.consultarOrdenes();
+        String informacion = "";
+        
+        for (int i = 0; i < ordenes.size(); i++) {
+            informacion = "--------------------------------------------------------\n" +
+                          "IDENTIFICACIÓN ORDEN: " + ordenes.get(i).getId_orden() + "\n" + 
+                          "IDENTIFICACIÓN USUARIO: " + ordenes.get(i).getId_usuario() + "\n" +
+                          "IDENTIFICACIÓN REPUESTO: " + ordenes.get(i).getId_repuesto() + "\n" +
+                          "IDENTIFICACIÓN SEDE: " + ordenes.get(i).getId_sede() + "\n" +
+                          "CANTIDAD REPUESTO: " + ordenes.get(i).getCantidadRepuesto() + "\n" +
+                          "DESCRIPCION : " + ordenes.get(i).getDescripcion() + "\n" +
+                          "--------------------------------------------------------\n";
+            areaTextoConsultarOrdenes.append(informacion);
+        }
     }//GEN-LAST:event_botonConsultarOrdenActionPerformed
+
+    private void botonCrearOrdenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCrearOrdenActionPerformed
+        
+        int response = JOptionPane.showConfirmDialog(rootPane, "¿ESTA SEGURO QUE DESEA REGISTRAR LA ORDEN?", "AutosBAC",JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if (response == JOptionPane.YES_OPTION){
+            ControladorVehiculo cV = new ControladorVehiculo();
+            ControladorRepuesto cR = new ControladorRepuesto();
+            ControladorOrdenDeTrabajo cOrden = new ControladorOrdenDeTrabajo();
+
+            ArrayList<OrdenDeTrabajo> ordenes = cOrden.consultarOrdenes();
+            ArrayList<Vehiculo> vehiculos = cV.consultarVehiculos();
+            ArrayList<Repuesto> repuestos = cR.consultarRepuestos();
+
+            try {
+                int cantidad = Integer.parseInt(cantidad_repuesto_orden.getText());
+                int indexV = comboBoxVehiculoOrden.getSelectedIndex();
+                int indexR = comboBoxRepuestoVehiculo.getSelectedIndex();
+                int numero_orden = Integer.parseInt(numero_de_orden.getText());
+                int cedula = jefeLogin.getCedula();
+                int sede = jefeLogin.getSede();
+                String descripcion = areaTextoCrearOrden.getText();
+                
+                int idValido = 0;
+
+                for (int i = 0; i < ordenes.size(); i++) {
+                    if (ordenes.get(i).getId_orden() == numero_orden){
+                        idValido = 1;
+                    }
+                }
+
+                if ((idValido == 1) | (cantidad <= 0) | (indexV == 0) | (indexR == 0) | (descripcion.equals(""))){
+                    JOptionPane.showMessageDialog(rootPane, "HUBO UN ERROR EN LOS DATOS INGRESADOS, RECORDAR QUE:\n"
+                                                            + "* LA CANTIDAD DEBE SER MAYOR A CERO\n"
+                                                            + "* EL ID NO DEBE SER NEGATIVO NI CERO\n"
+                                                            + "* LA DESCRIPCION NO DEBE ESTAR VACIA\n"
+                                                            + "* DEBE SELECCIONAR UN VEHICULO\n"
+                                                            + "* DEBE SELECCIONAR UN REPUESTO\n"
+                                                            + "* EL NUMERO DE ORDEN DEBE SER UNICO", "AutosABC", JOptionPane.ERROR_MESSAGE);
+                }
+                else if ((repuestos.get(indexR - 1).getCantidad() < cantidad)){
+                    JOptionPane.showMessageDialog(rootPane, "LA CANTIDAD DISPONIBLE DEL REPUESTO NO ES SUFICIENTE", "AutosABC", JOptionPane.ERROR_MESSAGE);
+                }
+
+                else {
+                    int cantidadNueva = repuestos.get(indexR - 1).getCantidad() - cantidad;
+
+                    cOrden = new ControladorOrdenDeTrabajo();
+
+                    int result = cOrden.insertarOrden(numero_orden, cedula, vehiculos.get(indexV - 1).getVehiculo(), repuestos.get(indexR - 1).getId_repuesto(), sede, cantidad, descripcion);
+
+                    if (result == -2) {
+                        JOptionPane.showMessageDialog(rootPane, "OCURRIO UN ERROR SQL EN LA BASE DE DATOS, LLAME A SOPORTE" , "AutosABC", JOptionPane.ERROR_MESSAGE);
+
+                    }
+
+                    else if (result == -3) {
+                        JOptionPane.showMessageDialog(rootPane, "OCURRIO UN ERROR DESCONOCIDO EN LA BASE DE DATOS, LLAME A SOPORTE" , "AutosABC", JOptionPane.ERROR_MESSAGE);
+                    }
+
+                    else {
+                       cR = new ControladorRepuesto();
+                        
+                        int resultado = cR.cambiarCantidad(repuestos.get(indexR - 1).getId_repuesto(), cantidad);
+                        JOptionPane.showMessageDialog(rootPane, "ORDEN EXPEDIDA CON EXITO" , "AutosABC", JOptionPane.INFORMATION_MESSAGE);
+                    }
+                }
+            }
+
+            catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(rootPane, "LA CANTIDAD Y EL NUMERO DE ORDEN TIENE QUE SER NUMERICO", "AutosABC", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        else {
+            JOptionPane.showMessageDialog(rootPane, "REGISTRO CANCELADO", "AutosABC", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }//GEN-LAST:event_botonCrearOrdenActionPerformed
 
 
 
@@ -845,17 +1033,17 @@ public class GUIJefeTaller extends javax.swing.JFrame {
     private javax.swing.JButton botonAyudaInformacionCuenta;
     private javax.swing.JButton botonConsultarOrden;
     private javax.swing.JButton botonContrasenaCuenta;
+    private javax.swing.JButton botonCrearOrden;
     private javax.swing.JButton botonCuenta;
     private javax.swing.JButton botonGenerarVenta;
     private javax.swing.JButton botonInformacionCuenta;
     private javax.swing.JButton botonLogout;
     private javax.swing.JButton botonOrden;
+    private javax.swing.JTextField cantidad_repuesto_orden;
     private javax.swing.JComboBox<String> comboBoxCambioLoginVendedor;
+    private javax.swing.JComboBox<String> comboBoxRepuestoVehiculo;
+    private javax.swing.JComboBox<String> comboBoxVehiculoOrden;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel12;
@@ -883,11 +1071,11 @@ public class GUIJefeTaller extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
+    private javax.swing.JTextField numero_de_orden;
     private javax.swing.JPanel panelContenedorCuenta;
     private javax.swing.JPanel panelContenedorJefe;
     private javax.swing.JPanel panelContenedorOrden;

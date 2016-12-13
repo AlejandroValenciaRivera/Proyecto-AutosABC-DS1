@@ -31,11 +31,13 @@ public class DAOOrdenDeTrabajo {
     public int guardarOrdenDeTrabajo(OrdenDeTrabajo ordenDeTrabajo) {
        
         String sql_guardar = "INSERT INTO orden_de_trabajo VALUES ("
+                + ordenDeTrabajo.getId_orden() + ", " 
                 + ordenDeTrabajo.getId_usuario()+", "
                 + ordenDeTrabajo.getId_repuesto() + ", "
                 + ordenDeTrabajo.getId_vehiculo()+ ", '"
-                + ordenDeTrabajo.getId_sede() + "', "
-                + ordenDeTrabajo.getDescripcion() + ") ";
+                + ordenDeTrabajo.getId_sede() + "', " 
+                + ordenDeTrabajo.getCantidadRepuesto() + ", '"
+                + ordenDeTrabajo.getDescripcion() + "') ";
         int numFilas = -1;
         try{
             Connection conn = fachada.getConnetion();
@@ -43,6 +45,7 @@ public class DAOOrdenDeTrabajo {
             numFilas = sentencia.executeUpdate(sql_guardar);
             conn.close();
             fachada.closeConection();
+            return numFilas;
         }
         catch(SQLException e){ 
             return -2; 
@@ -50,7 +53,7 @@ public class DAOOrdenDeTrabajo {
         catch(Exception e){ 
             return -3; 
         }
-        return numFilas;
+        
     }
     
     /**
@@ -77,7 +80,7 @@ public class DAOOrdenDeTrabajo {
         ArrayList<OrdenDeTrabajo> ordenes = new ArrayList<>();
         
         String sql_select;
-        sql_select="SELECT id_orden , id_usuario , id_repuesto , id_vehiculo , id_sede , descripcion FROM orden_de_trabajo";
+        sql_select="SELECT id_orden , id_usuario , id_repuesto , id_vehiculo , id_sede , cantidad_repuesto, descripcion FROM orden_de_trabajo";
          try{
             Connection conn = fachada.getConnetion();
             Statement sentencia = conn.createStatement();
@@ -96,7 +99,9 @@ public class DAOOrdenDeTrabajo {
                
                orden.setId_sede(tabla.getInt(5));
                
-               orden.setDescripcion(tabla.getString(6));
+               orden.setCantidadRepuesto(tabla.getInt(6));
+               
+               orden.setDescripcion(tabla.getString(7));
                
                ordenes.add(orden);
             }

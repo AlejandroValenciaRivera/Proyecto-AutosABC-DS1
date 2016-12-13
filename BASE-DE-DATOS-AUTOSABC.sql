@@ -11,13 +11,11 @@ DROP SEQUENCE IF EXISTS secuencia_id_vehiculo;
 DROP SEQUENCE IF EXISTS secuencia_id_repuesto;
 DROP SEQUENCE IF EXISTS secuencia_id_venta;
 DROP SEQUENCE IF EXISTS secuencia_id_cotizacion;
-DROP SEQUENCE IF EXISTS secuencia_id_orden_de_trabajo;
 
 CREATE SEQUENCE "secuencia_id_vehiculo" START WITH 1;
 CREATE SEQUENCE "secuencia_id_repuesto" START WITH 1;
 CREATE SEQUENCE "secuencia_id_venta" START WITH 1;
 CREATE SEQUENCE "secuencia_id_cotizacion" START WITH 1;
-CREATE SEQUENCE "secuencia_id_orden_de_trabajo" START WITH 1;
 
 CREATE TABLE sedes (
 
@@ -81,11 +79,12 @@ CREATE TABLE repuestos (
 
 CREATE TABLE orden_de_trabajo (
 
-	id_orden integer DEFAULT nextval('secuencia_id_orden_de_trabajo') PRIMARY KEY,
+	id_orden INT PRIMARY KEY,
 	id_usuario INT,
 	id_repuesto INT,
 	id_vehiculo INT,
 	id_sede INT,
+	cantidad_repuesto INT,
 	descripcion VARCHAR(500),
 	FOREIGN KEY (id_vehiculo) REFERENCES vehiculos(id_vehiculo),
 	FOREIGN KEY (id_repuesto) REFERENCES repuestos(id_repuesto),
