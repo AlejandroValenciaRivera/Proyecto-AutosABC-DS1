@@ -47,7 +47,7 @@ public class GUIlogin extends javax.swing.JFrame {
 
         panelLogin = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        botonAyudaLogin = new javax.swing.JButton();
         botonLogeo = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -55,20 +55,24 @@ public class GUIlogin extends javax.swing.JFrame {
         contraseñalogin = new javax.swing.JPasswordField();
         pin_login_text = new javax.swing.JLabel();
         pin_login = new javax.swing.JPasswordField();
+        panelAyudas = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        areaAyuda = new javax.swing.JTextArea();
 
         panelLogin.setToolTipText("");
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/INTERFAZ/logotipo.png"))); // NOI18N
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/AYUDA-LOGIN.png"))); // NOI18N
-        jButton2.setToolTipText("Presione para obtener ayuda ");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        botonAyudaLogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/AYUDA-LOGIN.png"))); // NOI18N
+        botonAyudaLogin.setToolTipText("Presione para obtener ayuda ");
+        botonAyudaLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                botonAyudaLoginActionPerformed(evt);
             }
         });
 
         botonLogeo.setText("Ingresar");
+        botonLogeo.setToolTipText("Click para ingresar al sistema");
         botonLogeo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonLogeoActionPerformed(evt);
@@ -88,6 +92,8 @@ public class GUIlogin extends javax.swing.JFrame {
         pin_login_text.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         pin_login_text.setText("PIN: ");
 
+        pin_login.setToolTipText("Numero de 12 digitos");
+
         javax.swing.GroupLayout panelLoginLayout = new javax.swing.GroupLayout(panelLogin);
         panelLogin.setLayout(panelLoginLayout);
         panelLoginLayout.setHorizontalGroup(
@@ -96,7 +102,7 @@ public class GUIlogin extends javax.swing.JFrame {
                 .addGap(26, 26, 26)
                 .addGroup(panelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
-                    .addComponent(jButton2))
+                    .addComponent(botonAyudaLogin))
                 .addGroup(panelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelLoginLayout.createSequentialGroup()
                         .addGap(38, 38, 38)
@@ -127,7 +133,7 @@ public class GUIlogin extends javax.swing.JFrame {
                     .addGroup(panelLoginLayout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(7, 7, 7)
-                        .addComponent(jButton2))
+                        .addComponent(botonAyudaLogin))
                     .addGroup(panelLoginLayout.createSequentialGroup()
                         .addGroup(panelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -143,6 +149,28 @@ public class GUIlogin extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(botonLogeo, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        areaAyuda.setBackground(new java.awt.Color(240, 240, 240));
+        areaAyuda.setColumns(20);
+        areaAyuda.setRows(5);
+        jScrollPane1.setViewportView(areaAyuda);
+
+        javax.swing.GroupLayout panelAyudasLayout = new javax.swing.GroupLayout(panelAyudas);
+        panelAyudas.setLayout(panelAyudasLayout);
+        panelAyudasLayout.setHorizontalGroup(
+            panelAyudasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelAyudasLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 572, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        panelAyudasLayout.setVerticalGroup(
+            panelAyudasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelAyudasLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 311, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -167,9 +195,19 @@ public class GUIlogin extends javax.swing.JFrame {
         contraseñalogin.setText("");
         pin_login.setText("");
     }
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        JOptionPane.showMessageDialog(rootPane, "Aqui va un texto de ayuda");
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void botonAyudaLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAyudaLoginActionPerformed
+        String informacion = "El Sistema cuenta con un nivel de seguridad adicional, un PIN, personal e intransferible,\n"
+                + " el cual internamente utiliza un mecanismo de encriptación para brindar mayor seguridad \n"
+                + "de la información de cada uno de los usuarios del sistema, funcionando a modo de llave.\n\n"
+                + "Dentro del Sistema se encuentran presentes tres tipos de usuario, los cuales tienen unas \n"
+                + "características particulares dentro del funcionamiento del mismo. Cada uno de estos  \n"
+                + "tipos de usuario corresponden a los tres roles que usarán el sistema dentro de la \n"
+                + "empresa, estamos hablando del Gerente, Vendedor y Jefe de Taller.\n\n"
+                + "Al rellenar los campos que le solicita la ventana, presione el botón “Ingresar” que está \n"
+                + "en la parte inferior izquierda para validar su información. El pin debe ser un numero de 12 digitos";
+        areaAyuda.setText(informacion);
+        JOptionPane.showMessageDialog(rootPane, panelAyudas);
+    }//GEN-LAST:event_botonAyudaLoginActionPerformed
 
     private void botonLogeoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonLogeoActionPerformed
         setVisible(false);  
@@ -232,12 +270,15 @@ public class GUIlogin extends javax.swing.JFrame {
                             switch (cargo) {
                                 case 1:
                                     gerente = new GUIgerente(this);
+                                    setVisible(false);
                                     break;
                                 case 2:
                                     jefeDeTaller = new GUIJefeTaller(this, users.get(i));
+                                    setVisible(false);
                                     break;
                                 case 3:
                                     vendedor = new GUIvendedor(this, users.get(i));
+                                    setVisible(false);
                                     break;
                                 default:
                                     JOptionPane.showMessageDialog(rootPane, "Ha ocurrido un error critico,\n no se reconocio el cargo de la cuenta ingresada");
@@ -320,12 +361,15 @@ public class GUIlogin extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextArea areaAyuda;
+    private javax.swing.JButton botonAyudaLogin;
     private javax.swing.JButton botonLogeo;
     private javax.swing.JPasswordField contraseñalogin;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JPanel panelAyudas;
     private javax.swing.JPanel panelLogin;
     private javax.swing.JPasswordField pin_login;
     private javax.swing.JLabel pin_login_text;

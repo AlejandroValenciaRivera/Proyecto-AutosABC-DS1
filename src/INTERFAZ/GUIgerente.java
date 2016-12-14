@@ -188,7 +188,6 @@ public class GUIgerente extends javax.swing.JFrame {
         jPanel18 = new javax.swing.JPanel();
         jScrollPane6 = new javax.swing.JScrollPane();
         areaTextoReportes = new javax.swing.JTextArea();
-        botonExportarReporte = new javax.swing.JButton();
         panelConsultarSede = new javax.swing.JPanel();
         seleccionarSede = new javax.swing.JComboBox<>();
         atributoSede = new javax.swing.JComboBox<>();
@@ -198,7 +197,7 @@ public class GUIgerente extends javax.swing.JFrame {
         jLabel47 = new javax.swing.JLabel();
         valor_consulta_sede = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        botonAyudaConsultaSede = new javax.swing.JButton();
         panelModificarSede = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
@@ -213,6 +212,7 @@ public class GUIgerente extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         areTextoModificacionSede = new javax.swing.JTextArea();
         botonRefrescarSede = new javax.swing.JButton();
+        botonAyudaModificarSede = new javax.swing.JButton();
         panelCrearSede = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -221,7 +221,7 @@ public class GUIgerente extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         botonCrearSede = new javax.swing.JButton();
-        jButton14 = new javax.swing.JButton();
+        botonAyudaCrearSede = new javax.swing.JButton();
         fax_sede = new javax.swing.JTextField();
         telefono_sede = new javax.swing.JTextField();
         dir_sede = new javax.swing.JTextField();
@@ -267,7 +267,15 @@ public class GUIgerente extends javax.swing.JFrame {
         jLabel31 = new javax.swing.JLabel();
         comboBoxAtributoUsuario = new javax.swing.JComboBox<>();
         botonModificarAtributoUsuario = new javax.swing.JButton();
-        botonAyudaCrearUsuario1 = new javax.swing.JButton();
+        botonAyudaModificarUsuario = new javax.swing.JButton();
+        panelConsultarUsuario = new javax.swing.JPanel();
+        comboBoxBusquedaUsuario = new javax.swing.JComboBox<>();
+        boton_consultar_usuario = new javax.swing.JButton();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        areaTextoConsultaUsuario = new javax.swing.JTextArea();
+        jLabel48 = new javax.swing.JLabel();
+        valor_consulta_usuario = new javax.swing.JTextField();
+        botonAyudaConsultaUsuario = new javax.swing.JButton();
         panelCrearInventario = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
         jPanel15 = new javax.swing.JPanel();
@@ -328,6 +336,8 @@ public class GUIgerente extends javax.swing.JFrame {
         comboBoxAtributoVehiculo = new javax.swing.JComboBox<>();
         jLabel63 = new javax.swing.JLabel();
         nuevo_valor_vehiculo = new javax.swing.JTextField();
+        panelModificarInventarioModificarVehiculoVacio = new javax.swing.JPanel();
+        panelModificarInventarioModificarRepuestoVacio = new javax.swing.JPanel();
         panelModificarInventarioModificarRepuesto = new javax.swing.JPanel();
         jLabel52 = new javax.swing.JLabel();
         jLabel53 = new javax.swing.JLabel();
@@ -337,16 +347,6 @@ public class GUIgerente extends javax.swing.JFrame {
         comboBoxAtributoRepuesto = new javax.swing.JComboBox<>();
         jLabel59 = new javax.swing.JLabel();
         nuevo_valor_repuesto = new javax.swing.JTextField();
-        panelModificarInventarioModificarVehiculoVacio = new javax.swing.JPanel();
-        panelModificarInventarioModificarRepuestoVacio = new javax.swing.JPanel();
-        panelConsultarUsuario = new javax.swing.JPanel();
-        comboBoxBusquedaUsuario = new javax.swing.JComboBox<>();
-        boton_consultar_usuario = new javax.swing.JButton();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        areaTextoConsultaUsuario = new javax.swing.JTextArea();
-        jLabel48 = new javax.swing.JLabel();
-        valor_consulta_usuario = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
         panelConsultarInventario = new javax.swing.JPanel();
         comboBosBusquedaInventario = new javax.swing.JComboBox<>();
         boton_consultar_inventario = new javax.swing.JButton();
@@ -363,6 +363,9 @@ public class GUIgerente extends javax.swing.JFrame {
         construccion = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel33 = new javax.swing.JLabel();
+        panelAyudas = new javax.swing.JPanel();
+        jScrollPane8 = new javax.swing.JScrollPane();
+        areaAyuda = new javax.swing.JTextArea();
 
         jPanel3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
 
@@ -380,6 +383,7 @@ public class GUIgerente extends javax.swing.JFrame {
         jPanel4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
 
         botonSedesGerente.setText("SEDES");
+        botonSedesGerente.setToolTipText("Para gestionar Sedes");
         botonSedesGerente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonSedesGerenteActionPerformed(evt);
@@ -387,6 +391,7 @@ public class GUIgerente extends javax.swing.JFrame {
         });
 
         botonUsuariosGerente.setText("USUARIOS");
+        botonUsuariosGerente.setToolTipText("Para gestionar Usuarios");
         botonUsuariosGerente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonUsuariosGerenteActionPerformed(evt);
@@ -394,6 +399,7 @@ public class GUIgerente extends javax.swing.JFrame {
         });
 
         botonReportesGerente.setText("REPORTES");
+        botonReportesGerente.setToolTipText("Para generar reportes");
         botonReportesGerente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonReportesGerenteActionPerformed(evt);
@@ -409,6 +415,7 @@ public class GUIgerente extends javax.swing.JFrame {
         });
 
         botonInventarioGerente.setText("INVENTARIO");
+        botonInventarioGerente.setToolTipText("Para gestionar vehiculos, repuestos, ventas, cotizaciones, ordenes de talle");
         botonInventarioGerente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonInventarioGerenteActionPerformed(evt);
@@ -669,7 +676,8 @@ public class GUIgerente extends javax.swing.JFrame {
             }
         });
 
-        botonConsultarInventario.setToolTipText("Al hacer click en este boton, se desplegará  el menu para modificar vehiculos o repuestos");
+        botonConsultarInventario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/ICONO-CONSULTAR-INVENTARIO.png"))); // NOI18N
+        botonConsultarInventario.setToolTipText("Al hacer click en este boton, se desplegará  el menu para realizar consultas relazionas con el inventario");
         botonConsultarInventario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonConsultarInventarioActionPerformed(evt);
@@ -739,6 +747,7 @@ public class GUIgerente extends javax.swing.JFrame {
         jPanel14.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         botonReporteNumero1.setText("R1");
+        botonReporteNumero1.setToolTipText("Genera el reporte numero 1");
         botonReporteNumero1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonReporteNumero1ActionPerformed(evt);
@@ -746,6 +755,7 @@ public class GUIgerente extends javax.swing.JFrame {
         });
 
         botonReporteNumero2.setText("R2");
+        botonReporteNumero2.setToolTipText("Genera el reporte numero 2");
         botonReporteNumero2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonReporteNumero2ActionPerformed(evt);
@@ -753,6 +763,8 @@ public class GUIgerente extends javax.swing.JFrame {
         });
 
         botonReporte3.setText("R3");
+        botonReporte3.setToolTipText("Genera el reporte numero 3");
+        botonReporte3.setBorderPainted(false);
         botonReporte3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonReporte3ActionPerformed(evt);
@@ -760,6 +772,7 @@ public class GUIgerente extends javax.swing.JFrame {
         });
 
         botonReporte4.setText("R4");
+        botonReporte4.setToolTipText("Genera el reporte numero 4");
         botonReporte4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonReporte4ActionPerformed(evt);
@@ -767,6 +780,7 @@ public class GUIgerente extends javax.swing.JFrame {
         });
 
         botonReporte5.setText("R5");
+        botonReporte5.setToolTipText("Genera el reporte numero 5");
         botonReporte5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonReporte5ActionPerformed(evt);
@@ -774,6 +788,8 @@ public class GUIgerente extends javax.swing.JFrame {
         });
 
         botonReporte6.setText("R6");
+        botonReporte6.setToolTipText("Genera el reporte numero 6");
+        botonReporte6.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         botonReporte6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonReporte6ActionPerformed(evt);
@@ -781,6 +797,7 @@ public class GUIgerente extends javax.swing.JFrame {
         });
 
         jButton18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/ICONO-AYUDA-REPORTES.jpg"))); // NOI18N
+        jButton18.setToolTipText("Para obtener ayuda acerca de los reportes");
 
         javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
         jPanel14.setLayout(jPanel14Layout);
@@ -813,7 +830,7 @@ public class GUIgerente extends javax.swing.JFrame {
                 .addComponent(botonReporte5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(botonReporte6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 78, Short.MAX_VALUE)
                 .addComponent(jButton18, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -825,36 +842,21 @@ public class GUIgerente extends javax.swing.JFrame {
         areaTextoReportes.setRows(5);
         jScrollPane6.setViewportView(areaTextoReportes);
 
-        botonExportarReporte.setText("EXPORTAR");
-        botonExportarReporte.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonExportarReporteActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel18Layout = new javax.swing.GroupLayout(jPanel18);
         jPanel18.setLayout(jPanel18Layout);
         jPanel18Layout.setHorizontalGroup(
             jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel18Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel18Layout.createSequentialGroup()
-                        .addComponent(jScrollPane6)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel18Layout.createSequentialGroup()
-                        .addGap(0, 244, Short.MAX_VALUE)
-                        .addComponent(botonExportarReporte)
-                        .addGap(244, 244, 244))))
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 563, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel18Layout.setVerticalGroup(
             jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel18Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(botonExportarReporte)
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addComponent(jScrollPane6)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout panelReportesGerenteLayout = new javax.swing.GroupLayout(panelReportesGerente);
@@ -906,7 +908,12 @@ public class GUIgerente extends javax.swing.JFrame {
 
         jLabel4.setText("SEDE O ATRIBUTO:");
 
-        jButton1.setText("AYUDA");
+        botonAyudaConsultaSede.setText("AYUDA");
+        botonAyudaConsultaSede.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonAyudaConsultaSedeActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelConsultarSedeLayout = new javax.swing.GroupLayout(panelConsultarSede);
         panelConsultarSede.setLayout(panelConsultarSedeLayout);
@@ -931,7 +938,7 @@ public class GUIgerente extends javax.swing.JFrame {
                         .addGap(36, 36, 36)
                         .addGroup(panelConsultarSedeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(boton_consultar_sede, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(botonAyudaConsultaSede, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         panelConsultarSedeLayout.setVerticalGroup(
@@ -948,7 +955,7 @@ public class GUIgerente extends javax.swing.JFrame {
                 .addGroup(panelConsultarSedeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel47)
                     .addComponent(valor_consulta_sede, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
+                    .addComponent(botonAyudaConsultaSede))
                 .addGap(19, 19, 19)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 266, Short.MAX_VALUE)
                 .addContainerGap())
@@ -1002,6 +1009,13 @@ public class GUIgerente extends javax.swing.JFrame {
             }
         });
 
+        botonAyudaModificarSede.setText("AYUDA");
+        botonAyudaModificarSede.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonAyudaModificarSedeActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelModificarSedeLayout = new javax.swing.GroupLayout(panelModificarSede);
         panelModificarSede.setLayout(panelModificarSedeLayout);
         panelModificarSedeLayout.setHorizontalGroup(
@@ -1034,7 +1048,8 @@ public class GUIgerente extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
                         .addGroup(panelModificarSedeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(botonAplicarCambioSede, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
-                            .addComponent(botonRefrescarSede, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(botonRefrescarSede, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(botonAyudaModificarSede, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(58, 58, 58))))
         );
         panelModificarSedeLayout.setVerticalGroup(
@@ -1042,34 +1057,27 @@ public class GUIgerente extends javax.swing.JFrame {
             .addGroup(panelModificarSedeLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel11)
-                .addGroup(panelModificarSedeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelModificarSedeLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(panelModificarSedeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel12)
-                            .addComponent(comboBoxSedeCambio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(panelModificarSedeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel13)
-                            .addComponent(comboBoxDatoACambiar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(panelModificarSedeLayout.createSequentialGroup()
-                        .addGap(35, 35, 35)
-                        .addComponent(botonAplicarCambioSede)))
-                .addGroup(panelModificarSedeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelModificarSedeLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(panelModificarSedeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel14)
-                            .addComponent(valor_actual_sede, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(panelModificarSedeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel41)
-                            .addComponent(valor_nuevo_sede, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(panelModificarSedeLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(botonRefrescarSede)))
+                .addGap(18, 18, 18)
+                .addGroup(panelModificarSedeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel12)
+                    .addComponent(comboBoxSedeCambio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(botonAplicarCambioSede))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panelModificarSedeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel13)
+                    .addComponent(comboBoxDatoACambiar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(botonRefrescarSede))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panelModificarSedeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel14)
+                    .addComponent(valor_actual_sede, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(botonAyudaModificarSede))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)
+                .addGroup(panelModificarSedeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel41)
+                    .addComponent(valor_nuevo_sede, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -1105,12 +1113,12 @@ public class GUIgerente extends javax.swing.JFrame {
             }
         });
 
-        jButton14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/INTERFAZ/icono ayuda.jpg"))); // NOI18N
-        jButton14.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jButton14.setName(""); // NOI18N
-        jButton14.addActionListener(new java.awt.event.ActionListener() {
+        botonAyudaCrearSede.setIcon(new javax.swing.ImageIcon(getClass().getResource("/INTERFAZ/icono ayuda.jpg"))); // NOI18N
+        botonAyudaCrearSede.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        botonAyudaCrearSede.setName(""); // NOI18N
+        botonAyudaCrearSede.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton14ActionPerformed(evt);
+                botonAyudaCrearSedeActionPerformed(evt);
             }
         });
 
@@ -1136,7 +1144,7 @@ public class GUIgerente extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(panelCrearSedeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelCrearSedeLayout.createSequentialGroup()
-                        .addComponent(jButton14, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(botonAyudaCrearSede, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 410, Short.MAX_VALUE)
                         .addComponent(botonCrearSede, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panelCrearSedeLayout.createSequentialGroup()
@@ -1190,7 +1198,7 @@ public class GUIgerente extends javax.swing.JFrame {
                     .addComponent(fax_sede, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 97, Short.MAX_VALUE)
                 .addGroup(panelCrearSedeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton14, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(botonAyudaCrearSede, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(botonCrearSede, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
@@ -1443,12 +1451,12 @@ public class GUIgerente extends javax.swing.JFrame {
                 .addContainerGap(22, Short.MAX_VALUE))
         );
 
-        botonAyudaCrearUsuario1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/INTERFAZ/icono ayuda.jpg"))); // NOI18N
-        botonAyudaCrearUsuario1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        botonAyudaCrearUsuario1.setName(""); // NOI18N
-        botonAyudaCrearUsuario1.addActionListener(new java.awt.event.ActionListener() {
+        botonAyudaModificarUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/INTERFAZ/icono ayuda.jpg"))); // NOI18N
+        botonAyudaModificarUsuario.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        botonAyudaModificarUsuario.setName(""); // NOI18N
+        botonAyudaModificarUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonAyudaCrearUsuario1ActionPerformed(evt);
+                botonAyudaModificarUsuarioActionPerformed(evt);
             }
         });
 
@@ -1469,7 +1477,7 @@ public class GUIgerente extends javax.swing.JFrame {
                     .addGroup(panelModificarUsuarioLayout.createSequentialGroup()
                         .addGroup(panelModificarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel30)
-                            .addComponent(botonAyudaCrearUsuario1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(botonAyudaModificarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -1487,7 +1495,76 @@ public class GUIgerente extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 80, Short.MAX_VALUE)
-                .addComponent(botonAyudaCrearUsuario1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(botonAyudaModificarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        panelConsultarUsuario.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        panelConsultarUsuario.setPreferredSize(new java.awt.Dimension(586, 366));
+
+        comboBoxBusquedaUsuario.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Buscar por...", "Todos", "Cedula", "Sede", "Nombre", "Genero", "Cargo", "Salario", "Estado" }));
+        comboBoxBusquedaUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboBoxBusquedaUsuarioActionPerformed(evt);
+            }
+        });
+
+        boton_consultar_usuario.setText("CONSULTAR");
+        boton_consultar_usuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boton_consultar_usuarioActionPerformed(evt);
+            }
+        });
+
+        areaTextoConsultaUsuario.setEditable(false);
+        areaTextoConsultaUsuario.setColumns(20);
+        areaTextoConsultaUsuario.setRows(5);
+        jScrollPane4.setViewportView(areaTextoConsultaUsuario);
+
+        jLabel48.setText("VALOR BUSQUEDA:");
+
+        botonAyudaConsultaUsuario.setText("AYUDA");
+        botonAyudaConsultaUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonAyudaConsultaUsuarioActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panelConsultarUsuarioLayout = new javax.swing.GroupLayout(panelConsultarUsuario);
+        panelConsultarUsuario.setLayout(panelConsultarUsuarioLayout);
+        panelConsultarUsuarioLayout.setHorizontalGroup(
+            panelConsultarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelConsultarUsuarioLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panelConsultarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane4)
+                    .addGroup(panelConsultarUsuarioLayout.createSequentialGroup()
+                        .addGroup(panelConsultarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panelConsultarUsuarioLayout.createSequentialGroup()
+                                .addComponent(jLabel48)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(valor_consulta_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(comboBoxBusquedaUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(36, 36, 36)
+                        .addGroup(panelConsultarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(boton_consultar_usuario, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)
+                            .addComponent(botonAyudaConsultaUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap())
+        );
+        panelConsultarUsuarioLayout.setVerticalGroup(
+            panelConsultarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelConsultarUsuarioLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panelConsultarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(boton_consultar_usuario)
+                    .addComponent(comboBoxBusquedaUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(panelConsultarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel48)
+                    .addComponent(valor_consulta_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(botonAyudaConsultaUsuario))
+                .addGap(19, 19, 19)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 266, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -1987,6 +2064,21 @@ public class GUIgerente extends javax.swing.JFrame {
                 .addContainerGap(83, Short.MAX_VALUE))
         );
 
+        panelModificarInventarioModificarVehiculoVacio.setPreferredSize(new java.awt.Dimension(258, 276));
+
+        javax.swing.GroupLayout panelModificarInventarioModificarVehiculoVacioLayout = new javax.swing.GroupLayout(panelModificarInventarioModificarVehiculoVacio);
+        panelModificarInventarioModificarVehiculoVacio.setLayout(panelModificarInventarioModificarVehiculoVacioLayout);
+        panelModificarInventarioModificarVehiculoVacioLayout.setHorizontalGroup(
+            panelModificarInventarioModificarVehiculoVacioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 258, Short.MAX_VALUE)
+        );
+        panelModificarInventarioModificarVehiculoVacioLayout.setVerticalGroup(
+            panelModificarInventarioModificarVehiculoVacioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 276, Short.MAX_VALUE)
+        );
+
+        panelModificarInventarioModificarRepuestoVacio.setPreferredSize(new java.awt.Dimension(258, 276));
+
         panelModificarInventarioModificarRepuesto.setPreferredSize(new java.awt.Dimension(258, 276));
 
         jLabel52.setText("INFORMACION REPUESTO:");
@@ -2056,94 +2148,25 @@ public class GUIgerente extends javax.swing.JFrame {
                 .addContainerGap(83, Short.MAX_VALUE))
         );
 
-        panelModificarInventarioModificarVehiculoVacio.setPreferredSize(new java.awt.Dimension(258, 276));
-
-        javax.swing.GroupLayout panelModificarInventarioModificarVehiculoVacioLayout = new javax.swing.GroupLayout(panelModificarInventarioModificarVehiculoVacio);
-        panelModificarInventarioModificarVehiculoVacio.setLayout(panelModificarInventarioModificarVehiculoVacioLayout);
-        panelModificarInventarioModificarVehiculoVacioLayout.setHorizontalGroup(
-            panelModificarInventarioModificarVehiculoVacioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 258, Short.MAX_VALUE)
-        );
-        panelModificarInventarioModificarVehiculoVacioLayout.setVerticalGroup(
-            panelModificarInventarioModificarVehiculoVacioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 276, Short.MAX_VALUE)
-        );
-
-        panelModificarInventarioModificarRepuestoVacio.setPreferredSize(new java.awt.Dimension(258, 276));
-
         javax.swing.GroupLayout panelModificarInventarioModificarRepuestoVacioLayout = new javax.swing.GroupLayout(panelModificarInventarioModificarRepuestoVacio);
         panelModificarInventarioModificarRepuestoVacio.setLayout(panelModificarInventarioModificarRepuestoVacioLayout);
         panelModificarInventarioModificarRepuestoVacioLayout.setHorizontalGroup(
             panelModificarInventarioModificarRepuestoVacioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 100, Short.MAX_VALUE)
+            .addGroup(panelModificarInventarioModificarRepuestoVacioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panelModificarInventarioModificarRepuestoVacioLayout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(panelModificarInventarioModificarRepuesto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
         panelModificarInventarioModificarRepuestoVacioLayout.setVerticalGroup(
             panelModificarInventarioModificarRepuestoVacioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 100, Short.MAX_VALUE)
-        );
-
-        panelConsultarUsuario.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        panelConsultarUsuario.setPreferredSize(new java.awt.Dimension(586, 366));
-
-        comboBoxBusquedaUsuario.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Buscar por...", "Todos", "Cedula", "Sede", "Nombre", "Genero", "Cargo", "Salario", "Estado" }));
-        comboBoxBusquedaUsuario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                comboBoxBusquedaUsuarioActionPerformed(evt);
-            }
-        });
-
-        boton_consultar_usuario.setText("CONSULTAR");
-        boton_consultar_usuario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                boton_consultar_usuarioActionPerformed(evt);
-            }
-        });
-
-        areaTextoConsultaUsuario.setEditable(false);
-        areaTextoConsultaUsuario.setColumns(20);
-        areaTextoConsultaUsuario.setRows(5);
-        jScrollPane4.setViewportView(areaTextoConsultaUsuario);
-
-        jLabel48.setText("VALOR BUSQUEDA:");
-
-        jButton2.setText("AYUDA");
-
-        javax.swing.GroupLayout panelConsultarUsuarioLayout = new javax.swing.GroupLayout(panelConsultarUsuario);
-        panelConsultarUsuario.setLayout(panelConsultarUsuarioLayout);
-        panelConsultarUsuarioLayout.setHorizontalGroup(
-            panelConsultarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelConsultarUsuarioLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(panelConsultarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane4)
-                    .addGroup(panelConsultarUsuarioLayout.createSequentialGroup()
-                        .addGroup(panelConsultarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(panelConsultarUsuarioLayout.createSequentialGroup()
-                                .addComponent(jLabel48)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(valor_consulta_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(comboBoxBusquedaUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(36, 36, 36)
-                        .addGroup(panelConsultarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(boton_consultar_usuario, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap())
-        );
-        panelConsultarUsuarioLayout.setVerticalGroup(
-            panelConsultarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelConsultarUsuarioLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(panelConsultarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(boton_consultar_usuario)
-                    .addComponent(comboBoxBusquedaUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(panelConsultarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel48)
-                    .addComponent(valor_consulta_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2))
-                .addGap(19, 19, 19)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 266, Short.MAX_VALUE)
-                .addContainerGap())
+            .addGroup(panelModificarInventarioModificarRepuestoVacioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panelModificarInventarioModificarRepuestoVacioLayout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(panelModificarInventarioModificarRepuesto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
 
         panelConsultarInventario.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -2298,6 +2321,28 @@ public class GUIgerente extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        areaAyuda.setBackground(new java.awt.Color(240, 240, 240));
+        areaAyuda.setColumns(20);
+        areaAyuda.setRows(5);
+        jScrollPane8.setViewportView(areaAyuda);
+
+        javax.swing.GroupLayout panelAyudasLayout = new javax.swing.GroupLayout(panelAyudas);
+        panelAyudas.setLayout(panelAyudasLayout);
+        panelAyudasLayout.setHorizontalGroup(
+            panelAyudasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelAyudasLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 572, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        panelAyudasLayout.setVerticalGroup(
+            panelAyudasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelAyudasLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 232, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("AUTOS ABC -- GERENTE");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -2390,9 +2435,13 @@ public class GUIgerente extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_ciudad_sedeActionPerformed
 
-    private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
-        JOptionPane.showMessageDialog(rootPane, "Aqui va un texto de ayuda");
-    }//GEN-LAST:event_jButton14ActionPerformed
+    private void botonAyudaCrearSedeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAyudaCrearSedeActionPerformed
+        String informacion = "EN ESTE ESPACIO PARA LA CREACION DE SEDES DEBE RECORDAR QUE: \n\n"
+                + "1) La identificacion, el telefono y el fax son numeros\n"
+                + "2) La identificacion debe ser unica, es decir, no deben haber 2 sedes con el mismo id\n";
+        areaAyuda.setText(informacion);
+        JOptionPane.showMessageDialog(rootPane, panelAyudas);
+    }//GEN-LAST:event_botonAyudaCrearSedeActionPerformed
 
     private void botonCrearSedeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCrearSedeActionPerformed
         try {
@@ -2474,16 +2523,36 @@ public class GUIgerente extends javax.swing.JFrame {
     }//GEN-LAST:event_radioBotonGeneroMActionPerformed
         
     private void botonAyudaCrearUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAyudaCrearUsuarioActionPerformed
-        // TODO add your handling code here:
+        String informacion = "Para la creación de un usuario deberá presionar en el botón “Usuarios” del menú \n"
+                + "superior y el sistema cargará en el panel izquierdo los botones necesarios para la gestión\n"
+                + " de usuarios. A continuación presione el botón “Crear usuario” (el que tiene una persona \n"
+                + "con un ‘+’), del panel izquierdo y diligencie el formulario. Posteriormente presione el \n"
+                + "botón “Crear Usuario” de la parte inferior el Sistema validará la información de los \n"
+                + "campos y hará la creación del usuario con la información proporcionada.\n\n"
+                + "En dicha validacion se debe tener muy presente que los campos de cedula, telefono y salario\n"
+                + "deben ser datos numericos, además que el campo fecha de nacimiento debe \n"
+                + "seguir el siguiente formato: AAAA-MM-DD. Cuando cree el usuario recuerde \n"
+                + "guardar el pin que es mostrado en pantalla, pues no se podra recuperar de ninguna forma.";
+        areaAyuda.setText(informacion);
+        JOptionPane.showMessageDialog(rootPane, panelAyudas);
     }//GEN-LAST:event_botonAyudaCrearUsuarioActionPerformed
 
     private void comboBoxAtributoUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxAtributoUsuarioActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_comboBoxAtributoUsuarioActionPerformed
 
-    private void botonAyudaCrearUsuario1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAyudaCrearUsuario1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_botonAyudaCrearUsuario1ActionPerformed
+    private void botonAyudaModificarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAyudaModificarUsuarioActionPerformed
+        String informacion = "Para la modificación de un usuario deberá presionar en el botón “Usuarios” del menú\n"
+                + " superior y el sistema cargará en el panel izquierdo los botones necesarios para la gestión\n"
+                + " de usuarios. A continuación presione el botón “Modificar usuario” (el que tiene una\n"
+                + " persona con una rueda), del panel izquierdo y diligencie el número de cédula. Seguido\n"
+                + " del campo que desea modificar y el valor que desea colocar.\n" +"\n" +"\n" 
+                + "Posteriormente presione el botón “Modificar” de la parte inferior el Sistema validará la \n"
+                + " información de los campos y hará la modificación del usuario con la\n"
+                + " información proporcionada.";
+        areaAyuda.setText(informacion);
+        JOptionPane.showMessageDialog(rootPane, panelAyudas);
+    }//GEN-LAST:event_botonAyudaModificarUsuarioActionPerformed
 
     private void botonModificarAtributoUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonModificarAtributoUsuarioActionPerformed
        try{
@@ -6123,12 +6192,50 @@ public class GUIgerente extends javax.swing.JFrame {
 
     }//GEN-LAST:event_botonReporteNumero1ActionPerformed
 
-    private void botonExportarReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonExportarReporteActionPerformed
-        JOptionPane.showMessageDialog(rootPane, "ESTA FUNCIONALIDAD AUN NO SE ENCUENTRA DISPONIBLE ENE STA VERSION DEL SOFTWARE");
-    }//GEN-LAST:event_botonExportarReporteActionPerformed
+    private void botonAyudaModificarSedeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAyudaModificarSedeActionPerformed
+        String informacion = "PARA REALIZAR UNA MODIFICACION DEBE PRIMERAMENTE SELECCIONAR UNA SEDE\n"
+                + "A LA QUE SE DESEA MODIFCIAR DATOS, LUEGO SE SELECCIONA EL ATRIBUTO QUE SE \n"
+                + "DESEA MODIFICAR DE LA SEDE SELECCIONADA Y POR ULTIMO SE DIGITA EL NUEVO VALOR,\n"
+                + "TENIENDO EN CUENTA QUE EL TELEFONO Y EL FAX DE UNA SEDE DEBEN SER NUMEROS";
+        areaAyuda.setText(informacion);
+        JOptionPane.showMessageDialog(rootPane, panelAyudas);
+    }//GEN-LAST:event_botonAyudaModificarSedeActionPerformed
+
+    private void botonAyudaConsultaSedeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAyudaConsultaSedeActionPerformed
+        String informacion = "Para consultar una sede, primero seleccione el botón “Sedes” en el menú superior, al cargar el panel de \n"
+                + "la izquierda seleccione el botón “Consultar Sede” (el que tiene \n"
+                + "un edificio acompañado de una lupa), a continuación en el panel de la derecha deberá \n"
+                + "seleccionar la información que desea consultar y digitar la informacion de la sede \n"
+                + "de la cual extraer la información.\n\n"
+                + "Para poder realizar una consulta satisfactoriamente, se puede consultar o por sedes, o por el atributo de una sede\n"
+                + "Pero no por ambos. Si se consulta por una sede se debe especificar si se desea consultar todas las sedes o una\n"
+                + "en particular, y se da click en consultar. Si se desea consultar por atributo, entonces la sede debe estar en la\n"
+                + "opcion 'Seleccione sede' y despues seleccionar el atributo por el que se desea consultar,\n"
+                + "una vez seleccionado el atributo, en el campo de texto se debe ingresar el valor en que debe coincidir\n"
+                + "el atributo a la hora de realizar la consulta";
+        areaAyuda.setText(informacion);
+        JOptionPane.showMessageDialog(rootPane, panelAyudas);
+    }//GEN-LAST:event_botonAyudaConsultaSedeActionPerformed
+
+    private void botonAyudaConsultaUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAyudaConsultaUsuarioActionPerformed
+        String informacion  = "Para realizar consultas de usuarios los pasos son bastantes simples:\n"
+                + "Se debe seleccionar el atributo por el que se desea consultar, luego se ingresa en\n"
+                + "el campo de texto que valor debe tomar dicho atributo y presionar en consultar,\n"
+                + "si se desea consultar toda la informacion de todos los usuarios, entonces se debe\n"
+                + "seleccionar la opcion 'Todas' y presionar en consultar.\n\n"
+                + "Debe recordar que la cedula y el salario son numeros, no deben ser ni contener \n"
+                + "letras o caracteres esoeciales. Además debe tener en cuenta que las consultas\n"
+                + "por salario tiene un formato, y es que antes del salario (numero) a consultar\n"
+                + "en el campo de etxto debe anteponer un >=, <= o == dependiendo de si quiere consultar\n"
+                + "salarios mayores o iguales, menos o iguales o estrictamente iguales al ingresado,\n"
+                + "no deben haber espacios en blanco entre el salario y el simbolo.";
+        areaAyuda.setText(informacion);
+        JOptionPane.showMessageDialog(rootPane, panelAyudas);
+    }//GEN-LAST:event_botonAyudaConsultaUsuarioActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea areTextoModificacionSede;
+    private javax.swing.JTextArea areaAyuda;
     private javax.swing.JTextArea areaTextoConsultaInventario;
     private javax.swing.JTextArea areaTextoConsultaSede;
     private javax.swing.JTextArea areaTextoConsultaUsuario;
@@ -6136,8 +6243,12 @@ public class GUIgerente extends javax.swing.JFrame {
     private javax.swing.JTextArea areaVehiculosAñadidos;
     private javax.swing.JComboBox<String> atributoSede;
     private javax.swing.JButton botonAplicarCambioSede;
+    private javax.swing.JButton botonAyudaConsultaSede;
+    private javax.swing.JButton botonAyudaConsultaUsuario;
+    private javax.swing.JButton botonAyudaCrearSede;
     private javax.swing.JButton botonAyudaCrearUsuario;
-    private javax.swing.JButton botonAyudaCrearUsuario1;
+    private javax.swing.JButton botonAyudaModificarSede;
+    private javax.swing.JButton botonAyudaModificarUsuario;
     private javax.swing.JButton botonAñadirRepuesto;
     private javax.swing.JButton botonAñadirRepuestoVehiculo;
     private javax.swing.JButton botonAñadirVehiculo;
@@ -6147,7 +6258,6 @@ public class GUIgerente extends javax.swing.JFrame {
     private javax.swing.JButton botonCrearSede;
     private javax.swing.JButton botonCrearUsuario;
     private javax.swing.JButton botonCrearUsuarioConfirmacion;
-    private javax.swing.JButton botonExportarReporte;
     private javax.swing.JButton botonInventarioGerente;
     private javax.swing.JButton botonModificarAtributoUsuario;
     private javax.swing.JButton botonModificarInventario;
@@ -6201,13 +6311,10 @@ public class GUIgerente extends javax.swing.JFrame {
     private javax.swing.JTextField id_modificar_respuesto;
     private javax.swing.JTextField id_modificar_vehiculo;
     private javax.swing.JTextField id_sede;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton11;
-    private javax.swing.JButton jButton14;
     private javax.swing.JButton jButton15;
     private javax.swing.JButton jButton16;
     private javax.swing.JButton jButton18;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton9;
@@ -6290,6 +6397,7 @@ public class GUIgerente extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextField marca_vehiculo;
     private javax.swing.JTextField modelo_vehiculo;
@@ -6300,6 +6408,7 @@ public class GUIgerente extends javax.swing.JFrame {
     private javax.swing.JTextField nuevo_valor_repuesto;
     private javax.swing.JTextField nuevo_valor_usuario;
     private javax.swing.JTextField nuevo_valor_vehiculo;
+    private javax.swing.JPanel panelAyudas;
     private javax.swing.JPanel panelConsultarInventario;
     private javax.swing.JPanel panelConsultarSede;
     private javax.swing.JPanel panelConsultarUsuario;
