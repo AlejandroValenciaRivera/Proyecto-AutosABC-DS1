@@ -9,6 +9,7 @@ import javax.swing.JOptionPane;
 import java.awt.CardLayout;
 import ACCESO_DATOS.controladores.*;
 import ACCESO_DATOS.entidades_y_relaciones.*;
+import Login.Encriptacion;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -20,6 +21,7 @@ import javax.swing.JFileChooser;
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.PdfWriter;
 import java.awt.event.ItemEvent;
+import java.util.Arrays;
 
 
 /**
@@ -39,6 +41,8 @@ public class GUIvendedor extends javax.swing.JFrame {
     
     /**
      * Creates new form GUIvendedor
+     * @param login2
+     * @param vendedorLogeado
      */
     public GUIvendedor(GUIlogin login2, Usuario vendedorLogeado) {
         initComponents();
@@ -161,19 +165,17 @@ public class GUIvendedor extends javax.swing.JFrame {
         jLabel14 = new javax.swing.JLabel();
         panelContrasena = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        comboBoxCambioLoginVendedor = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        valor_antiguo = new javax.swing.JTextField();
+        nuevo_valor = new javax.swing.JTextField();
+        BotonCambioContraseña = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
         jTextField6 = new javax.swing.JTextField();
+        pin_login = new javax.swing.JPasswordField();
 
         panelContenedorVendedor.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
 
@@ -749,11 +751,7 @@ public class GUIvendedor extends javax.swing.JFrame {
         panelContrasena.setRequestFocusEnabled(false);
         panelContrasena.setVerifyInputWhenFocusTarget(false);
 
-        jLabel2.setText("CAMBIAR DATOS DE LOGIN");
-
-        jLabel3.setText("SELECCIONE QUE DESEA CAMBIAR:");
-
-        comboBoxCambioLoginVendedor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione una opción", "Nombre de Usuario", "Contrasena" }));
+        jLabel2.setText("CAMBIAR CONTRASEÑA");
 
         jLabel4.setText("PIN LOGIN:");
 
@@ -761,7 +759,12 @@ public class GUIvendedor extends javax.swing.JFrame {
 
         jLabel13.setText("VALOR NUEVO: ");
 
-        jButton1.setText("REGISTRAR CAMBIO");
+        BotonCambioContraseña.setText("REGISTRAR CAMBIO");
+        BotonCambioContraseña.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotonCambioContraseñaActionPerformed(evt);
+            }
+        });
 
         jPanel3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
@@ -785,7 +788,7 @@ public class GUIvendedor extends javax.swing.JFrame {
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTextField6, javax.swing.GroupLayout.DEFAULT_SIZE, 82, Short.MAX_VALUE)
+                .addComponent(jTextField6, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -833,15 +836,10 @@ public class GUIvendedor extends javax.swing.JFrame {
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelContrasenaLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton1))
+                        .addComponent(BotonCambioContraseña))
                     .addGroup(panelContrasenaLayout.createSequentialGroup()
-                        .addGroup(panelContrasenaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addGroup(panelContrasenaLayout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(comboBoxCambioLoginVendedor, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 216, Short.MAX_VALUE))
+                        .addComponent(jLabel2)
+                        .addGap(0, 447, Short.MAX_VALUE))
                     .addGroup(panelContrasenaLayout.createSequentialGroup()
                         .addGroup(panelContrasenaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel12)
@@ -849,9 +847,9 @@ public class GUIvendedor extends javax.swing.JFrame {
                             .addComponent(jLabel4))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(panelContrasenaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField3)
-                            .addComponent(jTextField5)
-                            .addComponent(jTextField4))))
+                            .addComponent(nuevo_valor)
+                            .addComponent(valor_antiguo)
+                            .addComponent(pin_login))))
                 .addContainerGap())
         );
         panelContrasenaLayout.setVerticalGroup(
@@ -861,22 +859,18 @@ public class GUIvendedor extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addGap(18, 18, 18)
                 .addGroup(panelContrasenaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(comboBoxCambioLoginVendedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(panelContrasenaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(pin_login, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelContrasenaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(valor_antiguo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelContrasenaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jButton1)
+                    .addComponent(nuevo_valor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(43, 43, 43)
+                .addComponent(BotonCambioContraseña)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -1280,12 +1274,105 @@ public class GUIvendedor extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_botonGenerarVenta1ActionPerformed
 
+    private void BotonCambioContraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonCambioContraseñaActionPerformed
+        try {
+            char[] pinCS = pin_login.getPassword();
+            String pinS = String.valueOf(pinCS);
+            
+            
+            if (pinS.length() >= 12){
+                int peso1 = 0;
+                int peso2 = 0;
+                int peso3 = 0;
+                int peso4 = 0;
+                int peso5 = 0;
+                int peso6 = 0;
+
+                char[] pinC = pin_login.getPassword();
+                char [] valor = new char[2];
+
+                valor[0] = pinC[0];
+                valor[1] = pinC[1];
+                peso1 = Integer.parseInt(String.valueOf(valor));
+
+                valor[0] = pinC[2];
+                valor[1] = pinC[3];
+                peso2 = Integer.parseInt(String.valueOf(valor));
+
+                valor[0] = pinC[4];
+                valor[1] = pinC[5];
+                peso3 = Integer.parseInt(String.valueOf(valor));
+
+                valor[0] = pinC[6];
+                valor[1] = pinC[7];
+                peso4 = Integer.parseInt(String.valueOf(valor));
+
+                valor[0] = pinC[8];
+                valor[1] = pinC[9];
+                peso5 = Integer.parseInt(String.valueOf(valor));
+
+                valor[0] = pinC[10];
+                valor[1] = pinC[11];
+                peso6 = Integer.parseInt(String.valueOf(valor));
+                
+                Encriptacion encripto = new Encriptacion();
+                
+                ControladorUsuario cUsuario = new ControladorUsuario();
+                ArrayList<Usuario> users = cUsuario.consultarLogin();
+
+                String contraseña = "";
+                for (int i = 0; i < users.size(); i++) {
+
+                    contraseña = encripto.desencriptar(peso1, peso2, peso3, users.get(i).getContrasena());
+                    
+                    if ((valor_antiguo.getText().equals(contraseña)) && (users.size() > 0) && (users.get(i).getCedula() == vendedorLogin.getCedula())) {
+
+                        if(nuevo_valor.getText().equals(valor_antiguo.getText())){
+                            JOptionPane.showMessageDialog(rootPane, "LA CONTRASEÑA NUEVA DEBE SER DIFERENTE A LA ACTUAL", "AutosABC", JOptionPane.ERROR_MESSAGE);
+                            break;
+                        }
+                        else {
+                            ArrayList<String> resultadoEncriptacion = encripto.encriptar(nuevo_valor.getText());
+                        
+                            String nuevoPin = "" + resultadoEncriptacion.get(1) + peso4 + peso5 + peso6;
+
+                            ControladorUsuario cU = new ControladorUsuario();
+
+                            int result = cU.cambiarPass(users.get(i).getCedula(), resultadoEncriptacion.get(0));
+
+                            if ((result == -2) && (result == -3)){
+                                JOptionPane.showMessageDialog(rootPane, "ERROR EN LA BASE DE DATOS, NO SE ACTUALIZO LA CONTRASEÑA", "AutosABC", JOptionPane.ERROR_MESSAGE);
+                            }
+                            else {
+                                JOptionPane.showMessageDialog(rootPane, "SE HA MODIFICADO CON EXITO LA CONTRASEÑA, SU NUEVO PIN ES: " + nuevoPin, "AutosABC", JOptionPane.INFORMATION_MESSAGE);
+                            }
+                            break;
+                        }
+                    }
+
+                    else {
+                        if((i + 1) == users.size()){
+                            JOptionPane.showMessageDialog(rootPane, "CONTRASEÑA ANTIGUA INCORECCTA", "AutosABC", JOptionPane.ERROR_MESSAGE);
+                        }
+                    }
+                }
+            }
+            else {
+                 JOptionPane.showMessageDialog(rootPane, "EL PIN DEBE SER UN CODIGO DE 12 NUMEROS", "AutosABC", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        catch(NumberFormatException e){           
+             JOptionPane.showMessageDialog(rootPane, "EL PIN DEBE SER UN CODIGO DE 12 NUMEROS", "AutosABC", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_BotonCambioContraseñaActionPerformed
+
     /**
      * @param args the command line arguments
      */
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BotonCambioContraseña;
     private javax.swing.JTextArea areaTextoCotizacion;
     private javax.swing.JTextArea areaTextoInformacionVendedor;
     private javax.swing.JTextArea areaTextoVenta;
@@ -1302,10 +1389,8 @@ public class GUIvendedor extends javax.swing.JFrame {
     private javax.swing.JButton botonRegistrarVenta;
     private javax.swing.JButton botonVentaCotizacion;
     private javax.swing.JTextField cedula_cliente;
-    private javax.swing.JComboBox<String> comboBoxCambioLoginVendedor;
     private javax.swing.JComboBox<String> comboBoxVehiculoVenta;
     private javax.swing.JComboBox<String> comboBoxVehiculosCotizacion;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton14;
     private javax.swing.JButton jButton16;
     private javax.swing.JButton jButton20;
@@ -1317,7 +1402,6 @@ public class GUIvendedor extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -1334,11 +1418,9 @@ public class GUIvendedor extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField nombre_cliente;
+    private javax.swing.JTextField nuevo_valor;
     private javax.swing.JPanel panelContenedorCuenta;
     private javax.swing.JPanel panelContenedorVendedor;
     private javax.swing.JPanel panelContenedorVenta;
@@ -1349,8 +1431,10 @@ public class GUIvendedor extends javax.swing.JFrame {
     private javax.swing.JPanel panelRealizarVenta;
     private javax.swing.JPanel panelVendedor;
     private javax.swing.JPanel panelVenta;
+    private javax.swing.JPasswordField pin_login;
     private javax.swing.JRadioButton radioBotonEfectivo;
     private javax.swing.JRadioButton radioBotonTarjeta;
     private javax.swing.JTextField telefono_cliente;
+    private javax.swing.JTextField valor_antiguo;
     // End of variables declaration//GEN-END:variables
 }

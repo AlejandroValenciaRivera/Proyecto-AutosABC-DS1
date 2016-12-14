@@ -225,7 +225,7 @@ public class GUIlogin extends javax.swing.JFrame {
                     usuario = encripto.desencriptar(peso4, peso5, peso6, users.get(i).getCuenta());
                     contraseña = encripto.desencriptar(peso1, peso2, peso3, users.get(i).getContrasena());
                     cargo = users.get(i).getCargo();
-                    if (usuariologin.getText().equals(usuario)) {
+                    if ((usuariologin.getText().equals(usuario)) && (users.size() > 0)) {
 
                         if (Arrays.equals(contraseñalogin.getPassword(), explode(contraseña))) {
 
@@ -314,12 +314,6 @@ public class GUIlogin extends javax.swing.JFrame {
             public void run() {
                 
                 new GUIlogin().setVisible(true);
-                
-                /*
-                Encriptacion encripto = new Encriptacion();
-                System.out.println(encripto.encriptar("Pedper") + "::--->");
-                System.out.println(encripto.desencriptar(25, 55, 79, "6d]<btWRJ/^$<UJkN("));
-                */
                 
             }
         });

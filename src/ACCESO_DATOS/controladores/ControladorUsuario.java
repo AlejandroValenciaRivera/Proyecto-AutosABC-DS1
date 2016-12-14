@@ -148,4 +148,16 @@ public class ControladorUsuario {
         return result;
    
     }
+    
+    public int cambiarPass(int cedula, String contrasena){
+        Usuario usuario = new Usuario();
+        
+        usuario.setCedula(cedula);
+        usuario.setContrasena(contrasena);
+        
+        int result = daoUsuario.updatePASS(usuario);
+        
+        return result;
+   
+    }
 }

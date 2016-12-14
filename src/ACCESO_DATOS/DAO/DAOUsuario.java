@@ -341,9 +341,27 @@ public class DAOUsuario {
             System.out.println(ex);
             return -2;
         } catch (Exception ex) {
-            System.out.println("11 --" + ex);
             return -3;
         }
         
     }
+    public int updatePASS(Usuario usuario) {
+        String update_statement2 = "UPDATE usuarios SET contrasena = '" + usuario.getContrasena() + "' WHERE cedula = " + usuario.getCedula();
+        int numFilas = -1;
+        try {
+            Connection conn = fachada.getConnetion();
+            Statement sentencia = conn.createStatement();
+            numFilas = sentencia.executeUpdate(update_statement2);
+            conn.close();
+            fachada.closeConection();
+            return numFilas;
+        } catch (SQLException ex) {
+            System.out.println(ex);
+            return -2;
+        } catch (Exception ex) {
+            return -3;
+        }
+        
+    }
+    
 }
