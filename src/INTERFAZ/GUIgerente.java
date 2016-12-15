@@ -184,7 +184,7 @@ public class GUIgerente extends javax.swing.JFrame {
         botonReporte4 = new javax.swing.JButton();
         botonReporte5 = new javax.swing.JButton();
         botonReporte6 = new javax.swing.JButton();
-        jButton18 = new javax.swing.JButton();
+        botonAyudaReportes = new javax.swing.JButton();
         jPanel18 = new javax.swing.JPanel();
         jScrollPane6 = new javax.swing.JScrollPane();
         areaTextoReportes = new javax.swing.JTextArea();
@@ -354,7 +354,7 @@ public class GUIgerente extends javax.swing.JFrame {
         areaTextoConsultaInventario = new javax.swing.JTextArea();
         jLabel49 = new javax.swing.JLabel();
         valor_consulta_inventario = new javax.swing.JTextField();
-        jButton3 = new javax.swing.JButton();
+        botonConsultaInventarioo = new javax.swing.JButton();
         radioBotonVehiculo = new javax.swing.JRadioButton();
         radioBotonRepuesto = new javax.swing.JRadioButton();
         radioBotonVenta = new javax.swing.JRadioButton();
@@ -796,8 +796,13 @@ public class GUIgerente extends javax.swing.JFrame {
             }
         });
 
-        jButton18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/ICONO-AYUDA-REPORTES.jpg"))); // NOI18N
-        jButton18.setToolTipText("Para obtener ayuda acerca de los reportes");
+        botonAyudaReportes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/ICONO-AYUDA-REPORTES.jpg"))); // NOI18N
+        botonAyudaReportes.setToolTipText("Para obtener ayuda acerca de los reportes");
+        botonAyudaReportes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonAyudaReportesActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
         jPanel14.setLayout(jPanel14Layout);
@@ -812,7 +817,7 @@ public class GUIgerente extends javax.swing.JFrame {
                     .addComponent(botonReporte3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(botonReporteNumero2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(botonReporteNumero1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton18, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(botonAyudaReportes, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel14Layout.setVerticalGroup(
@@ -831,7 +836,7 @@ public class GUIgerente extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(botonReporte6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 78, Short.MAX_VALUE)
-                .addComponent(jButton18, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(botonAyudaReportes, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -2188,7 +2193,12 @@ public class GUIgerente extends javax.swing.JFrame {
 
         jLabel49.setText("VALOR BUSQUEDA:");
 
-        jButton3.setText("AYUDA");
+        botonConsultaInventarioo.setText("AYUDA");
+        botonConsultaInventarioo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonConsultaInventariooActionPerformed(evt);
+            }
+        });
 
         radioBotonVehiculo.setText("Vehiculo");
         radioBotonVehiculo.addActionListener(new java.awt.event.ActionListener() {
@@ -2249,7 +2259,7 @@ public class GUIgerente extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 76, Short.MAX_VALUE)
                         .addGroup(panelConsultarInventarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(boton_consultar_inventario, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
-                            .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(botonConsultaInventarioo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(panelConsultarInventarioLayout.createSequentialGroup()
                         .addGroup(panelConsultarInventarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(valor_consulta_inventario, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -2270,7 +2280,7 @@ public class GUIgerente extends javax.swing.JFrame {
                     .addComponent(radioBotonOrden))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panelConsultarInventarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton3)
+                    .addComponent(botonConsultaInventarioo)
                     .addComponent(comboBosBusquedaInventario, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel49)
@@ -6233,6 +6243,44 @@ public class GUIgerente extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(rootPane, panelAyudas);
     }//GEN-LAST:event_botonAyudaConsultaUsuarioActionPerformed
 
+    private void botonConsultaInventariooActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonConsultaInventariooActionPerformed
+        String informacion  = "Para hacer consultas del inventario, los pasos son muy simples: lo primeor que debe hacer \n"
+                + "es seleccionar una categoria de que desea consultar, si consultar venta, repuesto, vehiculo, \n"
+                + "cotizacion o orden de taller. Después debe seleccionar un atributo de consulta,\n "
+                + "debe escoger si desea uno en particular o si desea consultar todos los datos, si es la segunda opcion\n"
+                + "no es necesario diligenciar datos en el campo de texto, si es la primera opcion si debe diligenciar\n"
+                + "algun dato en el campo de texto, teniendo siempre presente que datos son numericos y \n"
+                + "que datos exigen un formato, si se comete un error en estas dos ultimas se avisara por\n"
+                + "medio d eun mensaje emergente.";
+        areaAyuda.setText(informacion);
+        JOptionPane.showMessageDialog(rootPane, panelAyudas);
+    }//GEN-LAST:event_botonConsultaInventariooActionPerformed
+
+    private void botonAyudaReportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAyudaReportesActionPerformed
+        String informacion  = "En esta seccion se generan los 6 distintos tipos de reporte, cuando seleccione un reporte\n"
+                + "debe tener en cuenta que le pedira datos para realziar el roporte y hasta que no sean digitados no\n"
+                + "dejará de pedirselos. Lo que muestra cada reporte esta descrito acontinuación:\n\n"
+                + "**R1:\n"
+                + "     Reporte cuyo contenido indica las ventas hechas por los usuariso del sistema\n"
+                + "     En un mes particular o en todos los 12 meses, se muestra el total de autos vendisdos\n"
+                + "     Y valor monetario total que generaron las ventas de esos vehiculos.\n"
+                + "**R2:\n"
+                + "     Este reporte permite conocer las ventas individuales de un usuario en cada mes del año\n"
+                + "**R3:\n"
+                + "     Este reporte es bastante sencillo, cuyo contenido representa las ventas hechas de una marca\n"
+                + "     De autos de la empresa\n"
+                + "**R4:\n"
+                + "     Este reporte permite concoer las ventas realizadas en cada una de las sedes.\n"
+                + "**R5:\n"
+                + "     Este reporte permite conocer las ventas hechas segun una marca de vehiculo,\n"
+                + "     En un mes particular, o en todos los meses del año.\n"
+                + "**R6:\n"
+                + "     Este reporte permite conocer las ventas hechas segun una sede,\n"
+                + "     En un mes particular, o en todos los meses del año.";
+        areaAyuda.setText(informacion);
+        JOptionPane.showMessageDialog(rootPane, panelAyudas);
+    }//GEN-LAST:event_botonAyudaReportesActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea areTextoModificacionSede;
     private javax.swing.JTextArea areaAyuda;
@@ -6249,9 +6297,11 @@ public class GUIgerente extends javax.swing.JFrame {
     private javax.swing.JButton botonAyudaCrearUsuario;
     private javax.swing.JButton botonAyudaModificarSede;
     private javax.swing.JButton botonAyudaModificarUsuario;
+    private javax.swing.JButton botonAyudaReportes;
     private javax.swing.JButton botonAñadirRepuesto;
     private javax.swing.JButton botonAñadirRepuestoVehiculo;
     private javax.swing.JButton botonAñadirVehiculo;
+    private javax.swing.JButton botonConsultaInventarioo;
     private javax.swing.JButton botonConsultarInventario;
     private javax.swing.JButton botonConsultarUsuario;
     private javax.swing.JButton botonCrearInventario;
@@ -6314,8 +6364,6 @@ public class GUIgerente extends javax.swing.JFrame {
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton15;
     private javax.swing.JButton jButton16;
-    private javax.swing.JButton jButton18;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;

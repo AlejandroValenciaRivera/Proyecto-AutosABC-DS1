@@ -109,8 +109,6 @@ public class GUIJefeTaller extends javax.swing.JFrame {
         panelOrden = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
         botonGenerarVenta = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();
-        botonAyudaGeneral = new javax.swing.JButton();
         botonConsultarOrden = new javax.swing.JButton();
         panelContenedorOrden = new javax.swing.JPanel();
         panelCuenta = new javax.swing.JPanel();
@@ -156,6 +154,9 @@ public class GUIJefeTaller extends javax.swing.JFrame {
         panelOrdenMostrarOrdenes = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
         areaTextoConsultarOrdenes = new javax.swing.JTextArea();
+        panelAyudas = new javax.swing.JPanel();
+        jScrollPane8 = new javax.swing.JScrollPane();
+        areaAyuda = new javax.swing.JTextArea();
 
         panelContenedorJefe.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
 
@@ -261,33 +262,6 @@ public class GUIJefeTaller extends javax.swing.JFrame {
             }
         });
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
-        botonAyudaGeneral.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/ICONO-AYUDA-MENULATERAL-VENDEDOR.png"))); // NOI18N
-        botonAyudaGeneral.setToolTipText("Presiona este boton para obtener más ayuda");
-        botonAyudaGeneral.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonAyudaGeneralActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(botonAyudaGeneral, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(botonAyudaGeneral, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-
         botonConsultarOrden.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/ICONO-CONSULTAR-ORDEN.png"))); // NOI18N
         botonConsultarOrden.setToolTipText("Al hacer click en este boton, se desplegará  el menu para realizar una venta");
         botonConsultarOrden.setAutoscrolls(true);
@@ -304,9 +278,7 @@ public class GUIJefeTaller extends javax.swing.JFrame {
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(botonGenerarVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(botonGenerarVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(botonConsultarOrden, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -317,9 +289,7 @@ public class GUIJefeTaller extends javax.swing.JFrame {
                 .addComponent(botonGenerarVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(botonConsultarOrden, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(42, 42, 42)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addContainerGap(195, Short.MAX_VALUE))
         );
 
         panelContenedorOrden.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -792,6 +762,28 @@ public class GUIJefeTaller extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        areaAyuda.setBackground(new java.awt.Color(240, 240, 240));
+        areaAyuda.setColumns(20);
+        areaAyuda.setRows(5);
+        jScrollPane8.setViewportView(areaAyuda);
+
+        javax.swing.GroupLayout panelAyudasLayout = new javax.swing.GroupLayout(panelAyudas);
+        panelAyudas.setLayout(panelAyudasLayout);
+        panelAyudasLayout.setHorizontalGroup(
+            panelAyudasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelAyudasLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 572, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        panelAyudasLayout.setVerticalGroup(
+            panelAyudasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelAyudasLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 232, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("AUTOS ABC -- JEFE DE TALLER");
 
@@ -874,12 +866,19 @@ public class GUIJefeTaller extends javax.swing.JFrame {
         contenedorOrdenCuenta.show(panelContenedorJefe, "PANEL-ORDEN");
     }//GEN-LAST:event_botonOrdenActionPerformed
 
-    private void botonAyudaGeneralActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAyudaGeneralActionPerformed
-        JOptionPane.showMessageDialog(rootPane, "Aqui va un texto de ayuda");        // TODO add your handling code here:
-    }//GEN-LAST:event_botonAyudaGeneralActionPerformed
-
     private void botonAyudaGeneral1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAyudaGeneral1ActionPerformed
-        JOptionPane.showMessageDialog(rootPane, "Aqui va un texto de ayuda");
+        String informacion  = "Para visualizar la información de la cuenta, comience por presionar el botón “Cuenta” \n"
+                + "en el menú superior, al cargarse el menú del panel izquierdo presione el botón \n"
+                + "“Información de la cuenta” (el que tiene una persona con una ‘i’), en ese momento se\n"
+                + " cargará la información personal del usuario en el panel de la derecha.\n\n"
+                + "Para modificar la información personal de su cuenta, seleccione el botón “Cuenta” del\n"
+                + " menú superior, al cargarse los botones del menú izquierdo, presione el botón “Modificar información” \n"
+                + "(El que tiene un par de llaves).\n" +"\n" +"\n" 
+                + "Del formulario  digite su PIN, posteriormente debe digitar el valor antiguo \n"
+                + "o actual y el nuevo de la contraseña. Presione el botón “Registrar Cambio” \n"
+                + "ubicado en la parte inferior.";
+        areaAyuda.setText(informacion);
+        JOptionPane.showMessageDialog(rootPane, panelAyudas);
     }//GEN-LAST:event_botonAyudaGeneral1ActionPerformed
 
     private void botonGenerarVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonGenerarVentaActionPerformed
@@ -1102,10 +1101,10 @@ public class GUIJefeTaller extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextArea areaAyuda;
     private javax.swing.JTextArea areaTextoConsultarCuenta;
     private javax.swing.JTextArea areaTextoConsultarOrdenes;
     private javax.swing.JTextArea areaTextoCrearOrden;
-    private javax.swing.JButton botonAyudaGeneral;
     private javax.swing.JButton botonAyudaGeneral1;
     private javax.swing.JButton botonAyudaInformacionCuenta;
     private javax.swing.JButton botonCambiarContraseña;
@@ -1132,7 +1131,6 @@ public class GUIJefeTaller extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -1144,9 +1142,11 @@ public class GUIJefeTaller extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField nuevo_valor;
     private javax.swing.JTextField numero_de_orden;
+    private javax.swing.JPanel panelAyudas;
     private javax.swing.JPanel panelContenedorCuenta;
     private javax.swing.JPanel panelContenedorJefe;
     private javax.swing.JPanel panelContenedorOrden;

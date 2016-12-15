@@ -609,7 +609,7 @@
                           <Component id="botonReporte3" alignment="1" max="32767" attributes="0"/>
                           <Component id="botonReporteNumero2" alignment="1" max="32767" attributes="0"/>
                           <Component id="botonReporteNumero1" alignment="0" max="32767" attributes="0"/>
-                          <Component id="jButton18" alignment="0" pref="0" max="32767" attributes="0"/>
+                          <Component id="botonAyudaReportes" alignment="0" pref="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -631,7 +631,7 @@
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="botonReporte6" min="-2" max="-2" attributes="0"/>
                       <EmptySpace pref="78" max="32767" attributes="0"/>
-                      <Component id="jButton18" min="-2" pref="69" max="-2" attributes="0"/>
+                      <Component id="botonAyudaReportes" min="-2" pref="69" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -696,13 +696,16 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonReporte6ActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="jButton18">
+            <Component class="javax.swing.JButton" name="botonAyudaReportes">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/iconos/ICONO-AYUDA-REPORTES.jpg"/>
                 </Property>
                 <Property name="toolTipText" type="java.lang.String" value="Para obtener ayuda acerca de los reportes"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonAyudaReportesActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -3000,7 +3003,7 @@
                           <EmptySpace pref="76" max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="boton_consultar_inventario" alignment="0" pref="165" max="32767" attributes="0"/>
-                              <Component id="jButton3" alignment="0" max="32767" attributes="0"/>
+                              <Component id="botonConsultaInventarioo" alignment="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <Group type="102" attributes="0">
@@ -3029,7 +3032,7 @@
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jButton3" min="-2" max="-2" attributes="0"/>
+                      <Component id="botonConsultaInventarioo" min="-2" max="-2" attributes="0"/>
                       <Component id="comboBosBusquedaInventario" alignment="1" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -3087,10 +3090,13 @@
         </Component>
         <Component class="javax.swing.JTextField" name="valor_consulta_inventario">
         </Component>
-        <Component class="javax.swing.JButton" name="jButton3">
+        <Component class="javax.swing.JButton" name="botonConsultaInventarioo">
           <Properties>
             <Property name="text" type="java.lang.String" value="AYUDA"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonConsultaInventariooActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JRadioButton" name="radioBotonVehiculo">
           <Properties>

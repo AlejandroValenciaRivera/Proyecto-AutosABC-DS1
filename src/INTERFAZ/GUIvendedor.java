@@ -140,7 +140,6 @@ public class GUIvendedor extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         botonRegistrarVenta = new javax.swing.JButton();
-        jButton14 = new javax.swing.JButton();
         cedula_cliente = new javax.swing.JTextField();
         nombre_cliente = new javax.swing.JTextField();
         comboBoxVehiculoVenta = new javax.swing.JComboBox<>();
@@ -153,7 +152,6 @@ public class GUIvendedor extends javax.swing.JFrame {
         telefono_cliente = new javax.swing.JTextField();
         panelRealizarCotizacion = new javax.swing.JPanel();
         botonRegistrarCotizacion = new javax.swing.JButton();
-        jButton16 = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
         comboBoxVehiculosCotizacion = new javax.swing.JComboBox<>();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -161,7 +159,6 @@ public class GUIvendedor extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         botonMostrarVehiculoCotizacion = new javax.swing.JButton();
         panelInformacion = new javax.swing.JPanel();
-        jButton20 = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         areaTextoInformacionVendedor = new javax.swing.JTextArea();
         jLabel14 = new javax.swing.JLabel();
@@ -181,6 +178,9 @@ public class GUIvendedor extends javax.swing.JFrame {
         panelOrdenMostrarVentas = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
         areaTextoConsultarVentas = new javax.swing.JTextArea();
+        panelAyudas = new javax.swing.JPanel();
+        jScrollPane8 = new javax.swing.JScrollPane();
+        areaAyuda = new javax.swing.JTextArea();
 
         panelContenedorVendedor.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
 
@@ -389,6 +389,11 @@ public class GUIvendedor extends javax.swing.JFrame {
 
         botonAyudaGeneral1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/ICONO-AYUDA-MENULATERAL-VENDEDOR.png"))); // NOI18N
         botonAyudaGeneral1.setToolTipText("Presiona este boton para obtener más ayuda");
+        botonAyudaGeneral1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonAyudaGeneral1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -494,15 +499,6 @@ public class GUIvendedor extends javax.swing.JFrame {
             }
         });
 
-        jButton14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/INTERFAZ/icono ayuda.jpg"))); // NOI18N
-        jButton14.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jButton14.setName(""); // NOI18N
-        jButton14.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton14ActionPerformed(evt);
-            }
-        });
-
         comboBoxVehiculoVenta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         comboBoxVehiculoVenta.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -543,38 +539,38 @@ public class GUIvendedor extends javax.swing.JFrame {
             .addGroup(panelRealizarVentaLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panelRealizarVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRealizarVentaLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(radioBotonTarjeta))
                     .addComponent(jScrollPane1)
                     .addGroup(panelRealizarVentaLayout.createSequentialGroup()
-                        .addComponent(jButton14, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(botonRegistrarVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panelRealizarVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(panelRealizarVentaLayout.createSequentialGroup()
-                            .addComponent(jLabel8)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(comboBoxVehiculoVenta, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGap(18, 18, 18)
-                            .addComponent(jLabel17)
-                            .addGap(18, 18, 18)
-                            .addComponent(radioBotonEfectivo)
-                            .addGap(77, 77, 77))
-                        .addGroup(panelRealizarVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5)
+                        .addGroup(panelRealizarVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(panelRealizarVentaLayout.createSequentialGroup()
-                                .addGroup(panelRealizarVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel6)
-                                    .addComponent(jLabel7))
+                                .addComponent(jLabel8)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(panelRealizarVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(cedula_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 438, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(nombre_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 438, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(comboBoxVehiculoVenta, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel17)
+                                .addGap(18, 18, 18)
+                                .addComponent(radioBotonEfectivo)
+                                .addGap(77, 77, 77))
+                            .addGroup(panelRealizarVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel5)
+                                .addGroup(panelRealizarVentaLayout.createSequentialGroup()
+                                    .addGroup(panelRealizarVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel6)
+                                        .addComponent(jLabel7))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addGroup(panelRealizarVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(cedula_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 438, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(nombre_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 438, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(panelRealizarVentaLayout.createSequentialGroup()
                         .addComponent(jLabel18)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(telefono_cliente)))
+                        .addComponent(telefono_cliente))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRealizarVentaLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(panelRealizarVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(radioBotonTarjeta, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(botonRegistrarVenta, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
         );
         panelRealizarVentaLayout.setVerticalGroup(
@@ -604,9 +600,7 @@ public class GUIvendedor extends javax.swing.JFrame {
                     .addComponent(jLabel18)
                     .addComponent(telefono_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(40, 40, 40)
-                .addGroup(panelRealizarVentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton14, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(botonRegistrarVenta, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(botonRegistrarVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -619,15 +613,6 @@ public class GUIvendedor extends javax.swing.JFrame {
         botonRegistrarCotizacion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonRegistrarCotizacionActionPerformed(evt);
-            }
-        });
-
-        jButton16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/INTERFAZ/icono ayuda.jpg"))); // NOI18N
-        jButton16.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jButton16.setName(""); // NOI18N
-        jButton16.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton16ActionPerformed(evt);
             }
         });
 
@@ -667,8 +652,7 @@ public class GUIvendedor extends javax.swing.JFrame {
                 .addGroup(panelRealizarCotizacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 564, Short.MAX_VALUE)
                     .addGroup(panelRealizarCotizacionLayout.createSequentialGroup()
-                        .addComponent(jButton16, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(botonRegistrarCotizacion, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panelRealizarCotizacionLayout.createSequentialGroup()
                         .addGroup(panelRealizarCotizacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -695,9 +679,7 @@ public class GUIvendedor extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(panelRealizarCotizacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton16, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(botonRegistrarCotizacion, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(botonRegistrarCotizacion, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -705,15 +687,6 @@ public class GUIvendedor extends javax.swing.JFrame {
         panelInformacion.setPreferredSize(new java.awt.Dimension(586, 366));
         panelInformacion.setRequestFocusEnabled(false);
         panelInformacion.setVerifyInputWhenFocusTarget(false);
-
-        jButton20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/INTERFAZ/icono ayuda.jpg"))); // NOI18N
-        jButton20.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jButton20.setName(""); // NOI18N
-        jButton20.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton20ActionPerformed(evt);
-            }
-        });
 
         areaTextoInformacionVendedor.setEditable(false);
         areaTextoInformacionVendedor.setColumns(20);
@@ -731,12 +704,8 @@ public class GUIvendedor extends javax.swing.JFrame {
                 .addGroup(panelInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 564, Short.MAX_VALUE)
                     .addGroup(panelInformacionLayout.createSequentialGroup()
-                        .addGroup(panelInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(panelInformacionLayout.createSequentialGroup()
-                                .addGap(253, 253, 253)
-                                .addComponent(jButton20, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel14))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addComponent(jLabel14)
+                        .addGap(0, 347, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         panelInformacionLayout.setVerticalGroup(
@@ -745,9 +714,7 @@ public class GUIvendedor extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel14)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 267, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
-                .addComponent(jButton20, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 322, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -908,6 +875,28 @@ public class GUIvendedor extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        areaAyuda.setBackground(new java.awt.Color(240, 240, 240));
+        areaAyuda.setColumns(20);
+        areaAyuda.setRows(5);
+        jScrollPane8.setViewportView(areaAyuda);
+
+        javax.swing.GroupLayout panelAyudasLayout = new javax.swing.GroupLayout(panelAyudas);
+        panelAyudas.setLayout(panelAyudasLayout);
+        panelAyudasLayout.setHorizontalGroup(
+            panelAyudasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelAyudasLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 572, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        panelAyudasLayout.setVerticalGroup(
+            panelAyudasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelAyudasLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 232, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("AUTOS ABC -- VENDEDOR");
         setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -932,14 +921,6 @@ public class GUIvendedor extends javax.swing.JFrame {
         login.setVisible(true);
         login.reset();
     }//GEN-LAST:event_botonLogoutActionPerformed
-
-    private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
-        JOptionPane.showMessageDialog(rootPane, "Aqui va un texto de ayuda");
-    }//GEN-LAST:event_jButton14ActionPerformed
-
-    private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
-        JOptionPane.showMessageDialog(rootPane, "Aqui va un texto de ayuda");
-    }//GEN-LAST:event_jButton16ActionPerformed
 
     private void botonVentaCotizacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonVentaCotizacionActionPerformed
         contenedorVentaCotizacionCuenta.show(panelContenedorVendedor, "VENTA/COTIZACION");
@@ -1036,10 +1017,6 @@ public class GUIvendedor extends javax.swing.JFrame {
                                                vehiculosCotizacion.get(i).getModelo());
         }
     }//GEN-LAST:event_botonGenerarCotizacionActionPerformed
-
-    private void jButton20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton20ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton20ActionPerformed
 
     private void botonInformacionCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonInformacionCuentaActionPerformed
         contenedorCuenta.show(panelContenedorCuenta,"INFORMACION");
@@ -1429,6 +1406,21 @@ public class GUIvendedor extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_BotonCambioContraseñaActionPerformed
 
+    private void botonAyudaGeneral1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAyudaGeneral1ActionPerformed
+        String informacion  = "Para visualizar la información de la cuenta, comience por presionar el botón “Cuenta” \n"
+                + "en el menú superior, al cargarse el menú del panel izquierdo presione el botón \n"
+                + "“Información de la cuenta” (el que tiene una persona con una ‘i’), en ese momento se\n"
+                + " cargará la información personal del usuario en el panel de la derecha.\n\n"
+                + "Para modificar la información personal de su cuenta, seleccione el botón “Cuenta” del\n"
+                + " menú superior, al cargarse los botones del menú izquierdo, presione el botón “Modificar información” \n"
+                + "(El que tiene un par de llaves).\n" +"\n" +"\n" 
+                + "Del formulario  digite su PIN, posteriormente debe digitar el valor antiguo \n"
+                + "o actual y el nuevo de la contraseña. Presione el botón “Registrar Cambio” \n"
+                + "ubicado en la parte inferior.";
+        areaAyuda.setText(informacion);
+        JOptionPane.showMessageDialog(rootPane, panelAyudas);
+    }//GEN-LAST:event_botonAyudaGeneral1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1436,6 +1428,7 @@ public class GUIvendedor extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BotonCambioContraseña;
+    private javax.swing.JTextArea areaAyuda;
     private javax.swing.JTextArea areaTextoConsultarVentas;
     private javax.swing.JTextArea areaTextoCotizacion;
     private javax.swing.JTextArea areaTextoInformacionVendedor;
@@ -1455,9 +1448,6 @@ public class GUIvendedor extends javax.swing.JFrame {
     private javax.swing.JTextField cedula_cliente;
     private javax.swing.JComboBox<String> comboBoxVehiculoVenta;
     private javax.swing.JComboBox<String> comboBoxVehiculosCotizacion;
-    private javax.swing.JButton jButton14;
-    private javax.swing.JButton jButton16;
-    private javax.swing.JButton jButton20;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -1483,9 +1473,11 @@ public class GUIvendedor extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField nombre_cliente;
     private javax.swing.JTextField nuevo_valor;
+    private javax.swing.JPanel panelAyudas;
     private javax.swing.JPanel panelContenedorCuenta;
     private javax.swing.JPanel panelContenedorVendedor;
     private javax.swing.JPanel panelContenedorVenta;
