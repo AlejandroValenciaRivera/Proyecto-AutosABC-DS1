@@ -53,6 +53,14 @@ public class GUIgerente extends javax.swing.JFrame {
         ventanaInventarioCrearRepuesto = new CardLayout(); 
         ventanaInventarioModificarVehiculo = new CardLayout();
         ventanaInventarioModificarRepuesto = new CardLayout();
+        
+        ControladorVehiculo cVehiculo = new ControladorVehiculo();
+        vehiculos = cVehiculo.consultarVehiculos();
+        vehiculosAenviar = new ArrayList<>();
+        bloqueoAction = 0;
+        reporteEscogido = 0;
+        comboBoxMesReporte1 = new JComboBox();
+        campoValorReporte2 = new JTextField();
                 
         card.addLayoutComponent(panelGerente, "panelGerente");
         
@@ -132,13 +140,7 @@ public class GUIgerente extends javax.swing.JFrame {
         
         setVisible(true);
         
-        ControladorVehiculo cVehiculo = new ControladorVehiculo();
-        vehiculos = cVehiculo.consultarVehiculos();
-        vehiculosAenviar = new ArrayList<>();
-        bloqueoAction = 0;
-        reporteEscogido = 0;
-        comboBoxMesReporte1 = new JComboBox();
-        campoValorReporte2 = new JTextField();
+       
     }
 
     /**
@@ -337,7 +339,6 @@ public class GUIgerente extends javax.swing.JFrame {
         jLabel63 = new javax.swing.JLabel();
         nuevo_valor_vehiculo = new javax.swing.JTextField();
         panelModificarInventarioModificarVehiculoVacio = new javax.swing.JPanel();
-        panelModificarInventarioModificarRepuestoVacio = new javax.swing.JPanel();
         panelModificarInventarioModificarRepuesto = new javax.swing.JPanel();
         jLabel52 = new javax.swing.JLabel();
         jLabel53 = new javax.swing.JLabel();
@@ -347,6 +348,7 @@ public class GUIgerente extends javax.swing.JFrame {
         comboBoxAtributoRepuesto = new javax.swing.JComboBox<>();
         jLabel59 = new javax.swing.JLabel();
         nuevo_valor_repuesto = new javax.swing.JTextField();
+        panelModificarInventarioModificarRepuestoVacio = new javax.swing.JPanel();
         panelConsultarInventario = new javax.swing.JPanel();
         comboBosBusquedaInventario = new javax.swing.JComboBox<>();
         boton_consultar_inventario = new javax.swing.JButton();
@@ -2082,8 +2084,6 @@ public class GUIgerente extends javax.swing.JFrame {
             .addGap(0, 276, Short.MAX_VALUE)
         );
 
-        panelModificarInventarioModificarRepuestoVacio.setPreferredSize(new java.awt.Dimension(258, 276));
-
         panelModificarInventarioModificarRepuesto.setPreferredSize(new java.awt.Dimension(258, 276));
 
         jLabel52.setText("INFORMACION REPUESTO:");
@@ -2153,25 +2153,17 @@ public class GUIgerente extends javax.swing.JFrame {
                 .addContainerGap(83, Short.MAX_VALUE))
         );
 
+        panelModificarInventarioModificarRepuestoVacio.setPreferredSize(new java.awt.Dimension(258, 276));
+
         javax.swing.GroupLayout panelModificarInventarioModificarRepuestoVacioLayout = new javax.swing.GroupLayout(panelModificarInventarioModificarRepuestoVacio);
         panelModificarInventarioModificarRepuestoVacio.setLayout(panelModificarInventarioModificarRepuestoVacioLayout);
         panelModificarInventarioModificarRepuestoVacioLayout.setHorizontalGroup(
             panelModificarInventarioModificarRepuestoVacioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 100, Short.MAX_VALUE)
-            .addGroup(panelModificarInventarioModificarRepuestoVacioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(panelModificarInventarioModificarRepuestoVacioLayout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(panelModificarInventarioModificarRepuesto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
         );
         panelModificarInventarioModificarRepuestoVacioLayout.setVerticalGroup(
             panelModificarInventarioModificarRepuestoVacioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 100, Short.MAX_VALUE)
-            .addGroup(panelModificarInventarioModificarRepuestoVacioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(panelModificarInventarioModificarRepuestoVacioLayout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(panelModificarInventarioModificarRepuesto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
         );
 
         panelConsultarInventario.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
