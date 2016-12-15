@@ -1101,7 +1101,7 @@ public class GUIvendedor extends javax.swing.JFrame {
                             Paragraph p2 = new Paragraph(informacionCotizacion, FontFactory.getFont("Arial",12,Font.ITALIC,BaseColor.BLACK));
                             Paragraph p3 = new Paragraph("AUTOS ABC", FontFactory.getFont("Arial",16,Font.ITALIC,BaseColor.RED));
                             p3.setAlignment(Element.ALIGN_RIGHT);
-                            Image imagen = Image.getInstance("C:\\Users\\aleja_000\\Documents\\NetBeansProjects\\Proyecto-AutosABC-DS1\\src\\iconos\\logotipo.png");
+                            Image imagen = Image.getInstance("logotipo.png");
                             imagen.scaleAbsolute(200, 66);
                             imagen.setAlignment(Element.ALIGN_CENTER);
                             doc.add(imagen);
@@ -1239,10 +1239,10 @@ public class GUIvendedor extends javax.swing.JFrame {
                                                         "Vendedor: " + vendedorLogin.getCedula()+ "\n" +
                                                         "Identificacion Sede Venta: " + vendedorLogin.getSede() + "\n\n\n\n";
                                 Paragraph p2 = new Paragraph(informacionVenta, FontFactory.getFont("Arial",12,Font.ITALIC,BaseColor.BLACK));
-                                Image imagen = Image.getInstance("C:\\Users\\aleja_000\\Documents\\NetBeansProjects\\Proyecto-AutosABC-DS1\\src\\iconos\\logotipo.png");
+                                Image imagen = Image.getInstance("logotipo.png");
                                 imagen.scaleAbsolute(200, 66);
                                 imagen.setAlignment(Element.ALIGN_CENTER);
-                                Image imagen2 = Image.getInstance("C:\\Users\\aleja_000\\Documents\\NetBeansProjects\\Proyecto-AutosABC-DS1\\src\\iconos\\FIRMA-VENTA.png");
+                                Image imagen2 = Image.getInstance("FIRMA-VENTA.png");
                                 imagen2.scaleAbsolute(200, 50);
                                 imagen2.setAlignment(Element.ALIGN_RIGHT);
                                 doc.add(imagen);
@@ -1250,14 +1250,16 @@ public class GUIvendedor extends javax.swing.JFrame {
                                 doc.add(p2);
                                 doc.add(imagen2);
                                 doc.close();
+                                JOptionPane.showMessageDialog(rootPane, "RECIBO GENERADO CON EXITO", "AutosABC", JOptionPane.INFORMATION_MESSAGE);
                             } catch (FileNotFoundException ex) {
+                                System.out.println(ex);
                                 JOptionPane.showMessageDialog(rootPane, "RUTA DEL ARCHIVO NO ENCONTRADA, NO SE GENERO EL RECIBO", "AutosABC", JOptionPane.ERROR_MESSAGE);
                             }
                             catch (Exception ex) {
                                 JOptionPane.showMessageDialog(rootPane, "HA OCURRIDO UN ERROR DESCONOCIDO AL GUARDAR EL ARCHIVO", "AutosABC", JOptionPane.ERROR_MESSAGE);
                             }
                             
-                            JOptionPane.showMessageDialog(rootPane, "RECIBO GENERADO CON EXITO", "AutosABC", JOptionPane.INFORMATION_MESSAGE);
+                            
                         }
 
                         else {
